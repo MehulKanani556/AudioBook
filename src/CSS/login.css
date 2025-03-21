@@ -4,5 +4,168 @@
     background-size: cover;
     height: 100vh;
     width: 100%;
+}
 
+.modal-content {
+    background-color: #000000;
+}
+
+.V_sign_in_1_modal {
+    width: 70%;
+}
+
+.V_icon_1 {
+    width: 20px;
+    height: 20px;
+}
+
+.V_input_1 {
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%);
+    border: 0.41px solid;
+    border-image-source: radial-gradient(80.38% 222.5% at -13.75% -12.36%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%),
+        radial-gradient(80.69% 208.78% at 108.28% 112.58%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) !important;
+    width: 70%;
+    border-radius: 4px;
+    padding: 15px 0px;
+    color: #FFFFFF;
+}
+
+.V_input_1:focus-visible {
+    border: 0px;
+    outline: none;
+}
+
+.V_password:focus-visible {
+    border: 0px;
+    outline: none;
+    color: #FFFFFF;
+}
+
+.V_password {
+    color: #FFFFFF;
+}
+
+.V_submit_1 {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+
+
+.V_forgot_pwd {
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.V_sub_forgot {
+    font-weight: 400;
+    font-size: 16px;
+    color: #C6C6C6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================ media query ================ */
+
+
+@media (max-width: 1921px) and (min-width: 1651px) {}
+
+@media (max-width: 1650px) and (min-width: 1441px) {}
+
+@media (max-width: 1440px) and (min-width: 1200px) {}
+
+@media (max-width: 1199px) and (min-width: 992px) {}
+
+@media (max-width: 991px) and (min-width: 768px) {
+    .V_sign_in {
+        font-weight: 600;
+        font-size: 28px;
+    }
+
+    .V_sign_in_1_modal {
+        width: 80%;
+    }
+
+    .V_input_1 {
+        width: 80%;
+        padding: 13px 0px;
+    }
+
+    .V_submit_1 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 767px) and (min-width: 576px) {
+    .V_sign_in {
+        font-weight: 600;
+        font-size: 28px;
+    }
+
+    .V_sign_in_1_modal {
+        width: 80%;
+    }
+
+    .V_input_1 {
+        width: 80%;
+        padding: 10px 0px;
+    }
+
+    .V_submit_1 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 575px) and (min-width: 481px) {
+
+    /* .modal-content{
+        width: 90%;
+    } */
+    .V_sign_in {
+        font-weight: 600;
+        font-size: 28px;
+    }
+
+    .V_sign_in_1_modal {
+        width: 90%;
+    }
+
+    .V_input_1 {
+        width: 90%;
+        padding: 10px 0px;
+    }
+
+    .V_submit_1 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) and (min-width: 320px) {
+    .V_sign_in {
+        font-weight: 600;
+        font-size: 28px;
+    }
+
+    .V_sign_in_1_modal {
+        width: 90%;
+    }
+
+    .V_input_1 {
+        width: 90%;
+        padding: 10px 0px;
+    }
+
+
+    .V_submit_1 {
+        font-size: 16px;
+    }
 }
