@@ -1,0 +1,8 @@
+.V_login_back {
+    background-image: url("../Images/login_background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+
+}
