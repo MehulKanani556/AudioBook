@@ -6,12 +6,16 @@ import { Outlet } from 'react-router-dom'
 const Layout = () => {
   return (
     <div>
-       <div>
-         <Sidebar/>
-       </div>
-       <div>
-         <Header/>
-         <Outlet/>
+       <div className='container-fluid'>
+          <div className='row'>
+            <div className=''>
+              <Sidebar/>
+            </div>
+            <div className='col-xl-9'>
+              <Header/>
+              <Outlet/>
+            </div>
+          </div>
        </div>
     </div>
   )
