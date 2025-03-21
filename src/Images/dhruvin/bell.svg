@@ -1,0 +1,24 @@
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M25.7878 19.9986C25.6905 19.8814 25.595 19.7643 25.5012 19.6512C24.2122 18.092 23.4323 17.151 23.4323 12.7371C23.4323 10.452 22.8856 8.57695 21.8081 7.1707C21.0135 6.13184 19.9395 5.34375 18.5239 4.76133C18.5057 4.75119 18.4894 4.7379 18.4758 4.72207C17.9667 3.01699 16.5733 1.875 15.0018 1.875C13.4303 1.875 12.0376 3.01699 11.5284 4.72031C11.5148 4.73556 11.4988 4.74843 11.4809 4.7584C8.17741 6.11836 6.57194 8.72754 6.57194 12.7354C6.57194 17.151 5.79323 18.092 4.50299 19.6494C4.40924 19.7625 4.31374 19.8773 4.21647 19.9969C3.96522 20.2999 3.80603 20.6685 3.75775 21.0592C3.70946 21.4498 3.7741 21.8461 3.94401 22.2012C4.30553 22.9629 5.07604 23.4357 5.95553 23.4357H24.0546C24.9299 23.4357 25.6952 22.9635 26.0579 22.2053C26.2285 21.8501 26.2938 21.4535 26.2459 21.0624C26.198 20.6713 26.039 20.3021 25.7878 19.9986ZM15.0018 28.125C15.8485 28.1243 16.6793 27.8945 17.4059 27.4599C18.1326 27.0253 18.728 26.4021 19.1292 25.6564C19.1481 25.6207 19.1574 25.5807 19.1563 25.5403C19.1551 25.4999 19.1436 25.4605 19.1227 25.4258C19.1018 25.3912 19.0723 25.3626 19.0371 25.3427C19.0019 25.3229 18.9622 25.3125 18.9217 25.3125H11.0831C11.0426 25.3124 11.0028 25.3227 10.9675 25.3425C10.9322 25.3623 10.9026 25.391 10.8817 25.4256C10.8608 25.4602 10.8491 25.4997 10.848 25.5401C10.8468 25.5806 10.8561 25.6207 10.8751 25.6564C11.2762 26.402 11.8715 27.0251 12.5981 27.4597C13.3246 27.8943 14.1552 28.1242 15.0018 28.125Z" fill="white"/>
+<foreignObject x="6.93753" y="-8.06638" width="31.1289" height="31.1307"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(6.08px);clip-path:url(#bgblur_0_443_18002_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="12.1562">
+<circle cx="22.5028" cy="7.49893" r="3.25714" fill="url(#paint0_radial_443_18002)" fill-opacity="0.2"/>
+<circle cx="22.5028" cy="7.49893" r="3.25714" stroke="url(#paint1_radial_443_18002)" stroke-width="0.303906"/>
+<circle cx="22.5028" cy="7.49893" r="3.25714" stroke="url(#paint2_radial_443_18002)" stroke-width="0.303906"/>
+</g>
+<defs>
+<clipPath id="bgblur_0_443_18002_clip_path" transform="translate(-6.93753 8.06638)"><circle cx="22.5028" cy="7.49893" r="3.25714"/>
+</clipPath><radialGradient id="paint0_radial_443_18002" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(20.1383 5.52447) rotate(44.7841) scale(8.66063 9.38335)">
+<stop stop-color="white"/>
+<stop offset="0.770833" stop-color="white" stop-opacity="0.223958"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint1_radial_443_18002" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(18.1559 3.24681) rotate(42.201) scale(7.39792 14.5762)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint2_radial_443_18002" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(26.4764 11.7658) rotate(-133.066) scale(7.53102 13.74)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
