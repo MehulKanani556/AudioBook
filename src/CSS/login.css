@@ -19,24 +19,35 @@
     height: 20px;
 }
 
+.V_icon_2 {
+    width: 20px;
+    height: 20px;
+}
+.V_icon_3 {
+    width: 20px;
+    height: 20px;
+}
+
 .V_input_1 {
-    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%);
-    border: 0.41px solid;
-    border-image-source: radial-gradient(80.38% 222.5% at -13.75% -12.36%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%),
-        radial-gradient(80.69% 208.78% at 108.28% 112.58%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) !important;
     width: 70%;
-    border-radius: 4px;
-    padding: 15px 0px;
-    color: #FFFFFF;
+    padding: 12px 0px;
+    background: #111;
+    color: #fff;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.1),
+        0px 0px 15px rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16.3px);
+    outline: none;
+    transition: all 0.3s ease;
 }
 
 .V_input_1:focus-visible {
-    border: 0px;
     outline: none;
 }
 
 .V_password:focus-visible {
-    border: 0px;
     outline: none;
     color: #FFFFFF;
 }
@@ -48,9 +59,8 @@
 .V_submit_1 {
     font-weight: 600;
     font-size: 18px;
+    border-radius: 6px;
 }
-
-
 
 .V_forgot_pwd {
     font-weight: 600;
@@ -63,11 +73,39 @@
     color: #C6C6C6;
 }
 
+.V_input_otp {
+    width: 7%;
+    padding: 12px 0px;
+    background: #111;
+    color: #fff;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.1),
+        0px 0px 15px rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16.3px);
+    outline: none;
+    transition: all 0.3s ease;
+    text-align: center;
+}
 
+.V_sign_in_1_modal_otp {
+    width: 100%;
+}
 
+.V_resend {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 16px;
+    color: #C6C6C6;
+}
 
-
-
+.V_resend_otp {
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFFFFF;
+}
 
 
 
@@ -103,6 +141,18 @@
     .V_submit_1 {
         font-size: 18px;
     }
+
+    .V_input_otp {
+        width: 10%;
+        padding: 12px 0px;
+    }
+    .V_forgot_pwd {
+        font-size: 24px;
+    }
+    
+    .V_sub_forgot {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 767px) and (min-width: 576px) {
@@ -121,6 +171,17 @@
     }
 
     .V_submit_1 {
+        font-size: 16px;
+    }
+    .V_input_otp {
+        width: 10%;
+        padding: 12px 0px;
+    }
+    .V_forgot_pwd {
+        font-size: 24px;
+    }
+    
+    .V_sub_forgot {
         font-size: 16px;
     }
 }
@@ -147,6 +208,18 @@
     .V_submit_1 {
         font-size: 16px;
     }
+
+    .V_input_otp {
+        width: 10%;
+        padding: 12px 0px;
+    }
+    .V_forgot_pwd {
+        font-size: 20px;
+    }
+    
+    .V_sub_forgot {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 480px) and (min-width: 320px) {
@@ -166,6 +239,18 @@
 
 
     .V_submit_1 {
+        font-size: 16px;
+    }
+
+    .V_input_otp {
+        width: 13%;
+        padding: 12px 0px;
+    }
+    .V_forgot_pwd {
+        font-size: 20px;
+    }
+    
+    .V_sub_forgot {
         font-size: 16px;
     }
 }
