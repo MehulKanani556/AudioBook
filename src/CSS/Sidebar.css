@@ -1,0 +1,25 @@
+.ds_side_main{
+    width: 18%;
+}
+.ds_side_bg{
+    background: rgba(1, 1, 4, 1);
+    height: 100vh;
+}
+
+.ds_active_color {
+    position: relative;
+    border: 0.3px solid transparent;
+    background: radial-gradient(80.38% 222.5% at -13.75% -12.36%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%),
+                radial-gradient(80.69% 208.78% at 108.28% 112.58%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    background-clip: padding-box;
+
+}
+.ds_active_pad{
+    margin-right: 30px;
+    padding: 13px 0px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.ds_side_title{
+    font-weight: 400;
+}
