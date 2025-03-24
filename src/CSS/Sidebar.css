@@ -1,9 +1,11 @@
 .ds_side_main{
-    width: 18%;
+    width: 100%;
+    min-width: 300px;
 }
 .ds_side_bg{
     background: rgba(1, 1, 4, 1);
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
 }
 
 .ds_active_color {
@@ -22,4 +24,37 @@
 }
 .ds_side_title{
     font-weight: 400;
+}
+.ds_side_off_main{
+    background: rgba(1, 1, 4, 1);
+}
+.ds_side_off_main .offcanvas-header .btn-close{
+    background-image: url(../Images/dhruvin/cancel.svg);
+    font-size: 25px;
+}  
+
+
+@media (max-width:1441px) {
+    .ds_side_main{
+        width: 100%;
+    }
+}
+
+@media (max-width:1200px) {
+    .ds_side_main{
+        width: 100%;
+    }
+    .ds_side_title{
+        font-size: 16px;
+    }
+    .ds_side_icon{
+        width: 90%;
+    }
+}
+
+@media (max-width:992px) {
+    .ds_side_main {
+        width: 100%;
+        min-width: 250px;
+    }
 }

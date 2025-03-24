@@ -31,8 +31,115 @@
 .ds_notifi{
     position: absolute;
     top: 50px;
-    left: -250px;
-    width: 350px;
+    left: -300px;
+    width: 400px;
     background: rgba(12, 17, 24, 1);
     box-shadow: 0px 4px 16px 0px rgba(105, 105, 105, 0.1);
+}
+.ds_border{
+    background: rgba(106, 106, 106, 1);
+     height: 1px;
+}
+.ds_head_txt{
+    color: rgba(198, 198, 198, 1);
+}
+.ds_lh{
+    line-height: 22px;
+}
+.ds_head_text{
+    color: rgba(255, 255, 255, 1);
+}
+.ds_notification{
+    height: 450px;
+}
+.ds_noti_bell{
+    margin-right: 20px;
+}
+
+
+@media (max-width:1441px) {
+    .ds_header_main{
+        width: 78%;
+    }
+}
+
+@media (max-width:1200px) {
+    .ds_header_main{
+        width: 78%;
+    }
+    .ds_notifi{
+        top: 50px;
+        left: -200px;
+        width: 300px;
+    }
+}
+
+@media (max-width:992px) {
+    .ds_header_main{
+        width: 70%;
+    }
+    .ds_notifi{
+        top: 50px;
+        left: -198px;
+        width: 300px;
+    }
+    .ds_header_input{
+       width: 300px;
+    }
+}
+
+@media (max-width:767px) {
+    .ds_header_main{
+        width: 100%;
+    }
+    .ds_notifi{
+        top: 50px;
+        left: -162px;
+        width: 300px;
+    }
+    .ds_header_input{
+       width: 300px;
+    }
+}
+
+@media (max-width:576px) {
+    .ds_header_input {
+        width: 130px;
+    }
+    .ds_notifi{
+        top: 50px;
+        left: -167px;
+        width: 300px;
+    }
+}
+
+@media (max-width:374px) {
+    .ds_header_input {
+        width: 130px;
+    }
+    .ds_profile_img{
+        width: 70%;
+    }
+    .ds_noti_img{
+        width: 75%;
+    }
+    .ds_noti_bell{
+        margin-right: 5px;
+    }
+    .ds_notifi{
+        top: 50px;
+        left: -167px;
+        width: 300px;
+    }
+}
+
+@media (max-width:321px) {
+    .ds_notifi{
+        top: 50px;
+        left: -196px;
+        width: 300px;
+    }
+    .ds_head_logo{
+         font-size: 21px;
+    }
 }
