@@ -1,19 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import { Outlet } from 'react-router-dom'
 import '../CSS/Layout.css'
 
 const Layout = () => {
+
+const [offToggle, setOffToggle] = useState(false)  
+
   return (
     <div>
-       <div className='container-fluid'>
-          <div className='row'>
-            <div className='p-0 ds_side_main'>
-              <Sidebar/>
+       <div className=''>
+          
+          <div className='d-flex'>
+            <div className='p-0'>
+              <Sidebar offToggle={offToggle} setOffToggle={setOffToggle}/>
             </div>
-            <div className='p-0 ds_header_main'>
-              <Header/>
+            <div className='p-0 flex-fill w-100'>
+              <Header setOffToggle={setOffToggle} />
               <Outlet/>
             </div>
           </div>
