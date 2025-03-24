@@ -1,0 +1,82 @@
+.V_outlet_back {
+    background: linear-gradient(180deg, #050614 0%, #000101 88.37%);
+    height: 822px;
+}
+
+.V_title {
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.V_his_first {
+    font-weight: 400;
+    font-size: 18px;
+    color: #C6C6C6;
+}
+
+.V_his_second {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.V_outlet_sub_back {
+    background: #171F28;
+    height: 80%;
+}
+
+.V_thead {
+    padding: 20px;
+    text-align: center;
+}
+
+.V_border_bottom {
+    border-bottom: 0.8px solid #C6C6C64D;
+}
+
+.V_action_image {
+    height: 32px;
+    width: 32px;
+    margin: 0px 10px;
+}
+
+.V_pagination1 {
+    font-family: Mulish;
+    font-weight: 600;
+    font-size: 13px;
+    width: 32px;
+    height: 32px;
+    background: #949090;
+    border: 1px solid #131313;
+    backdrop-filter: blur(60px);
+    padding-top: 6px;
+    margin: 0px 5px;
+}
+
+
+.V_pagination {
+    font-size: 13px;
+    width: 32px;
+    height: 32px;
+    background: #030303;
+
+    padding-top: 6px;
+}
+
+/* ================ media query ================ */
+
+
+@media (max-width: 1921px) and (min-width: 1651px) {}
+
+@media (max-width: 1650px) and (min-width: 1441px) {}
+
+@media (max-width: 1440px) and (min-width: 1200px) {}
+
+@media (max-width: 1199px) and (min-width: 992px) {}
+
+@media (max-width: 991px) and (min-width: 768px) {}
+
+@media (max-width: 767px) and (min-width: 576px) {}
+
+@media (max-width: 575px) and (min-width: 481px) {}
+
+@media (max-width: 480px) and (min-width: 320px) {}
