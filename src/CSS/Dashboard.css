@@ -1,0 +1,24 @@
+.ds_dash_main{
+    height: 873px;
+    background: rgba(1, 1, 4, 1);
+}
+.ds_dash_inner{
+    padding: 0px 40px;
+}
+.ds_dash_bg{
+    background: rgba(23, 31, 40, 1);
+    padding: 20px;
+    border-radius: 5px;
+}
+.ds_dash_chart{
+    background: rgba(23, 31, 40, 1);
+    padding: 40px 20px;
+    border-radius: 5px;
+    height: 500px;
+}
+
+@media (max-width:575px) {
+    .ds_dash_inner {
+        padding: 0px 15px;
+    }
+}
