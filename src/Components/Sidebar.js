@@ -24,8 +24,11 @@ import label from '../Images/dhruvin/label.svg'
 import join from '../Images/dhruvin/join.svg'
 
 import { Offcanvas } from 'react-bootstrap'
+import {  useNavigate } from 'react-router-dom'
 
 const Sidebar = ({offToggle , setOffToggle }) => {
+
+  const navigate = useNavigate();
   return (
     <>
     <div className='p-0 ds_side_main d-md-block d-none'>
@@ -151,7 +154,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/review')}>
                      <div>
                         <img src={review} className="ds_side_icon" />
                      </div>
@@ -205,7 +208,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/homecorousel')}>
                      <div>
                         <img src={home} className="ds_side_icon" />
                      </div>
@@ -214,7 +217,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/homelabels')}>
                      <div>
                         <img src={label} className="ds_side_icon" />
                      </div>
@@ -223,7 +226,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/homelabeljoin')}>
                      <div>
                         <img src={join} className="ds_side_icon" />
                      </div>
@@ -361,7 +364,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/review')}>
                      <div>
                         <img src={review} className="ds_side_icon" />
                      </div>
@@ -415,7 +418,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/homecorousel')}>
                      <div>
                         <img src={home} className="ds_side_icon" />
                      </div>
@@ -424,7 +427,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/homelabels')}>
                      <div>
                         <img src={label} className="ds_side_icon" />
                      </div>
@@ -433,7 +436,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/homelabel')}>
                      <div>
                         <img src={join} className="ds_side_icon" />
                      </div>

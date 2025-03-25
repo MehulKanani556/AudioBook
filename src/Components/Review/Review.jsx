@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import './Review.css';
+import { FaPlus } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
 // import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 const Review = () => {
+    const [modalShow, setModalShow] = useState(false);
+    const navigate = useNavigate()
 
     const totalPages = 10;
     const [currentPage, setCurrentPage] = useState(1);
@@ -76,9 +81,17 @@ const Review = () => {
     return (
         <>
             <section className='V_outlet_back text-white pt-3 px-3 pt-lg-5 px-lg-5'>
-                <h1 className='V_title'>Review</h1>
-                <p><span className='V_his_first'>Dashboard</span> / <span className='V_his_second'>Review</span></p>
-
+                <div className="d-flex justify-content-between">
+                    <div>
+                        <h1 className='V_title'>Review</h1>
+                        <p><span className='V_his_first'>Dashboard</span> / <span className='V_his_second'>Review</span></p>
+                    </div>
+                    <div>
+                        <button className='V_add_button bg-white text-black py-2 px-4 ' onClick={() => navigate('/layout/addreview')}>
+                            <FaPlus />     Add
+                        </button>
+                    </div>
+                </div>
 
                 <div className="V_outlet_sub_back">
                     <div className=" d-flex justify-content-between flex-column overflow-auto">
@@ -105,10 +118,10 @@ const Review = () => {
                                     <td className='V_thead'>
                                         <div className="d-flex justify-content-center">
                                             <div>
-                                                <img src={require('../../Images/Parth/view_button.png')} alt="" className='V_action_image' />
+                                                <img src={require('../../Images/Parth/view_button.png')} alt="" className='V_action_image' onClick={() => setModalShow(true)} />
                                             </div>
                                             <div>
-                                                <img src={require('../../Images/Parth/edit_button.png')} alt="" className='V_action_image' />
+                                                <img src={require('../../Images/Parth/edit_button.png')} alt="" className='V_action_image' onClick={() => navigate("/layout/editreview")} />
                                             </div>
                                             <div>
                                                 <img src={require('../../Images/Parth/delete_button.png')} alt="" className='V_action_image' />
@@ -154,6 +167,47 @@ const Review = () => {
                     {renderPagination()}
                 </div>
             </section>
+
+
+
+            <Modal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                className='V_review_modal_width m-auto'
+            >
+                <div className='V_rview_modal'>
+                    <Modal.Header className='border-0'>
+                        <Modal.Title id="contained-modal-title-vcenter" className='w-100 px-sm-4' >
+                            <div className="text-white d-flex justify-content-between w-100">
+                                <div>
+                                    <p className='V_review'>Review Details</p>
+                                </div>
+                                <div className='ms-auto'>
+                                    <img src={require('../../Images/Parth/close_button.png')} alt="" className='' onClick={() => setModalShow(false)}/>
+                                </div>
+                            </div>
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="row px-sm-4">
+                            <div className="col-6 V_label1 mb-3">Audio Book ID</div>
+                            <div className="col-6 text-white mb-3">:<span className='ps-2'>45256</span></div>
+                            <div className="col-6 V_label1 mb-3">User ID</div>
+                            <div className="col-6 text-white mb-3">:<span className='ps-2'>Johanwick08</span></div>
+                            <div className="col-6 V_label1 mb-3">Date</div>
+                            <div className="col-6 text-white mb-3">:<span className='ps-2'>12/12/2023</span></div>
+                            <div className="col-6 V_label1 mb-3">Review</div>
+                            <div className="col-6 text-white mb-3">:<span className='ps-2'>Lorem Ipsum</span></div>
+                            <div className="col-6 V_label1 mb-3">Rating</div>
+                            <div className="col-6 text-white mb-3">:<span className='ps-2'>Lorem Ipsum</span></div>
+                        </div>
+                    </Modal.Body>
+                </div>
+            </Modal>
+
         </>
     )
 }
