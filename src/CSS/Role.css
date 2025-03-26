@@ -1,7 +1,10 @@
+.modal-backdrop{
+    opacity: 0.8 !important;
+}
 #root {
     width: 100vw;
-   min-height: 100vh;
-   height: 100%;
+    min-height: 100vh;
+    height: 100%;
     overflow: hidden;
 }
 .ds_dash_master {
@@ -17,7 +20,7 @@
 }
 .ds_role_bg{
     background: #171F28;
-    height: 650px;
+    height: 680px;
     border-radius: 5px;
 }
 .ds_role_table thead tr th , td {
@@ -31,7 +34,145 @@
     background-color: white;
     padding: 3px 5px 5px 5px;
     border-radius: 3px;
+    
+
 }
+.V_pagination {
+    font-size: 13px;
+    width: 32px;
+    height: 32px;
+    background: #030303;
+    color: white;
+    padding-top: 6px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.V_pagination1 {
+    font-size: 13px;
+    width: 32px;
+    height: 32px;
+    background: #949090;
+    color: black;
+    font-weight: 600;
+    padding-top: 6px;
+    margin: 0 5px;
+}
+
+.V_pagination.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+.ds_role_modal .btn-close{
+   background-image: url(../Images/dhruvin/cancel.svg);
+   background-repeat: no-repeat;
+   fill: white;
+   font-size: 25px;
+}
+.ds_role_modal_main .modal-content{
+    border: 1px solid white !important;
+    background: rgba(12, 17, 24, 1);
+
+}
+.ds_role_text{
+    color: rgba(198, 198, 198, 0.9);
+}
+.ds_role_input{
+    background: rgba(23, 31, 40, 1);
+    color: white;
+}
+.ds_role_input:focus{
+    background: rgba(23, 31, 40, 1);
+    border-color: inherit;
+    box-shadow: none;
+    color: white;
+}
+.ds_role_save{
+    background: rgba(255, 255, 255, 1);
+    padding: 10px 50px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-right: 20px;
+}
+.ds_role_cancel{
+    background: black;
+    padding: 10px 45px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    color: white;
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    border: 0.3px solid;
+
+    border-image-source: radial-gradient(80.38% 222.5% at -13.75% -12.36%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(80.69% 208.78% at 108.28% 112.58%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+}
+.ds_role_delete_modal .modal-content{
+    border: 1px solid white !important;
+    background: rgba(12, 17, 24, 1);    
+}
+.ds_delete_cancel{
+    background: black;
+    padding: 10px 45px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    color: white;
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    border: 0.3px solid;
+    margin-right: 20px;
+
+}
+.ds_delete_yes{
+    background: rgba(255, 255, 255, 1);
+    padding: 10px 57px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+}
+.ds_role_delete_modal .modal-dialog {
+    max-width: 550px;
+}
+.ds_role_link:hover{
+    color: rgb(73, 72, 72);
+}
+
+@media (max-width:1441px) {
+    .ds_role_modal_main .modal-dialog{
+        max-width: 650px !important;
+    }
+    .ds_role_bg{
+        height: 590px;
+    }
+}
+@media (max-width:1200px) {
+    .ds_role_modal_main .modal-dialog{
+        max-width: 450px !important;
+    }
+    .ds_role_delete_modal .modal-dialog{
+        max-width: 420px !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .ds_table_wrapper {
+      overflow-x: auto; 
+      display: block; 
+      white-space: nowrap; 
+    }
+  
+    .ds_role_table {
+      min-width: 400px; 
+    }
+  }
+  
+
+  
 @media(max-width : 991px){
     .ds_dash_master {
     width:calc(100vw - 250px);
@@ -42,4 +183,42 @@
     .ds_dash_master {
         width:100%;
     }
+}
+
+@media (max-width:426px) {
+    .ds_role_modal_main .modal-dialog{
+        max-width: 350px !important;
+        margin: auto;
+    }
+    .ds_role_btn{
+        padding: 8px 15px;
+    }
+    .ds_role_save{
+        padding: 8px 30px;
+    }
+    .ds_role_cancel{
+        padding: 8px 23px
+    }
+    .ds_role_delete_modal .modal-dialog{
+        max-width: 350px !important;
+        margin: auto;
+    }
+    .ds_delete_cancel{
+        padding: 10px 25px;
+    }
+    .ds_delete_yes {
+        padding: 10px 38px;
+    }
+}
+
+@media (max-width:376px) {
+    .ds_role_modal_main .modal-dialog{
+        max-width: 300px !important;
+        margin: auto;
+    }
+    .ds_role_delete_modal .modal-dialog{
+        max-width: 300px !important;
+        margin: auto;
+    }
+
 }

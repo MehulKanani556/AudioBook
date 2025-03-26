@@ -5,6 +5,7 @@ import Login from "./Components/Login";
 import Dashboard from "./Components/Pages/Dashboard";
 import Role from "./Components/Pages/Role";
 import Review from "./Components/Pages/Review"
+import Subscription from "./Components/Pages/Subscription";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/layout" element={<Layout />} >
            <Route path="dashboard" element={<Dashboard/>} />
            <Route path="role" element={<Role/>} />   
+           <Route path="subscription" element={<Subscription/>} />   
            <Route path="review" element={<Review />} />   
         </Route>
       </Routes>

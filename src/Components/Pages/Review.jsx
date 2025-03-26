@@ -10,7 +10,7 @@ const Review = () => {
     const [modalShow, setModalShow] = useState(false);
     const totalPages = 10;
     const [currentPage, setCurrentPage] = useState(1);
-
+    
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
