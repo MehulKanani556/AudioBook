@@ -3,7 +3,7 @@ import { Router, Routes, Route, Link } from "react-router-dom";
 import Layout from "./Components/Layout";
 import Login from "./Components/Login";
 import Review from "./Components/Review/Review";
-import Dashboard from "./Pages/Dashboard";
+// import Dashboard from "./Pages/Dashboard";
 import AddReview from "./Components/Review/AddReview";
 import EditReview from "./Components/Review/EditReview";
 import HomeLabelJoin from "./Components/HomeLabelJoin/HomeLabelJoin";
@@ -15,7 +15,7 @@ import AddHomeLabels from "./Components/HomeLabels/AddHomeLabels";
 import HomeCorousel from "./Components/HomeCorousel/HomeCorousel";
 import AddHomeCorousel from "./Components/HomeCorousel/AddHomeCorousel";
 import EditHomeCorousel from "./Components/HomeCorousel/EditHomeCorousel";
-// import Dashboard from "./Components/Pages/Dashboard";
+import Dashboard from "./Components/Pages/Dashboard";
 import Role from "./Components/Pages/Role";
 
 const App = () => {
@@ -30,7 +30,7 @@ const App = () => {
       
         
           <Route path="/layout/review" element={<Review />} />
-          <Route path="dashboard" element={<Dashboard/>} />
+          {/* <Route path="dashboard" element={<Dashboard/>} /> */}
           <Route path="addreview" element={<AddReview />} />
           <Route path="editreview" element={<EditReview />} />
           <Route path="homelabeljoin" element={<HomeLabelJoin />} />
