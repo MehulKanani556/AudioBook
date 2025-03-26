@@ -1,0 +1,25 @@
+.ds_role_btn {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 8px 25px;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+}
+.ds_role_bg{
+    background: #171F28;
+    height: 650px;
+    border-radius: 5px;
+}
+.ds_role_table thead tr th , td {
+    padding: 15px 0px;
+    text-align: center;
+}
+.ds_role_table thead tr th{
+    border-bottom: 0.8px solid #C6C6C64D;
+}
+.ds_role_icon{
+    background-color: white;
+    padding: 3px 5px 5px 5px;
+    border-radius: 3px;
+}

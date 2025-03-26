@@ -15,13 +15,20 @@ import AddHomeLabels from "./Components/HomeLabels/AddHomeLabels";
 import HomeCorousel from "./Components/HomeCorousel/HomeCorousel";
 import AddHomeCorousel from "./Components/HomeCorousel/AddHomeCorousel";
 import EditHomeCorousel from "./Components/HomeCorousel/EditHomeCorousel";
+// import Dashboard from "./Components/Pages/Dashboard";
+import Role from "./Components/Pages/Role";
 
 const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login />} />
         <Route path="/layout" element={<Layout />} >
+          <Route path="review" element={<Review />} />
+           <Route path="dashboard" element={<Dashboard/>} />
+           <Route path="role" element={<Role/>} />
+      
+        
           <Route path="/layout/review" element={<Review />} />
           <Route path="dashboard" element={<Dashboard/>} />
           <Route path="addreview" element={<AddReview />} />
