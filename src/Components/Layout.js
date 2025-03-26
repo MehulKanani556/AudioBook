@@ -12,8 +12,8 @@ const [offToggle, setOffToggle] = useState(false)
     <div>
        <div className=''>
           
-          <div className='d-flex'>
-            <div className='p-0'>
+          <div className='d-flex '>
+            <div className='p-0 position-relative'>
               <Sidebar offToggle={offToggle} setOffToggle={setOffToggle}/>
             </div>
             <div className='p-0 flex-fill w-100'>

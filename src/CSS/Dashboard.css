@@ -1,5 +1,12 @@
+.ds_dash_master{
+    /* height: 100%; */
+
+}
+
 .ds_dash_main{
-    height: 873px;
+    /* height: 873px; */
+    height: 100%;
+    min-height: calc(100vh - 80px);
     background: rgba(1, 1, 4, 1);
 }
 .ds_dash_inner{
@@ -16,9 +23,93 @@
     border-radius: 5px;
     height: 500px;
 }
+.ds_dash_chart2{
+    background: rgba(23, 31, 40, 1);
+    padding: 40px 20px;
+    border-radius: 5px;
+    height: 500px;
+}
+.ds_dash_chart .recharts-responsive-container{
+    height: 400px !important;
+}
+.ds_dash_chart .recharts-responsive-container .recharts-wrapper{
+    max-height: 400px !important;
+}
 
 @media (max-width:575px) {
     .ds_dash_inner {
         padding: 0px 15px;
+    }
+}
+@media (max-width: 1200px){
+    .ds_side_main {
+        height: 100%;
+    }
+    .ds_side_bg  {
+        height: 100%;
+    }
+    .ds_dash_chart{
+        height: 400px;
+    }
+    .ds_dash_chart .recharts-responsive-container{
+        height: 330px !important;
+    }
+    .ds_dash_chart .recharts-responsive-container .recharts-wrapper{
+        max-height: 330px !important;
+    }
+    .ds_dash_chart2{
+        height: 460px;
+    }
+    
+}
+
+@media (max-width:992px) {
+    .ds_dash_manage{
+        flex-direction: column-reverse;
+    }
+    .ds_dash_chart2 {
+        height: 560px;
+    }
+    .ds_dash_flex{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 426px){
+    .ds_dash_chart{
+        height: 350px;
+    }
+    .ds_dash_chart .recharts-responsive-container{
+        height: 290px !important;
+    }
+    .ds_dash_chart .recharts-responsive-container .recharts-wrapper{
+        max-height: 290px !important;
+    }
+    
+    .ds_dash_chart{
+        height: 300px;
+    }
+    .ds_dash_chart .recharts-responsive-container{
+        height: 250px !important;
+    }
+    .ds_dash_chart .recharts-responsive-container .recharts-wrapper{
+        max-height: 250px !important;
+    }
+    .ds_dash_chart2 {
+        height: 560px;
+    }
+}
+
+@media (max-width:376px) {
+    .ds_dash_chart2 {
+        height: 580px;
+    }
+}
+
+@media (max-width:321px) {
+    .ds_dash_chart2 {
+        height: 620px;
     }
 }
