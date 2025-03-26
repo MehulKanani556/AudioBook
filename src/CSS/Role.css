@@ -1,3 +1,12 @@
+#root {
+    width: 100vw;
+   min-height: 100vh;
+   height: 100%;
+    overflow: hidden;
+}
+.ds_dash_master {
+    width:calc(100vw - 300px);
+}
 .ds_role_btn {
   background: #ffffff;
   border-radius: 5px;
@@ -22,4 +31,15 @@
     background-color: white;
     padding: 3px 5px 5px 5px;
     border-radius: 3px;
+}
+@media(max-width : 991px){
+    .ds_dash_master {
+    width:calc(100vw - 250px);
+    }
+}
+
+@media(max-width : 767px){
+    .ds_dash_master {
+        width:100%;
+    }
 }

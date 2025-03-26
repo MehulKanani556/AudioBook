@@ -1,0 +1,52 @@
+.V_review_btn {
+    background: #ffffff;
+    border-radius: 5px;
+    padding: 8px 25px;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .V_review_bg{
+      background: #171F28;
+      height: 650px;
+      border-radius: 5px;
+  }
+  .V_review_table thead tr th , td {
+      padding: 15px 30px;
+      text-align: center;
+  }
+  .V_review_table thead tr th{
+      border-bottom: 0.8px solid #C6C6C64D;
+  }
+  .V_review_icon{
+      background-color: white;
+      padding: 3px 5px 5px 5px;
+      border-radius: 3px;
+  }
+
+  .V_pagination {
+    font-size: 13px;
+    width: 32px;
+    height: 32px;
+    background: #030303;
+    color: white;
+    padding-top: 6px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.V_pagination1 {
+    font-size: 13px;
+    width: 32px;
+    height: 32px;
+    background: #949090;
+    color: black;
+    font-weight: 600;
+    padding-top: 6px;
+    margin: 0 5px;
+}
+
+.V_pagination.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
