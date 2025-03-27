@@ -7,6 +7,8 @@ import Role from "./Components/Pages/Role";
 import Review from "./Components/Pages/Review";
 import HomeLabelJoin from "./Components/Pages/HomeLabelJoin";
 import HomeLabels from "./Components/Pages/HomeLabels";
+// import Review from "./Components/Pages/Review"
+import Subscription from "./Components/Pages/Subscription";
 
 const App = () => {
   return (
@@ -16,6 +18,7 @@ const App = () => {
         <Route path="/layout" element={<Layout />} >
            <Route path="dashboard" element={<Dashboard/>} />
            <Route path="role" element={<Role/>} />   
+           <Route path="subscription" element={<Subscription/>} />   
            <Route path="review" element={<Review />} />   
            <Route path="homelabeljoin" element={<HomeLabelJoin />} />
            <Route path="homelabels" element={<HomeLabels />} />

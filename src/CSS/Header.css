@@ -43,6 +43,7 @@
 .ds_head_txt{
     color: rgba(198, 198, 198, 1);
 }
+
 .ds_lh{
     line-height: 22px;
 }
@@ -54,6 +55,9 @@
 }
 .ds_noti_bell{
     margin-right: 20px;
+}
+.ds_role_link:hover{
+    
 }
 
 

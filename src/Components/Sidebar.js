@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../CSS/Sidebar.css'
 import dashboard from '../Images/dhruvin/dashboard.svg'
 import role from '../Images/dhruvin/role.svg'
@@ -25,10 +25,14 @@ import join from '../Images/dhruvin/join.svg'
 
 import { Offcanvas } from 'react-bootstrap'
 import {  useNavigate } from 'react-router-dom'
+import { type } from '@testing-library/user-event/dist/type'
 
 const Sidebar = ({offToggle , setOffToggle }) => {
 
   const navigate = useNavigate();
+  const [color, setColor] = useState("dashboard")
+
+
   return (
     <>
     <div className='p-0 ds_side_main d-md-block d-none'>
@@ -36,8 +40,8 @@ const Sidebar = ({offToggle , setOffToggle }) => {
            <div>
               <h3 className='text-light text-center pt-3'>LOGO</h3>
               <div className='mt-5'>
-                 <div className=' ms-3 ds_active_pad  ds_active_color'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                 <div className={` ms-3 ds_active_pad ${color === "dashboard" ? 'ds_active_color' : '' }  `} onClick={() => {navigate('/layout/dashboard'); setColor("dashboard")}}>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={dashboard} className="ds_side_icon" />
                      </div>
@@ -45,8 +49,8 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                 <div className={`ms-3 ds_active_pad ${color === "role" ? 'ds_active_color' : '' }   mt-3 `} onClick={() => {navigate('/layout/role'); setColor("role")}}>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={role} className="ds_side_icon" />
                      </div>
@@ -54,8 +58,8 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                 <div className=' ms-3 ds_active_pad  py-2 mt-3' onClick={() => navigate('/layout/subscription')}>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={king} className="ds_side_icon" />
                      </div>

@@ -196,7 +196,7 @@ const Dashboard = (props) => {
                                   </div> */}
 
                     <div className="row ds_dash_manage">
-                      <div className="col-lg-6 d-flex align-items-center justify-content-sm-end justify-content-center">
+                      <div className=" col-xl-5 col-lg-5  d-flex align-items-center justify-content-sm-end justify-content-center">
                         <div className="ds_dash_flex">
                           {pieData.map((category, index) => (
                             <div
@@ -224,7 +224,7 @@ const Dashboard = (props) => {
                           ))}
                         </div>
                       </div>
-                      <div className="col-lg-6">
+                      <div className="col-xl-7 col-lg-7 ">
                         <ResponsiveContainer width="100%" height={400}>
                           <PieChart>
                             <Pie
