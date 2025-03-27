@@ -79,6 +79,7 @@ td {
     gap: 10px;
     background: #171F28;
     color: white;
+    /* border: 1px solid #ced4da !important; */
     border: none;
 }
 
@@ -102,7 +103,7 @@ td {
     background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%)
         /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
     ;
-    border: none;
+    /* border: 1px solid #ced4da !important; */
     color: white;
     border-radius: 6px;
 }
@@ -121,18 +122,76 @@ td {
     color: rgba(255, 255, 255, 1);
 }
 
+.V_modal_width .modal-content{
+    box-shadow: rgba(22, 22, 22, 0.25) 0px 54px 55px, rgba(107, 106, 106, 0.12) 0px -12px 30px, rgba(121, 120, 120, 0.12) 0px 4px 6px, rgba(104, 103, 103, 0.17) 0px 12px 13px, rgba(250, 249, 249, 0.09) 0px -3px 5px;
+    background: rgba(12, 17, 24, 1);
+}
+
+
+.V_home_corousel_image{
+    height: 30px;
+    width: 30px;
+}
 
 
 
+.V_input_file_image_for_all{
+    width: 100%;
+    height: 44px;
+    border-radius: 4px;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    gap: 10px;
+    background: #171F28;
+    color: white;
+    border: none;
+    /* border: 1px solid #ced4da !important; */
+}
 
 
+.custom-file-input {
+    display: none; /* Hide default file input */
+}
+.custom-input-group {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+    height: 44px;
+    border-radius: 4px;
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    gap: 10px;
+    background: #171F28;
+    color: white;
+   
+}
+.custom-text {
+    flex: 1;
+    background: none;
+    border: none;
+    color: white;
+    padding: 5px;
+    outline: none;
+}
+.custom-button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 0px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 
-
-
-
-
-
+.V_castCrew_image{
+    width: 120px;
+    height: 120px;
+}
 
 /* ================ media query ================ */
 
@@ -147,6 +206,9 @@ td {
     .V_input_text_for_all {
         height: 40px;
     }
+    .custom-input-group{
+        height: 40px;
+    }
 }
 
 @media (max-width: 991px) and (min-width: 769px) {
@@ -157,6 +219,13 @@ td {
 
     .V_input_text_for_all {
         height: 40px;
+    }
+    .custom-input-group{
+        height: 40px;
+    }
+    .V_castCrew_image{
+        width: 100px;
+        height: 100px;
     }
 }
 
@@ -169,6 +238,13 @@ td {
     .V_input_text_for_all {
         height: 35px;
     }
+    .custom-input-group{
+        height: 35px;
+    }
+    .V_castCrew_image{
+        width: 100px;
+        height: 100px;
+    }
 }
 
 @media (max-width: 575px) and (min-width: 481px) {
@@ -180,6 +256,9 @@ td {
     .V_input_text_for_all {
         height: 35px;
     }
+    .custom-input-group{
+        height: 35px;
+    }
 }
 
 @media (max-width: 480px) and (min-width: 320px) {
@@ -189,6 +268,9 @@ td {
     }
 
     .V_input_text_for_all {
+        height: 35px;
+    }
+    .custom-input-group{
         height: 35px;
     }
     .V_label2 {

@@ -10,6 +10,7 @@ import Close from "../../Images/Parth/close_button.png"
 const HomeLabels = () => {
     const [addHomeLabelsModal, setAddHomeLabelsModal] = useState(false);
     const [editHomeLabelsModal, setEditHomeLabelsModal] = useState(false);
+    const [removeHomeLabels, setRemoveHomeLabels] = useState(false);
 
 
     const totalPages = 10;
@@ -114,7 +115,7 @@ const HomeLabels = () => {
                                             <span className=' me-2 ds_cursor' onClick={() => setEditHomeLabelsModal(true)}>
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor'>
+                                            <span className='ds_cursor' onClick={() => setRemoveHomeLabels(true)}>
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -198,7 +199,7 @@ const HomeLabels = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                    Edit Home Labels 
+                                    Edit Home Labels
                                 </div>
                                 <div className='ms-auto' onClick={() => setEditHomeLabelsModal(false)}>
                                     <img src={Close} alt="" />
@@ -224,6 +225,23 @@ const HomeLabels = () => {
                     </Modal.Footer>
                 </Modal>
             </div>
+
+
+
+            {/* -================= Delete Home Label Join Modal ==================*/}
+            <Modal show={removeHomeLabels} onHide={() => setRemoveHomeLabels(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
+
+                <Modal.Body >
+                    <div className='text-center'>
+                        <h4 className='mt-4'>Delete</h4>
+                        <p className='ds_role_text'>Are you sure you want to delete Home Labels?</p>
+                        <div className='mt-5 mb-5'>
+                            <button className='ds_delete_cancel' onClick={() => setRemoveHomeLabels(false)}>Cancel</button>
+                            <button className='ds_delete_yes'>Yes</button>
+                        </div>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     )
 }

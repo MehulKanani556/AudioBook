@@ -7,10 +7,11 @@ import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
 
-const HomeLabelJoin = () => {
-    const [addHomeLabelJoinModal, setAddHomeLabelJoinModal] = useState(false);
-    const [editHomeLabelJoinModal, setEditHomeLabelJoinModal] = useState(false);
-    const [removeHomeLabelJoin, setRemoveHomeLabelJoin] = useState(false);
+
+const HomeCorousel = () => {
+    const [addHomeLabelCorouselModal, setAddHomeLabelCorouselModal] = useState(false);
+    const [editHomeLabelCorousel, setEditHomeLabelCorousel] = useState(false);
+    const [removeHomeCorousel, setRemoveHomeCorousel] = useState(false);
 
 
     const totalPages = 10;
@@ -89,11 +90,11 @@ const HomeLabelJoin = () => {
                 <div className='ds_dash_inner'>
                     <div className='d-flex justify-content-between align-items-center'>
                         <div>
-                            <h4 className="text-light pt-4 mb-0">Home Label Join</h4>
-                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Home Label Join</span></p>
+                            <h4 className="text-light pt-4 mb-0">Home Corousel</h4>
+                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Home Corousel</span></p>
                         </div>
                         <div>
-                            <button className='V_review_btn' onClick={() => setAddHomeLabelJoinModal(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
+                            <button className='V_review_btn' onClick={() => setAddHomeLabelCorouselModal(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
                         </div>
                     </div>
 
@@ -103,31 +104,32 @@ const HomeLabelJoin = () => {
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Home Label ID</th>
-                                        <th>Audio Book ID</th>
+                                        <th>Image</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>01</td>
-                                        <td>9632</td>
-                                        <td>2541211</td>
+                                        <td>
+                                            <img src={require("../../Images/Parth/homeCorouselImage.png")} alt="" className='V_home_corousel_image' />
+                                        </td>
                                         <td className=''>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditHomeLabelJoinModal(true)}>
+                                            <span className=' me-2 ds_cursor' onClick={() => setEditHomeLabelCorousel(true)}>
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveHomeLabelJoin(true)}>
+                                            <span className='ds_cursor' onClick={() => setRemoveHomeCorousel(true)}>
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>02</td>
-                                        <td>9632</td>
-                                        <td>2541211</td>
+                                        <td>
+                                            <img src={require("../../Images/Parth/homeCorouselImage.png")} alt="" className='V_home_corousel_image' />
+                                        </td>
                                         <td className=''>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditHomeLabelJoinModal(true)}>
+                                            <span className=' me-2 ds_cursor' onClick={() => setEditHomeLabelCorousel(true)}>
                                                 <img src={pen} alt="" />
                                             </span>
                                             <span className='ds_cursor'>
@@ -148,11 +150,11 @@ const HomeLabelJoin = () => {
 
 
 
-            {/* ==========     Add Home Label Join   ========== */}
+            {/* ==========     Add Home Labels    ========== */}
             <div className=''>
                 <Modal
-                    show={addHomeLabelJoinModal}
-                    onHide={() => setAddHomeLabelJoinModal(false)}
+                    show={addHomeLabelCorouselModal}
+                    onHide={() => setAddHomeLabelCorouselModal(false)}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     className='text-white V_modal_width'
@@ -161,9 +163,9 @@ const HomeLabelJoin = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                    Add Home Label Join
+                                    Add Home Corousel
                                 </div>
-                                <div className='ms-auto' onClick={() => setAddHomeLabelJoinModal(false)}>
+                                <div className='ms-auto' onClick={() => setAddHomeLabelCorouselModal(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
@@ -171,13 +173,13 @@ const HomeLabelJoin = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Home Label Join</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Audio Book ID</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
+                            <div className="col-12   pt-2 pt-md-3">
+                                <label className='V_label'>Image</label>
+                                <div class="custom-input-group">
+                                    <input type="text" class="custom-text" placeholder="" readonly />
+                                    <label for="fileInput" class="custom-button">CHOOSE</label>
+                                    <input type="file" id="fileInput" class="custom-file-input" />
+                                </div>
                             </div>
                         </div>
 
@@ -193,11 +195,11 @@ const HomeLabelJoin = () => {
             </div>
 
 
-            {/* ==========    Edit review Modal    ========== */}
+            {/* ==========    Edit Home Labels     ========== */}
             <div className=''>
                 <Modal
-                    show={editHomeLabelJoinModal}
-                    onHide={() => setEditHomeLabelJoinModal(false)}
+                    show={editHomeLabelCorousel}
+                    onHide={() => setEditHomeLabelCorousel(false)}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     className='text-white V_modal_width'
@@ -206,9 +208,9 @@ const HomeLabelJoin = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                    Edit Home Label Join
+                                    Edit Home Corousel
                                 </div>
-                                <div className='ms-auto' onClick={() => setEditHomeLabelJoinModal(false)}>
+                                <div className='ms-auto' onClick={() => setEditHomeLabelCorousel(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
@@ -216,17 +218,15 @@ const HomeLabelJoin = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Home Label Join</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Audio Book ID</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
+                            <div className="col-12   pt-2 pt-md-3">
+                                <label className='V_label'>Image</label>
+                                <div class="custom-input-group">
+                                    <input type="text" class="custom-text" placeholder="" readonly />
+                                    <label for="fileInput" class="custom-button">CHOOSE</label>
+                                    <input type="file" id="fileInput" class="custom-file-input" />
+                                </div>
                             </div>
                         </div>
-
-
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
@@ -239,17 +239,15 @@ const HomeLabelJoin = () => {
 
 
 
-
             {/* -================= Delete Home Label Join Modal ==================*/}
-
-            <Modal show={removeHomeLabelJoin} onHide={() => setRemoveHomeLabelJoin(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
+            <Modal show={removeHomeCorousel} onHide={() => setRemoveHomeCorousel(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
 
                 <Modal.Body >
                     <div className='text-center'>
                         <h4 className='mt-4'>Delete</h4>
-                        <p className='ds_role_text'>Are you sure you want to delete Home Label join?</p>
+                        <p className='ds_role_text'>Are you sure you want to delete Home Corousel?</p>
                         <div className='mt-5 mb-5'>
-                            <button className='ds_delete_cancel' onClick={() => setRemoveHomeLabelJoin(false)}>Cancel</button>
+                            <button className='ds_delete_cancel' onClick={() => setRemoveHomeCorousel(false)}>Cancel</button>
                             <button className='ds_delete_yes'>Yes</button>
                         </div>
                     </div>
@@ -259,4 +257,4 @@ const HomeLabelJoin = () => {
     )
 }
 
-export default HomeLabelJoin
+export default HomeCorousel

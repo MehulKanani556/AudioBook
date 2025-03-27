@@ -149,7 +149,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/castcrew')}>
                      <div>
                         <img src={cast} className="ds_side_icon" />
                      </div>
@@ -167,7 +167,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate("/layout/episodes")}>
                      <div>
                         <img src={episode} className="ds_side_icon" />
                      </div>
@@ -176,7 +176,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/episodeunlock')}>
                      <div>
                         <img src={unlock} className="ds_side_icon" />
                      </div>
@@ -185,7 +185,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/episodestate')}>
                      <div>
                         <img src={state} className="ds_side_icon" />
                      </div>
@@ -194,7 +194,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/playlistmaster')}>
                      <div>
                         <img src={playmaster} className="ds_side_icon" />
                      </div>
@@ -203,7 +203,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/playlistsongs')}>
                      <div>
                         <img src={song} className="ds_side_icon" />
                      </div>
@@ -359,7 +359,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/castcrew')}>
                      <div>
                         <img src={cast} className="ds_side_icon" />
                      </div>
@@ -377,7 +377,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate("/layout/episodes")}>
                      <div>
                         <img src={episode} className="ds_side_icon" />
                      </div>
@@ -386,7 +386,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/episodeunlock')}>
                      <div>
                         <img src={unlock} className="ds_side_icon" />
                      </div>
@@ -395,7 +395,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/episodestate')}>
                      <div>
                         <img src={state} className="ds_side_icon" />
                      </div>
@@ -404,7 +404,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/playlistmaster')}>
                      <div>
                         <img src={playmaster} className="ds_side_icon" />
                      </div>
@@ -413,7 +413,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/playlistsongs')}>
                      <div>
                         <img src={song} className="ds_side_icon" />
                      </div>

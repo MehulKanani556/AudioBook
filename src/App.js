@@ -9,6 +9,13 @@ import HomeLabelJoin from "./Components/Pages/HomeLabelJoin";
 import HomeLabels from "./Components/Pages/HomeLabels";
 // import Review from "./Components/Pages/Review"
 import Subscription from "./Components/Pages/Subscription";
+import HomeCorousel from "./Components/Pages/HomeCorousel";
+import PlaylistSongs from "./Components/Pages/PlaylistSongs";
+import PlaylistMaster from "./Components/Pages/PlaylistMaster";
+import EpisodeState from "./Components/Pages/EpisodeState";
+import EpisodeUnlock from "./Components/Pages/EpisodeUnlock";
+import Episodes from "./Components/Pages/Episodes";
+import CastCrew from "./Components/Pages/CastCrew";
 
 const App = () => {
   return (
@@ -22,6 +29,13 @@ const App = () => {
            <Route path="review" element={<Review />} />   
            <Route path="homelabeljoin" element={<HomeLabelJoin />} />
            <Route path="homelabels" element={<HomeLabels />} />
+           <Route path="homecorousel" element={<HomeCorousel />} />
+           <Route path="playlistsongs" element={<PlaylistSongs />} />
+           <Route path="playlistmaster" element={<PlaylistMaster />} />
+           <Route path="episodestate" element={<EpisodeState />} />
+           <Route path="episodeunlock" element={<EpisodeUnlock />} />
+           <Route path="episodes" element={<Episodes />} />
+           <Route path="castcrew" element={<CastCrew />} />
         </Route>
       </Routes>
     </div>

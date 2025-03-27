@@ -7,16 +7,16 @@ import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
 
-const Review = () => {
-    const [modalShow, setModalShow] = useState(false);
-    const [editModalShow, setEditModalShow] = useState(false);
-    const [viewModalShow, setViewModalShow] = useState(false);
-    const [removeReview, setRemoveReview] = useState(false);
+const CastCrew = () => {
+    const [addCastCrew, setAddCastCrew] = useState(false);
+    const [editCastCrew, setEditCastCrew] = useState(false);
+    const [viewCastCrew, setViewCastCrew] = useState(false);
+    const [removeCastCrew, setRemoveCastCrew] = useState(false);
 
 
     const totalPages = 10;
     const [currentPage, setCurrentPage] = useState(1);
-    
+
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
@@ -90,11 +90,11 @@ const Review = () => {
                 <div className='ds_dash_inner'>
                     <div className='d-flex justify-content-between align-items-center'>
                         <div>
-                            <h4 className="text-light pt-4 mb-0">Review</h4>
-                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Review</span></p>
+                            <h4 className="text-light pt-4 mb-0">Cast Crew</h4>
+                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Cast Crew</span></p>
                         </div>
                         <div>
-                            <button className='V_review_btn' onClick={() => setModalShow(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
+                            <button className='V_review_btn' onClick={() => setAddCastCrew(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
                         </div>
                     </div>
 
@@ -104,49 +104,50 @@ const Review = () => {
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Image</th>
                                         <th>Audio Book ID</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                        <th>Review</th>
-                                        <th>Rating</th>
+                                        <th>Name</th>
+                                        <th>Role</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>01</td>
+                                        <td>
+                                            <img src={require("../../Images/Parth/homeCorouselImage.png")} alt="" className='V_home_corousel_image' />
+                                        </td>
                                         <td>2541211</td>
-                                        <td>Johanwick08</td>
-                                        <td>12/12/2023</td>
-                                        <td>Lorem Ipsum</td>
+                                        <td>Johan patel</td>
                                         <td>Lorem Ipsum</td>
                                         <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewModalShow(true)}>
+                                            <span className=' ds_cursor me-2' onClick={() => setViewCastCrew(true)}>
                                                 <img src={view} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditModalShow(true)}>
+                                            <span className=' me-2 ds_cursor' onClick={() => setEditCastCrew(true)}>
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveReview(true)}>
+                                            <span className='ds_cursor' onClick={() => setRemoveCastCrew(true)}>
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>02</td>
-                                        <td>2541211</td>
-                                        <td>Johanwick08</td>
-                                        <td>12/12/2023</td>
-                                        <td>Lorem Ipsum</td>
+                                        <td>
+                                            <img src={require("../../Images/Parth/homeCorouselImage.png")} alt="" className='V_home_corousel_image' />
+                                        </td>
+                                        <td>8216614</td>
+                                        <td>Johan patel</td>
                                         <td>Lorem Ipsum</td>
                                         <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewModalShow(true)}>
+                                            <span className=' ds_cursor me-2' onClick={() => setViewCastCrew(true)}>
                                                 <img src={view} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditModalShow(true)}>
+                                            <span className=' me-2 ds_cursor' onClick={() => setEditCastCrew(true)}>
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveReview(true)}>
+                                            <span className='ds_cursor' onClick={() => setRemoveCastCrew(true)}>
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -164,11 +165,11 @@ const Review = () => {
 
 
 
-            {/* ==========    Add review Modal    ========== */}
+            {/* ==========    Add Cast Crew Modal    ========== */}
             <div className=''>
                 <Modal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
+                    show={addCastCrew}
+                    onHide={() => setAddCastCrew(false)}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     className='text-white V_modal_width'
@@ -177,9 +178,9 @@ const Review = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                    Add Review
+                                    Add Cast Crew
                                 </div>
-                                <div className='ms-auto' onClick={() => setModalShow(false)}>
+                                <div className='ms-auto' onClick={() => setAddCastCrew(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
@@ -192,26 +193,22 @@ const Review = () => {
                                 <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>User ID</label>
+                                <label className='V_label'>Name</label>
                                 <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Date</label>
+                                <label className='V_label'>Role</label>
                                 <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Review</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Rating</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
+                                <label className='V_label'>Image</label>
+                                <div class="custom-input-group mt-1 mt-md-2">
+                                    <input type="text" class="custom-text" placeholder="" readonly />
+                                    <label for="fileInput" class="custom-button">CHOOSE</label>
+                                    <input type="file" id="fileInput" class="custom-file-input " />
+                                </div>
                             </div>
                         </div>
-
-
-            
-
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
@@ -223,11 +220,11 @@ const Review = () => {
             </div>
 
 
-            {/* ==========    Edit review Modal    ========== */}
+            {/* ==========    Edit Cast Crew Modal    ========== */}
             <div className=''>
                 <Modal
-                    show={editModalShow}
-                    onHide={() => setEditModalShow(false)}
+                    show={editCastCrew}
+                    onHide={() => setEditCastCrew(false)}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     className='text-white V_modal_width'
@@ -236,9 +233,9 @@ const Review = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                    Edit Review
+                                    Edit Cast Crew
                                 </div>
-                                <div className='ms-auto' onClick={() => setEditModalShow(false)}>
+                                <div className='ms-auto' onClick={() => setEditCastCrew(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
@@ -251,24 +248,22 @@ const Review = () => {
                                 <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>User ID</label>
+                                <label className='V_label'>Name</label>
                                 <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Date</label>
+                                <label className='V_label'>Role</label>
                                 <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Review</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Rating</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
+                                <label className='V_label'>Image</label>
+                                <div class="custom-input-group mt-1 mt-md-2">
+                                    <input type="text" class="custom-text" placeholder="" readonly />
+                                    <label for="fileInput" class="custom-button">CHOOSE</label>
+                                    <input type="file" id="fileInput" class="custom-file-input " />
+                                </div>
                             </div>
                         </div>
-
-
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
@@ -281,11 +276,11 @@ const Review = () => {
 
 
 
-            {/* ==========    View review Modal    ========== */}
+            {/* ==========    View Cast Crew Modal    ========== */}
             <div className=''>
                 <Modal
-                    show={viewModalShow}
-                    onHide={() => setViewModalShow(false)}
+                    show={viewCastCrew}
+                    onHide={() => setViewCastCrew(false)}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     className='text-white V_modal_width '
@@ -294,54 +289,56 @@ const Review = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-md-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                    Review Details
+                                    Cast Crew Details
                                 </div>
-                                <div className='ms-auto' onClick={() => setViewModalShow(false)}>
+                                <div className='ms-auto' onClick={() => setViewCastCrew(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row py-md-3  px-md-5 ">
-                            <div className="col-6  pt-2 pt-md-3">
-                                <p className='V_label2'>Audio Book ID</p>
-                                <p className='V_label2'>User ID</p>
-                                <p className='V_label2'>Date</p>
-                                <p className='V_label2'>Review</p>
-                                <p className='V_label2'>Rating</p>
+                        <div className="row  justify-content-center  py-md-3  px-lg-5 ">
+                            <div className="col-12 col-sm-3  align-self-center text-center pt-2 pt-md-3">
+                                <img src={require('../../Images/Parth/homeCorouselImage.png')} alt="" className='V_castCrew_image' />
                             </div>
-                            <div className="col-6 pt-2 pt-md-3">
-                                <p>: <span className='ms-2 V_label1'>45256</span></p>
-                                <p>: <span className='ms-2 V_label1'>Johanwick08</span></p>
-                                <p>: <span className='ms-2 V_label1'>12/12/2023</span></p>
-                                <p>: <span className='ms-2 V_label1'>Lorem Ipsum</span></p>
-                                <p>: <span className='ms-2 V_label1'>Lorem Ipsum</span></p>
+
+                            <div className='col-12 col-sm-9   pt-3 '>
+                                <div className="row  ">
+                                    <div className="col-5   pt-2 pt-md-3">
+                                        <p className='V_label2'>Audio Book ID</p>
+                                        <p className='V_label2'>Name</p>
+                                        <p className='V_label2'>Role</p>
+                                    </div>
+                                    <div className="col-5  pt-2 pt-md-3">
+                                        <p>: <span className='ms-2 V_label1'>9854</span></p>
+                                        <p>: <span className='ms-2 V_label1'>Johan Patel</span></p>
+                                        <p>: <span className='ms-2 V_label1'>Lorem Ipsum</span></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-
                     </Modal.Body>
                 </Modal>
             </div>
 
-{/* -================= Delete Review Modal ==================*/}
+            {/* -================= Delete Cast Crew Modal ==================*/}
 
-             <Modal show={removeReview} onHide={()=> setRemoveReview(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
-                  
-                  <Modal.Body >
-                     <div className='text-center'>
+            <Modal show={removeCastCrew} onHide={() => setRemoveCastCrew(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
+
+                <Modal.Body >
+                    <div className='text-center'>
                         <h4 className='mt-4'>Delete</h4>
-                        <p className='ds_role_text'>Are you sure you want to delete Review?</p>
+                        <p className='ds_role_text'>Are you sure you want to delete Cast Crew?</p>
                         <div className='mt-5 mb-5'>
-                          <button className='ds_delete_cancel' onClick={()=> setRemoveReview(false)}>Cancel</button>
-                          <button className='ds_delete_yes'>Yes</button>
+                            <button className='ds_delete_cancel' onClick={() => setRemoveCastCrew(false)}>Cancel</button>
+                            <button className='ds_delete_yes'>Yes</button>
                         </div>
-                     </div>
-                  </Modal.Body>
-                </Modal>
-        </div>
+                    </div>
+                </Modal.Body>
+            </Modal>
+        </div >
     )
 }
 
-export default Review
+export default CastCrew
