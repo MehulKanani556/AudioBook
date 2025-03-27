@@ -63,14 +63,19 @@
     opacity: 0.5;
     pointer-events: none;
 }
+.ds_role_modal_main .modal-content{
+    max-width:700px;
+}
 .ds_role_modal .btn-close{
    background-image: url(../Images/dhruvin/cancel.svg);
    background-repeat: no-repeat;
    fill: white;
    font-size: 25px;
+   padding: 0px !important;
+
 }
 .ds_role_modal_main .modal-content{
-    border: 1px solid white !important;
+    box-shadow: rgba(22, 22, 22, 0.25) 0px 54px 55px, rgba(107, 106, 106, 0.12) 0px -12px 30px, rgba(121, 120, 120, 0.12) 0px 4px 6px, rgba(104, 103, 103, 0.17) 0px 12px 13px, rgba(250, 249, 249, 0.09) 0px -3px 5px;
     background: rgba(12, 17, 24, 1);
 
 }
@@ -80,6 +85,8 @@
 .ds_role_input{
     background: rgba(23, 31, 40, 1);
     color: white;
+    border: none;
+    padding: 8px 15px;
 }
 .ds_role_input:focus{
     background: rgba(23, 31, 40, 1);
@@ -105,13 +112,13 @@
     font-weight: 600;
     color: white;
     background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-    border: 0.3px solid;
+    border: 0.3px solid transparent;
 
     border-image-source: radial-gradient(80.38% 222.5% at -13.75% -12.36%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
     radial-gradient(80.69% 208.78% at 108.28% 112.58%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
 }
 .ds_role_delete_modal .modal-content{
-    border: 1px solid white !important;
+    box-shadow: rgba(22, 22, 22, 0.25) 0px 54px 55px, rgba(107, 106, 106, 0.12) 0px -12px 30px, rgba(121, 120, 120, 0.12) 0px 4px 6px, rgba(104, 103, 103, 0.17) 0px 12px 13px, rgba(250, 249, 249, 0.09) 0px -3px 5px;
     background: rgba(12, 17, 24, 1);    
 }
 .ds_delete_cancel{
@@ -123,7 +130,7 @@
     font-weight: 600;
     color: white;
     background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-    border: 0.3px solid;
+    border: 0.3px solid transparent;
     margin-right: 20px;
 
 }
@@ -182,6 +189,12 @@
 @media(max-width : 767px){
     .ds_dash_master {
         width:100%;
+    }
+}
+
+@media (max-width:576px) {
+    .ds_role_modal_main .modal-dialog{
+        margin: auto;
     }
 }
 
