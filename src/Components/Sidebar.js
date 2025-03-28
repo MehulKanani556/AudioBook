@@ -122,7 +122,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate("/layout/voucherused")}>
                      <div>
                         <img src={used} className="ds_side_icon" />
                      </div>
@@ -131,7 +131,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/genre')}>
                      <div>
                         <img src={genre} className="ds_side_icon" />
                      </div>
@@ -140,7 +140,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate("/layout/audiobooks")}>
                      <div>
                         <img src={book} className="ds_side_icon" />
                      </div>
@@ -332,7 +332,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate("/layout/voucherused")}>
                      <div>
                         <img src={used} className="ds_side_icon" />
                      </div>
@@ -341,7 +341,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/genre')}>
                      <div>
                         <img src={genre} className="ds_side_icon" />
                      </div>
@@ -350,7 +350,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3'>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate("/layout/audiobooks")}>
                      <div>
                         <img src={book} className="ds_side_icon" />
                      </div>
