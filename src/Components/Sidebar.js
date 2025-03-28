@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../CSS/Sidebar.css'
 import dashboard from '../Images/dhruvin/dashboard.svg'
 import role from '../Images/dhruvin/role.svg'
@@ -25,12 +25,15 @@ import join from '../Images/dhruvin/join.svg'
 
 import { Offcanvas } from 'react-bootstrap'
 import {  useNavigate } from 'react-router-dom'
-import { type } from '@testing-library/user-event/dist/type'
 
 const Sidebar = ({offToggle , setOffToggle }) => {
 
   const navigate = useNavigate();
-  const [color, setColor] = useState("dashboard")
+  const [color, setColor] = useState(localStorage.getItem("activeMenu") || "dashboard");
+
+  useEffect(() => {
+    localStorage.setItem("activeMenu", color);
+  }, [color]);
 
 
   return (
@@ -58,7 +61,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className=' ms-3 ds_active_pad  py-2 mt-3' onClick={() => navigate('/layout/subscription')}>
+                 <div className={`ms-3 ds_active_pad ${color === "subscription" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/layout/subscription'); setColor("subscription")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={king} className="ds_side_icon" />
@@ -67,16 +70,16 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className=' ms-3 ds_active_pad  py-2 mt-3'>
+                 <div className={`ms-3 ds_active_pad ${color === "coinlabel" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/layout/coinlabel'); setColor("coinlabel")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={coin} className="ds_side_icon" />
                      </div>
-                     <h5 className='ms-3 text-light mb-0 ds_side_title'>Coin Label</h5>
+                     <h5 className='ms-3 text-light mb-0 ds_side_title'>Coin  Label</h5>
                    </div>
                  </div>
 
-                 <div className=' ms-3 ds_active_pad  py-2 mt-3'>
+                 <div className={` ms-3 ds_active_pad ${color === "coinmaster" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/layout/coinmaster'); setColor("coinmaster")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={master} className="ds_side_icon" />

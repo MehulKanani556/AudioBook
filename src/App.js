@@ -16,6 +16,8 @@ import EpisodeState from "./Components/Pages/EpisodeState";
 import EpisodeUnlock from "./Components/Pages/EpisodeUnlock";
 import Episodes from "./Components/Pages/Episodes";
 import CastCrew from "./Components/Pages/CastCrew";
+import CoinLabel from "./Components/Pages/CoinLabel"
+import CoinMaster from "./Components/Pages/CoinMaster";
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
            <Route path="dashboard" element={<Dashboard/>} />
            <Route path="role" element={<Role/>} />   
            <Route path="subscription" element={<Subscription/>} />   
+           <Route path="coinlabel" element={<CoinLabel/>} />   
+           <Route path="coinmaster" element={<CoinMaster/>} />   
            <Route path="review" element={<Review />} />   
            <Route path="homelabeljoin" element={<HomeLabelJoin />} />
            <Route path="homelabels" element={<HomeLabels />} />

@@ -1,0 +1,14 @@
+.ds_coin_master thead tr th , td {
+    padding: 15px 0px;
+    text-align: center;
+}
+.ds_coin_master thead tr th{
+    border-bottom: 0.8px solid #C6C6C64D;
+}
+
+
+@media (max-width:1024px) {
+    .ds_coin_master {
+        min-width: 950px; 
+      }
+}
