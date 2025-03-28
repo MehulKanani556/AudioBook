@@ -16,6 +16,11 @@ import EpisodeState from "./Components/Pages/EpisodeState";
 import EpisodeUnlock from "./Components/Pages/EpisodeUnlock";
 import Episodes from "./Components/Pages/Episodes";
 import CastCrew from "./Components/Pages/CastCrew";
+import AudioBook from "./Components/Pages/AudioBook";
+import AddAudioBook from "./Components/Pages/AddAudioBook";
+import EditAudiobooks from "./Components/Pages/EditAudiobooks";
+import Genre from "./Components/Pages/Genre";
+import VoucherUsed from "./Components/Pages/VoucherUsed";
 
 const App = () => {
   return (
@@ -36,6 +41,11 @@ const App = () => {
            <Route path="episodeunlock" element={<EpisodeUnlock />} />
            <Route path="episodes" element={<Episodes />} />
            <Route path="castcrew" element={<CastCrew />} />
+           <Route path="audiobooks" element={<AudioBook />} />
+           <Route path="addaudiobook" element={<AddAudioBook />} />
+           <Route path="editaudiobook" element={<EditAudiobooks />} />
+           <Route path="genre" element={<Genre />} />
+           <Route path="voucherused" element={<VoucherUsed />} />
         </Route>
       </Routes>
     </div>
