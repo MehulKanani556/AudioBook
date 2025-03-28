@@ -21,6 +21,8 @@ import AddAudioBook from "./Components/Pages/AddAudioBook";
 import EditAudiobooks from "./Components/Pages/EditAudiobooks";
 import Genre from "./Components/Pages/Genre";
 import VoucherUsed from "./Components/Pages/VoucherUsed";
+import CoinLabel from "./Components/Pages/CoinLabel"
+import CoinMaster from "./Components/Pages/CoinMaster";
 
 const App = () => {
   return (
@@ -31,6 +33,8 @@ const App = () => {
            <Route path="dashboard" element={<Dashboard/>} />
            <Route path="role" element={<Role/>} />   
            <Route path="subscription" element={<Subscription/>} />   
+           <Route path="coinlabel" element={<CoinLabel/>} />   
+           <Route path="coinmaster" element={<CoinMaster/>} />   
            <Route path="review" element={<Review />} />   
            <Route path="homelabeljoin" element={<HomeLabelJoin />} />
            <Route path="homelabels" element={<HomeLabels />} />

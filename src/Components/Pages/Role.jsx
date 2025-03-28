@@ -88,7 +88,7 @@ const Role = () => {
              <div className='d-flex justify-content-between align-items-center'>
                 <div>
                    <h4 className="text-light pt-4 mb-0">Role</h4>
-                   <p><Link to="/layout/dashboard" className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Role</span></p>
+                   <p><Link to="/layout/dashboard"  className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Role</span></p>
                 </div>
                 <div>
                   <button className='ds_role_btn' onClick={()=> setAdd(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
@@ -125,14 +125,19 @@ const Role = () => {
          </div>
          <div className="py-3 d-flex justify-content-center justify-content-md-end px-5">
                     {renderPagination()}
-                </div>
+          </div>
       </div>
 
       {/* **************** Add Role **************** */}
       <Modal show={add} onHide={()=> setAdd(false)} size="lg" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_modal_main ' centered>
-      <Modal.Header className='border-0 ds_role_modal' closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Add Role
+      <Modal.Header className='border-0 ds_role_modal w-100' >
+        <Modal.Title id="contained-modal-title-vcenter" className='w-100'>
+            <div className='d-flex justify-content-between align-items-center w-100'>
+               <div>
+                  Add Role
+               </div>
+               <i className="fa-solid fa-xmark ds_cursor" onClick={()=> setAdd(false)}></i>
+             </div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body >
@@ -149,14 +154,19 @@ const Role = () => {
            </div>
          </div>
       </Modal.Body>
-    </Modal>
+      </Modal>
 
 
       {/* **************** Edit Role **************** */}
     <Modal show={edit} onHide={()=> setEdit(false)} size="lg" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_modal_main' centered>
-      <Modal.Header className='border-0 ds_role_modal' closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Edit Role
+      <Modal.Header className='border-0 ds_role_modal w-100' >
+        <Modal.Title id="contained-modal-title-vcenter" className='w-100'>
+            <div className='d-flex justify-content-between align-items-center w-100'>
+               <div>
+                  Edit Role
+               </div>
+               <i className="fa-solid fa-xmark ds_cursor" onClick={()=> setEdit(false)}></i>
+            </div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body >
@@ -175,8 +185,8 @@ const Role = () => {
       </Modal.Body>
     </Modal>
 
-    <Modal show={remove} onHide={()=> setRemove(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
-      
+      {/* **************** Delete Role **************** */}
+     <Modal show={remove} onHide={()=> setRemove(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
       <Modal.Body >
          <div className='text-center'>
             <h4 className='mt-4'>Delete</h4>

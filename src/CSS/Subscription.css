@@ -91,6 +91,16 @@
 .ds_sub_check:focus{
     box-shadow: none !important;
 }
+.ds_sub_des_modal .modal-content{
+    box-shadow: rgba(22, 22, 22, 0.25) 0px 54px 55px, rgba(107, 106, 106, 0.12) 0px -12px 30px, rgba(121, 120, 120, 0.12) 0px 4px 6px, rgba(104, 103, 103, 0.17) 0px 12px 13px, rgba(250, 249, 249, 0.09) 0px -3px 5px;
+    background: rgba(12, 17, 24, 1); 
+}
+
+.ds_sub_des_modal .modal-content{
+    max-width: 570px !important; 
+    padding: 0px 10px;
+}
+         
 
 @media (max-width:1200px) {
     .ds_sub_add_modal .modal-dialog{
@@ -108,11 +118,18 @@
     .ds_sub_add_modal .modal-dialog{
         max-width: 500px !important;
     }
+    .ds_sub_des_modal .modal-content {
+        max-width: 500px !important;
+    }
 }
 
 @media (max-width:576px) {
     .ds_sub_add_modal .modal-dialog{
         max-width: 500px !important;
+        margin: auto;
+    }
+    .ds_sub_des_modal .modal-content {
+        max-width: 430px !important;
         margin: auto;
     }
 }
@@ -125,6 +142,10 @@
     .ds_sub_cancel{
         padding: 8px 30px;
     }
+    .ds_sub_des_modal .modal-content {
+        max-width: 360px !important;
+        margin: auto;
+    }
 }
 
 @media (max-width:376px) {
@@ -132,10 +153,18 @@
         max-width: 320px !important;
         margin: auto;
     }
+    .ds_sub_des_modal .modal-content {
+        max-width: 320px !important;
+        margin: auto;
+    }
 }
 
 @media (max-width:376px) {
     .ds_sub_add_modal .modal-dialog{
+        max-width: 290px !important;
+        margin: auto;
+    }
+    .ds_sub_des_modal .modal-content {
         max-width: 290px !important;
         margin: auto;
     }

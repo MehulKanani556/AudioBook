@@ -149,6 +149,7 @@
     color: rgb(73, 72, 72);
 }
 
+
 @media (max-width:1441px) {
     .ds_role_modal_main .modal-dialog{
         max-width: 650px !important;
@@ -194,6 +195,9 @@
 
 @media (max-width:576px) {
     .ds_role_modal_main .modal-dialog{
+        margin: auto;
+    }
+    .ds_role_delete_modal .modal-dialog{
         margin: auto;
     }
 }
