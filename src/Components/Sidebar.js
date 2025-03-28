@@ -88,7 +88,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className=' ms-3 ds_active_pad  py-2 mt-3'>
+                 <div className={`ms-3 ds_active_pad ${color === "usermaster" ? 'ds_active_color' : '' } mt-3`} onClick={() => {navigate('/layout/usermaster'); setColor("usermaster")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={person} className="ds_side_icon" />

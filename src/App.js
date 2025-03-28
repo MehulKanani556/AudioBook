@@ -30,6 +30,11 @@ import CoinSell from "./Components/Pages/CoinSell";
 import SubscriptionSell from "./Components/Pages/SubscriptionSell";
 import EditSubscriptionSell from "./Components/Pages/EditSubscriptionSell";
 import AddSubscriptionSell from "./Components/Pages/AddSubscriptionSell";
+import AddCoinMaster from "./Components/Pages/AddCoinMaster";
+import EditCoinMaster from "./Components/Pages/EditCoinMaster";
+import UserMaster from "./Components/Pages/UserMaster";
+import AddUserMaster from "./Components/Pages/AddUserMaster";
+import EditUserMaster from "./Components/Pages/EditUserMaster";
 
 const App = () => {
   return (
@@ -42,6 +47,11 @@ const App = () => {
            <Route path="subscription" element={<Subscription/>} />   
            <Route path="coinlabel" element={<CoinLabel/>} />   
            <Route path="coinmaster" element={<CoinMaster/>} />   
+           <Route path="addcoinmaster" element={<AddCoinMaster/>} />   
+           <Route path="editcoinmaster" element={<EditCoinMaster/>} />   
+           <Route path="usermaster" element={<UserMaster/>} />   
+           <Route path="addusermaster" element={<AddUserMaster/>} />   
+           <Route path="editusermaster" element={<EditUserMaster/>} />   
            <Route path="review" element={<Review />} />   
            <Route path="homelabeljoin" element={<HomeLabelJoin />} />
            <Route path="homelabels" element={<HomeLabels />} />

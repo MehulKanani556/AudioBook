@@ -6,9 +6,51 @@
     border-bottom: 0.8px solid #C6C6C64D;
 }
 
+.ds_coin_master_detail .modal-content{
+    box-shadow: rgba(22, 22, 22, 0.25) 0px 54px 55px, rgba(107, 106, 106, 0.12) 0px -12px 30px, rgba(121, 120, 120, 0.12) 0px 4px 6px, rgba(104, 103, 103, 0.17) 0px 12px 13px, rgba(250, 249, 249, 0.09) 0px -3px 5px;
+    background: rgba(12, 17, 24, 1); 
+}
+
+.ds_coin_master_detail .modal-content{
+    max-width: 600px !important; 
+    padding: 0px 10px;
+    margin: auto;
+}
+
+/* **************** Add Coin Master Page *************** */
+input[type="time"]::-webkit-calendar-picker-indicator{
+    filter: invert(100%) sepia(0%) saturate(5656%) hue-rotate(341deg) brightness(123%) contrast(102%);
+  }
 
 @media (max-width:1024px) {
     .ds_coin_master {
         min-width: 950px; 
-      }
+    }
+}
+
+@media (max-width:576px) {
+    .ds_coin_master_detail .modal-content{
+        max-width: 400px !important; 
+    } 
+    .ds_coin_master_text{
+        font-size: 16px;
+    }
+}
+
+@media (max-width:426px) {
+    .ds_coin_master_detail .modal-content{
+        max-width: 350px !important; 
+    } 
+}
+
+@media (max-width:376px) {
+    .ds_coin_master_detail .modal-content{
+        max-width: 330px !important; 
+    } 
+}
+
+@media (max-width:321px) {
+    .ds_coin_master_detail .modal-content{
+        max-width: 280px !important; 
+    } 
 }

@@ -105,7 +105,7 @@ const renderPagination = () => {
                   <table className='w-100 text-light ds_sub_table '>
                     <thead>
                       <tr>
-                        <th>No</th>
+                        <th>No.</th>
                         <th>Name</th>
                         <th>Discount</th>
                         <th>Scratch price</th>

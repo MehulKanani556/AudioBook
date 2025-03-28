@@ -100,7 +100,7 @@ const Role = () => {
                   <table className='w-100 text-light ds_role_table '>
                     <thead>
                       <tr>
-                        <th>No</th>
+                        <th>No.</th>
                         <th>Name</th>
                         <th>Action</th>
                       </tr>
