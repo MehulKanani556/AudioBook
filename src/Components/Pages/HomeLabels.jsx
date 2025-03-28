@@ -230,7 +230,6 @@ const HomeLabels = () => {
 
             {/* -================= Delete Home Label Join Modal ==================*/}
             <Modal show={removeHomeLabels} onHide={() => setRemoveHomeLabels(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
-
                 <Modal.Body >
                     <div className='text-center'>
                         <h4 className='mt-4'>Delete</h4>

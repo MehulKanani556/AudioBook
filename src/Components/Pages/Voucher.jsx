@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import pen from '../../Images/Parth/edit_button.png'
 import trash from '../../Images/Parth/delete_button.png'
 import view from '../../Images/Parth/view_button.png'
@@ -7,11 +7,12 @@ import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
 
-const CastCrew = () => {
-    const [addCastCrew, setAddCastCrew] = useState(false);
-    const [editCastCrew, setEditCastCrew] = useState(false);
-    const [viewCastCrew, setViewCastCrew] = useState(false);
-    const [removeCastCrew, setRemoveCastCrew] = useState(false);
+const Voucher = () => {
+
+    const navigate = useNavigate();
+
+    const [viewVouchers, setViewVouchers] = useState(false);
+    const [removeVouchers, setRemoveVouchers] = useState(false);
 
 
     const totalPages = 10;
@@ -90,64 +91,75 @@ const CastCrew = () => {
                 <div className='ds_dash_inner'>
                     <div className='d-flex justify-content-between align-items-center'>
                         <div>
-                            <h4 className="text-light pt-4 mb-0">Cast Crew</h4>
-                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Cast Crew</span></p>
+                            <h4 className="text-light pt-4 mb-0">Vouchers</h4>
+                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Vouchers</span></p>
                         </div>
                         <div>
-                            <button className='V_review_btn' onClick={() => setAddCastCrew(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
+                            <button className='V_review_btn' onClick={() => navigate('/layout/addVouchers')} ><i className="fa-solid fa-plus me-2"></i> Add</button>
                         </div>
                     </div>
 
                     <div className='V_review_bg mt-2'>
                         <div className='overflow-auto'>
-                            <table className='w-100 text-light V_review_table  text-nowrap '>
+                            <table className='w-100 text-light V_review_table  text-nowrap ' style={{minWidth: "1800px"}}>
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Image</th>
-                                        <th>Audio Book ID</th>
                                         <th>Name</th>
-                                        <th>Role</th>
+                                        <th>Description </th>
+                                        <th>Code</th>
+                                        <th>Discount</th>
+                                        <th>Coin Master ID</th>
+                                        <th>Subscription ID</th>
+                                        <th>Valid till</th>
+                                        <th>For Student</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>01</td>
-                                        <td>
-                                            <img src={require("../../Images/Parth/homeCorouselImage.png")} alt="" className='V_home_corousel_image' />
-                                        </td>
-                                        <td>2541211</td>
-                                        <td>Johan patel</td>
-                                        <td>Lorem Ipsum</td>
+                                        <td>Johnwick</td>
+                                        <td>Lorem Inspuml</td>
+                                        <td>1234</td>
+                                        <td>5%</td>
+                                        <td>9632</td>
+                                        <td>9685</td>
+                                        <td>20/09/02020</td>
+                                        <td>Lorem inspum</td>
+                                        <td><span className='ds_sub_active'>Active</span></td>
                                         <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewCastCrew(true)}>
+                                            <span className=' ds_cursor me-2' onClick={() => setViewVouchers(true)}>
                                                 <img src={view} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditCastCrew(true)}>
+                                            <span className=' me-2 ds_cursor' onClick={() => navigate('/layout/editVouchers')}>
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveCastCrew(true)}>
+                                            <span className='ds_cursor' onClick={() => setRemoveVouchers(true)}>
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>02</td>
-                                        <td>
-                                            <img src={require("../../Images/Parth/homeCorouselImage.png")} alt="" className='V_home_corousel_image' />
-                                        </td>
-                                        <td>8216614</td>
-                                        <td>Johan patel</td>
-                                        <td>Lorem Ipsum</td>
+                                        <td>01</td>
+                                        <td>Johnwick</td>
+                                        <td>Lorem Inspuml</td>
+                                        <td>1234</td>
+                                        <td>5%</td>
+                                        <td>9632</td>
+                                        <td>9685</td>
+                                        <td>20/09/02020</td>
+                                        <td>Lorem inspum</td>
+                                        <td><span className='ds_sub_block'>Block</span></td>
                                         <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewCastCrew(true)}>
+                                            <span className=' ds_cursor me-2' onClick={() => setViewVouchers(true)}>
                                                 <img src={view} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditCastCrew(true)}>
+                                            <span className=' me-2 ds_cursor' onClick={() => navigate('/layout/editVouchers')} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveCastCrew(true)}>
+                                            <span className='ds_cursor' onClick={() => setRemoveVouchers(true)}>
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -165,8 +177,8 @@ const CastCrew = () => {
 
 
 
-            {/* ==========    Add Cast Crew Modal    ========== */}
-            <div className=''>
+            {/* ==========    Add Vouchers Modal    ========== */}
+            {/* <div className=''>
                 <Modal
                     show={addCastCrew}
                     onHide={() => setAddCastCrew(false)}
@@ -178,7 +190,7 @@ const CastCrew = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                    Add Cast Crew
+                                    Add Vouchers
                                 </div>
                                 <div className='ms-auto' onClick={() => setAddCastCrew(false)}>
                                     <img src={Close} alt="" />
@@ -189,7 +201,7 @@ const CastCrew = () => {
                     <Modal.Body>
                         <div className="row py-md-3  px-lg-5 ">
                             <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Audio Book ID</label>
+                                <label className='V_label'>Vouchers ID</label>
                                 <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
@@ -217,11 +229,11 @@ const CastCrew = () => {
                         </div>
                     </Modal.Footer>
                 </Modal>
-            </div>
+            </div> */}
 
 
-            {/* ==========    Edit Cast Crew Modal    ========== */}
-            <div className=''>
+            {/* ==========    Edit Vouchers Modal    ========== */}
+            {/* <div className=''>
                 <Modal
                     show={editCastCrew}
                     onHide={() => setEditCastCrew(false)}
@@ -233,7 +245,7 @@ const CastCrew = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                    Edit Cast Crew
+                                    Edit Vouchers
                                 </div>
                                 <div className='ms-auto' onClick={() => setEditCastCrew(false)}>
                                     <img src={Close} alt="" />
@@ -244,7 +256,7 @@ const CastCrew = () => {
                     <Modal.Body>
                         <div className="row py-md-3  px-lg-5 ">
                             <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Audio Book ID</label>
+                                <label className='V_label'>Vouchers ID</label>
                                 <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
@@ -272,15 +284,15 @@ const CastCrew = () => {
                         </div>
                     </Modal.Footer>
                 </Modal>
-            </div>
+            </div> */}
 
 
 
-            {/* ==========    View Cast Crew Modal    ========== */}
+            {/* ==========    View Vouchers Modal    ========== */}
             <div className=''>
                 <Modal
-                    show={viewCastCrew}
-                    onHide={() => setViewCastCrew(false)}
+                    show={viewVouchers}
+                    onHide={() => setViewVouchers(false)}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     className='text-white V_modal_width '
@@ -289,57 +301,84 @@ const CastCrew = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-md-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                    Cast Crew Details
+                                    Vouchers Details
                                 </div>
-                                <div className='ms-auto' onClick={() => setViewCastCrew(false)}>
+                                <div className='ms-auto' onClick={() => setViewVouchers(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row  justify-content-center  py-md-3  px-lg-5 ">
-                            <div className="col-12 col-sm-3  align-self-center text-center pt-2 pt-md-3">
-                                <img src={require('../../Images/Parth/homeCorouselImage.png')} alt="" className='V_castCrew_image' />
+                        <div className="row py-md-3  px-md-5 ">
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Name</p>
                             </div>
-
-                            <div className='col-12 col-sm-9   pt-3 '>
-                                <div className="row py-md-3  px-md-3 ">
-                                    <div className="col-5 col-md-6  pt-2 pt-sm-0">
-                                        <p className='V_label2 mb-0'>Audio Book ID</p>
-                                    </div>
-                                    <div className="col-7 col-md-6 pt-2 pt-sm-0">
-                                        <p>: <span className='ms-2 V_label1'>9854</span></p>
-                                    </div>
-                                    <div className="col-5 col-md-6  pt-2 pt-sm-0">
-                                        <p className='V_label2 mb-0'>Name</p>
-                                    </div>
-                                    <div className="col-7 col-md-6 pt-2 pt-sm-0">
-                                        <p>: <span className='ms-2 V_label1'>Johan Patel</span></p>
-                                    </div>
-                                    <div className="col-5 col-md-6  pt-2 pt-sm-0">
-                                        <p className='V_label2 mb-0'>Role</p>
-                                    </div>
-                                    <div className="col-7 col-md-6 pt-2 pt-sm-0">
-                                        <p>: <span className='ms-2 V_label1'>Lorem Ipsum</span></p>
-                                    </div>
-                                </div>
+                            <div className="col-6 pt-2 pt-sm-0">
+                                <p>: <span className='ms-2 V_label1'>9854</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Description</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
+                                <p>: <span className='ms-2 V_label1'>9854</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Code</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
+                                <p>: <span className='ms-2 V_label1'>20/09/2020</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Discount</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
+                                <p>: <span className='ms-2 V_label1'>₹99</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Coin Master ID</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
+                                <p>: <span className='ms-2 V_label1'>5845</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Subscription ID</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
+                                <p>: <span className='ms-2 V_label1'>Active</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Valid till</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
+                                <p>: <span className='ms-2 V_label1'>Active</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>For Student</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
+                                <p>: <span className='ms-2 V_label1'>Active</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Status</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
+                                <p>: <span className='ms-2 V_label1'>Active</span></p>
                             </div>
                         </div>
                     </Modal.Body>
                 </Modal>
             </div>
 
-            {/* -================= Delete Cast Crew Modal ==================*/}
+            {/* -================= Delete Vouchers Modal ==================*/}
 
-            <Modal show={removeCastCrew} onHide={() => setRemoveCastCrew(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
-
+            <Modal show={removeVouchers} onHide={() => setRemoveVouchers(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
                 <Modal.Body >
                     <div className='text-center'>
                         <h4 className='mt-4'>Delete</h4>
-                        <p className='ds_role_text'>Are you sure you want to delete Cast Crew?</p>
+                        <p className='ds_role_text'>Are you sure you want to delete Vouchers?</p>
                         <div className='mt-5 mb-5'>
-                            <button className='ds_delete_cancel' onClick={() => setRemoveCastCrew(false)}>Cancel</button>
+                            <button className='ds_delete_cancel' onClick={() => setRemoveVouchers(false)}>Cancel</button>
                             <button className='ds_delete_yes'>Yes</button>
                         </div>
                     </div>
@@ -349,4 +388,5 @@ const CastCrew = () => {
     )
 }
 
-export default CastCrew
+
+export default Voucher

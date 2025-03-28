@@ -7,11 +7,16 @@ import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
 
-const Episodes = () => {
-    const [addEpisodes, setAddEpisodes] = useState(false);
-    const [editEpisodes, setEditEpisodes] = useState(false);
-    const [viewEpisodes, setViewEpisodes] = useState(false);
-    const [removeEpisodes, setRemoveEpisodes] = useState(false);
+const CoinSell = () => {
+
+
+    const [toggle, setToggle] = useState(false);
+    const [redioVal, setRedioVal] = useState("Active");
+    const [viewCoinSell, setViewCoinSell] = useState(false);
+    const [removeCoinSell, setRemoveCoinSell] = useState(false);
+    const [addCoinSell, setAddCoinSell] = useState(false);
+    const [editCoinSell, setEditCoinSell] = useState(false);
+    const [subAdd, setSubAdd] = useState(false);
 
 
     const totalPages = 10;
@@ -90,11 +95,11 @@ const Episodes = () => {
                 <div className='ds_dash_inner'>
                     <div className='d-flex justify-content-between align-items-center'>
                         <div>
-                            <h4 className="text-light pt-4 mb-0">Episodes</h4>
-                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Episodes</span></p>
+                            <h4 className="text-light pt-4 mb-0">Coin Sell</h4>
+                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Coin Sell</span></p>
                         </div>
                         <div>
-                            <button className='V_review_btn' onClick={() => setAddEpisodes(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
+                            <button className='V_review_btn' onClick={() => setAddCoinSell(true)} ><i className="fa-solid fa-plus me-2"></i> Add</button>
                         </div>
                     </div>
 
@@ -104,46 +109,49 @@ const Episodes = () => {
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Audio Book ID</th>
-                                        <th>Premium</th>
-                                        <th>Coins Required</th>
-                                        <th>Duration</th>
+                                        <th>User ID</th>
+                                        <th>Coin Master ID</th>
+                                        <th>Amount</th>
+                                        <th>Payment ID</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>01</td>
-                                        <td>2541211</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
+                                        <td>0123</td>
+                                        <td>Johnwick08</td>
+                                        <td>1254</td>
+                                        <td>₹99</td>
+                                        <td>785</td>
+                                        <td><span className='ds_sub_active'>Active</span></td>
                                         <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewEpisodes(true)}>
+                                            <span className=' ds_cursor me-2' onClick={() => setViewCoinSell(true)}>
                                                 <img src={view} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditEpisodes(true)}>
+                                            <span className=' me-2 ds_cursor' onClick={() => setEditCoinSell(true)}>
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveEpisodes(true)}>
+                                            <span className='ds_cursor' onClick={() => setRemoveCoinSell(true)}>
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>02</td>
-                                        <td>8216614</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
+                                        <td>0123</td>
+                                        <td>Johnwick08</td>
+                                        <td>1254</td>
+                                        <td>₹99</td>
+                                        <td>785</td>
+                                        <td><span className='ds_sub_block'>Block</span></td>
                                         <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewEpisodes(true)}>
+                                            <span className=' ds_cursor me-2' onClick={() => setViewCoinSell(true)}>
                                                 <img src={view} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditEpisodes(true)}>
+                                            <span className=' me-2 ds_cursor' onClick={() => setEditCoinSell(true)} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveEpisodes(true)}>
+                                            <span className='ds_cursor' onClick={() => setRemoveCoinSell(true)}>
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -161,11 +169,11 @@ const Episodes = () => {
 
 
 
-            {/* ==========    Add Episodes Modal    ========== */}
+            {/* ==========    Add CoinSell Modal    ========== */}
             <div className=''>
                 <Modal
-                    show={addEpisodes}
-                    onHide={() => setAddEpisodes(false)}
+                    show={addCoinSell}
+                    onHide={() => setAddCoinSell(false)}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     className='text-white V_modal_width'
@@ -174,9 +182,9 @@ const Episodes = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                    Add Episodes
+                                    Add Coin Sell
                                 </div>
-                                <div className='ms-auto' onClick={() => setAddEpisodes(false)}>
+                                <div className='ms-auto' onClick={() => setAddCoinSell(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
@@ -185,28 +193,43 @@ const Episodes = () => {
                     <Modal.Body>
                         <div className="row py-md-3  px-lg-5 ">
                             <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Audio Book ID</label>
+                                <label className='V_label'>User ID</label>
                                 <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Audio file</label>
-                                <div class="custom-input-group mt-1 mt-md-2">
-                                <input type="text" class="custom-text" placeholder="" readonly />
-                                    <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input " />
+                                <label className='V_label'>Coin Master ID</label>
+                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
+                            </div>
+                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
+                                <label className='V_label'>Amount</label>
+                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
+                            </div>
+                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
+                                <label className='V_label'>Payment ID</label>
+                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
+                            </div>
+                            <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                                <div>
+                                    <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Language</label>
+                                    <div className='select-wrapper position-relative'>
+                                        <div className='ds_sub_select1' onClick={() => setToggle(!toggle)}>{redioVal}</div>
+                                        {toggle && (<div className='ds_sub_select_box'>
+                                            <div className="form-check mb-3" onClick={() => { setRedioVal("Active"); setToggle(false) }}>
+                                                <input className="form-check-input ds_sub_check" type="radio" name="exampleRadios" id="exampleRadios1" value="Active" checked={redioVal === "Active" && subAdd ? true : false} />
+                                                <label className="form-check-label" htmlFor="exampleRadios1">
+                                                    Active
+                                                </label>
+                                            </div>
+                                            <div className="form-check" onClick={() => { setRedioVal("Block"); setToggle(false) }}>
+                                                <input className="form-check-input ds_sub_check" type="radio" name="exampleRadios" id="exampleRadios2" value="Block" checked={redioVal === "Block" && subAdd ? true : false} />
+                                                <label className="form-check-label" htmlFor="exampleRadios2">
+                                                    Block
+                                                </label>
+                                            </div>
+                                        </div>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Premium</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Coins required</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Duration</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                         </div>
                     </Modal.Body>
@@ -220,11 +243,11 @@ const Episodes = () => {
             </div>
 
 
-            {/* ==========    Edit Episodes Modal    ========== */}
+            {/* ==========    Edit CoinSell Modal    ========== */}
             <div className=''>
                 <Modal
-                    show={editEpisodes}
-                    onHide={() => setEditEpisodes(false)}
+                    show={editCoinSell}
+                    onHide={() => setEditCoinSell(false)}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     className='text-white V_modal_width'
@@ -233,39 +256,54 @@ const Episodes = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                    Edit Episodes
+                                    Edit Coin Sell
                                 </div>
-                                <div className='ms-auto' onClick={() => setEditEpisodes(false)}>
+                                <div className='ms-auto' onClick={() => setEditCoinSell(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <div className="row py-md-3  px-lg-5 ">
+                        <div className="row py-md-3  px-lg-5 ">
                             <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Audio Book ID</label>
+                                <label className='V_label'>User ID</label>
                                 <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Audio file</label>
-                                <div class="custom-input-group mt-1 mt-md-2">
-                                <input type="text" class="custom-text" placeholder="" readonly />
-                                    <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input " />
+                                <label className='V_label'>Coin Master ID</label>
+                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
+                            </div>
+                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
+                                <label className='V_label'>Amount</label>
+                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
+                            </div>
+                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
+                                <label className='V_label'>Payment ID</label>
+                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
+                            </div>
+                            <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                                <div>
+                                    <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Language</label>
+                                    <div className='select-wrapper position-relative'>
+                                        <div className='ds_sub_select1' onClick={() => setToggle(!toggle)}>{redioVal}</div>
+                                        {toggle && (<div className='ds_sub_select_box'>
+                                            <div className="form-check mb-3" onClick={() => { setRedioVal("Active"); setToggle(false) }}>
+                                                <input className="form-check-input ds_sub_check" type="radio" name="exampleRadios" id="exampleRadios1" value="Active" checked={redioVal === "Active" && subAdd ? true : false} />
+                                                <label className="form-check-label" htmlFor="exampleRadios1">
+                                                    Active
+                                                </label>
+                                            </div>
+                                            <div className="form-check" onClick={() => { setRedioVal("Block"); setToggle(false) }}>
+                                                <input className="form-check-input ds_sub_check" type="radio" name="exampleRadios" id="exampleRadios2" value="Block" checked={redioVal === "Block" && subAdd ? true : false} />
+                                                <label className="form-check-label" htmlFor="exampleRadios2">
+                                                    Block
+                                                </label>
+                                            </div>
+                                        </div>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Premium</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Coins required</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Duration</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                         </div>
                     </Modal.Body>
@@ -280,11 +318,11 @@ const Episodes = () => {
 
 
 
-            {/* ==========    View Episodes Modal    ========== */}
+            {/* ==========    View CoinSell Modal    ========== */}
             <div className=''>
                 <Modal
-                    show={viewEpisodes}
-                    onHide={() => setViewEpisodes(false)}
+                    show={viewCoinSell}
+                    onHide={() => setViewCoinSell(false)}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     className='text-white V_modal_width '
@@ -293,62 +331,67 @@ const Episodes = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-md-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                Episodes Details
+                                    View Coin Sell Details
                                 </div>
-                                <div className='ms-auto' onClick={() => setViewEpisodes(false)}>
+                                <div className='ms-auto' onClick={() => setViewCoinSell(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <div className="row py-md-3  px-md-5 ">
+                        <div className="row py-md-3  px-md-5 ">
                             <div className="col-6  pt-2 pt-sm-0">
-                                <p className='V_label2 mb-0'>Audio Book ID</p>
+                                <p className='V_label2 mb-0'>User ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>45256</span></p>
+                                <p>: <span className='ms-2 V_label1'>9854</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
-                                <p className='V_label2 mb-0'>Premium</p>
+                                <p className='V_label2 mb-0'>Coin Master ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>Johanwick08</span></p>
+                                <p>: <span className='ms-2 V_label1'>9854</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
-                                <p className='V_label2 mb-0'>Coins Required</p>
+                                <p className='V_label2 mb-0'>Amount</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>12/12/2023</span></p>
+                                <p>: <span className='ms-2 V_label1'>₹99</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
-                                <p className='V_label2 mb-0'>Duration</p>
+                                <p className='V_label2 mb-0'>Payment ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>Lorem Ipsum</span></p>
+                                <p>: <span className='ms-2 V_label1'>5845</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Status</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
+                                <p>: <span className='ms-2 V_label1'>Active</span></p>
                             </div>
                         </div>
                     </Modal.Body>
                 </Modal>
             </div>
 
-            {/* -================= Delete Episodes Modal ==================*/}
+            {/* -================= Delete CoinSell Modal ==================*/}
 
-            <Modal show={removeEpisodes} onHide={() => setRemoveEpisodes(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
-
+            <Modal show={removeCoinSell} onHide={() => setRemoveCoinSell(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
                 <Modal.Body >
                     <div className='text-center'>
                         <h4 className='mt-4'>Delete</h4>
-                        <p className='ds_role_text'>Are you sure you want to delete Episodes?</p>
+                        <p className='ds_role_text'>Are you sure you want to delete Coin Sell?</p>
                         <div className='mt-5 mb-5'>
-                            <button className='ds_delete_cancel' onClick={() => setRemoveEpisodes(false)}>Cancel</button>
+                            <button className='ds_delete_cancel' onClick={() => setRemoveCoinSell(false)}>Cancel</button>
                             <button className='ds_delete_yes'>Yes</button>
                         </div>
                     </div>
                 </Modal.Body>
             </Modal>
-        </div>
+        </div >
     )
 }
 
-export default Episodes
+export default CoinSell

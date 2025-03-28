@@ -145,7 +145,7 @@ const AudioBook = () => {
                                             <span className=' ds_cursor me-2' onClick={() => setViewAudioBook(true)}>
                                                 <img src={view} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor'onClick={() => navigate('/layout/editaudiobook')} >
+                                            <span className=' me-2 ds_cursor' onClick={() => navigate('/layout/editaudiobook')} >
                                                 <img src={pen} alt="" />
                                             </span>
                                             <span className='ds_cursor' onClick={() => setRemoveAudioBook(true)}>
@@ -299,21 +299,41 @@ const AudioBook = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <div className="row py-md-3  px-md-5 ">
-                            <div className="col-6  pt-2 pt-md-3">
-                                <p className='V_label2'>Subscription Plan ID</p>
-                                <p className='V_label2'>User ID</p>
-                                <p className='V_label2'>Expiry Date</p>
-                                <p className='V_label2'>Amount</p>
-                                <p className='V_label2'>Payment ID</p>
-                                <p className='V_label2'>Status</p>
+                        <div className="row py-md-3  px-md-5 ">
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Subscription Plan ID</p>
                             </div>
-                            <div className="col-6 pt-2 pt-md-3">
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>9854</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>User ID</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>9854</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Expiry Date</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>20/09/2020</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Amount</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>₹99</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Payment ID</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>5845</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Status</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>Active</span></p>
                             </div>
                         </div>

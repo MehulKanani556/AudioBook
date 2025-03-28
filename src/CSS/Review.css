@@ -13,10 +13,12 @@
     border-radius: 5px;
 }
 
+
 .V_review_table thead tr th,
 td {
     padding: 15px 30px;
     text-align: center;
+    font-size: 18px;
 }
 
 .V_review_table thead tr th {
@@ -118,7 +120,7 @@ td {
 .V_label1 {
     font-family: Inter; 
     font-weight: 500;
-    font-size: 18px;
+    font-size: 20px;
     color: rgba(255, 255, 255, 1);
 }
 
@@ -290,7 +292,6 @@ td {
         width: 90%;
         margin: auto;
     }
-
     .V_input_text_for_all {
         height: 35px;
     }
@@ -300,8 +301,7 @@ td {
     .V_label2 {
         font-size: 14px;
     }
-    
     .V_label1 {
-        font-size: 14px;
+        font-size: 16px;
     }
 }

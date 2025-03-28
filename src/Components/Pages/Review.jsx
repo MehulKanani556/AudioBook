@@ -303,24 +303,38 @@ const Review = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row py-md-3  px-md-5 ">
-                            <div className="col-6  pt-2 pt-md-3">
-                                <p className='V_label2'>Audio Book ID</p>
-                                <p className='V_label2'>User ID</p>
-                                <p className='V_label2'>Date</p>
-                                <p className='V_label2'>Review</p>
-                                <p className='V_label2'>Rating</p>
+                    <div className="row py-md-3  px-md-5 ">
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Audio Book ID</p>
                             </div>
-                            <div className="col-6 pt-2 pt-md-3">
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>45256</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>User ID</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>Johanwick08</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Date</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>12/12/2023</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Review</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>Lorem Ipsum</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Rating</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>Lorem Ipsum</span></p>
                             </div>
                         </div>
-
-
                     </Modal.Body>
                 </Modal>
             </div>

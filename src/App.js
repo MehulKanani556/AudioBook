@@ -21,8 +21,15 @@ import AddAudioBook from "./Components/Pages/AddAudioBook";
 import EditAudiobooks from "./Components/Pages/EditAudiobooks";
 import Genre from "./Components/Pages/Genre";
 import VoucherUsed from "./Components/Pages/VoucherUsed";
-import CoinLabel from "./Components/Pages/CoinLabel"
+import CoinLabel from "./Components/Pages/CoinLabel";
 import CoinMaster from "./Components/Pages/CoinMaster";
+import Voucher from "./Components/Pages/Voucher";
+import AddVoucher from "./Components/Pages/AddVoucher";
+import EditVoucher from "./Components/Pages/EditVoucher";
+import CoinSell from "./Components/Pages/CoinSell";
+import SubscriptionSell from "./Components/Pages/SubscriptionSell";
+import EditSubscriptionSell from "./Components/Pages/EditSubscriptionSell";
+import AddSubscriptionSell from "./Components/Pages/AddSubscriptionSell";
 
 const App = () => {
   return (
@@ -50,6 +57,13 @@ const App = () => {
            <Route path="editaudiobook" element={<EditAudiobooks />} />
            <Route path="genre" element={<Genre />} />
            <Route path="voucherused" element={<VoucherUsed />} />
+           <Route path="voucher" element={<Voucher />} />
+           <Route path="addVouchers" element={<AddVoucher />} />
+           <Route path="editVouchers" element={<EditVoucher />} />
+           <Route path="coinsell" element={<CoinSell />} />
+           <Route path="subscriptionsell" element={<SubscriptionSell />} />
+           <Route path="editSubscriptionSell" element={<EditSubscriptionSell />} />
+           <Route path="addSubscriptionSell" element={<AddSubscriptionSell />} />
         </Route>
       </Routes>
     </div>

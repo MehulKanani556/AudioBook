@@ -283,7 +283,7 @@ const EpisodeUnlock = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-md-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                Audio Book Details
+                                    Episode Unlock Details
                                 </div>
                                 <div className='ms-auto' onClick={() => setViewEpisodeUnlock(false)}>
                                     <img src={Close} alt="" />
@@ -293,21 +293,31 @@ const EpisodeUnlock = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <div className="row py-md-3  px-md-5 ">
-                            <div className="col-6  pt-2 pt-md-3">
-                                <p className='V_label2'>User ID</p>
-                                <p className='V_label2'>Episode ID</p>
-                                <p className='V_label2'>Date</p>
-                                <p className='V_label2'>Coins Used</p>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>User ID</p>
                             </div>
-                            <div className="col-6 pt-2 pt-md-3">
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>Johanwick08</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Episode ID</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>5454</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Date</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>12/09/2021</span></p>
+                            </div>
+                            <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Coins Used</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>5444</span></p>
                             </div>
                         </div>
-
-
                     </Modal.Body>
                 </Modal>
             </div>

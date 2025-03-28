@@ -193,7 +193,7 @@ const HomeLabelJoin = () => {
             </div>
 
 
-            {/* ==========    Edit review Modal    ========== */}
+            {/* ==========    Edit Home Label Join Modal    ========== */}
             <div className=''>
                 <Modal
                     show={editHomeLabelJoinModal}

@@ -243,7 +243,6 @@ const PlaylistSongs = () => {
             {/* -================= Delete Playlist Songs Modal ==================*/}
 
             <Modal show={removePlaylistSongs} onHide={() => setRemovePlaylistSongs(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
-
                 <Modal.Body >
                     <div className='text-center'>
                         <h4 className='mt-4'>Delete</h4>
