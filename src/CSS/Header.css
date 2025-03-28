@@ -117,7 +117,15 @@
     }
 }
 
-@media (max-width:374px) {
+@media (max-width:426px) {
+    .ds_notifi{
+        top: 50px;
+        left: -222px;
+        width: 300px;
+    }
+}
+
+@media (max-width:376px) {
     .ds_header_input {
         width: 130px;
     }
@@ -132,7 +140,7 @@
     }
     .ds_notifi{
         top: 50px;
-        left: -167px;
+        left: -222px;
         width: 300px;
     }
 }
@@ -140,7 +148,7 @@
 @media (max-width:321px) {
     .ds_notifi{
         top: 50px;
-        left: -196px;
+        left: -201px;
         width: 300px;
     }
     .ds_head_logo{

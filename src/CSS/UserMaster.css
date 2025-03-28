@@ -1,0 +1,99 @@
+.ds_user_master_img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+.ds_user_master_pending{
+    background: rgba(255, 225, 66, 1);
+    padding: 7px 17px;
+    color: black;
+    border-radius: 5px;
+}
+.ds_user_master{
+    min-width: 1800px;
+}
+
+
+.ds_user_master thead tr th , td {
+    padding: 15px 0px;
+    text-align: center;
+}
+.ds_user_master thead tr th{
+    border-bottom: 0.8px solid #C6C6C64D;
+}
+
+
+.ds_user_master_scroll::-webkit-scrollbar {
+    width: 3px;
+    height: 8px;
+  }
+  
+  .ds_user_master_scroll::-webkit-scrollbar-track {
+    background: #121a24;
+    border-radius: 4px;
+  }
+  
+  .ds_user_master_scroll::-webkit-scrollbar-thumb {
+    background: #94a3b4;
+    border-radius: 4px;
+  }
+  
+  .ds_user_master_scroll::-webkit-scrollbar-thumb:hover {
+    background: #394857;
+  }
+
+
+  /* *************** AddUserMaster ************* */
+  .ds_add_master_choose{
+    position: absolute;
+    top: 37px;
+    right: 7px;
+    width: 66px;
+  }
+
+  .ds_user_master_detail .modal-content{
+      box-shadow: rgba(22, 22, 22, 0.25) 0px 54px 55px, rgba(107, 106, 106, 0.12) 0px -12px 30px, rgba(121, 120, 120, 0.12) 0px 4px 6px, rgba(104, 103, 103, 0.17) 0px 12px 13px, rgba(250, 249, 249, 0.09) 0px -3px 5px;
+      background: rgba(12, 17, 24, 1); 
+      padding: 0px 15px;
+  }
+  .ds_user_master_big{
+     width: 130px;
+     height: 130px;
+     object-fit: cover;
+  }
+
+
+  @media (max-width:1200px) {
+    .ds_user_master_detail .modal-dialog{
+        max-width: 690px !important;
+    }
+    .ds_user_master_big {
+        width: 100px;
+        height: 100px;
+    }
+  }
+
+  @media (max-width:992px) {
+    .ds_user_master_detail .modal-dialog{
+        max-width: 600px !important;
+    }
+}
+
+@media (max-width:576px) {
+    .ds_user_master_detail .modal-dialog{
+        max-width: 400px !important;
+        margin: auto;
+    }
+}
+
+@media (max-width:426px) {
+    .ds_user_master_detail .modal-dialog{
+        max-width: 333px !important;
+    }
+}
+
+@media (max-width:321px) {
+    .ds_user_master_detail .modal-dialog{
+        max-width: 290px !important;
+    }
+}
