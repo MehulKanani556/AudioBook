@@ -34,18 +34,21 @@
 
 .ds_active_color {
     position: relative;
-    border: 0.3px solid transparent;
-    background: radial-gradient(80.38% 222.5% at -13.75% -12.36%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%),
-                radial-gradient(80.69% 208.78% at 108.28% 112.58%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
-    background-clip: padding-box;
-
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(236, 230, 230, 0.4) 0%, rgba(240, 234, 234, 0.045) 77.08%, rgba(245, 242, 242, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    border: 0.3px solid;
 }
 .ds_active_pad{
     margin-right: 30px;
     padding: 13px 0px;
     border-radius: 5px;
     cursor: pointer;
+    border: 0.3px solid transparent;
+
 }
+.ds_active_pad:hover{
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(236, 230, 230, 0.4) 0%, rgba(240, 234, 234, 0.045) 77.08%, rgba(245, 242, 242, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+}
+
 .ds_side_title{
     font-weight: 400;
 }

@@ -149,7 +149,7 @@ const Role = () => {
            <div className='mt-5 mb-3'>
              <div className='text-center'>
                 <button className='ds_role_save'>Save</button>
-                <button className='ds_role_cancel' onClick={()=> setAdd(false)}>Cancel</button>
+                <button className='ds_sub_cancel' onClick={()=> setAdd(false)}>Clear</button>
              </div>
            </div>
          </div>
@@ -178,7 +178,7 @@ const Role = () => {
            <div className='mt-5 mb-3'>
              <div className='text-center'>
                 <button className='ds_role_save'>Save</button>
-                <button className='ds_role_cancel' onClick={()=> setEdit(false)}>Cancel</button>
+                <button className='ds_sub_cancel' onClick={()=> setEdit(false)}>Clear</button>
              </div>
            </div>
          </div>

@@ -30,13 +30,15 @@ const Dashboard = (props) => {
   ];
 
   const pieData = [
-    { name: "Historical", value: 50 },
-    { name: "Crime", value: 25 },
-    { name: "Career", value: 18 },
-    { name: "Information", value: 10 },
+    { name: "Historical", value: 50 , color:"#1E2A5E" },
+    { name: "Crime", value: 25 , color:"#55679C" },
+    { name: "Career", value: 18 , color:"#7C93C3" },
+    { name: "Information", value: 10 , color:"#CCD6EB" },
   ];
 
-  const COLORS = ["#0A46A7", "#3795BD", "#5FBDFF", "#89CFF3"];
+  const COLORS = ["#1E2A5E", "#55679C", "#7C93C3", "#CCD6EB"];
+
+
 
   return (
     <div className="ds_dash_master">
@@ -216,7 +218,7 @@ const Dashboard = (props) => {
                                 <span className="text-light me-3">
                                   {category.name}
                                 </span>
-                                <span style={{ color: "#3795BD" }}>
+                                <span style={{ color: category?.color , fontWeight:"600" }}>
                                   +{category.value}%
                                 </span>
                               </div>

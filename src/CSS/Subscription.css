@@ -68,16 +68,22 @@
     border-radius: 5px;
     font-weight: 600;
     color: white;
-    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%);
     border: 0.3px solid transparent;
 
-    border-image-source: radial-gradient(80.38% 222.5% at -13.75% -12.36%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-    radial-gradient(80.69% 208.78% at 108.28% 112.58%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+
+}
+.ds_sub_cancel:hover{
+    background-color: white;
+    color: black;
 }
 .ds_sub_eye{
     background-color: white;
     padding: 3px 6px 5px 6px;
     border-radius: 3px; 
+}
+.ds_sub_eye:hover{
+    background-color: rgb(214, 211, 211);
 }
 .ds_sub_check{
     background: rgba(23, 31, 40, 0.6);
