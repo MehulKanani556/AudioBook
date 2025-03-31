@@ -149,7 +149,7 @@ const renderPagination = () => {
               <div className='mt-5 mb-3'>
                 <div className='text-center'>
                    <button className='ds_role_save'>Save</button>
-                   <button className='ds_role_cancel' onClick={()=> setCoinAdd(false)}>Cancel</button>
+                   <button className='ds_sub_cancel' onClick={()=> setCoinAdd(false)}>Clear</button>
                 </div>
               </div>
             </div>
@@ -177,7 +177,7 @@ const renderPagination = () => {
               <div className='mt-5 mb-3'>
                 <div className='text-center'>
                    <button className='ds_role_save'>Save</button>
-                   <button className='ds_role_cancel' onClick={()=> setCoinEdit(false)}>Cancel</button>
+                   <button className='ds_sub_cancel' onClick={()=> setCoinEdit(false)}>Clear</button>
                 </div>
               </div>
             </div>

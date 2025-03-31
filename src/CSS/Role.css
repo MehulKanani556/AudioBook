@@ -18,6 +18,9 @@
   font-size: 18px;
   font-weight: 600;
 }
+.ds_role_btn:hover{
+    background-color: rgb(214, 211, 211);
+}
 .ds_role_bg{
     background: #171F28;
     height: 680px;
@@ -34,8 +37,9 @@
     background-color: white;
     padding: 3px 5px 5px 5px;
     border-radius: 3px;
-    
-
+}
+.ds_role_icon:hover{
+    background-color: rgb(214, 211, 211);
 }
 .V_pagination {
     font-size: 13px;
@@ -103,6 +107,10 @@
     font-weight: 600;
     margin-right: 20px;
 }
+.ds_role_save:hover{
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    color: white; 
+}
 .ds_role_cancel{
     background: black;
     padding: 10px 45px;
@@ -116,6 +124,10 @@
 
     border-image-source: radial-gradient(80.38% 222.5% at -13.75% -12.36%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
     radial-gradient(80.69% 208.78% at 108.28% 112.58%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+}
+.ds_role_cancel:hover{
+    background-color: white;
+    color: black;
 }
 .ds_role_delete_modal .modal-content{
     box-shadow: rgba(22, 22, 22, 0.25) 0px 54px 55px, rgba(107, 106, 106, 0.12) 0px -12px 30px, rgba(121, 120, 120, 0.12) 0px 4px 6px, rgba(104, 103, 103, 0.17) 0px 12px 13px, rgba(250, 249, 249, 0.09) 0px -3px 5px;
@@ -134,6 +146,10 @@
     margin-right: 20px;
 
 }
+.ds_delete_cancel:hover{
+    background-color: white;
+    color:black;
+}
 .ds_delete_yes{
     background: rgba(255, 255, 255, 1);
     padding: 10px 57px;
@@ -141,6 +157,10 @@
     border: none;
     border-radius: 5px;
     font-weight: 600;
+}
+.ds_delete_yes:hover{
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    color: white; 
 }
 .ds_role_delete_modal .modal-dialog {
     max-width: 550px;
