@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import pen from '../../Images/Parth/edit_button.png'
-import trash from '../../Images/Parth/delete_button.png'
-import view from '../../Images/Parth/view_button.png'
+import pen from '../../Images/dhruvin/pancil.svg'
+import trash from '../../Images/dhruvin/trash.svg'
+import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
 
 const Voucher = () => {
-
     const navigate = useNavigate();
 
     const [viewVouchers, setViewVouchers] = useState(false);
@@ -101,7 +100,7 @@ const Voucher = () => {
 
                     <div className='V_review_bg mt-2'>
                         <div className='overflow-auto'>
-                            <table className='w-100 text-light V_review_table  text-nowrap ' style={{minWidth: "1800px"}}>
+                            <table className='w-100 text-light V_review_table  text-nowrap ' style={{ minWidth: "1800px" }}>
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -130,13 +129,13 @@ const Voucher = () => {
                                         <td>Lorem inspum</td>
                                         <td><span className='ds_sub_active'>Active</span></td>
                                         <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewVouchers(true)}>
-                                                <img src={view} alt="" />
+                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewVouchers(true)} >
+                                                <img src={eye} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => navigate('/layout/editVouchers')}>
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => navigate('/layout/editvouchers')} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveVouchers(true)}>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveVouchers(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -153,13 +152,13 @@ const Voucher = () => {
                                         <td>Lorem inspum</td>
                                         <td><span className='ds_sub_block'>Block</span></td>
                                         <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewVouchers(true)}>
-                                                <img src={view} alt="" />
+                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewVouchers(true)} >
+                                                <img src={eye} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => navigate('/layout/editVouchers')} >
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => navigate('/layout/editvouchers')} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveVouchers(true)}>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveVouchers(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -177,114 +176,7 @@ const Voucher = () => {
 
 
 
-            {/* ==========    Add Vouchers Modal    ========== */}
-            {/* <div className=''>
-                <Modal
-                    show={addCastCrew}
-                    onHide={() => setAddCastCrew(false)}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    className='text-white V_modal_width'
-                    centered>
-                    <Modal.Header className='V_modal_header'>
-                        <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
-                            <div className="d-flex justify-content-between ">
-                                <div>
-                                    Add Vouchers
-                                </div>
-                                <div className='ms-auto' onClick={() => setAddCastCrew(false)}>
-                                    <img src={Close} alt="" />
-                                </div>
-                            </div>
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Vouchers ID</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Name</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Role</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Image</label>
-                                <div class="custom-input-group mt-1 mt-md-2">
-                                    <input type="text" class="custom-text" placeholder="" readonly />
-                                    <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input " />
-                                </div>
-                            </div>
-                        </div>
-                    </Modal.Body>
-                    <Modal.Footer className='V_modal_header mx-auto pb-4'>
-                        <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Save</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
-                        </div>
-                    </Modal.Footer>
-                </Modal>
-            </div> */}
-
-
-            {/* ==========    Edit Vouchers Modal    ========== */}
-            {/* <div className=''>
-                <Modal
-                    show={editCastCrew}
-                    onHide={() => setEditCastCrew(false)}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    className='text-white V_modal_width'
-                    centered>
-                    <Modal.Header className='V_modal_header'>
-                        <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
-                            <div className="d-flex justify-content-between ">
-                                <div>
-                                    Edit Vouchers
-                                </div>
-                                <div className='ms-auto' onClick={() => setEditCastCrew(false)}>
-                                    <img src={Close} alt="" />
-                                </div>
-                            </div>
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Vouchers ID</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Name</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Role</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Image</label>
-                                <div class="custom-input-group mt-1 mt-md-2">
-                                    <input type="text" class="custom-text" placeholder="" readonly />
-                                    <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input " />
-                                </div>
-                            </div>
-                        </div>
-                    </Modal.Body>
-                    <Modal.Footer className='V_modal_header mx-auto pb-4'>
-                        <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Update</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
-                        </div>
-                    </Modal.Footer>
-                </Modal>
-            </div> */}
+          
 
 
 

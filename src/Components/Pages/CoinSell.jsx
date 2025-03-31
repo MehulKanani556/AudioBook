@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import pen from '../../Images/Parth/edit_button.png'
-import trash from '../../Images/Parth/delete_button.png'
-import view from '../../Images/Parth/view_button.png'
+import pen from '../../Images/dhruvin/pancil.svg'
+import trash from '../../Images/dhruvin/trash.svg'
+import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
@@ -126,13 +126,13 @@ const CoinSell = () => {
                                         <td>785</td>
                                         <td><span className='ds_sub_active'>Active</span></td>
                                         <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewCoinSell(true)}>
-                                                <img src={view} alt="" />
+                                        <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewCoinSell(true)} >
+                                                <img src={eye} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditCoinSell(true)}>
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditCoinSell(true)} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveCoinSell(true)}>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setViewCoinSell(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -145,13 +145,13 @@ const CoinSell = () => {
                                         <td>785</td>
                                         <td><span className='ds_sub_block'>Block</span></td>
                                         <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewCoinSell(true)}>
-                                                <img src={view} alt="" />
+                                        <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewCoinSell(true)} >
+                                                <img src={eye} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditCoinSell(true)} >
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditCoinSell(true)} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveCoinSell(true)}>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setViewCoinSell(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -235,8 +235,8 @@ const CoinSell = () => {
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Save</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
+                            <button className='ds_role_save'>Save</button>
+                            <button className='ds_sub_cancel'>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>
@@ -309,8 +309,8 @@ const CoinSell = () => {
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Update</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
+                            <button className='ds_role_save'>Save</button>
+                            <button className='ds_sub_cancel'>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>

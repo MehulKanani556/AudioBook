@@ -94,7 +94,7 @@ const HomeCorousel = () => {
                             <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Home Corousel</span></p>
                         </div>
                         <div>
-                            <button className='V_review_btn' onClick={() => setAddHomeLabelCorouselModal(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
+                            <button className='V_review_btn1' onClick={() => setAddHomeLabelCorouselModal(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
                         </div>
                     </div>
 
@@ -115,10 +115,10 @@ const HomeCorousel = () => {
                                             <img src={require("../../Images/Parth/homeCorouselImage.png")} alt="" className='V_home_corousel_image' />
                                         </td>
                                         <td className=''>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditHomeLabelCorousel(true)}>
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditHomeLabelCorousel(true)} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveHomeCorousel(true)}>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveHomeCorousel(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -129,10 +129,10 @@ const HomeCorousel = () => {
                                             <img src={require("../../Images/Parth/homeCorouselImage.png")} alt="" className='V_home_corousel_image' />
                                         </td>
                                         <td className=''>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditHomeLabelCorousel(true)}>
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditHomeLabelCorousel(true)} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor'>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveHomeCorousel(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -187,8 +187,8 @@ const HomeCorousel = () => {
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Save</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
+                            <button className='ds_role_save'>Save</button>
+                            <button className='ds_sub_cancel'>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>
@@ -230,8 +230,8 @@ const HomeCorousel = () => {
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Update</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
+                            <button className='ds_role_save'>Save</button>
+                            <button className='ds_sub_cancel'>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>

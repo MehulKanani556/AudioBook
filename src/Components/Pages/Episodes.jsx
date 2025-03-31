@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import pen from '../../Images/Parth/edit_button.png'
-import trash from '../../Images/Parth/delete_button.png'
-import view from '../../Images/Parth/view_button.png'
+import pen from '../../Images/dhruvin/pancil.svg'
+import trash from '../../Images/dhruvin/trash.svg'
+import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
@@ -118,14 +118,14 @@ const Episodes = () => {
                                         <td>Lorem Ipsum</td>
                                         <td>Lorem Ipsum</td>
                                         <td>Lorem Ipsum</td>
-                                        <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewEpisodes(true)}>
-                                                <img src={view} alt="" />
+                                        <td>
+                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewEpisodes(true)} >
+                                                <img src={eye} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditEpisodes(true)}>
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditEpisodes(true)} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveEpisodes(true)}>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveEpisodes(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -136,14 +136,14 @@ const Episodes = () => {
                                         <td>Lorem Ipsum</td>
                                         <td>Lorem Ipsum</td>
                                         <td>Lorem Ipsum</td>
-                                        <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewEpisodes(true)}>
-                                                <img src={view} alt="" />
+                                        <td>
+                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewEpisodes(true)} >
+                                                <img src={eye} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditEpisodes(true)}>
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditEpisodes(true)} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveEpisodes(true)}>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveEpisodes(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -191,7 +191,7 @@ const Episodes = () => {
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
                                 <label className='V_label'>Audio file</label>
                                 <div class="custom-input-group mt-1 mt-md-2">
-                                <input type="text" class="custom-text" placeholder="" readonly />
+                                    <input type="text" class="custom-text" placeholder="" readonly />
                                     <label for="fileInput" class="custom-button">CHOOSE</label>
                                     <input type="file" id="fileInput" class="custom-file-input " />
                                 </div>
@@ -212,8 +212,8 @@ const Episodes = () => {
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Save</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
+                            <button className='ds_role_save'>Save</button>
+                            <button className='ds_sub_cancel'>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>
@@ -242,7 +242,7 @@ const Episodes = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <div className="row py-md-3  px-lg-5 ">
+                        <div className="row py-md-3  px-lg-5 ">
                             <div className="col-12 col-sm-6  pt-2 pt-md-3">
                                 <label className='V_label'>Audio Book ID</label>
                                 <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
@@ -250,7 +250,7 @@ const Episodes = () => {
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
                                 <label className='V_label'>Audio file</label>
                                 <div class="custom-input-group mt-1 mt-md-2">
-                                <input type="text" class="custom-text" placeholder="" readonly />
+                                    <input type="text" class="custom-text" placeholder="" readonly />
                                     <label for="fileInput" class="custom-button">CHOOSE</label>
                                     <input type="file" id="fileInput" class="custom-file-input " />
                                 </div>
@@ -271,8 +271,8 @@ const Episodes = () => {
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Update</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
+                            <button className='ds_role_save'>Save</button>
+                            <button className='ds_sub_cancel'>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>
@@ -293,7 +293,7 @@ const Episodes = () => {
                         <Modal.Title id="contained-modal-title-vcenter" className='px-md-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
-                                Episodes Details
+                                    Episodes Details
                                 </div>
                                 <div className='ms-auto' onClick={() => setViewEpisodes(false)}>
                                     <img src={Close} alt="" />
@@ -302,7 +302,7 @@ const Episodes = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <div className="row py-md-3  px-md-5 ">
+                        <div className="row py-md-3  px-md-5 ">
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Audio Book ID</p>
                             </div>

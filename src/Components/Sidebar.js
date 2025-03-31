@@ -443,7 +443,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                  </div>
 
                  <div className=' ms-3 ds_active_pad  py-2 mt-3'>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/homelabel')}>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/homelabeljoin')}>
                      <div>
                         <img src={join} className="ds_side_icon" />
                      </div>

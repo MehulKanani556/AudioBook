@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import pen from '../../Images/Parth/edit_button.png'
-import trash from '../../Images/Parth/delete_button.png'
-import view from '../../Images/Parth/view_button.png'
+import pen from '../../Images/dhruvin/pancil.svg'
+import trash from '../../Images/dhruvin/trash.svg'
+import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
@@ -16,7 +16,7 @@ const Review = () => {
 
     const totalPages = 10;
     const [currentPage, setCurrentPage] = useState(1);
-    
+
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
@@ -120,14 +120,14 @@ const Review = () => {
                                         <td>12/12/2023</td>
                                         <td>Lorem Ipsum</td>
                                         <td>Lorem Ipsum</td>
-                                        <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewModalShow(true)}>
-                                                <img src={view} alt="" />
+                                        <td>
+                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewModalShow(true)} >
+                                                <img src={eye} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditModalShow(true)}>
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditModalShow(true)} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveReview(true)}>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveReview(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -139,14 +139,14 @@ const Review = () => {
                                         <td>12/12/2023</td>
                                         <td>Lorem Ipsum</td>
                                         <td>Lorem Ipsum</td>
-                                        <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewModalShow(true)}>
-                                                <img src={view} alt="" />
+                                        <td>
+                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewModalShow(true)} >
+                                                <img src={eye} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditModalShow(true)}>
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditModalShow(true)} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveReview(true)}>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveReview(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -210,13 +210,13 @@ const Review = () => {
                         </div>
 
 
-            
+
 
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Save</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
+                            <button className='ds_role_save'>Save</button>
+                            <button className='ds_sub_cancel'>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>
@@ -272,8 +272,8 @@ const Review = () => {
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Update</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
+                            <button className='ds_role_save'>Save</button>
+                            <button className='ds_sub_cancel'>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>
@@ -303,7 +303,7 @@ const Review = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <div className="row py-md-3  px-md-5 ">
+                        <div className="row py-md-3  px-md-5 ">
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Audio Book ID</p>
                             </div>
@@ -339,21 +339,21 @@ const Review = () => {
                 </Modal>
             </div>
 
-{/* -================= Delete Review Modal ==================*/}
+            {/* -================= Delete Review Modal ==================*/}
 
-             <Modal show={removeReview} onHide={()=> setRemoveReview(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
-                  
-                  <Modal.Body >
-                     <div className='text-center'>
+            <Modal show={removeReview} onHide={() => setRemoveReview(false)} size="md" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_role_delete_modal' centered>
+
+                <Modal.Body >
+                    <div className='text-center'>
                         <h4 className='mt-4'>Delete</h4>
                         <p className='ds_role_text'>Are you sure you want to delete Review?</p>
                         <div className='mt-5 mb-5'>
-                          <button className='ds_delete_cancel' onClick={()=> setRemoveReview(false)}>Cancel</button>
-                          <button className='ds_delete_yes'>Yes</button>
+                            <button className='ds_delete_cancel' onClick={() => setRemoveReview(false)}>Cancel</button>
+                            <button className='ds_delete_yes'>Yes</button>
                         </div>
-                     </div>
-                  </Modal.Body>
-                </Modal>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     )
 }

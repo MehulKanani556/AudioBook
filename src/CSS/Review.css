@@ -7,6 +7,22 @@
     font-weight: 600;
 }
 
+.V_review_btn1 {
+    background: #ffffff;
+    border-radius: 5px;
+    padding: 8px 20px;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+}
+.V_review_btn:hover{
+    background-color: rgb(214, 211, 211); 
+}
+
+.V_review_btn1:hover{
+    background-color: rgb(214, 211, 211); 
+}
+
 .V_review_bg {
     background: #171F28;
     height: 650px;
@@ -38,7 +54,7 @@ td {
     background: #030303;
     color: white;
     padding-top: 6px;
-    margin: 0 5px;
+    /* margin: 0 5px; */
     cursor: pointer;
 }
 
@@ -50,9 +66,17 @@ td {
     color: black;
     font-weight: 600;
     padding-top: 6px;
-    margin: 0 5px;
+    /* margin: 0 5px; */
 }
 
+.V_pagination:hover{
+    border: 1px solid white;
+}
+.V_pagination1:hover{
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+}
 .V_pagination.disabled {
     opacity: 0.5;
     pointer-events: none;
@@ -118,26 +142,26 @@ td {
 }
 
 .V_label1 {
-    font-family: Inter; 
+    font-family: Inter;
     font-weight: 500;
     font-size: 20px;
     color: rgba(255, 255, 255, 1);
 }
 
-.V_modal_width .modal-content{
+.V_modal_width .modal-content {
     box-shadow: rgba(22, 22, 22, 0.25) 0px 54px 55px, rgba(107, 106, 106, 0.12) 0px -12px 30px, rgba(121, 120, 120, 0.12) 0px 4px 6px, rgba(104, 103, 103, 0.17) 0px 12px 13px, rgba(250, 249, 249, 0.09) 0px -3px 5px;
     background: rgba(12, 17, 24, 1);
 }
 
 
-.V_home_corousel_image{
+.V_home_corousel_image {
     height: 30px;
     width: 30px;
 }
 
 
 
-.V_input_file_image_for_all{
+.V_input_file_image_for_all {
     width: 100%;
     height: 44px;
     border-radius: 4px;
@@ -154,8 +178,10 @@ td {
 
 
 .custom-file-input {
-    display: none; /* Hide default file input */
+    display: none;
+    /* Hide default file input */
 }
+
 .custom-input-group {
     display: flex;
     align-items: center;
@@ -170,8 +196,9 @@ td {
     gap: 10px;
     background: #171F28;
     color: white;
-   
+
 }
+
 .custom-text {
     flex: 1;
     background: none;
@@ -180,6 +207,7 @@ td {
     padding: 5px;
     outline: none;
 }
+
 .custom-button {
     background-color: white;
     color: black;
@@ -190,34 +218,40 @@ td {
 }
 
 
-.V_castCrew_image{
+.V_castCrew_image {
     width: 120px;
     height: 120px;
 }
 
-.ds_sub_select1{
+.ds_sub_select1 {
     background: rgba(23, 31, 40, 1);
     color: white;
     border: none;
     padding: 5px 15px;
 }
+
+.ds_cursor:hover{
+    cursor: pointer;
+    background-color: rgb(214, 211, 211); 
+}
+
 /* ================ media query ================ */
 
 
 @media (max-width: 1921px) and (min-width: 1651px) {
-    .ds_sub_select1{
+    .ds_sub_select1 {
         padding: 10px 15px;
     }
 }
 
 @media (max-width: 1650px) and (min-width: 1441px) {
-    .ds_sub_select1{
+    .ds_sub_select1 {
         padding: 10px 15px;
     }
 }
 
 @media (max-width: 1440px) and (min-width: 1200px) {
-    .ds_sub_select1{
+    .ds_sub_select1 {
         padding: 10px 15px;
     }
 }
@@ -226,10 +260,12 @@ td {
     .V_input_text_for_all {
         height: 40px;
     }
-    .custom-input-group{
+
+    .custom-input-group {
         height: 40px;
     }
-    .ds_sub_select1{
+
+    .ds_sub_select1 {
         padding: 8px 15px;
     }
 }
@@ -243,14 +279,17 @@ td {
     .V_input_text_for_all {
         height: 40px;
     }
-    .custom-input-group{
+
+    .custom-input-group {
         height: 40px;
     }
-    .V_castCrew_image{
+
+    .V_castCrew_image {
         width: 100px;
         height: 100px;
     }
-    .ds_sub_select1{
+
+    .ds_sub_select1 {
         padding: 8px 15px;
     }
 }
@@ -264,10 +303,12 @@ td {
     .V_input_text_for_all {
         height: 35px;
     }
-    .custom-input-group{
+
+    .custom-input-group {
         height: 35px;
     }
-    .V_castCrew_image{
+
+    .V_castCrew_image {
         width: 100px;
         height: 100px;
     }
@@ -282,7 +323,8 @@ td {
     .V_input_text_for_all {
         height: 35px;
     }
-    .custom-input-group{
+
+    .custom-input-group {
         height: 35px;
     }
 }
@@ -292,16 +334,29 @@ td {
         width: 90%;
         margin: auto;
     }
+
     .V_input_text_for_all {
         height: 35px;
     }
-    .custom-input-group{
+
+    .custom-input-group {
         height: 35px;
     }
+
     .V_label2 {
         font-size: 14px;
     }
+
     .V_label1 {
         font-size: 16px;
+    }
+
+    .V_review_btn1 {
+        background: #ffffff;
+        border-radius: 5px;
+        padding: 8px 9px;
+        border: none;
+        font-size: 18px;
+        font-weight: 600;
     }
 }

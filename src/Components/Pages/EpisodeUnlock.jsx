@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import pen from '../../Images/Parth/edit_button.png'
-import trash from '../../Images/Parth/delete_button.png'
-import view from '../../Images/Parth/view_button.png'
+import pen from '../../Images/dhruvin/pancil.svg'
+import trash from '../../Images/dhruvin/trash.svg'
+import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
@@ -94,7 +94,7 @@ const EpisodeUnlock = () => {
                             <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Episode Unlock</span></p>
                         </div>
                         <div>
-                            <button className='V_review_btn' onClick={() => setAddEpisodeUnlock(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
+                            <button className='V_review_btn1' onClick={() => setAddEpisodeUnlock(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
                         </div>
                     </div>
 
@@ -118,14 +118,14 @@ const EpisodeUnlock = () => {
                                         <td>1254</td>
                                         <td>12/09/2021</td>
                                         <td>Lorem Ipsum</td>
-                                        <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewEpisodeUnlock(true)}>
-                                                <img src={view} alt="" />
+                                        <td>
+                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewEpisodeUnlock(true)} >
+                                                <img src={eye} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditEpisodeUnlock(true)}>
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditEpisodeUnlock(true)} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveReview(true)}>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveReview(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -136,14 +136,14 @@ const EpisodeUnlock = () => {
                                         <td>1254</td>
                                         <td>18/05/2024</td>
                                         <td>Lorem Ipsum</td>
-                                        <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewEpisodeUnlock(true)}>
-                                                <img src={view} alt="" />
+                                        <td>
+                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewEpisodeUnlock(true)} >
+                                                <img src={eye} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => setEditEpisodeUnlock(true)}>
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditEpisodeUnlock(true)} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveReview(true)}>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveReview(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -208,8 +208,8 @@ const EpisodeUnlock = () => {
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Save</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
+                            <button className='ds_role_save'>Save</button>
+                            <button className='ds_sub_cancel'>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>
@@ -261,8 +261,8 @@ const EpisodeUnlock = () => {
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Update</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
+                            <button className='ds_role_save'>Save</button>
+                            <button className='ds_sub_cancel'>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>

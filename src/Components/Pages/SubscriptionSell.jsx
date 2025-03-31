@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import pen from '../../Images/Parth/edit_button.png'
-import trash from '../../Images/Parth/delete_button.png'
-import view from '../../Images/Parth/view_button.png'
+import pen from '../../Images/dhruvin/pancil.svg'
+import trash from '../../Images/dhruvin/trash.svg'
+import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
@@ -95,7 +95,7 @@ const SubscriptionSell = () => {
                             <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Subscription Sell</span></p>
                         </div>
                         <div>
-                            <button className='V_review_btn' onClick={() => navigate('/layout/addSubscriptionSell')} ><i className="fa-solid fa-plus me-2"></i> Add</button>
+                            <button className='V_review_btn1' onClick={() => navigate('/layout/addSubscriptionSell')} ><i className="fa-solid fa-plus me-2"></i> Add</button>
                         </div>
                     </div>
 
@@ -124,13 +124,13 @@ const SubscriptionSell = () => {
                                         <td>9658</td>
                                         <td><span className='ds_sub_active'>Active</span></td>
                                         <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewSubscriptionSell(true)}>
-                                                <img src={view} alt="" />
+                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewSubscriptionSell(true)} >
+                                                <img src={eye} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => navigate('/layout/editSubscriptionSell')}>
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => navigate('/layout/editSubscriptionSell')} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveSubscriptionSell(true)}>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveSubscriptionSell(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -144,13 +144,13 @@ const SubscriptionSell = () => {
                                         <td>9658</td>
                                         <td><span className='ds_sub_block'>Block</span></td>
                                         <td className=''>
-                                            <span className=' ds_cursor me-2' onClick={() => setViewSubscriptionSell(true)}>
-                                                <img src={view} alt="" />
+                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewSubscriptionSell(true)} >
+                                                <img src={eye} alt="" />
                                             </span>
-                                            <span className=' me-2 ds_cursor' onClick={() => navigate('/layout/editSubscriptionSell')} >
+                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => navigate('/layout/editSubscriptionSell')} >
                                                 <img src={pen} alt="" />
                                             </span>
-                                            <span className='ds_cursor' onClick={() => setRemoveSubscriptionSell(true)}>
+                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveSubscriptionSell(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
@@ -168,114 +168,6 @@ const SubscriptionSell = () => {
 
 
 
-            {/* ==========    Add Subscription Sell Modal    ========== */}
-            {/* <div className=''>
-                <Modal
-                    show={addCastCrew}
-                    onHide={() => setAddCastCrew(false)}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    className='text-white V_modal_width'
-                    centered>
-                    <Modal.Header className='V_modal_header'>
-                        <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
-                            <div className="d-flex justify-content-between ">
-                                <div>
-                                    Add Subscription Sell
-                                </div>
-                                <div className='ms-auto' onClick={() => setAddCastCrew(false)}>
-                                    <img src={Close} alt="" />
-                                </div>
-                            </div>
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Subscription Sell ID</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Name</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Role</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Image</label>
-                                <div class="custom-input-group mt-1 mt-md-2">
-                                    <input type="text" class="custom-text" placeholder="" readonly />
-                                    <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input " />
-                                </div>
-                            </div>
-                        </div>
-                    </Modal.Body>
-                    <Modal.Footer className='V_modal_header mx-auto pb-4'>
-                        <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Save</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
-                        </div>
-                    </Modal.Footer>
-                </Modal>
-            </div> */}
-
-
-            {/* ==========    Edit Subscription Sell Modal    ========== */}
-            {/* <div className=''>
-                <Modal
-                    show={editCastCrew}
-                    onHide={() => setEditCastCrew(false)}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    className='text-white V_modal_width'
-                    centered>
-                    <Modal.Header className='V_modal_header'>
-                        <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
-                            <div className="d-flex justify-content-between ">
-                                <div>
-                                    Edit Subscription Sell
-                                </div>
-                                <div className='ms-auto' onClick={() => setEditCastCrew(false)}>
-                                    <img src={Close} alt="" />
-                                </div>
-                            </div>
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Subscription Sell ID</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Name</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Role</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Image</label>
-                                <div class="custom-input-group mt-1 mt-md-2">
-                                    <input type="text" class="custom-text" placeholder="" readonly />
-                                    <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input " />
-                                </div>
-                            </div>
-                        </div>
-                    </Modal.Body>
-                    <Modal.Footer className='V_modal_header mx-auto pb-4'>
-                        <div className="d-flex justify-content-center">
-                            <button className='py-2 px-4 px-md-5 mx-3 V_save'>Update</button>
-                            <button className='py-2 px-4 px-md-5 mx-3 V_clear'>Clear</button>
-                        </div>
-                    </Modal.Footer>
-                </Modal>
-            </div> */}
 
 
 
