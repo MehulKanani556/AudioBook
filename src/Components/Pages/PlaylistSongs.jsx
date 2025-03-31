@@ -98,7 +98,7 @@ const PlaylistSongs = () => {
                     </div>
 
                     <div className='V_review_bg mt-2'>
-                        <div className='overflow-auto'>
+                        <div className='ds_user_master_scroll overflow-auto'>
                             <table className='w-100 text-light V_review_table  text-nowrap '>
                                 <thead>
                                     <tr>
