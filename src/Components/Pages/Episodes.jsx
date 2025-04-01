@@ -12,6 +12,12 @@ const Episodes = () => {
     const [editEpisodes, setEditEpisodes] = useState(false);
     const [viewEpisodes, setViewEpisodes] = useState(false);
     const [removeEpisodes, setRemoveEpisodes] = useState(false);
+    const [fileName, setFileName] = useState("No file chosen");
+    
+        const handleFileChange = (event) => {
+          const file = event.target.files[0];
+          setFileName(file ? file.name : "No file chosen");
+        };
 
 
     const totalPages = 10;
@@ -191,9 +197,9 @@ const Episodes = () => {
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
                                 <label className='V_label'>Audio file</label>
                                 <div class="custom-input-group mt-1 mt-md-2">
-                                    <input type="text" class="custom-text" placeholder="" readonly />
+                                    <input type="text" class="custom-text" placeholder="" value={fileName} readonly />
                                     <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input " />
+                                    <input type="file" id="fileInput" class="custom-file-input " onChange={handleFileChange} />
                                 </div>
                             </div>
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
@@ -213,7 +219,7 @@ const Episodes = () => {
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
                             <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel'onClick={() => setAddEpisodes(false)}>Clear</button>
+                            <button className='ds_sub_cancel'onClick={() => {setAddEpisodes(false); setFileName("No File Choosen")}}>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>
@@ -250,9 +256,9 @@ const Episodes = () => {
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
                                 <label className='V_label'>Audio file</label>
                                 <div class="custom-input-group mt-1 mt-md-2">
-                                    <input type="text" class="custom-text" placeholder="" readonly />
+                                <input type="text" class="custom-text" placeholder="" value={fileName} readonly />
                                     <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input " />
+                                    <input type="file" id="fileInput" class="custom-file-input " onChange={handleFileChange} />
                                 </div>
                             </div>
                             <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
@@ -272,7 +278,7 @@ const Episodes = () => {
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
                             <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel' onClick={() => setEditEpisodes(false)}>Clear</button>
+                            <button className='ds_sub_cancel' onClick={() => {setEditEpisodes(false); setFileName("No File Choosen")}}>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>

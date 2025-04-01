@@ -200,7 +200,7 @@ const Genre = () => {
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
                             <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel' onClick={() => setAddGenreModal(false)}>Clear</button>
+                            <button className='ds_sub_cancel' onClick={() => {setAddGenreModal(false); setFileName("No File Choosen")}}>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>
@@ -247,7 +247,7 @@ const Genre = () => {
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
                             <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel' onClick={() => setEditGenre(false)}>Clear</button>
+                            <button className='ds_sub_cancel' onClick={() => {setEditGenre(false); setFileName("No File Choosen")}}>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>

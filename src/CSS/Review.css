@@ -192,7 +192,7 @@ td {
     padding-top: 10px;
     padding-right: 20px;
     padding-bottom: 10px;
-    padding-left: 30px;
+    padding-left: 10px;
     gap: 10px;
     background: #171F28;
     color: white;
@@ -206,6 +206,7 @@ td {
     color: white;
     padding: 5px;
     outline: none;
+    width: 100%;
 }
 
 .custom-button {
@@ -292,6 +293,12 @@ td {
     .ds_sub_select1 {
         padding: 8px 15px;
     }
+    /* .custom-text {
+        width: 135px;
+    } */
+    /* .custom-text {
+        width: 100px;
+    } */
 }
 
 @media (max-width: 768px) and (min-width: 576px) {
@@ -312,6 +319,10 @@ td {
         width: 100px;
         height: 100px;
     }
+    /* .custom-text {
+        width: 85px;
+    } */
+
 }
 
 @media (max-width: 575px) and (min-width: 481px) {
@@ -327,6 +338,7 @@ td {
     .custom-input-group {
         height: 35px;
     }
+    
 }
 
 @media (max-width: 480px) and (min-width: 320px) {
@@ -359,4 +371,7 @@ td {
         font-size: 18px;
         font-weight: 600;
     }
+    /* .custom-text {
+        width: 155px;
+    } */
 }

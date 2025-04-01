@@ -193,7 +193,7 @@ const HomeCorousel = () => {
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
                             <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel' onClick={() => setAddHomeLabelCorouselModal(false)}>Clear</button>
+                            <button className='ds_sub_cancel' onClick={() => {setAddHomeLabelCorouselModal(false); setFileName("No File Choosen")}}>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>
@@ -236,7 +236,7 @@ const HomeCorousel = () => {
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
                             <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel'  onClick={() => setEditHomeLabelCorousel(false)}>Clear</button>
+                            <button className='ds_sub_cancel'  onClick={() => {setEditHomeLabelCorousel(false);  setFileName("No File Chosen")}}>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>

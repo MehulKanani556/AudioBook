@@ -5,7 +5,13 @@ import '../../CSS/Review.css';
 const EditAudiobooks = () => {
     const [toggle, setToggle] = useState(false);
     const [redioVal, setRedioVal] = useState("English");
-    const [subAdd, setSubAdd] = useState(false)
+    const [subAdd, setSubAdd] = useState(false);
+    const [fileName, setFileName] = useState("No file chosen");
+
+    const handleFileChange = (event) => {
+      const file = event.target.files[0];
+      setFileName(file ? file.name : "No file chosen");
+    };
 
     return (
         <>
@@ -35,9 +41,9 @@ const EditAudiobooks = () => {
                                         <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Sample File</label>
 
                                         <div class="custom-input-group ">
-                                            <input type="text" class="custom-text" placeholder="" readonly />
+                                            <input type="text" class="custom-text" placeholder="" value={fileName} readonly />
                                             <label for="fileInput" class="custom-button">CHOOSE</label>
-                                            <input type="file" id="fileInput" class="custom-file-input " />
+                                            <input type="file" id="fileInput" class="custom-file-input " onChange={handleFileChange} />
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +78,7 @@ const EditAudiobooks = () => {
                             <div className='mt-5 mb-3 pb-5 '>
                                 <div className='text-center'>
                                     <button className='ds_role_save'>Save</button>
-                                    <button className='ds_sub_cancel' onClick={() => setSubAdd(false)}>Clear</button>
+                                    <button className='ds_sub_cancel' onClick={() => {setSubAdd(false); setFileName("No File Choosen")}}>Clear</button>
                                 </div>
                             </div>
                         </div>
