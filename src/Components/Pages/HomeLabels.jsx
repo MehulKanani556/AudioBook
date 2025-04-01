@@ -179,7 +179,7 @@ const HomeLabels = () => {
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
                             <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel'>Clear</button>
+                            <button className='ds_sub_cancel' onClick={() => setAddHomeLabelsModal(false)}>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>
@@ -220,7 +220,7 @@ const HomeLabels = () => {
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
                             <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel'>Clear</button>
+                            <button className='ds_sub_cancel' onClick={() => setEditHomeLabelsModal(false)}>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>

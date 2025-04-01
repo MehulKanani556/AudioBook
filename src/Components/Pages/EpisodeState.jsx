@@ -195,7 +195,7 @@ const EpisodeState = () => {
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
                             <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel'>Clear</button>
+                            <button className='ds_sub_cancel'  onClick={() => setAddEpisodeStateModal(false)}>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>
@@ -242,7 +242,7 @@ const EpisodeState = () => {
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
                             <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel'>Clear</button>
+                            <button className='ds_sub_cancel' onClick={() => setEditEpisodeStateModal(false)}>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>

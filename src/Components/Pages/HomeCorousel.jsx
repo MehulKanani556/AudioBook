@@ -12,7 +12,12 @@ const HomeCorousel = () => {
     const [addHomeLabelCorouselModal, setAddHomeLabelCorouselModal] = useState(false);
     const [editHomeLabelCorousel, setEditHomeLabelCorousel] = useState(false);
     const [removeHomeCorousel, setRemoveHomeCorousel] = useState(false);
+    const [fileName, setFileName] = useState("No file chosen");
 
+    const handleFileChange = (event) => {
+      const file = event.target.files[0];
+      setFileName(file ? file.name : "No file chosen");
+    };
 
     const totalPages = 10;
     const [currentPage, setCurrentPage] = useState(1);
@@ -176,9 +181,9 @@ const HomeCorousel = () => {
                             <div className="col-12   pt-2 pt-md-3">
                                 <label className='V_label'>Image</label>
                                 <div class="custom-input-group">
-                                    <input type="text" class="custom-text" placeholder="" readonly />
+                                    <input type="text" class="custom-text" placeholder="" value={fileName} readonly />
                                     <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input" />
+                                    <input type="file" id="fileInput" class="custom-file-input " onChange={handleFileChange} />
                                 </div>
                             </div>
                         </div>
@@ -188,7 +193,7 @@ const HomeCorousel = () => {
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
                             <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel'>Clear</button>
+                            <button className='ds_sub_cancel' onClick={() => setAddHomeLabelCorouselModal(false)}>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>
@@ -221,9 +226,9 @@ const HomeCorousel = () => {
                             <div className="col-12   pt-2 pt-md-3">
                                 <label className='V_label'>Image</label>
                                 <div class="custom-input-group">
-                                    <input type="text" class="custom-text" placeholder="" readonly />
+                                    <input type="text" class="custom-text" placeholder="" value={fileName} readonly />
                                     <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input" />
+                                    <input type="file" id="fileInput" class="custom-file-input " onChange={handleFileChange} />
                                 </div>
                             </div>
                         </div>
@@ -231,7 +236,7 @@ const HomeCorousel = () => {
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
                             <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel'>Clear</button>
+                            <button className='ds_sub_cancel'  onClick={() => setEditHomeLabelCorousel(false)}>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>

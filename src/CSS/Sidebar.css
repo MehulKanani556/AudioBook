@@ -10,6 +10,7 @@
     /* height: 950px; */
     overflow-y: auto;
     min-width: 300px;
+    width: 100%;
 }
 
 .ds_side_bg::-webkit-scrollbar {

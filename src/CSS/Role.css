@@ -1,12 +1,12 @@
 .modal-backdrop{
     opacity: 0.8 !important;
 }
-#root {
-    width: 100vw;
-    min-height: 100vh;
-    height: 100%;
-    overflow: hidden;
-}
+    #root {
+        width: 100%;
+        min-height: 100vh;
+        height: 100%;
+        overflow: hidden;
+    }
 .ds_dash_master {
     width:calc(100vw - 300px);
 }
