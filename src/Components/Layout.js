@@ -18,7 +18,7 @@ const [offToggle, setOffToggle] = useState(false)
             </div>
             <div className='p-0 flex-fill w-100'>
               <Header setOffToggle={setOffToggle} />
-              <Outlet/>
+              <Outlet />
             </div>
           </div>
        </div>

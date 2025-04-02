@@ -13,25 +13,30 @@
     width: 100%;
 }
 
+
 .ds_side_bg::-webkit-scrollbar {
     width: 8px;
-  }
+}
   
-  .ds_side_bg::-webkit-scrollbar-track {
+  .ds_side_bg:hover::-webkit-scrollbar-track {
     background: #121a24;
     border-radius: 4px;
   }
   
-  .ds_side_bg::-webkit-scrollbar-thumb {
+  .ds_side_bg:hover::-webkit-scrollbar-thumb {
     background: #94a3b4;
     border-radius: 4px;
   }
   
-  .ds_side_bg::-webkit-scrollbar-thumb:hover {
+  .ds_side_bg:hover::-webkit-scrollbar-thumb:hover {
     background: #394857;
   }
 
+
   
+
+  
+
 
 .ds_active_color {
     position: relative;
