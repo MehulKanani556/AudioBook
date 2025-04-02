@@ -4,113 +4,99 @@
     background-size: cover;
     height: 100vh;
     width: 100%;
+    opacity: 0.9;
 }
 
-.modal-content {
-    background-color: #000000;
+
+.V_login_back2 {
+    background-image: url("../Images/Parth/login 2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    opacity: 0.9;
 }
 
-.V_sign_in_1_modal {
-    width: 70%;
+.V_back {
+    background: rgba(0, 0, 0, 1);
+    backdrop-filter: blur(33.60148620605469px)
 }
 
-.V_icon_1 {
-    width: 20px;
-    height: 20px;
-}
-
-.V_icon_2 {
-    width: 20px;
-    height: 20px;
-}
-.V_icon_3 {
-    width: 20px;
-    height: 20px;
-}
-
-.V_input_1 {
-    width: 70%;
-    padding: 12px 0px;
-    background: #111;
-    color: #fff;
-    font-size: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+.V_input {
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%);
+    width: 100%;
+    height: 44px;
     border-radius: 6px;
-    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.1),
-        0px 0px 15px rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(16.3px);
+    color: white;
+    border: 2px solid transparent;
+    /* Set transparent border */
+
+    border-image: radial-gradient(80.38% 222.5% at -13.75% -12.36%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%),
+        radial-gradient(80.69% 208.78% at 108.28% 112.58%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    border-image-slice: 1;
+    /* Ensures full coverage */
+}
+
+.V_input:focus-visible {
     outline: none;
-    transition: all 0.3s ease;
 }
 
-.V_input_1:focus-visible {
-    outline: none;
-}
 
-.V_password:focus-visible {
-    outline: none;
-    color: #FFFFFF;
-}
-
-.V_password {
-    color: #FFFFFF;
-}
-
-.V_submit_1 {
-    font-weight: 600;
-    font-size: 18px;
+.V_otp {
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%);
+    width: 8%;
+    height: 44px;
     border-radius: 6px;
+    color: white;
+    border: 2px solid transparent;
+    /* Set transparent border */
+
+    border-image: radial-gradient(80.38% 222.5% at -13.75% -12.36%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%),
+        radial-gradient(80.69% 208.78% at 108.28% 112.58%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    border-image-slice: 1;
+    /* Ensures full coverage */
 }
 
-.V_forgot_pwd {
+.V_otp:focus-visible {
+    outline: none;
+}
+
+.V_eye {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    font-size: 20px;
+}
+
+.V_signup_btn {
+    height: 44px;
+    background-color: white;
+    color: black;
+    width: 100%;
+    border: 0;
+    outline: 0;
     font-weight: 600;
-    font-size: 28px;
 }
 
-.V_sub_forgot {
+.V_forgot {
+    color: rgba(255, 0, 0, 1);
+}
+
+.V_P_class {
     font-weight: 400;
     font-size: 16px;
-    color: #C6C6C6;
-}
-
-.V_input_otp {
-    width: 7%;
-    padding: 12px 0px;
-    background: #111;
-    color: #fff;
-    font-size: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.1),
-        0px 0px 15px rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(16.3px);
-    outline: none;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-
-.V_sign_in_1_modal_otp {
-    width: 100%;
+    line-height: 100%;
+    letter-spacing: 0px;
+    color: rgba(198, 198, 198, 1);
 }
 
 .V_resend {
-    font-family: Inter;
-    font-weight: 400;
-    font-size: 16px;
-    color: #C6C6C6;
-}
-
-.V_resend_otp {
-    font-family: Inter;
     font-weight: 500;
     font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0px;
     color: #FFFFFF;
 }
-
-
-
-
-
 
 /* ================ media query ================ */
 
@@ -119,138 +105,44 @@
 
 @media (max-width: 1650px) and (min-width: 1441px) {}
 
-@media (max-width: 1440px) and (min-width: 1200px) {}
+@media (max-width: 1440px) and (min-width: 1200px) {
+    .V_otp {
+        width: 10%;
+        height: 44px;
+    }
+}
 
-@media (max-width: 1199px) and (min-width: 992px) {}
+@media (max-width: 1199px) and (min-width: 992px) {
+    .V_otp {
+        width: 12%;
+        height: 44px;
+    }
+}
 
 @media (max-width: 991px) and (min-width: 768px) {
-    .V_sign_in {
-        font-weight: 600;
-        font-size: 28px;
-    }
-
-    .V_sign_in_1_modal {
-        width: 80%;
-    }
-
-    .V_input_1 {
-        width: 80%;
-        padding: 13px 0px;
-    }
-
-    .V_submit_1 {
-        font-size: 18px;
-    }
-
-    .V_input_otp {
-        width: 10%;
-        padding: 12px 0px;
-    }
-    .V_forgot_pwd {
-        font-size: 24px;
-    }
-    
-    .V_sub_forgot {
-        font-size: 16px;
+    .V_otp {
+        width: 12%;
+        height: 44px;
     }
 }
 
 @media (max-width: 767px) and (min-width: 576px) {
-    .V_sign_in {
-        font-weight: 600;
-        font-size: 28px;
-    }
-
-    .V_sign_in_1_modal {
-        width: 80%;
-    }
-
-    .V_input_1 {
-        width: 80%;
-        padding: 10px 0px;
-    }
-
-    .V_submit_1 {
-        font-size: 16px;
-    }
-    .V_input_otp {
-        width: 10%;
-        padding: 12px 0px;
-    }
-    .V_forgot_pwd {
-        font-size: 24px;
-    }
-    
-    .V_sub_forgot {
-        font-size: 16px;
+    .V_otp {
+        width: 12%;
+        height: 44px;
     }
 }
 
 @media (max-width: 575px) and (min-width: 481px) {
-
-    /* .modal-content{
-        width: 90%;
-    } */
-    .V_sign_in {
-        font-weight: 600;
-        font-size: 28px;
-    }
-
-    .V_sign_in_1_modal {
-        width: 90%;
-    }
-
-    .V_input_1 {
-        width: 90%;
-        padding: 10px 0px;
-    }
-
-    .V_submit_1 {
-        font-size: 16px;
-    }
-
-    .V_input_otp {
-        width: 10%;
-        padding: 12px 0px;
-    }
-    .V_forgot_pwd {
-        font-size: 20px;
-    }
-    
-    .V_sub_forgot {
-        font-size: 16px;
+    .V_otp {
+        width: 12%;
+        height: 44px;
     }
 }
 
 @media (max-width: 480px) and (min-width: 320px) {
-    .V_sign_in {
-        font-weight: 600;
-        font-size: 28px;
-    }
-
-    .V_sign_in_1_modal {
-        width: 90%;
-    }
-
-    .V_input_1 {
-        width: 90%;
-        padding: 10px 0px;
-    }
-
-
-    .V_submit_1 {
-        font-size: 16px;
-    }
-
-    .V_input_otp {
-        width: 13%;
-        padding: 12px 0px;
-    }
-    .V_forgot_pwd {
-        font-size: 20px;
-    }
-    
-    .V_sub_forgot {
-        font-size: 16px;
+    .V_otp {
+        width: 18%;
+        height: 44px;
     }
 }

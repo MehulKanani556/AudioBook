@@ -1,300 +1,143 @@
 import React, { useRef, useState } from 'react';
 import '../CSS/login.css';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { useFormik } from 'formik';
-import * as Yup from "yup";
-import { PiEyeLight } from 'react-icons/pi';
-import { PiEyeSlash } from 'react-icons/pi';
+import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 
 const Login = () => {
-  const [modalShow, setModalShow] = useState(true);
-  const [modalShow1, setModalShow1] = useState(false);
-  const [modalShowOTP, setModalShowOTP] = useState(false);
-  const [modalShowPWD, setModalShowPWD] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConPassword, setShowConPassword] = useState(false);
-  const [values1, setValues1] = useState({ newPassword: "", confirmPassword: "" });
-  
 
-  const init = {
-    email: "",
-    password: ""
-  }
-
-  const validate = Yup.object({
-    email: Yup.string().email().required("Enter Email"),
-    password: Yup.string().required("Enter Password")
-  })
-
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
-    initialValues: init,
-    validationSchema: validate,
-    onSubmit: (values) => {
-      console.log(values)
-    }
-  })
+  const [toggle, setToggle] = useState(false);
+  const [toggle1, setToggle1] = useState(false);
+  const [toggle2, setToggle2] = useState(false)
+  const [inputType, setInputType] = useState("password");
+  const [inputType1, setInputType1] = useState("password");
+  const [pageToggle, setPageToggle] = useState("login");
 
 
-  const handleChange2 = (e) => {
-    setValues1({ ...values, [e.target.name]: e.target.value });
-  };
+  const [otp, setOtp] = useState(["", "", "", ""]); // Stores the OTP input values
+  const inputRefs = useRef([]); // Ref to manage input focus
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  }
-  const togglePasswordVisibility1 = () => {
-    setShowConPassword(!showConPassword);
-  }
-
-
-  const handleSubmit1 = (e) => {
-    e.preventDefault();
-  
-  };
-
-
-  const forgotPassword = () => {
-    setModalShow(false);
-    setModalShow1(true);
-  }
-
-  const handleOTP = () => {
-    setModalShow(false);
-    setModalShow1(false);
-    setModalShowOTP(true);
-  }
-
-
-  const resetPassword = () => {
-    setModalShow(false);
-    setModalShow1(false);
-    setModalShowOTP(false);
-    setModalShowPWD(true);
-  }
-
-
-  const otpLength = 4;
-  const [otp, setOtp] = useState(new Array(otpLength).fill(""));
-  const inputRefs = useRef([]);
-
-  const handleChange1 = (e, index) => {
-    const value = e.target.value;
-    if (!/^[0-9]?$/.test(value)) return;
+  // Handle input change and auto-move to next
+  const handleChange = (index, value) => {
+    if (!/^\d*$/.test(value)) return; // Allow only digits
 
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
 
-    if (value && index < otpLength - 1) {
-      inputRefs.current[index + 1]?.focus();
+    if (value && index < 3) {
+      inputRefs.current[index + 1].focus();
     }
   };
 
-  const handleKeyDown = (e, index) => {
+  // Handle backspace and move to previous input
+  const handleKeyDown = (index, e) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
-      inputRefs.current[index - 1]?.focus();
+      inputRefs.current[index - 1].focus();
     }
   };
 
-
-
+  // Clear OTP fields when "Resend" is clicked
+  const handleResend = () => {
+    setOtp(["", "", "", ""]);
+    inputRefs.current[0].focus(); // Focus back to the first input
+  };
 
   return (
     <>
-      <section className='V_login_back'>
 
-        
-        <div className='V_sign_in_1_modal'>
-          <Modal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            className='mb-0'
-          >
-            <div className="text-white">
-              <h1 className='text-center py-4 py-sm-5 V_sign_in'>Sign in</h1>
-              <form onSubmit={handleSubmit}>
-                <div className='text-center mb-4'>
-                  <input
-                    type="email"
-                    name='email'
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                    placeholder='Enter email'
-                    className='V_input_1  ps-2'
-                  />
-                  <div>{(errors.email && touched.email) && <span className='text-danger'>{errors.email}</span>}</div>
-                </div>
-                <div className='justify-content-between d-flex V_input_1 mx-auto'>
-                  <div>
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      name='password'
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.password}
-                      placeholder='Password'
-                      className='V_password  bg-transparent border-0 ps-2'
-                    />
-                  </div>
-                  <div className='text-end pe-3' onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
-                    {showPassword ?
-                      <PiEyeSlash className='V_icon_1' /> :
-                      <PiEyeLight className='V_icon_1' />
-                    }
-                  </div>
-                </div>
-                <div className='text-center'>{(errors.password && touched.password) && <span className='text-danger'>{errors.password}</span>}</div>
-                <p className="text-danger text-end mx-auto pt-2 V_sign_in_1_modal" onClick={forgotPassword}>Forgot Password?</p>
-                <div className='my-4 my-sm-5 text-center'>
-                  <button type="submit" className='py-2 V_submit_1 V_sign_in_1_modal'>Sign in</button>
-                </div>
-              </form>
+
+      <section className={`V_login_back ${pageToggle === "login" ? 'd-block' : 'd-none'}`}>
+        <div className="row justify-content-center align-items-center h-100">
+          <div className="col-xl-5 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
+            <h2 className=''>Sign in</h2>
+            <input type="text" placeholder='Enter email' className='V_input ps-4 mt-4 mt-sm-5 ' />
+            <div className='position-relative mt-4 mt-sm-5'>
+              <input type={inputType} placeholder='Password' className='V_input ps-4 ' />
+
+              {
+                toggle ? <IoIosEye className=' V_eye' onClick={() => { setToggle(false); setInputType("password") }} /> : <IoIosEyeOff className=' V_eye' onClick={() => { setToggle(true); setInputType("text") }} />
+              }
+
             </div>
-          </Modal>
+            <div className='text-end pt-2 V_forgot' onClick={() => { setPageToggle(true); setPageToggle("password") }}>Forgot Password? </div>
+            <button className='V_signup_btn mt-4 mt-sm-5'>
+              Sign In
+            </button>
+          </div>
         </div>
+      </section >
 
-
-
-
-
-        <Modal
-          show={modalShow1}
-          onHide={() => setModalShow1(false)}
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          className='mb-0'
-        >
-          <div className="text-white">
-            <h1 className='text-center pt-4 pt-sm-5 V_forgot_pwd'>Forgot Password</h1>
-            <p className='pb-4 pb-sm-5 text-center V_sub_forgot'>Enter your mail to change your password.</p>
-            <form onSubmit={handleSubmit}>
-              <div className='text-center mb-4'>
-                <input
-                  type="email"
-                  name='email'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                  placeholder='Enter email'
-                  className='V_input_1 ps-3'
-                />
-              </div>
-              <div className='my-4 my-sm-5 text-center'>
-                <button type="submit" className='py-2 V_submit_1 V_sign_in_1_modal' onClick={handleOTP}>Send OTP</button>
-              </div>
-            </form>
+      <section className={`V_login_back2 ${pageToggle === "password" ? 'd-block' : 'd-none'}`}>
+        <div className="row justify-content-center align-items-center h-100 ">
+          <div className="col-xl-5 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
+            <h2 className=''>Forgot Password</h2>
+            <p className="mt-3 V_P_class">Enter your mail to change your password.</p>
+            <input type="text" placeholder='Enter email' className='V_input ps-4 my-4 my-sm-5 ' />
+            <button className='V_signup_btn mt-4 mt-sm-5' onClick={() => { setPageToggle(true); setPageToggle("otp") }}>
+              Send OTP
+            </button>
           </div>
-        </Modal>
-
-
-
-
-        <Modal
-          show={modalShowOTP}
-          onHide={() => setModalShow1(false)}
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          className='my-3 my-md-5'
-        >
-          <div className="text-white">
-            <h1 className='text-center pt-4 pt-sm-5 V_forgot_pwd'>Email Verification</h1>
-            <p className='pb-4 pb-sm-5 text-center V_sub_forgot'>Code has been successfully sent to example@gmail.com</p>
-            <form onSubmit={handleSubmit}>
-              <div className='text-center mb-5'>
-                <div className='d-flex justify-content-between mx-auto'>
-                  <div className='V_sign_in_1_modal_otp '>
-                    {otp.map((digit, index) => (
-                      <input
-                        key={index}
-                        type="text"
-                        className="V_input_otp mx-2"
-                        maxLength="1"
-                        value={digit}
-                        onChange={(e) => handleChange1(e, index)}
-                        onKeyDown={(e) => handleKeyDown(e, index)}
-                        ref={(el) => (inputRefs.current[index] = el)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className='my-4 mt-sm-5 mb-sm-2 text-center'>
-                <button type="submit" className='py-2 V_submit_1 V_sign_in_1_modal' onClick={resetPassword}>Verify</button>
-              </div>
-              <p className='V_resend text-center mb-3 mb-sm-5' >Didn’t receive code? <span className='V_resend_otp'> Resend</span></p>
-            </form>
-          </div>
-        </Modal>
-
-
-
-
-        <Modal
-          show={modalShowPWD}
-          onHide={() => setModalShow(false)}
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          className='mb-0'
-        >
-          <div className="text-white">
-            <h1 className='text-center pt-4 pt-sm-5 V_sign_in'>Reset Password</h1>
-            <p className='pb-4 pb-sm-5 text-center V_sub_forgot'>Code has been successfully sent to example@gmail.com</p>
-            <form onSubmit={handleSubmit1}>
-              <div className='text-center mb-4'>
-                <div className='justify-content-between d-flex V_input_1 mx-auto'>
-                  <div>
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      name='newPassword'
-                      onChange={handleChange2}
-                      value={values1.newPassword}
-                      placeholder='Enter New Password'
-                      className='V_password  bg-transparent border-0 ps-2'
-                    />
-                  </div>
-                  <div className='text-end pe-3' onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
-                    {showPassword ?
-                      <PiEyeSlash className='V_icon_2' /> :
-                      <PiEyeLight className='V_icon_2' />
-                    }
-                  </div>
-                </div>
-              </div>
-              <div className='justify-content-between d-flex V_input_1 mx-auto'>
-                <div>
-                  <input
-                    type={showConPassword ? "text" : "password"}
-                    name='confirmPassword'
-                    onChange={handleChange2}
-                    value={values1.confirmPassword}
-                    placeholder='Confirm Password'
-                    className='V_password  bg-transparent border-0 ps-2'
-                  />
-                </div>
-                <div className='text-end pe-3' onClick={togglePasswordVisibility1} style={{ cursor: 'pointer' }}>
-                  {showConPassword ?
-                    <PiEyeSlash className='V_icon_1' /> :
-                    <PiEyeLight className='V_icon_1' />
-                  }
-                </div>
-              </div>
-              <div className='my-4 my-sm-5 text-center'>
-                <button type="submit" className='py-2 V_submit_1 V_sign_in_1_modal'>Reset Password</button>
-              </div>
-            </form>
-          </div>
-        </Modal>
-
-
+        </div>
       </section>
+
+      <section className={`V_login_back2 ${pageToggle === "otp" ? 'd-block' : 'd-none'}`}>
+        <div className="row justify-content-center align-items-center h-100 ">
+          <div className="col-xl-5 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
+            <h2 className=''>Email Verification</h2>
+            <p className="mt-3 V_P_class">Code has been successfully sent to example@gmail.com</p>
+            <div className="d-flex justify-content-center gap-3">
+              {otp.map((digit, index) => (
+                <input
+                  key={index}
+                  type="text"
+                  className="V_otp my-4 my-sm-5 text-center"
+                  maxLength="1"
+                  value={digit}
+                  onChange={(e) => handleChange(index, e.target.value)}
+                  onKeyDown={(e) => handleKeyDown(index, e)}
+                  ref={(el) => (inputRefs.current[index] = el)}
+                />
+              ))}
+            </div>
+            <button className='V_signup_btn mt-4 mt-sm-5' onClick={() => { setPageToggle(true); setPageToggle("reset") }}>
+              Verify
+            </button>
+            <p className="mt-3 V_P_class">Didn’t receive code?  <span className='V_resend' onClick={handleResend}>Resend</span></p>
+          </div>
+        </div>
+      </section>
+
+
+      <section className={`V_login_back2 ${pageToggle === "reset" ? 'd-block' : 'd-none'}`}>
+        <div className="row justify-content-center align-items-center h-100">
+          <div className="col-xl-5 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
+            <h2 className=''>Reset Password</h2>
+            <p className="mt-3">Reset your password here!</p>
+
+            <div className='position-relative mt-4 mt-sm-5'>
+              <input type={inputType1} placeholder='Password' className='V_input ps-4 ' />
+
+              {
+                toggle1 ? <IoIosEye className=' V_eye' onClick={() => { setToggle1(false); setInputType1("password") }} /> : <IoIosEyeOff className=' V_eye' onClick={() => { setToggle1(true); setInputType1("text") }} />
+              }
+
+            </div>
+            <div className='position-relative mt-4 mt-sm-5'>
+              <input type={inputType} placeholder='Password' className='V_input ps-4 ' />
+
+              {
+                toggle2 ? <IoIosEye className=' V_eye' onClick={() => { setToggle2(false); setInputType("password") }} /> : <IoIosEyeOff className=' V_eye' onClick={() => { setToggle2(true); setInputType("text") }} />
+              }
+
+            </div>
+            {/* <div className='text-end pt-2 V_forgot'>Forgot Password? </div> */}
+            <button className='V_signup_btn mt-5'>
+              Reset Password
+            </button>
+          </div>
+        </div>
+      </section >
+
+
     </>
   )
 }
