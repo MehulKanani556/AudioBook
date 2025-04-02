@@ -1,5 +1,5 @@
 .ds_coin_master thead tr th , td {
-    padding: 15px 0px;
+    padding: 15px 15px;
     text-align: center;
 }
 .ds_coin_master thead tr th{
@@ -24,7 +24,7 @@ input[type="time"]::-webkit-calendar-picker-indicator{
 
 @media (max-width:1024px) {
     .ds_coin_master {
-        min-width: 950px; 
+        min-width: 1070px; 
     }
 }
 

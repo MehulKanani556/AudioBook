@@ -169,7 +169,7 @@ const renderPagination = () => {
        </div>
 
        {/* ******************* Add Modal ************* */}
-       <Modal show={subAdd} onHide={()=> setSubAdd(false)}  size="lg" aria-labelledby="contained-modal-title-vcenter " className='text-light ds_sub_add_modal' centered>
+       <Modal show={subAdd} onHide={()=> setSubAdd(false)}  size="lg" aria-labelledby="contained-modal-title-vcenter ps-0" className='text-light ds_sub_add_modal' centered>
             <Modal.Header className='border-0 pb-0 w-100'>
               <Modal.Title id="contained-modal-title-vcenter" className='w-100'>
                   <div className='d-flex justify-content-between align-items-center w-100'>
@@ -211,15 +211,15 @@ const renderPagination = () => {
                         <div>
                             <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Status</label>
                             <div className='select-wrapper position-relative'>
-                               <div className='ds_sub_select' onClick={()=> setToggle(!toggle)}>{redioVal}</div>
+                               <div className='ds_sub_select ds_cursor' onClick={()=> setToggle(!toggle)}>{redioVal}</div>
                                  {toggle && (<div className='ds_sub_select_box'>
-                                               <div className="form-check mb-3" onClick={()=> {setRedioVal("Active"); setToggle(false)}}>
+                                               <div className="form-check mb-3 ds_cursor" onClick={()=> {setRedioVal("Active"); setToggle(false)}}>
                                                    <input className="form-check-input ds_sub_check" type="radio" name="exampleRadios" id="exampleRadios1" value="Active" checked={redioVal === "Active" && subCheck ? true : false} />
                                                    <label className="form-check-label" htmlFor="exampleRadios1">
                                                       Active
                                                    </label>
                                                  </div>
-                                                 <div className="form-check" onClick={()=> {setRedioVal("Block"); setToggle(false)}}>
+                                                 <div className="form-check ds_cursor" onClick={()=> {setRedioVal("Block"); setToggle(false)}}>
                                                    <input className="form-check-input ds_sub_check" type="radio" name="exampleRadios" id="exampleRadios2" value="Block" checked={redioVal === "Block" && subCheck ? true : false}/>
                                                    <label className="form-check-label" htmlFor="exampleRadios2">
                                                       Block

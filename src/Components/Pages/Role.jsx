@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../CSS/Role.css'
 import { Link } from 'react-router-dom'
 import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
-import { Button, Modal } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 
 const Role = () => {
   const totalPages = 10;
@@ -11,6 +11,7 @@ const Role = () => {
     const [add, setAdd] = useState(false)
     const [edit, setEdit] = useState(false)
     const [remove, setRemove] = useState(false)
+    const [local, setLocal] = useState(false)
 
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
@@ -79,6 +80,12 @@ const Role = () => {
         return pages;
     };
 
+    useEffect(()=>{
+       if(local){
+         localStorage.setItem("activeMenu" , "dashboard")
+        }
+    },[local])
+    
 
 
   return (
@@ -88,7 +95,7 @@ const Role = () => {
              <div className='d-flex justify-content-between align-items-center'>
                 <div>
                    <h4 className="text-light pt-4 mb-0">Role</h4>
-                   <p><Link to="/layout/dashboard"  className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Role</span></p>
+                   <p><Link to="/layout/dashboard" onClick={()=>{setLocal(true)}}  className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Role</span></p>
                 </div>
                 <div>
                   <button className='ds_role_btn' onClick={()=> setAdd(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>

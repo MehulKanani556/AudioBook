@@ -27,7 +27,7 @@
     border-radius: 5px;
 }
 .ds_role_table thead tr th , td {
-    padding: 15px 0px;
+    padding: 15px 15px;
     text-align: center;
 }
 .ds_role_table thead tr th{

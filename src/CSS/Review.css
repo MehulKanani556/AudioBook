@@ -88,7 +88,6 @@ td {
 }
 
 .V_label {
-    font-family: Inter;
     font-weight: 400;
     font-size: 16px;
     color: #C6C6C6E5;
@@ -135,14 +134,14 @@ td {
 }
 
 .V_label2 {
-    font-family: Inter;
+
     font-weight: 400;
     font-size: 18px;
     color: rgba(198, 198, 198, 1);
 }
 
 .V_label1 {
-    font-family: Inter;
+
     font-weight: 500;
     font-size: 20px;
     color: rgba(255, 255, 255, 1);
@@ -230,9 +229,8 @@ td {
     padding: 5px 15px;
 }
 
-.ds_cursor:hover{
+.ds_cursor{
     cursor: pointer;
-    background-color: rgb(214, 211, 211); 
 }
 
 /* ================ media query ================ */
