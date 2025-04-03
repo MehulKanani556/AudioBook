@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import '../CSS/login.css';
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
@@ -41,6 +42,9 @@ const Login = () => {
     inputRefs.current[0].focus(); // Focus back to the first input
   };
 
+
+
+  const navigate = useNavigate();
   return (
     <>
 
@@ -59,7 +63,7 @@ const Login = () => {
 
             </div>
             <div className='text-end pt-2 V_forgot' onClick={() => { setPageToggle(true); setPageToggle("password") }}>Forgot Password? </div>
-            <button className='V_signup_btn mt-4 mt-sm-5'>
+            <button className='V_signup_btn mt-4 mt-sm-5' onClick={() => navigate("/layout/dashboard")}>
               Sign In
             </button>
           </div>
