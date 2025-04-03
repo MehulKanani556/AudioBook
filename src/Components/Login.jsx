@@ -47,7 +47,7 @@ const Login = () => {
 
       <section className={`V_login_back ${pageToggle === "login" ? 'd-block' : 'd-none'}`}>
         <div className="row justify-content-center align-items-center h-100">
-          <div className="col-xl-5 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
+          <div className="col-xl-4 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
             <h2 className=''>Sign in</h2>
             <input type="text" placeholder='Enter email' className='V_input ps-4 mt-4 mt-sm-5 ' />
             <div className='position-relative mt-4 mt-sm-5'>
@@ -68,7 +68,7 @@ const Login = () => {
 
       <section className={`V_login_back2 ${pageToggle === "password" ? 'd-block' : 'd-none'}`}>
         <div className="row justify-content-center align-items-center h-100 ">
-          <div className="col-xl-5 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
+          <div className="col-xl-4 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
             <h2 className=''>Forgot Password</h2>
             <p className="mt-3 V_P_class">Enter your mail to change your password.</p>
             <input type="text" placeholder='Enter email' className='V_input ps-4 my-4 my-sm-5 ' />
@@ -81,7 +81,7 @@ const Login = () => {
 
       <section className={`V_login_back2 ${pageToggle === "otp" ? 'd-block' : 'd-none'}`}>
         <div className="row justify-content-center align-items-center h-100 ">
-          <div className="col-xl-5 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
+          <div className="col-xl-4 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
             <h2 className=''>Email Verification</h2>
             <p className="mt-3 V_P_class">Code has been successfully sent to example@gmail.com</p>
             <div className="d-flex justify-content-center gap-3">
@@ -89,7 +89,7 @@ const Login = () => {
                 <input
                   key={index}
                   type="text"
-                  className="V_otp my-4 my-sm-5 text-center"
+                  className="V_otp my-4 my-sm-4 text-center"
                   maxLength="1"
                   value={digit}
                   onChange={(e) => handleChange(index, e.target.value)}
@@ -109,7 +109,7 @@ const Login = () => {
 
       <section className={`V_login_back2 ${pageToggle === "reset" ? 'd-block' : 'd-none'}`}>
         <div className="row justify-content-center align-items-center h-100">
-          <div className="col-xl-5 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
+          <div className="col-xl-4 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
             <h2 className=''>Reset Password</h2>
             <p className="mt-3">Reset your password here!</p>
 
