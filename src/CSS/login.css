@@ -1,11 +1,12 @@
 .V_login_back {
-    background-image: url("../Images/login_background.png");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../Images/login_background.png");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
     width: 100%;
-    opacity: 0.9;
+    opacity: 1;
 }
+
 
 
 .V_login_back2 {
@@ -44,8 +45,8 @@
 
 .V_otp {
     background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%);
-    width: 8%;
-    height: 44px;
+    width: 10%;
+    height: 60px;
     border-radius: 6px;
     color: white;
     border: 2px solid transparent;
@@ -107,15 +108,15 @@
 
 @media (max-width: 1440px) and (min-width: 1200px) {
     .V_otp {
-        width: 10%;
-        height: 44px;
+        width: 12%;
+        height: 52px;
     }
 }
 
 @media (max-width: 1199px) and (min-width: 992px) {
     .V_otp {
-        width: 12%;
-        height: 44px;
+        width: 15%;
+        height: 46px;
     }
 }
 
@@ -140,9 +141,16 @@
     }
 }
 
-@media (max-width: 480px) and (min-width: 320px) {
+@media (max-width: 480px) and (min-width: 374px) {
     .V_otp {
-        width: 18%;
+        width: 16%;
         height: 44px;
+    }
+}
+
+@media (max-width:321px) {
+    .V_otp {
+        width: 16%;
+        height: 40px;
     }
 }
