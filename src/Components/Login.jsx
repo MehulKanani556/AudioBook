@@ -58,7 +58,7 @@ const Login = () => {
               <input type={inputType} placeholder='Password' className='V_input ps-4 ' />
 
               {
-                toggle ? <IoIosEye className=' V_eye' onClick={() => { setToggle(false); setInputType("password") }} /> : <IoIosEyeOff className=' V_eye' onClick={() => { setToggle(true); setInputType("text") }} />
+                toggle ? <IoIosEye className=' V_eye ds_cursor' onClick={() => { setToggle(false); setInputType("password") }} /> : <IoIosEyeOff className=' V_eye ds_cursor' onClick={() => { setToggle(true); setInputType("text") }} />
               }
 
             </div>
@@ -70,7 +70,7 @@ const Login = () => {
         </div>
       </section >
 
-      <section className={`V_login_back2 ${pageToggle === "password" ? 'd-block' : 'd-none'}`}>
+      <section className={`V_login_back2 ${pageToggle === "password" ? 'd-block ' : 'd-none'}`}>
         <div className="row justify-content-center align-items-center h-100 ">
           <div className="col-xl-4 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
             <h2 className=''>Forgot Password</h2>
@@ -93,7 +93,7 @@ const Login = () => {
                 <input
                   key={index}
                   type="text"
-                  className="V_otp my-4 my-sm-4 text-center"
+                  className="V_otp my-3 text-center"
                   maxLength="1"
                   value={digit}
                   onChange={(e) => handleChange(index, e.target.value)}
@@ -121,7 +121,7 @@ const Login = () => {
               <input type={inputType1} placeholder='Password' className='V_input ps-4 ' />
 
               {
-                toggle1 ? <IoIosEye className=' V_eye' onClick={() => { setToggle1(false); setInputType1("password") }} /> : <IoIosEyeOff className=' V_eye' onClick={() => { setToggle1(true); setInputType1("text") }} />
+                toggle1 ? <IoIosEye className=' V_eye ds_cursor' onClick={() => { setToggle1(false); setInputType1("password") }} /> : <IoIosEyeOff className=' V_eye ds_cursor' onClick={() => { setToggle1(true); setInputType1("text") }} />
               }
 
             </div>
@@ -129,7 +129,7 @@ const Login = () => {
               <input type={inputType} placeholder='Password' className='V_input ps-4 ' />
 
               {
-                toggle2 ? <IoIosEye className=' V_eye' onClick={() => { setToggle2(false); setInputType("password") }} /> : <IoIosEyeOff className=' V_eye' onClick={() => { setToggle2(true); setInputType("text") }} />
+                toggle2 ? <IoIosEye className=' V_eye ds_cursor' onClick={() => { setToggle2(false); setInputType("password") }} /> : <IoIosEyeOff className=' V_eye ds_cursor' onClick={() => { setToggle2(true); setInputType("text") }} />
               }
 
             </div>
