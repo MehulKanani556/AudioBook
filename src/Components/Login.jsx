@@ -62,7 +62,7 @@ const Login = () => {
               }
 
             </div>
-            <div className='text-end pt-2 V_forgot' onClick={() => { setPageToggle(true); setPageToggle("password") }}>Forgot Password? </div>
+            <div className='text-end pt-2 V_forgot ds_cursor' onClick={() => { setPageToggle(true); setPageToggle("password") }}>Forgot Password? </div>
             <button className='V_signup_btn mt-4 mt-sm-5' onClick={() => navigate("/layout/dashboard")}>
               Sign In
             </button>
