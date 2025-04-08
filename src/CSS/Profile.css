@@ -1,0 +1,56 @@
+.ds_profile_inner{
+    background: rgba(23, 31, 40, 0.5);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.ds_profile_box{
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%);
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+.ds_profile_img_btn{
+    background-color: white;
+    border: 1px solid white;
+    height: 35px;
+    width: 140px;
+    border-radius: 4px;
+}
+.ds_profile_img_btn:hover{
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%);
+    color: white;
+    border:1px solid transparent;
+}
+.ds_profile_text{
+    font-size: 13px;
+}
+.ds_profile_input{
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%);
+    color: white;
+    border: 0.41px solid transparent;
+
+border-image-source: radial-gradient(80.38% 222.5% at -13.75% -12.36%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+radial-gradient(80.69% 208.78% at 108.28% 112.58%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+padding: 8px 15px;
+  border-radius: 4px;
+}
+.ds_profile_input:focus{
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%);
+    border-color: inherit;
+    box-shadow: none;
+    color: white;
+    border: 0.41px solid transparent;
+
+}
+
+
+@media (max-width:426px) {
+    .ds_profile_box{
+        width: 70px;
+        height: 70px;
+    }
+    .ds_profile_img_btn{
+        width: 120px;
+    }
+}

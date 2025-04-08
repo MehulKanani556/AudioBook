@@ -5,12 +5,25 @@ import bell from '../Images/dhruvin/bell.svg'
 import profile from '../Images/dhruvin/Profile.svg'
 import cancel from '../Images/dhruvin/cancel.svg'
 import noti from '../Images/dhruvin/notification.png'
-
+import pen from '../Images/dhruvin/white_pen.svg'
+import lock from '../Images/dhruvin/lock.svg'
+import logout from '../Images/dhruvin/log_out.svg'
+import { Modal } from 'react-bootstrap'
+import '../CSS/Header.css'
+import { IoIosEye, IoIosEyeOff } from 'react-icons/io'
+import { useNavigate } from 'react-router-dom'
 
 
 const Header = ({setOffToggle}) => {
 
 const [toggle, setToggle] = useState(false)   
+const [profileToggle, setProfileToggle] = useState(false)
+const [passwordToggle, setPasswordToggle] = useState(false)
+const [passwordText, setPasswordText] = useState("password")
+const [passwordText2, setPasswordText2] = useState("password")
+const [passwordText3, setPasswordText3] = useState("password")
+const [logOut, setLogOut] = useState(false)
+const navigate = useNavigate()
 
   return (
     <div>
@@ -29,10 +42,10 @@ const [toggle, setToggle] = useState(false)
              </div>
              <div className='d-flex align-items-center mt-2 position-relative'>
                 <div className='ds_noti_bell'>
-                   <img src={bell} alt="" className='ds_cursor ds_noti_img' onClick={()=> setToggle(true)} />
+                   <img src={bell} alt="" className='ds_cursor ds_noti_img' onClick={()=> {setToggle(true); setProfileToggle(false)}} />
                 </div>
                 <div className='ds_noti_bell'>
-                   <img src={profile} alt="" className='ds_profile_img' />
+                   <img src={profile} alt="" className='ds_profile_img ds_cursor' onClick={()=> {setProfileToggle(!profileToggle); setToggle(false)}} />
                 </div>
                 <div className='d-md-none d-block'>
                   <i className="fa-solid fa-bars text-light fs-4 me-sm-3 me-2" onClick={()=> setOffToggle(true)}></i>
@@ -82,9 +95,76 @@ const [toggle, setToggle] = useState(false)
                      </div>
                    </div>
                 </div>}
+
+                {profileToggle &&  <div className='ds_profile'>
+                   <div className='p-3'>
+                       <div className='d-flex align-items-center ds_cursor' onClick={()=> navigate("/layout/profile")}>
+                           <img src={pen} alt="" className='me-3 align-self-baseline mt-1' />
+                           <p className='text-light'>Edit Profile</p>
+                       </div>
+                       <div className='d-flex align-items-center ds_cursor' onClick={()=> setPasswordToggle(true)}>
+                           <img src={lock} alt="" className='me-3 align-self-baseline mt-1' />
+                           <p className='text-light'>Change Password</p>
+                       </div>
+                       <div className='d-flex align-items-center ds_cursor' onClick={()=> setLogOut(true)}>
+                           <img src={logout} alt="" className='me-3 align-self-baseline mt-1' />
+                           <p className='text-light mb-0'>Logout</p>
+                       </div>
+                   </div>
+                </div>}
+               
              </div>
              
           </div>
+
+          {/* *************** Forgot Password ************** */}
+          <Modal  show={passwordToggle} className='ds_head_modal' onHide={()=> setPasswordToggle(false)} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
+               <Modal.Body className='ds_header_password p-4'>
+                 <div className='px-3 pt-3 pb-3'>
+                    <h5 className='text-center text-white'>Change Password</h5>
+                    <div className='mt-4 pt-2'>
+                       <div>
+                         <div className='position-relative'>
+                          <input type={passwordText} className='ds_profile_input w-100 py-2' placeholder='Old Password' />
+                           {passwordText === "password" ? <IoIosEyeOff onClick={()=> setPasswordText("text")} className='text-light ds_head_eye ds_cursor'/> : <IoIosEye onClick={()=> setPasswordText("password")} className='text-light ds_head_eye ds_cursor'/>}
+                         </div>
+                       </div>
+
+                       <div className='mt-4'>
+                         <div className='position-relative'>
+                          <input type={passwordText2} className='ds_profile_input w-100 py-2' placeholder='Enter New Password' />
+                          {passwordText2 === "password" ? <IoIosEyeOff onClick={()=> setPasswordText2("text")} className='text-light ds_head_eye ds_cursor'/> : <IoIosEye onClick={()=> setPasswordText2("password")} className='text-light ds_head_eye ds_cursor'/>}
+                         </div>
+                       </div>
+
+                       <div className='mt-4'>
+                         <div className='position-relative'>
+                          <input type={passwordText3} className='ds_profile_input w-100 py-2' placeholder='Enter New Password' />
+                          {passwordText3 === "password" ? <IoIosEyeOff onClick={()=> setPasswordText3("text")} className='text-light ds_head_eye ds_cursor'/> : <IoIosEye onClick={()=> setPasswordText3("password")} className='text-light ds_head_eye ds_cursor'/>}
+                         </div>
+                       </div>
+
+                       <div className='mt-5 pt-1 mb-3'>
+                         <button className='ds_role_btn w-100'>Reset Password</button>
+                       </div>
+                    </div>
+                 </div>
+               </Modal.Body>
+         </Modal>
+
+         {/* *************** Forgot Password ************** */}
+         <Modal show={logOut} className='ds_head_modal' onHide={()=> setLogOut(false)} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
+               <Modal.Body className='ds_header_password py-5 px-3'>
+                 <div>
+                    <h5 className='text-center text-white'>Logout</h5>
+                    <p className='text-center' style={{color: 'rgba(198, 198, 198, 1)'}}>Are you sure you want to Logout?</p>
+                    <div className='text-center mt-5 mb-2'>
+                       <button className='ds_role_cancel me-4' onClick={()=> setLogOut(false)}>Cancel</button>
+                       <button className='ds_log_yes'>Yes</button>
+                    </div>
+                 </div>
+               </Modal.Body>
+         </Modal>
       </div>
     </div>
   )

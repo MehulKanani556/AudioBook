@@ -35,6 +35,7 @@ import EditCoinMaster from "./Components/Pages/EditCoinMaster";
 import UserMaster from "./Components/Pages/UserMaster";
 import AddUserMaster from "./Components/Pages/AddUserMaster";
 import EditUserMaster from "./Components/Pages/EditUserMaster";
+import EditProfile from "./Components/Pages/EditProfile";
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/layout" element={<Layout />} >
            <Route path="dashboard" element={<Dashboard/>} />
+           <Route path="profile" element={<EditProfile/>} />
            <Route path="role" element={<Role/>} />   
            <Route path="subscription" element={<Subscription/>} />   
            <Route path="coinlabel" element={<CoinLabel/>} />   

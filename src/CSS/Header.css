@@ -35,6 +35,16 @@
     width: 400px;
     background: rgba(12, 17, 24, 1);
     box-shadow: 0px 4px 16px 0px rgba(105, 105, 105, 0.1);
+    z-index: 1;
+}
+.ds_profile{
+    position: absolute;
+    top: 50px;
+    left: -130px;
+    width: 215px;
+    background: rgba(12, 17, 24, 1);
+    box-shadow: 0px 4px 16px 0px rgba(105, 105, 105, 0.1);
+    z-index: 1;
 }
 .ds_border{
     background: rgba(106, 106, 106, 1);
@@ -56,10 +66,30 @@
 .ds_noti_bell{
     margin-right: 20px;
 }
-.ds_role_link:hover{
-    
+.ds_header_password{
+    background: rgba(12, 17, 24, 1);
 }
-
+.ds_head_eye{
+    position: absolute;
+    top: 14px;
+    right: 10px;
+}
+.ds_head_modal .modal-dialog{
+    max-width: 560px;
+}
+.ds_log_yes{
+    background: rgba(255, 255, 255, 1);
+    padding: 10px 55px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-right: 20px;
+}
+.ds_log_yes:hover{
+    background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0447917) 77.08%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    color: white; 
+}
 
 @media (max-width:1441px) {
     .ds_header_main{
@@ -101,6 +131,9 @@
         left: -162px;
         width: 300px;
     }
+    .ds_profile{
+        left: -85px;
+    }
     .ds_header_input{
        width: 300px;
     }
@@ -115,6 +148,11 @@
         left: -167px;
         width: 300px;
     }
+    .ds_head_modal .modal-dialog{
+        max-width: 400px;
+        margin: auto;
+    }
+    
 }
 
 @media (max-width:426px) {
@@ -122,6 +160,12 @@
         top: 50px;
         left: -222px;
         width: 300px;
+    }
+    .ds_head_modal .modal-dialog{
+        max-width: 350px;
+    }
+    .ds_log_yes{
+       padding: 8px 30px;
     }
 }
 
@@ -143,6 +187,13 @@
         left: -222px;
         width: 300px;
     }
+    .ds_profile{
+        left: -105px;
+        width: 200px;
+    }
+    .ds_head_modal .modal-dialog{
+        max-width: 330px;
+    }
 }
 
 @media (max-width:321px) {
@@ -153,5 +204,8 @@
     }
     .ds_head_logo{
          font-size: 21px;
+    }
+    .ds_head_modal .modal-dialog{
+        max-width: 300px;
     }
 }

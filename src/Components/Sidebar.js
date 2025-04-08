@@ -60,7 +60,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
            <div>
               <h3 className='text-light text-center pt-3'>LOGO</h3>
               <div className='mt-5'>
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/dashboard" ? 'ds_active_color' : '' }  `} onClick={() => {navigate('/layout/dashboard'); setColor("dashboard")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/layout/dashboard" || color === "/layout/profile" ? 'ds_active_color' : '' }  `} onClick={() => {navigate('/layout/dashboard'); setColor("dashboard")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={dashboard} className="ds_side_icon" />
@@ -277,7 +277,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
          </Offcanvas.Header>
          <Offcanvas.Body>
          <div className='mt-2' ref={offcanvasRef}>
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/dashboard" ? 'ds_active_color' : '' }  `} onClick={() => {navigate('/layout/dashboard'); setColor("dashboard"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/layout/dashboard" || color === "/layout/profile" ? 'ds_active_color' : '' }  `} onClick={() => {navigate('/layout/dashboard'); setColor("dashboard"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={dashboard} className="ds_side_icon" />
