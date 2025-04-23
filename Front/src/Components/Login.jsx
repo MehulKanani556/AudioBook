@@ -59,8 +59,7 @@ const Login = () => {
     validationSchema:LoginSchema,
     onSubmit:(values)=>{
         dispatch(LoginAdmin(values))
-          navigate("/layout/dashboard")
-      
+        navigate("/layout/dashboard")      
     }
   })
 

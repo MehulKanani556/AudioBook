@@ -37,20 +37,12 @@ import AddUserMaster from "./Components/Pages/AddUserMaster";
 import EditUserMaster from "./Components/Pages/EditUserMaster";
 import EditProfile from "./Components/Pages/EditProfile";
 
-// 🔐 Private Route Wrapper
-const PrivateRoute = () => {
-  const token = localStorage.getItem("token");
-  return token ? <Outlet /> : <Navigate to="/" />;
-};
 
 const App = () => {
   return (
     <Routes>
-      {/* Public Route */}
-      <Route path="/" element={<Login />} />
 
-      {/* Protected Routes */}
-      <Route element={<PrivateRoute />}>
+      <Route path="/" element={<Login />} />
         <Route path="/layout" element={<Layout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<EditProfile />} />
@@ -86,7 +78,6 @@ const App = () => {
           <Route path="editsubscriptionsell" element={<EditSubscriptionSell />} />
           <Route path="addsubscriptionsell" element={<AddSubscriptionSell />} />
         </Route>
-      </Route>
     </Routes>
   );
 };
