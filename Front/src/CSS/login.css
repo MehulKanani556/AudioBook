@@ -78,6 +78,9 @@
     outline: 0;
     font-weight: 600;
 }
+.V_signup_btn:hover{
+    background-color: #f0f0f0;
+}
 
 .V_forgot {
     color: rgba(255, 0, 0, 1);

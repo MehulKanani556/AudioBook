@@ -22,12 +22,36 @@ export const LoginAdmin = createAsyncThunk(
       
     } catch (error) {
       console.error("LoginAdmin Error:", error.message);
+      alert("Login" , error.message)
       return rejectWithValue(
         error.response?.data || { message: "Unexpected error occurred" }
       );
     }
   }
 );
+
+export const ForgotPass = createAsyncThunk(
+  "ForgetPass",
+  async (forgetPassData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/forgotPassword`,
+        {
+          email:forgetPassData?.forgetPassVal
+        }
+      );
+      console.log("ForgetPass" , response);
+      return response.data.data
+    } catch (error) {
+      console.error("ForgetPass Error:", error.message);
+      alert("ForgetPass" , error.message)
+      return rejectWithValue(
+        error.response?.data || { message: "Unexpected error occurred" }
+      );
+    }
+  }
+);
+
 
 const loginAdminSlice = createSlice({
   name: "login",
@@ -49,13 +73,29 @@ const loginAdminSlice = createSlice({
       .addCase(LoginAdmin.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.login = action.payload;
+        // state.login = action.payload;
         state.message = "Login SuccessFully";
       })
       .addCase(LoginAdmin.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.message = action.payload?.message || "Failed To Login";
+      })
+
+      .addCase(ForgotPass.pending, (state) => {
+        state.loading = true;
+        state.message = "ForgetPassword Login Admin...";
+      })
+      .addCase(ForgotPass.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        // state.login = action.payload;
+        state.message = "ForgetPassword SuccessFully";
+      })
+      .addCase(ForgotPass.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = action.payload?.message || "Failed To ForgetPassword";
       });
   },
 });
