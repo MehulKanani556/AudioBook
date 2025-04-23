@@ -6,7 +6,6 @@ export const LoginAdmin = createAsyncThunk(
   "LoginAdmin",
   async (loginData, { rejectWithValue }) => {
     try {
-      alert()
       const response = await axios.post(
         `${API_URL}/adminLogin`,
         {
@@ -14,8 +13,13 @@ export const LoginAdmin = createAsyncThunk(
           password:loginData.password
         }
       );
-      localStorage.setItem("Token" , response?.data?.token)
+      console.log("Resposnse" , response);
+      
+      localStorage.setItem("token" , response?.data?.token)
+      localStorage.setItem("adminId" , response?.data?.data?._id)
+      alert("SignUp SuccessFully")
       return response.data.data
+      
     } catch (error) {
       console.error("LoginAdmin Error:", error.message);
       return rejectWithValue(

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../CSS/login.css';
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,7 @@ const Login = () => {
   const [pageToggle, setPageToggle] = useState("login");
   const dispatch = useDispatch()
   const navigate = useNavigate();
+  const token = localStorage.getItem("token")
  
 
   const [otp, setOtp] = useState(["", "", "", ""]); // Stores the OTP input values
@@ -58,6 +59,8 @@ const Login = () => {
     validationSchema:LoginSchema,
     onSubmit:(values)=>{
         dispatch(LoginAdmin(values))
+          navigate("/layout/dashboard")
+      
     }
   })
 
