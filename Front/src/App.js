@@ -37,47 +37,58 @@ import AddUserMaster from "./Components/Pages/AddUserMaster";
 import EditUserMaster from "./Components/Pages/EditUserMaster";
 import EditProfile from "./Components/Pages/EditProfile";
 
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
 
+  if (!token) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
 const App = () => {
   return (
     <Routes>
 
       <Route path="/" element={<Login />} />
-        <Route path="/layout" element={<Layout />}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="profile" element={<EditProfile />} />
-          <Route path="role" element={<Role />} />
-          <Route path="subscription" element={<Subscription />} />
-          <Route path="coinlabel" element={<CoinLabel />} />
-          <Route path="coinmaster" element={<CoinMaster />} />
-          <Route path="addcoinmaster" element={<AddCoinMaster />} />
-          <Route path="editcoinmaster" element={<EditCoinMaster />} />
-          <Route path="usermaster" element={<UserMaster />} />
-          <Route path="addusermaster" element={<AddUserMaster />} />
-          <Route path="editusermaster" element={<EditUserMaster />} />
-          <Route path="review" element={<Review />} />
-          <Route path="homelabeljoin" element={<HomeLabelJoin />} />
-          <Route path="homelabels" element={<HomeLabels />} />
-          <Route path="homecorousel" element={<HomeCorousel />} />
-          <Route path="playlistsongs" element={<PlaylistSongs />} />
-          <Route path="playlistmaster" element={<PlaylistMaster />} />
-          <Route path="episodestate" element={<EpisodeState />} />
-          <Route path="episodeunlock" element={<EpisodeUnlock />} />
-          <Route path="episodes" element={<Episodes />} />
-          <Route path="castcrew" element={<CastCrew />} />
-          <Route path="audiobooks" element={<AudioBook />} />
-          <Route path="addaudiobook" element={<AddAudioBook />} />
-          <Route path="editaudiobook" element={<EditAudiobooks />} />
-          <Route path="genre" element={<Genre />} />
-          <Route path="voucherused" element={<VoucherUsed />} />
-          <Route path="voucher" element={<Voucher />} />
-          <Route path="addvouchers" element={<AddVoucher />} />
-          <Route path="editvouchers" element={<EditVoucher />} />
-          <Route path="coinsell" element={<CoinSell />} />
-          <Route path="subscriptionsell" element={<SubscriptionSell />} />
-          <Route path="editsubscriptionsell" element={<EditSubscriptionSell />} />
-          <Route path="addsubscriptionsell" element={<AddSubscriptionSell />} />
-        </Route>
+      <Route path="/layout" element={
+        <ProtectedRoute>
+          <Layout />
+        </ProtectedRoute>
+      }>
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="profile" element={<EditProfile />} />
+        <Route path="role" element={<Role />} />
+        <Route path="subscription" element={<Subscription />} />
+        <Route path="coinlabel" element={<CoinLabel />} />
+        <Route path="coinmaster" element={<CoinMaster />} />
+        <Route path="addcoinmaster" element={<AddCoinMaster />} />
+        <Route path="editcoinmaster" element={<EditCoinMaster />} />
+        <Route path="usermaster" element={<UserMaster />} />
+        <Route path="addusermaster" element={<AddUserMaster />} />
+        <Route path="editusermaster" element={<EditUserMaster />} />
+        <Route path="review" element={<Review />} />
+        <Route path="homelabeljoin" element={<HomeLabelJoin />} />
+        <Route path="homelabels" element={<HomeLabels />} />
+        <Route path="homecorousel" element={<HomeCorousel />} />
+        <Route path="playlistsongs" element={<PlaylistSongs />} />
+        <Route path="playlistmaster" element={<PlaylistMaster />} />
+        <Route path="episodestate" element={<EpisodeState />} />
+        <Route path="episodeunlock" element={<EpisodeUnlock />} />
+        <Route path="episodes" element={<Episodes />} />
+        <Route path="castcrew" element={<CastCrew />} />
+        <Route path="audiobooks" element={<AudioBook />} />
+        <Route path="addaudiobook" element={<AddAudioBook />} />
+        <Route path="editaudiobook" element={<EditAudiobooks />} />
+        <Route path="genre" element={<Genre />} />
+        <Route path="voucherused" element={<VoucherUsed />} />
+        <Route path="voucher" element={<Voucher />} />
+        <Route path="addvouchers" element={<AddVoucher />} />
+        <Route path="editvouchers" element={<EditVoucher />} />
+        <Route path="coinsell" element={<CoinSell />} />
+        <Route path="subscriptionsell" element={<SubscriptionSell />} />
+        <Route path="editsubscriptionsell" element={<EditSubscriptionSell />} />
+        <Route path="addsubscriptionsell" element={<AddSubscriptionSell />} />
+      </Route>
     </Routes>
   );
 };
