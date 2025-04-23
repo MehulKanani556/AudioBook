@@ -3,6 +3,6 @@ import loginReducer from './Slices/LoginSlices'
 
 export const store = configureStore({
   reducer: {
-    counter: loginReducer,
+    login: loginReducer,
   },
 })

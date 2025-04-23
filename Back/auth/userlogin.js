@@ -6,7 +6,7 @@ const nodemailer = require('nodemailer')
 exports.adminLogin = async (req, res) => {
     try {
         let { email, password } = req.body;
-
+        
         let checkEmailIsExist = await user.findOne({ email });
 
         if (!checkEmailIsExist) {

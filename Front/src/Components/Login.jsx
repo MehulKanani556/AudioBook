@@ -2,6 +2,10 @@ import React, { useRef, useState } from 'react';
 import '../CSS/login.css';
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import { useFormik } from 'formik';
+import { LoginSchema } from './Formik';
+import { LoginAdmin } from '../Toolkit/Slices/LoginSlices';
 
 const Login = () => {
 
@@ -11,12 +15,14 @@ const Login = () => {
   const [inputType, setInputType] = useState("password");
   const [inputType1, setInputType1] = useState("password");
   const [pageToggle, setPageToggle] = useState("login");
-
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+ 
 
   const [otp, setOtp] = useState(["", "", "", ""]); // Stores the OTP input values
   const inputRefs = useRef([]); // Ref to manage input focus
 
-  // Handle input change and auto-move to next
+
   const handleChange = (index, value) => {
     if (!/^\d*$/.test(value)) return; // Allow only digits
 
@@ -42,9 +48,20 @@ const Login = () => {
     inputRefs.current[0].focus(); // Focus back to the first input
   };
 
+  const Values = {
+    email:"",
+    password:""
+  }
+
+  const LoginFromik = useFormik({
+    initialValues:Values,
+    validationSchema:LoginSchema,
+    onSubmit:(values)=>{
+        dispatch(LoginAdmin(values))
+    }
+  })
 
 
-  const navigate = useNavigate();
   return (
     <>
 
@@ -52,20 +69,24 @@ const Login = () => {
       <section className={`V_login_back ${pageToggle === "login" ? 'd-block' : 'd-none'}`}>
         <div className="row justify-content-center align-items-center h-100">
           <div className="col-xl-4 col-lg-5 col-md-7 col-10 text-white V_back text-center p-sm-5 p-4">
-            <h2 className=''>Sign in</h2>
-            <input type="text" placeholder='Enter email' className='V_input ps-4 mt-4 mt-sm-5 ' />
-            <div className='position-relative mt-4 mt-sm-5'>
-              <input type={inputType} placeholder='Password' className='V_input ps-4 ' />
-
-              {
-                toggle ? <IoIosEye className=' V_eye ds_cursor' onClick={() => { setToggle(false); setInputType("password") }} /> : <IoIosEyeOff className=' V_eye ds_cursor' onClick={() => { setToggle(true); setInputType("text") }} />
-              }
-
-            </div>
-            <div className='text-end pt-2 V_forgot ds_cursor' onClick={() => { setPageToggle(true); setPageToggle("password") }}>Forgot Password? </div>
-            <button className='V_signup_btn mt-4 mt-sm-5' onClick={() => navigate("/layout/dashboard")}>
-              Sign In
-            </button>
+            <form onSubmit={LoginFromik.handleSubmit}>
+                <h2 className=''>Sign in</h2>
+                <input type="text" name='email' value={LoginFromik.values.email} onChange={LoginFromik.handleChange} onBlur={LoginFromik.handleBlur} placeholder='Enter email' className='V_input ps-4 mt-4 mt-sm-5 ' />
+                <p className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{LoginFromik.errors.email}</p>
+                <div className='position-relative mt-4 mt-sm-5'>
+                  <input type={inputType} name='password' value={LoginFromik.values.password} onChange={LoginFromik.handleChange} onBlur={LoginFromik.handleBlur} placeholder='Password' className='V_input ps-4 ' />
+                  <p className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{LoginFromik.errors.password}</p>
+    
+                  {
+                    toggle ? <IoIosEye className=' V_eye ds_cursor' onClick={() => { setToggle(false); setInputType("password") }} /> : <IoIosEyeOff className=' V_eye ds_cursor' onClick={() => { setToggle(true); setInputType("text") }} />
+                  }
+    
+                </div>
+                <div className='text-end pt-2 V_forgot ds_cursor' onClick={() => { setPageToggle(true); setPageToggle("password") }}>Forgot Password? </div>
+                <button type='submit' className='V_signup_btn mt-4 mt-sm-5'>
+                  Sign In
+                </button>
+            </form>
           </div>
         </div>
       </section >
