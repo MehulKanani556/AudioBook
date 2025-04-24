@@ -2,13 +2,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 const API_URL = "http://localhost:4000/api";
 
-export const getSingleAdmin = createAsyncThunk(
-  "getAdmin",
+export const getAllSubscriptionData = createAsyncThunk(
+  "getSubscription",
   async (_, { rejectWithValue }) => {
-    const getAdminId = localStorage.getItem("adminId");
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.get(`${API_URL}/getUser/${getAdminId}`, {
+      const response = await axios.get(`${API_URL}/allSubScription`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -23,35 +22,19 @@ export const getSingleAdmin = createAsyncThunk(
   }
 );
 
-export const editProfileAdmin = createAsyncThunk(
-  "EditProfile-Admin",
-  async (adminUpdate, { rejectWithValue }) => {
-    const editProfileId = localStorage.getItem("adminId");
+export const singleSubscriptionData = createAsyncThunk(
+  "getSingleSubscription",
+  async (subscriptionId, { rejectWithValue }) => {
     const token = localStorage.getItem("token");
-
-    const formData = new FormData();
-    formData.append("firstName", adminUpdate.firstName);
-    formData.append("lastName", adminUpdate.lastName);
-    formData.append("email", adminUpdate.email);
-    formData.append("mobileNo", adminUpdate.mobileNo);
-
-    if (adminUpdate.image instanceof File) {
-      formData.append("image", adminUpdate.image);
-    } else {
-      formData.append("image", adminUpdate.image);
-    }
     try {
-      const response = await axios.put(
-        `${API_URL}/updateUser/${editProfileId}`,
-        formData,
+      const response = await axios.get(
+        `${API_URL}/getSubScription/${subscriptionId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
           },
         }
       );
-      console.log("Resposnse", editProfileId);
       return response.data.data;
     } catch (error) {
       console.error("LoginAdmin Error:", error.message);
@@ -62,18 +45,20 @@ export const editProfileAdmin = createAsyncThunk(
   }
 );
 
-export const changePassAdmin = createAsyncThunk(
-  "changePasswordAdmin",
-  async (password, { rejectWithValue }) => {
-    const changePassId = localStorage.getItem("adminId");
+export const editSubscriptionData = createAsyncThunk(
+  "editSubscription",
+  async (subscription, { rejectWithValue }) => {
+    console.log(subscription);
     const token = localStorage.getItem("token");
     try {
       const response = await axios.put(
-        `${API_URL}/updatePassword/${changePassId}`,
+        `${API_URL}/updateSubScription/${subscription._id}`,
         {
-          currentPassword: password?.oldPassword,
-          newPassword: password?.newPassword,
-          confirmPassword: password?.confirmPassword,
+          name: subscription.name,
+          dicount: subscription.dicount,
+          scratchPrice: subscription.scratchPrice,
+          price: subscription.price,
+          status: subscription.status,
         },
         {
           headers: {
@@ -81,6 +66,7 @@ export const changePassAdmin = createAsyncThunk(
           },
         }
       );
+      console.log(response);
       return response.data.data;
     } catch (error) {
       console.error("LoginAdmin Error:", error.message);
@@ -91,12 +77,12 @@ export const changePassAdmin = createAsyncThunk(
   }
 );
 
-const EProfileSlice = createSlice({
+const SubscriptionSlice = createSlice({
   name: "login",
   initialState: {
-    editProfile: [],
-    getAdmin: [],
-    changePass: [],
+    subscription: [],
+    singlesubscription: [],
+    editSubscription: [],
     loading: false,
     success: false,
     message: "",
@@ -104,51 +90,53 @@ const EProfileSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(editProfileAdmin.pending, (state) => {
+
+      // all subscription
+      .addCase(getAllSubscriptionData.pending, (state) => {
         state.loading = true;
         state.message = "Accepting Login Admin...";
       })
-      .addCase(editProfileAdmin.fulfilled, (state, action) => {
+      .addCase(getAllSubscriptionData.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.editProfile = action.payload;
+        state.subscription = action.payload;
         state.message = "Login SuccessFully";
       })
-      .addCase(editProfileAdmin.rejected, (state, action) => {
+      .addCase(getAllSubscriptionData.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.message = action.payload?.message || "Failed To Login";
       })
 
-      // get single admin
-      .addCase(getSingleAdmin.pending, (state) => {
+      //   single subscription
+      .addCase(singleSubscriptionData.pending, (state) => {
         state.loading = true;
         state.message = "Accepting Login Admin...";
       })
-      .addCase(getSingleAdmin.fulfilled, (state, action) => {
+      .addCase(singleSubscriptionData.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.getAdmin = action.payload;
+        state.singlesubscription = action.payload;
         state.message = "Login SuccessFully";
       })
-      .addCase(getSingleAdmin.rejected, (state, action) => {
+      .addCase(singleSubscriptionData.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.message = action.payload?.message || "Failed To Login";
       })
 
-      // change admin password
-      .addCase(changePassAdmin.pending, (state) => {
+      // edit subscription
+      .addCase(editSubscriptionData.pending, (state) => {
         state.loading = true;
         state.message = "Accepting Login Admin...";
       })
-      .addCase(changePassAdmin.fulfilled, (state, action) => {
+      .addCase(editSubscriptionData.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.changePass = action.payload;
+        state.editSubscription = action.payload;
         state.message = "Login SuccessFully";
       })
-      .addCase(changePassAdmin.rejected, (state, action) => {
+      .addCase(editSubscriptionData.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.message = action.payload?.message || "Failed To Login";
@@ -156,4 +144,4 @@ const EProfileSlice = createSlice({
   },
 });
 
-export default EProfileSlice.reducer;
+export default SubscriptionSlice.reducer;

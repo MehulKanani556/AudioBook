@@ -1,15 +1,24 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../CSS/Profile.css";
 import profile from "../../Images/dhruvin/profile_main.png";
 import { FiUpload } from "react-icons/fi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { editProfileSchema } from "../Formik";
+import {
+  editProfileAdmin,
+  getSingleAdmin,
+} from "../../Toolkit/Slices/EditProfileSlice";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
+
+  const getAdminData = useSelector((state) => state.editProfile?.getAdmin);
+  useEffect(() => {
+    dispatch(getSingleAdmin());
+  }, []);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -17,20 +26,30 @@ const EditProfile = () => {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      editProfileFormik.setValues({
+        ...editProfileFormik.values,
+        image: imageUrl,
+      });
+    }
   };
 
+  const admin = getAdminData?.[0] || {};
   const editProfileVal = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    mobileNo: "",
+    firstName: admin.firstName || "",
+    lastName: admin.lastName || "",
+    email: admin.email || "",
+    mobileNo: admin.mobileNo || "",
+    image: admin.image || profile,
   };
 
   const editProfileFormik = useFormik({
     initialValues: editProfileVal,
+    enableReinitialize: true,
     validationSchema: editProfileSchema,
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(editProfileAdmin(values));
     },
   });
 
@@ -56,15 +75,17 @@ const EditProfile = () => {
               <div className="d-flex align-items-center ">
                 <div className="ds_profile_box text-center me-4">
                   <img
-                    src={profile}
+                    src={editProfileFormik.values.image}
                     alt=""
                     className="mt-3"
                     style={{ width: "75%" }}
                   />
                 </div>
                 <div>
-                  <h5 className="text-light mb-0">Johan Patel</h5>
-                  <p className="text-light">johanpatel@gmail.com</p>
+                  <h5 className="text-light mb-0">
+                    {admin.firstName} {admin.lastName}
+                  </h5>
+                  <p className="text-light">{admin.email}</p>
                 </div>
               </div>
               <div className="mt-4">
@@ -89,15 +110,15 @@ const EditProfile = () => {
                   <div className="col-xl-6 col-lg-6 mt-4 ">
                     <div className="">
                       <label
-                        for="exampleInputEmail1"
-                        class="form-label ds_role_text"
+                        htmlFor="exampleInputEmail1"
+                        className="form-label ds_role_text"
                       >
                         First Name
                       </label>
                       <input
                         type="text"
-                        class="form-control ds_profile_input"
-                        id="exampleInputEmail1"
+                        className="form-control ds_profile_input"
+                        id="firstName"
                         aria-describedby="emailHelp"
                         name="firstName"
                         value={editProfileFormik.values.firstName}
@@ -115,15 +136,15 @@ const EditProfile = () => {
                   <div className="col-xl-6 col-lg-6 mt-4 ">
                     <div className="">
                       <label
-                        for="exampleInputEmail1"
-                        class="form-label ds_role_text"
+                        htmlFor="exampleInputEmail1"
+                        className="form-label ds_role_text"
                       >
                         Last Name
                       </label>
                       <input
                         type="text"
-                        class="form-control ds_profile_input"
-                        id="exampleInputEmail1"
+                        className="form-control ds_profile_input"
+                        id="lastName"
                         aria-describedby="emailHelp"
                         name="lastName"
                         value={editProfileFormik.values.lastName}
@@ -141,15 +162,15 @@ const EditProfile = () => {
                   <div className="col-xl-6 col-lg-6 mt-4 ">
                     <div className="">
                       <label
-                        for="exampleInputEmail1"
-                        class="form-label ds_role_text"
+                        htmlFor="exampleInputEmail1"
+                        className="form-label ds_role_text"
                       >
                         Email
                       </label>
                       <input
                         type="email"
-                        class="form-control ds_profile_input"
-                        id="exampleInputEmail1"
+                        className="form-control ds_profile_input"
+                        id="email"
                         aria-describedby="emailHelp"
                         name="email"
                         value={editProfileFormik.values.email}
@@ -167,15 +188,15 @@ const EditProfile = () => {
                   <div className="col-xl-6 col-lg-6 mt-4 ">
                     <div className="">
                       <label
-                        for="exampleInputEmail1"
-                        class="form-label ds_role_text"
+                        htmlFor="exampleInputEmail1"
+                        className="form-label ds_role_text"
                       >
                         Mobile No.
                       </label>
                       <input
                         type="text"
-                        class="form-control ds_profile_input"
-                        id="exampleInputEmail1"
+                        className="form-control ds_profile_input"
+                        id="mobileNo"
                         aria-describedby="emailHelp"
                         name="mobileNo"
                         value={editProfileFormik.values.mobileNo}
@@ -192,7 +213,9 @@ const EditProfile = () => {
                   </div>
                 </div>
                 <div className="mt-5 pt-lg-4">
-                  <button className="ds_role_save">Save</button>
+                  <button type="submit" className="ds_role_save">
+                    Save
+                  </button>
                 </div>
               </form>
             </div>
