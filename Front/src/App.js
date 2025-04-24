@@ -50,7 +50,7 @@ const App = () => {
     <Routes>
 
       <Route path="/" element={<Login />} />
-      <Route path="/layout" element={
+      <Route path="/admin" element={
         <ProtectedRoute>
           <Layout />
         </ProtectedRoute>

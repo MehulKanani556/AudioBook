@@ -48,3 +48,17 @@ export const editProfileSchema = Yup.object().shape({
     .matches(/^[0-9]{10}$/, "Mobile number must be 10 digits")
     .matches(/^[6-9]\d{9}$/, "Mobile number must start with 6-9"),
 });
+
+export const ResetPassSchema = Yup.object().shape({
+  newPass: Yup.string()
+    .min(6, 'Password must be at least 6 characters')
+    .required('Password is required'),
+    confirmPass: Yup.string()
+    .oneOf([Yup.ref('newPass'), null], 'Passwords must match')
+    .required('Confirm password is required'),
+});
+
+export const CreateLableSchema = Yup.object({
+  labelNameVal: Yup.string().required("LableName Is Required")
+})
+

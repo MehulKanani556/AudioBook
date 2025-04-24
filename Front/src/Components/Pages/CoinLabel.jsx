@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../CSS/CoinLabel.css'
 import { Link } from 'react-router-dom'
 import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
 import { Modal } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { CoinLabelData, CreateCoinLabel, EditCoinLabel, SingleCoinLabel } from '../../Toolkit/Slices/CoinLabelSlice'
+import { useFormik } from 'formik'
+import { CreateLableSchema } from '../Formik'
 
 const CoinLabel = () => {
 
@@ -12,6 +16,16 @@ const [coinEdit, setCoinEdit] = useState(false)
 const [coinDelete, setCoinDelete] = useState(false)
 const totalPages = 10;
 const [currentPage, setCurrentPage] = useState(1);
+const allData =  useSelector((state)=> state?.coinLabel?.coinLaData)
+const dispatch = useDispatch()
+const singleData =  useSelector((state)=> state?.coinLabel?.singleData)
+console.log("zzzzzzzz" , singleData);
+
+
+useEffect(()=>{
+  dispatch(CoinLabelData())
+},[])
+
 
 const handlePageChange = (page) => {
   if (page >= 1 && page <= totalPages) {
@@ -80,6 +94,50 @@ const renderPagination = () => {
   return pages;
 };
 
+const labelNameVal = {
+   labelNameVal:""
+}
+const CreateLableFormik = useFormik({
+   initialValues:labelNameVal,
+   validationSchema:CreateLableSchema,
+   onSubmit:((value , action)=>{
+      // console.log("ccccccccccc" , value);
+      dispatch(CreateCoinLabel(value)).then((response)=>{
+          if(response?.payload){
+            setCoinAdd(false)
+            dispatch(CoinLabelData())
+          }  
+          else{
+            setCoinAdd(true)
+          }  
+      }) 
+     action.resetForm()
+   })
+})
+
+const editLabel = {
+   editLabelName:singleData?.labelName || ""
+}
+
+const EditLabelFromik = useFormik({
+  enableReinitialize: true,
+  initialValues:editLabel,
+  validationSchema:CreateLableSchema,
+  onSubmit:((value , action)=>{
+     // console.log("ccccccccccc" , value);
+     dispatch(CreateCoinLabel(value)).then((response)=>{
+         if(response?.payload){
+           setCoinEdit(false)
+           dispatch(EditCoinLabel())
+         }  
+         else{
+           setCoinEdit(true)
+         }  
+     }) 
+    action.resetForm()
+  })
+})
+
   return (
     <div className='ds_dash_master'>
       <div className='ds_dash_main'>
@@ -105,18 +163,24 @@ const renderPagination = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>01</td>
-                        <td>Label Name</td>
-                        <td>
-                          <span className='ds_role_icon ds_cursor me-2' onClick={()=> setCoinEdit(true)}>
-                            <img src={pen} alt=""  />
-                          </span>
-                          <span className='ds_role_icon ds_cursor' onClick={()=> setCoinDelete(true)}>
-                            <img src={trash} alt="" />
-                          </span>
-                        </td>
-                      </tr>
+                      {allData?.map((element , index)=>{
+                        // console.log(element);
+                        return(
+                          <tr key={element?._id}>
+                            <td>{index+1}</td>
+                            <td>{element?.labelName}</td>
+                            <td>
+                              <span className='ds_role_icon ds_cursor me-2' onClick={()=> {setCoinEdit(true) ; dispatch(SingleCoinLabel(element._id))}}>
+                                <img src={pen} alt=""  />
+                              </span>
+                              <span className='ds_role_icon ds_cursor' onClick={()=> setCoinDelete(true)}>
+                                <img src={trash} alt="" />
+                              </span>
+                            </td>
+                          </tr>
+                        )
+                      })}
+                      
                     </tbody>
                   </table>
                 </div>
@@ -141,18 +205,19 @@ const renderPagination = () => {
            </Modal.Title>
          </Modal.Header>
          <Modal.Body >
-            <div>
+            <form onSubmit={CreateLableFormik.handleSubmit}>
               <div>
-                 <label for="exampleInputEmail1" class="form-label ds_role_text">Label</label>
-                 <input type="email" class="form-control ds_role_input" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                 <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Label</label>
+                 <input type="text" name='labelNameVal' value={CreateLableFormik.values.labelNameVal} onChange={CreateLableFormik.handleChange} onBlur={CreateLableFormik.handleBlur} className="form-control ds_role_input" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                 <p className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{CreateLableFormik.errors.labelNameVal}</p>
               </div>
               <div className='mt-5 mb-3'>
                 <div className='text-center'>
-                   <button className='ds_role_save'>Save</button>
+                   <button type='submit' className='ds_role_save'>Save</button>
                    <button className='ds_sub_cancel' onClick={()=> setCoinAdd(false)}>Clear</button>
                 </div>
               </div>
-            </div>
+            </form>
          </Modal.Body>
       </Modal>
 
@@ -169,10 +234,10 @@ const renderPagination = () => {
            </Modal.Title>
          </Modal.Header>
          <Modal.Body >
-            <div>
+            <form onSubmit={EditLabelFromik.handleSubmit}>
               <div>
-                 <label for="exampleInputEmail1" class="form-label ds_role_text">Label</label>
-                 <input type="email" class="form-control ds_role_input" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                 <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Label</label>
+                 <input type="text" name='editLabelName' value={EditLabelFromik.values.editLabelName} onChange={EditLabelFromik.handleChange} onBlur={EditLabelFromik.handleBlur} className="form-control ds_role_input" id="exampleInputEmail1" aria-describedby="emailHelp"/>
               </div>
               <div className='mt-5 mb-3'>
                 <div className='text-center'>
@@ -180,7 +245,7 @@ const renderPagination = () => {
                    <button className='ds_sub_cancel' onClick={()=> setCoinEdit(false)}>Clear</button>
                 </div>
               </div>
-            </div>
+            </form>
          </Modal.Body>
       </Modal>
 

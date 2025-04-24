@@ -60,7 +60,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
            <div>
               <h3 className='text-light text-center pt-3'>LOGO</h3>
               <div className='mt-5'>
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/dashboard" || color === "/layout/profile" ? 'ds_active_color' : '' }  `} onClick={() => {navigate('/layout/dashboard'); setColor("dashboard")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/dashboard" || color === "/admin/profile" ? 'ds_active_color' : '' }  `} onClick={() => {navigate('/admin/dashboard'); setColor("dashboard")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={dashboard} className="ds_side_icon" />
@@ -69,7 +69,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={`ms-3 ds_active_pad ${color === "/layout/role" ? 'ds_active_color' : '' }   mt-3 `} onClick={() => {navigate('/layout/role'); setColor("role")}}>
+                 <div className={`ms-3 ds_active_pad ${color === "/admin/role" ? 'ds_active_color' : '' }   mt-3 `} onClick={() => {navigate('/admin/role'); setColor("role")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={role} className="ds_side_icon" />
@@ -78,7 +78,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={`ms-3 ds_active_pad ${color === "/layout/subscription" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/layout/subscription'); setColor("subscription")}}>
+                 <div className={`ms-3 ds_active_pad ${color === "/admin/subscription" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/admin/subscription'); setColor("subscription")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={king} className="ds_side_icon" />
@@ -87,7 +87,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={`ms-3 ds_active_pad ${color === "/layout/coinlabel" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/layout/coinlabel'); setColor("coinlabel")}}>
+                 <div className={`ms-3 ds_active_pad ${color === "/admin/coinlabel" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/admin/coinlabel'); setColor("coinlabel")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={coin} className="ds_side_icon" />
@@ -96,7 +96,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/coinmaster" || color === "/layout/addcoinmaster" || color === "/layout/editcoinmaster" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/layout/coinmaster'); setColor("coinmaster")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/coinmaster" || color === "/admin/addcoinmaster" || color === "/admin/editcoinmaster" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/admin/coinmaster'); setColor("coinmaster")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={master} className="ds_side_icon" />
@@ -105,7 +105,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={`ms-3 ds_active_pad ${color === "/layout/usermaster" || color === "/layout/addusermaster" || color === "/layout/editusermaster" ? 'ds_active_color' : '' } mt-3`} onClick={() => {navigate('/layout/usermaster'); setColor("usermaster")}}>
+                 <div className={`ms-3 ds_active_pad ${color === "/admin/usermaster" || color === "/admin/addusermaster" || color === "/admin/editusermaster" ? 'ds_active_color' : '' } mt-3`} onClick={() => {navigate('/admin/usermaster'); setColor("usermaster")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={person} className="ds_side_icon" />
@@ -114,7 +114,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/subscriptionsell" || color === "/layout/addSubscriptionSell" || color === "/layout/editSubscriptionSell" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/subscriptionsell'); setColor("subscriptionsell")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/subscriptionsell" || color === "/admin/addSubscriptionSell" || color === "/admin/editSubscriptionSell" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/subscriptionsell'); setColor("subscriptionsell")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={sub} className="ds_side_icon" />
@@ -123,7 +123,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/coinsell" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/coinsell'); setColor("coinsell")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/coinsell" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/coinsell'); setColor("coinsell")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={sell} className="ds_side_icon" />
@@ -132,7 +132,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/voucher" || color === "/layout/addVouchers" || color === "/layout/editvouchers" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/voucher'); setColor("voucher")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/voucher" || color === "/admin/addVouchers" || color === "/admin/editvouchers" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/voucher'); setColor("voucher")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={voucher} className="ds_side_icon" />
@@ -141,7 +141,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/voucherused" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/voucherused'); setColor("voucherused")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/voucherused" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/voucherused'); setColor("voucherused")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={used} className="ds_side_icon" />
@@ -150,7 +150,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/genre" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/genre'); setColor("genre")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/genre" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/genre'); setColor("genre")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={genre} className="ds_side_icon" />
@@ -159,7 +159,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/audiobooks" || color === "/layout/addaudiobook" || color === "/layout/editaudiobook" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/audiobooks'); setColor("audiobooks")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/audiobooks" || color === "/admin/addaudiobook" || color === "/admin/editaudiobook" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/audiobooks'); setColor("audiobooks")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={book} className="ds_side_icon" />
@@ -168,7 +168,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/castcrew" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/castcrew'); setColor("castcrew")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/castcrew" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/castcrew'); setColor("castcrew")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={cast} className="ds_side_icon" />
@@ -177,7 +177,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/review" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/review'); setColor("review")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/review" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/review'); setColor("review")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={review} className="ds_side_icon" />
@@ -186,7 +186,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/episodes" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/episodes'); setColor("episodes")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/episodes" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/episodes'); setColor("episodes")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={episode} className="ds_side_icon" />
@@ -195,7 +195,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/episodeunlock" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/episodeunlock'); setColor("episodeunlock")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/episodeunlock" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/episodeunlock'); setColor("episodeunlock")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={unlock} className="ds_side_icon" />
@@ -204,7 +204,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/episodestate" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/episodestate'); setColor("episodestate")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/episodestate" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/episodestate'); setColor("episodestate")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={state} className="ds_side_icon" />
@@ -213,7 +213,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/playlistmaster" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/playlistmaster'); setColor("playlistmaster")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/playlistmaster" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/playlistmaster'); setColor("playlistmaster")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={playmaster} className="ds_side_icon" />
@@ -222,7 +222,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/playlistsongs" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/playlistsongs'); setColor("playlistsongs")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/playlistsongs" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/playlistsongs'); setColor("playlistsongs")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={song} className="ds_side_icon" />
@@ -231,7 +231,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/homecorousel" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/homecorousel'); setColor("homecorousel")}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/homecorousel" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/homecorousel'); setColor("homecorousel")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={home} className="ds_side_icon" />
@@ -240,8 +240,8 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/homelabels" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/homelabels'); setColor("homelabels")}}>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/homelabels')}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/homelabels" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/homelabels'); setColor("homelabels")}}>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/admin/homelabels')}>
                      <div>
                         <img src={label} className="ds_side_icon" />
                      </div>
@@ -249,8 +249,8 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/homelabeljoin" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/homelabeljoin'); setColor("homelabeljoin")}}>
-                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/layout/homelabeljoin')}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/homelabeljoin" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/homelabeljoin'); setColor("homelabeljoin")}}>
+                   <div className='d-flex align-items-center  ms-xl-5 ms-3' onClick={() => navigate('/admin/homelabeljoin')}>
                      <div>
                         <img src={join} className="ds_side_icon" />
                      </div>
@@ -277,7 +277,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
          </Offcanvas.Header>
          <Offcanvas.Body>
          <div className='mt-2' ref={offcanvasRef}>
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/dashboard" || color === "/layout/profile" ? 'ds_active_color' : '' }  `} onClick={() => {navigate('/layout/dashboard'); setColor("dashboard"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/dashboard" || color === "/admin/profile" ? 'ds_active_color' : '' }  `} onClick={() => {navigate('/admin/dashboard'); setColor("dashboard"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={dashboard} className="ds_side_icon" />
@@ -286,7 +286,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={`ms-3 ds_active_pad ${color === "/layout/role" ? 'ds_active_color' : '' }   mt-3 `} onClick={() => {navigate('/layout/role'); setColor("role"); setOffToggle(false)}}>
+                 <div className={`ms-3 ds_active_pad ${color === "/admin/role" ? 'ds_active_color' : '' }   mt-3 `} onClick={() => {navigate('/admin/role'); setColor("role"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={role} className="ds_side_icon" />
@@ -295,7 +295,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={`ms-3 ds_active_pad ${color === "/layout/subscription" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/layout/subscription'); setColor("subscription"); setOffToggle(false)}}>
+                 <div className={`ms-3 ds_active_pad ${color === "/admin/subscription" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/admin/subscription'); setColor("subscription"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={king} className="ds_side_icon" />
@@ -304,7 +304,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={`ms-3 ds_active_pad ${color === "/layout/coinlabel" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/layout/coinlabel'); setColor("coinlabel"); setOffToggle(false)}}>
+                 <div className={`ms-3 ds_active_pad ${color === "/admin/coinlabel" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/admin/coinlabel'); setColor("coinlabel"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={coin} className="ds_side_icon" />
@@ -313,7 +313,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/coinmaster" || color === "/layout/addcoinmaster" || color === "/layout/editcoinmaster" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/layout/coinmaster'); setColor("coinmaster"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/coinmaster" || color === "/admin/addcoinmaster" || color === "/admin/editcoinmaster" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/admin/coinmaster'); setColor("coinmaster"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={master} className="ds_side_icon" />
@@ -322,7 +322,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={`ms-3 ds_active_pad ${color === "/layout/usermaster" || color === "/layout/addusermaster" || color === "/layout/editusermaster"  ? 'ds_active_color' : '' } mt-3`} onClick={() => {navigate('/layout/usermaster'); setColor("usermaster"); setOffToggle(false)}}>
+                 <div className={`ms-3 ds_active_pad ${color === "/admin/usermaster" || color === "/admin/addusermaster" || color === "/admin/editusermaster"  ? 'ds_active_color' : '' } mt-3`} onClick={() => {navigate('/admin/usermaster'); setColor("usermaster"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={person} className="ds_side_icon" />
@@ -331,7 +331,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/subscriptionsell" || color === "/layout/addSubscriptionSell" || color === "/layout/editSubscriptionSell" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/subscriptionsell'); setColor("subscriptionsell"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/subscriptionsell" || color === "/admin/addSubscriptionSell" || color === "/admin/editSubscriptionSell" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/subscriptionsell'); setColor("subscriptionsell"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={sub} className="ds_side_icon" />
@@ -340,7 +340,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/coinsell" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/coinsell'); setColor("coinsell"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/coinsell" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/coinsell'); setColor("coinsell"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={sell} className="ds_side_icon" />
@@ -349,7 +349,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/voucher" || color === "/layout/addVouchers" || color === "/layout/editvouchers" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/voucher'); setColor("voucher"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/voucher" || color === "/admin/addVouchers" || color === "/admin/editvouchers" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/voucher'); setColor("voucher"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={voucher} className="ds_side_icon" />
@@ -358,7 +358,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/voucherused" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/voucherused'); setColor("voucherused"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/voucherused" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/voucherused'); setColor("voucherused"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={used} className="ds_side_icon" />
@@ -367,7 +367,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/genre" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/genre'); setColor("genre"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/genre" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/genre'); setColor("genre"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={genre} className="ds_side_icon" />
@@ -376,7 +376,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/audiobooks" || color === "/layout/addaudiobook" || color === "/layout/editaudiobook" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/audiobooks'); setColor("audiobooks"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/audiobooks" || color === "/admin/addaudiobook" || color === "/admin/editaudiobook" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/audiobooks'); setColor("audiobooks"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={book} className="ds_side_icon" />
@@ -385,7 +385,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/castcrew" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/castcrew'); setColor("castcrew"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/castcrew" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/castcrew'); setColor("castcrew"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={cast} className="ds_side_icon" />
@@ -394,7 +394,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/review" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/review'); setColor("review"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/review" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/review'); setColor("review"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={review} className="ds_side_icon" />
@@ -403,7 +403,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/episodes" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/episodes'); setColor("episodes"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/episodes" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/episodes'); setColor("episodes"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={episode} className="ds_side_icon" />
@@ -412,7 +412,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/episodeunlock" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/episodeunlock'); setColor("episodeunlock"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/episodeunlock" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/episodeunlock'); setColor("episodeunlock"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={unlock} className="ds_side_icon" />
@@ -421,7 +421,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/episodestate" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/episodestate'); setColor("episodestate"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/episodestate" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/episodestate'); setColor("episodestate"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={state} className="ds_side_icon" />
@@ -430,7 +430,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/playlistmaster" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/playlistmaster'); setColor("playlistmaster"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/playlistmaster" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/playlistmaster'); setColor("playlistmaster"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={playmaster} className="ds_side_icon" />
@@ -439,7 +439,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/playlistsongs" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/playlistsongs'); setColor("playlistsongs"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/playlistsongs" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/playlistsongs'); setColor("playlistsongs"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={song} className="ds_side_icon" />
@@ -448,7 +448,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/homecorousel" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/homecorousel'); setColor("homecorousel"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/homecorousel" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/homecorousel'); setColor("homecorousel"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={home} className="ds_side_icon" />
@@ -457,7 +457,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/homelabels" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/homelabels'); setColor("homelabels"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/homelabels" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/homelabels'); setColor("homelabels"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={label} className="ds_side_icon" />
@@ -466,7 +466,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/layout/homelabeljoin" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/layout/homelabeljoin'); setColor("homelabeljoin"); setOffToggle(false)}}>
+                 <div className={` ms-3 ds_active_pad ${color === "/admin/homelabeljoin" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/homelabeljoin'); setColor("homelabeljoin"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={join} className="ds_side_icon" />

@@ -40,11 +40,12 @@ export const ForgotPass = createAsyncThunk(
           email:forgetPassData?.forgetPassVal
         }
       );
-      console.log("ForgetPass" , response);
-      return response.data.data
+      localStorage.setItem("email" , forgetPassData?.forgetPassVal)
+      // console.log("ForgetPass" , response?.data?.status);
+      return response.data
     } catch (error) {
       console.error("ForgetPass Error:", error.message);
-      alert("ForgetPass" , error.message)
+       alert("ForgetPass Invalid Email" , error.message)
       return rejectWithValue(
         error.response?.data || { message: "Unexpected error occurred" }
       );
@@ -52,6 +53,53 @@ export const ForgotPass = createAsyncThunk(
   }
 );
 
+export const OtpVerify = createAsyncThunk(
+  "OtpVerify",
+  async (otp, { rejectWithValue }) => {
+    let email = localStorage.getItem("email")   
+    try {
+      const response = await axios.post(
+        `${API_URL}/emailOtpVerify`,
+        {
+          email:email,
+          otp:otp
+        }
+      );
+      console.log("OtpVerify" , response);
+      return response.data.data
+    } catch (error) {
+      console.error("OtpVerify Error:", error.message);
+      alert("OtpVerify Invalid Otp" , error.message)
+      return rejectWithValue(
+        error.response?.data || { message: "Unexpected error occurred" }
+      );
+    }
+  }
+);
+
+export const ResetPass = createAsyncThunk(
+  "ResetPass",
+  async (value, { rejectWithValue }) => {
+    let adminId = localStorage.getItem("adminId")
+    try {
+      const response = await axios.put(
+        `${API_URL}/changePassword/${adminId}`,
+        {
+          newPassword:value?.newPass,
+          confirmPassword:value?.confirmPass
+        }
+      );
+      console.log("ResetPass" , response);
+      return response.data.data
+    } catch (error) {
+      console.error("ResetPass Error:", error.message);
+      alert("ResetPass Does Not Match" , error.message)
+      return rejectWithValue(
+        error.response?.data || { message: "Unexpected error occurred" }
+      );
+    }
+  }
+);
 
 const loginAdminSlice = createSlice({
   name: "login",
@@ -60,6 +108,7 @@ const loginAdminSlice = createSlice({
     loading: false,
     success: false,
     message: "",
+    adminEmail:""
   },
   reducers: {
    
@@ -90,12 +139,45 @@ const loginAdminSlice = createSlice({
         state.loading = false;
         state.success = true;
         // state.login = action.payload;
+        state.adminEmail = action.payload
         state.message = "ForgetPassword SuccessFully";
       })
       .addCase(ForgotPass.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.message = action.payload?.message || "Failed To ForgetPassword";
+      })
+
+      .addCase(OtpVerify.pending, (state) => {
+        state.loading = true;
+        state.message = "OtpVerify Login Admin...";
+      })
+      .addCase(OtpVerify.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        // state.login = action.payload;
+        state.message = "OtpVerify SuccessFully";
+      })
+      .addCase(OtpVerify.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = action.payload?.message || "Failed To OtpVerify";
+      })
+
+      .addCase(ResetPass.pending, (state) => {
+        state.loading = true;
+        state.message = "ResetPass Login Admin...";
+      })
+      .addCase(ResetPass.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        // state.login = action.payload;
+        state.message = "ResetPass SuccessFully";
+      })
+      .addCase(ResetPass.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = action.payload?.message || "Failed To ResetPass";
       });
   },
 });
