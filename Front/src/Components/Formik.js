@@ -48,3 +48,8 @@ export const editProfileSchema = Yup.object().shape({
     .matches(/^[0-9]{10}$/, "Mobile number must be 10 digits")
     .matches(/^[6-9]\d{9}$/, "Mobile number must start with 6-9"),
 });
+
+
+export const roleSchema = Yup.object({
+  role:Yup.string().required("role is required")
+})
