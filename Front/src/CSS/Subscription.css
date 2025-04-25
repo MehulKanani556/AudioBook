@@ -106,7 +106,9 @@
     max-width: 570px !important; 
     padding: 0px 10px;
 }
-         
+.ds_date_icon::-webkit-calendar-picker-indicator {
+    filter: brightness(0) invert(1);
+}         
 
 @media (max-width:1200px) {
     .ds_sub_add_modal .modal-dialog{

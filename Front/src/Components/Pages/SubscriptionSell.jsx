@@ -17,13 +17,22 @@ const SubscriptionSell = () => {
     const [removeSubscriptionSell, setRemoveSubscriptionSell] = useState(false);
     const dispatch = useDispatch()
     const subData = useSelector((state)=> state.subSell.subSellDat)
-    
+    let itemPerPage = 10;
+    let totalPages = Math.ceil(subData?.length / itemPerPage);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [currentData,setCurrentData] = useState([]);
+    const [viewObject, setViewObject] = useState({})
+
     useEffect(()=>{
         dispatch(SubSellData())
     },[])
 
-    const totalPages = 10;
-    const [currentPage, setCurrentPage] = useState(1);
+    useEffect(() => {
+        const startIndex = (currentPage - 1) * itemPerPage;
+        const endIndex = startIndex + itemPerPage;
+        const paginatedData = subData?.slice(startIndex, endIndex);
+        setCurrentData(paginatedData);
+    }, [currentPage, subData]);
 
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
@@ -92,6 +101,8 @@ const SubscriptionSell = () => {
         return pages;
     };
 
+    
+
     return (
         <div className="ds_dash_master">
             <div className='ds_dash_main'>
@@ -99,11 +110,11 @@ const SubscriptionSell = () => {
                     <div className='d-flex justify-content-between align-items-center'>
                         <div>
                             <h4 className="text-light pt-4 mb-0">Subscription Sell</h4>
-                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Subscription Sell</span></p>
+                            <p><Link to="/admin/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Subscription Sell</span></p>
                         </div>
-                        <div>
-                            <button className='V_review_btn1' onClick={() => navigate('/admin/addSubscriptionSell')} ><i className="fa-solid fa-plus me-2"></i> Add</button>
-                        </div>
+                        {/* <div>
+                            <button className='V_review_btn1'  ><i className="fa-solid fa-plus me-2"></i> Add</button>
+                        </div> */}
                     </div>
 
                     <div className='V_review_bg mt-2'>
@@ -122,32 +133,32 @@ const SubscriptionSell = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {subData?.map((element)=>{
-                                         console.log(element);
+                                    {currentData?.map((element)=>{
+                                        //  console.log(element);
                                          return(
                                             <tr key={element._id}>
                                                <td>01</td>
-                                               <td>{element?.subscriptionData[0]?._id}</td>
-                                               <td>{element?._id}</td>
-                                               <td>20/09/02020</td>
-                                               <td>₹99</td>
-                                               <td>9658</td>
-                                               <td><span className='ds_sub_active'>Active</span></td>
+                                               <td>{element?.subscriptionData[0]?.name}</td>
+                                               <td>{element?.userData[0]?.firstName}</td>
+                                               <td>{element?.expiryDate}</td>
+                                               <td>₹{element?.amount}</td>
+                                               <td>{element?.paymentId}</td>
+                                               <td><span className={`${element?.status === "Active" ?  'ds_sub_active' : 'ds_sub_block'} `}>{element?.status}</span></td>
                                                <td className=''>
-                                                   <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewSubscriptionSell(true)} >
+                                                   <span className='ds_sub_eye ds_cursor me-2' onClick={() => {setViewSubscriptionSell(true) ; setViewObject(element)}} >
                                                        <img src={eye} alt="" />
                                                    </span>
-                                                   <span className='ds_role_icon ds_cursor me-2' onClick={() => navigate('/layout/editSubscriptionSell')} >
+                                                   {/* <span className='ds_role_icon ds_cursor me-2' onClick={() => navigate('/layout/editSubscriptionSell')} >
                                                        <img src={pen} alt="" />
-                                                   </span>
-                                                   <span className='ds_role_icon ds_cursor' onClick={() => setRemoveSubscriptionSell(true)} >
+                                                   </span> */}
+                                                   {/* <span className='ds_role_icon ds_cursor' onClick={() => setRemoveSubscriptionSell(true)} >
                                                        <img src={trash} alt="" />
-                                                   </span>
+                                                   </span> */}
                                                </td>
                                             </tr>
                                          )
                                     })}
-                                    <tr>
+                                    {/* <tr>
                                         <td>01</td>
                                         <td>9685</td>
                                         <td>Johnwick08</td>
@@ -166,7 +177,7 @@ const SubscriptionSell = () => {
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
-                                    </tr>
+                                    </tr> */}
                                 </tbody>
                             </table>
                         </div>
@@ -198,7 +209,7 @@ const SubscriptionSell = () => {
                                 <div>
                                     Subscription Sell Details
                                 </div>
-                                <div className='ms-auto' onClick={() => setViewSubscriptionSell(false)}>
+                                <div className='ms-auto ds_cursor' onClick={() => setViewSubscriptionSell(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
@@ -210,37 +221,37 @@ const SubscriptionSell = () => {
                                 <p className='V_label2 mb-0'>Subscription Plan ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>9854</span></p>
+                                <p>: <span className='ms-2 V_label1'> {viewObject?.subscriptionData?.length ? viewObject.subscriptionData[0].name : ''}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>User ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>9854</span></p>
+                                <p>: <span className='ms-2 V_label1'> {viewObject?.userData?.length ? viewObject.userData[0].firstName : ''}</span></p> 
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Expiry Date</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>20/09/2020</span></p>
+                                <p>: <span className='ms-2 V_label1'>{viewObject?.expiryDate}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Amount</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>₹99</span></p>
+                                <p>: <span className='ms-2 V_label1'>₹{viewObject?.amount}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Payment ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>5845</span></p>
+                                <p>: <span className='ms-2 V_label1'>{viewObject?.paymentId}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Status</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>Active</span></p>
+                                <p>: <span className='ms-2 V_label1'>{viewObject?.status}</span></p>
                             </div>
                         </div>
                     </Modal.Body>
