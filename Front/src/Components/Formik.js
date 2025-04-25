@@ -51,25 +51,24 @@ export const editProfileSchema = Yup.object().shape({
 
 export const ResetPassSchema = Yup.object().shape({
   newPass: Yup.string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
-    confirmPass: Yup.string()
-    .oneOf([Yup.ref('newPass'), null], 'Passwords must match')
-    .required('Confirm password is required'),
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+  confirmPass: Yup.string()
+    .oneOf([Yup.ref("newPass"), null], "Passwords must match")
+    .required("Confirm password is required"),
 });
 
 export const CreateLableSchema = Yup.object({
-  labelNameVal: Yup.string().required("LableName Is Required")
-})
+  labelNameVal: Yup.string().required("LableName Is Required"),
+});
 
 export const EditLableSchema = Yup.object({
-  editLabelName: Yup.string().required("LableName Is Required")
-})
-
+  editLabelName: Yup.string().required("LableName Is Required"),
+});
 
 export const roleSchema = Yup.object({
-  role:Yup.string().required("role is required")
-})
+  role: Yup.string().required("role is required"),
+});
 export const changePassSchema = Yup.object().shape({
   oldPassword: Yup.string().required("Old password is required"),
   newPassword: Yup.string()
@@ -104,15 +103,13 @@ export const editSubscriptionSchema = Yup.object().shape({
 export const coinMasterSchema = Yup.object({
   // role:Yup.string().required("role is required")
   coin: Yup.string().required("role is required"),
-  payment:Yup.string().required("payment is required"),
-  freeCoin:Yup.string().required("freecoin is required"),
-  labelID:Yup.string().required("labelID is required"),
-  isoneTime:Yup.string().required("is one time is required"),
-  validTill:Yup.string().required("valid till is required"),
-  status:Yup.string().required("status is required"),
-})
-
-
+  payment: Yup.string().required("payment is required"),
+  freeCoin: Yup.string().required("freecoin is required"),
+  labelID: Yup.string().required("labelID is required"),
+  isoneTime: Yup.string().required("is one time is required"),
+  validTill: Yup.string().required("valid till is required"),
+  status: Yup.string().required("status is required"),
+});
 
 export const addSubscriptionSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -129,5 +126,39 @@ export const addSubscriptionSchema = Yup.object().shape({
     .typeError("Price must be a number")
     .min(0, "Price cannot be negative")
     .required("Price is required"),
+  status: Yup.string().required("Status is required"),
+});
+
+export const editUserMasterSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required")
+    .matches(
+      /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+      "Invalid email format"
+    ),
+  phone: Yup.string()
+    .required("Mobile number is required")
+    .matches(/^[0-9]{10}$/, "Mobile number must be 10 digits")
+    .matches(/^[6-9]\d{9}$/, "Mobile number must start with 6-9"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+  roleId: Yup.string().required("Role ID is required"),
+  bio: Yup.string().required("Bio is required"),
+  age: Yup.number()
+    .required("Age is required")
+    .positive("Age must be positive")
+    .integer("Age must be an integer"),
+  occupation: Yup.string().required("Occupation is required"),
+  studentVerificationStatus: Yup.string().required(
+    "Verification status is required"
+  ),
+  studentIdImage: Yup.string().required("StudentIdImage is required"),
+  coins: Yup.number()
+    .min(0, "Coins cannot be negative")
+    .required("Coins is required"),
+  language: Yup.string().required("Language is required"),
+  image: Yup.string().required("Image is required"),
   status: Yup.string().required("Status is required"),
 });
