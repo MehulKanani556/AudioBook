@@ -164,7 +164,7 @@ const Header = ({ setOffToggle }) => {
                 <div className="p-3">
                   <div
                     className="d-flex align-items-center ds_cursor"
-                    onClick={() => navigate("/layout/profile")}
+                    onClick={() => navigate("/admin/profile")}
                   >
                     <img
                       src={pen}

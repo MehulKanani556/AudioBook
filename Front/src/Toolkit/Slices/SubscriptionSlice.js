@@ -14,6 +14,11 @@ export const getAllSubscriptionData = createAsyncThunk(
       });
       return response.data.data;
     } catch (error) {
+      if (error.status === 404) {
+        console.error("Get Coin Label Error:", error.status);
+        var data = [];
+        return data;
+      }
       console.error("LoginAdmin Error:", error.message);
       return rejectWithValue(
         error.response?.data || { message: "Unexpected error occurred" }
@@ -35,6 +40,34 @@ export const singleSubscriptionData = createAsyncThunk(
           },
         }
       );
+      return response.data.data;
+    } catch (error) {
+      console.error("LoginAdmin Error:", error.message);
+      return rejectWithValue(
+        error.response?.data || { message: "Unexpected error occurred" }
+      );
+    }
+  }
+);
+
+export const addSubscriptionData = createAsyncThunk(
+  "addSubscription",
+  async (addSubs, { rejectWithValue }) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.post(`${API_URL}/createSubScription`,
+      {
+        name: addSubs.name,
+        dicount: addSubs.discount,
+        scratchPrice: addSubs.scratchPrice,
+        price: addSubs.price,
+        status: addSubs.status
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return response.data.data;
     } catch (error) {
       console.error("LoginAdmin Error:", error.message);
@@ -77,12 +110,38 @@ export const editSubscriptionData = createAsyncThunk(
   }
 );
 
+export const deleteSubscriptionData = createAsyncThunk(
+  "deleteSubscription",
+  async (deletesubsId, { rejectWithValue }) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.delete(
+        `${API_URL}/deleteSubScription/${deletesubsId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+      return response.data.data;
+    } catch (error) {
+      console.error("LoginAdmin Error:", error.message);
+      return rejectWithValue(
+        error.response?.data || { message: "Unexpected error occurred" }
+      );
+    }
+  }
+);
+
 const SubscriptionSlice = createSlice({
   name: "login",
   initialState: {
     subscription: [],
     singlesubscription: [],
     editSubscription: [],
+    deleteSubscription: [],
+    addSubscription:[],
     loading: false,
     success: false,
     message: "",
@@ -137,6 +196,40 @@ const SubscriptionSlice = createSlice({
         state.message = "Login SuccessFully";
       })
       .addCase(editSubscriptionData.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = action.payload?.message || "Failed To Login";
+      })
+
+      // delete subscription
+      .addCase(deleteSubscriptionData.pending, (state) => {
+        state.loading = true;
+        state.message = "Accepting Login Admin...";
+      })
+      .addCase(deleteSubscriptionData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.deleteSubscription = action.payload;
+        state.message = "Login SuccessFully";
+      })
+      .addCase(deleteSubscriptionData.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = action.payload?.message || "Failed To Login";
+      })
+
+      //add subscription
+      .addCase(addSubscriptionData.pending, (state) => {
+        state.loading = true;
+        state.message = "Accepting Login Admin...";
+      })
+      .addCase(addSubscriptionData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.addSubscription = action.payload;
+        state.message = "Login SuccessFully";
+      })
+      .addCase(addSubscriptionData.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.message = action.payload?.message || "Failed To Login";

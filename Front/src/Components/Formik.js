@@ -111,3 +111,23 @@ export const coinMasterSchema = Yup.object({
   validTill:Yup.string().required("valid till is required"),
   status:Yup.string().required("status is required"),
 })
+
+
+
+export const addSubscriptionSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  discount: Yup.number()
+    .typeError("Discount must be a number")
+    .min(0, "Discount cannot be negative")
+    .max(100, "Discount cannot exceed 100%")
+    .required("discount is required"),
+  scratchPrice: Yup.number()
+    .typeError("Scratch price must be a number")
+    .min(0, "Scratch price cannot be negative")
+    .required("Scratch price is required"),
+  price: Yup.number()
+    .typeError("Price must be a number")
+    .min(0, "Price cannot be negative")
+    .required("Price is required"),
+  status: Yup.string().required("Status is required"),
+});
