@@ -62,3 +62,7 @@ export const CreateLableSchema = Yup.object({
   labelNameVal: Yup.string().required("LableName Is Required")
 })
 
+
+export const roleSchema = Yup.object({
+  role:Yup.string().required("role is required")
+})
