@@ -11,5 +11,6 @@ export const store = configureStore({
     editProfile: profileReducer,
     role: roleReducer,
     subscription: subscriptionReducer,
+    coinLabel:CoinLabelSlice
   },
 });
