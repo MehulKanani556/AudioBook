@@ -101,3 +101,13 @@ export const editSubscriptionSchema = Yup.object().shape({
     .required("Price is required"),
   status: Yup.string().required("Status is required"),
 });
+export const coinMasterSchema = Yup.object({
+  // role:Yup.string().required("role is required")
+  coin: Yup.string().required("role is required"),
+  payment:Yup.string().required("payment is required"),
+  freeCoin:Yup.string().required("freecoin is required"),
+  labelID:Yup.string().required("labelID is required"),
+  isoneTime:Yup.string().required("is one time is required"),
+  validTill:Yup.string().required("valid till is required"),
+  status:Yup.string().required("status is required"),
+})

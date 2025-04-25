@@ -11,7 +11,7 @@ import { useFormik } from 'formik'
 
 const Role = () => {
   // var totalPages = 10;
-  var itemPerPage = 1;
+  var itemPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [add, setAdd] = useState(false)
   const [edit, setEdit] = useState(false)
@@ -72,7 +72,7 @@ const Role = () => {
     roleValFormik.setValues({role:''}) ;
     roleValFormik.setErrors({});
     roleValFormik.setTouched({});
-    dispatch(getRole())
+    
 
   }
   const handleUpdate=()=>{
@@ -82,10 +82,12 @@ const Role = () => {
     })).then((response)=>{
       console.log(response);
       if(response.payload.success){
-        setEdit(false) ; 
+        // alert('');
+        setEdit(false); 
         roleValFormik.setValues({role:''}) ;
         roleValFormik.setErrors({});
         roleValFormik.setTouched({});
+        dispatch(getRole())
       }
     });
   }

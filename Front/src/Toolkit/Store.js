@@ -6,6 +6,7 @@ import roleReducer from "./Slices/RoleSlice"
 import subscriptionReducer from "./Slices/SubscriptionSlice";
 import SubscriptionSellSlice from './Slices/SubscriptionSellSlice'
 
+import coinMasterReducer from "./Slices/CoinMasterSlice"
 export const store = configureStore({
   reducer: {
     login: loginReducer,
@@ -13,6 +14,7 @@ export const store = configureStore({
     role: roleReducer,
     subscription: subscriptionReducer,
     coinLabel:CoinLabelSlice,
-    subSell:SubscriptionSellSlice
+    subSell:SubscriptionSellSlice,
+    coinMaster: coinMasterReducer,
   },
 });
