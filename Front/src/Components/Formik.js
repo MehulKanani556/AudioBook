@@ -1,18 +1,18 @@
 import * as Yup from "yup";
 
 export const LoginSchema = Yup.object({
-    email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required'),
-    password: Yup.string()
-      .min(6, 'Password must be at least 6 characters')
-      .required('Password is required'),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
 });
 
 export const ForgetPassSchema = Yup.object({
   forgetPassVal: Yup.string()
-    .email('Invalid email address')
-    .required('Email is required'),
+    .email("Invalid email address")
+    .required("Email is required"),
 });
 
 export const OtpSchema = Yup.object({
@@ -20,7 +20,7 @@ export const OtpSchema = Yup.object({
   otp1: Yup.string().required("Required").matches(/^\d$/, "Must be a digit"),
   otp2: Yup.string().required("Required").matches(/^\d$/, "Must be a digit"),
   otp3: Yup.string().required("Required").matches(/^\d$/, "Must be a digit"),
-})
+});
 
 export const editProfileSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -66,3 +66,34 @@ export const CreateLableSchema = Yup.object({
 export const roleSchema = Yup.object({
   role:Yup.string().required("role is required")
 })
+export const changePassSchema = Yup.object().shape({
+  oldPassword: Yup.string().required("Old password is required"),
+  newPassword: Yup.string()
+    .required("New password is required")
+    .min(8, "Password must be at least 8 characters")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character"
+    ),
+  confirmPassword: Yup.string()
+    .required("Confirm password is required")
+    .oneOf([Yup.ref("newPassword"), null], "Passwords must match"),
+});
+
+export const editSubscriptionSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  discount: Yup.number()
+    .typeError("Discount must be a number")
+    .min(0, "Discount cannot be negative")
+    .max(100, "Discount cannot exceed 100%")
+    .required("discount is required"),
+  scratchPrice: Yup.number()
+    .typeError("Scratch price must be a number")
+    .min(0, "Scratch price cannot be negative")
+    .required("Scratch price is required"),
+  price: Yup.number()
+    .typeError("Price must be a number")
+    .min(0, "Price cannot be negative")
+    .required("Price is required"),
+  status: Yup.string().required("Status is required"),
+});
