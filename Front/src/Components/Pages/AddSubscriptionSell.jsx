@@ -13,11 +13,11 @@ const AddSubscriptionSell = () => {
                 <div className='ds_dash_main'>
                     <div className='ds_dash_inner'>
                         <div>
-                            <h2 className="text-light pt-4 mb-0">Add Subscription Sell</h2>
+                            <h4 className="text-light pt-4 mb-0">Add Subscription Sell</h4>
                         </div>
 
                         <div>
-                            <div className="row py-5 ">
+                            <div className="row pt-3 pb-5 ">
                                 <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
                                     <label className='V_label'>Subscription Plan ID</label>
                                     <input type="text" className='V_input_text_for_all mt-1 mt-md-2 ' />

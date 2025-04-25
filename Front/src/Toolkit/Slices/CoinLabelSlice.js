@@ -15,15 +15,23 @@ export const CoinLabelData = createAsyncThunk(
               },
         }
       );
-    //   console.log("CoinLabelData" , response);
+      // console.log("CoinLabelData" , response.data.status);
       return response?.data?.data
       
     } catch (error) {
       console.error("Get Coin Label Error:", error.message);
-      alert("Get Coin Label" , error.message)
+      if(error.status === 404){
+         console.error("Get Coin Label Error:", error.status);
+         let data =[];
+         return data;
+      }
+      else{
+        alert("Get Coin Label" , error.message)
+      }
       return rejectWithValue(
         error.response?.data || { message: "Unexpected error occurred" }
       );
+
     }
   }
 );
@@ -44,10 +52,10 @@ export const CreateCoinLabel = createAsyncThunk(
           }
         );
         console.log("CoinLabelData" , response);
-        return response?.data?.data
+        return response?.data
       } catch (error) {
         console.error("Create Coin Label Error:", error.message);
-        alert("Create Coin Label" , error.message)
+        // alert("Create Coin Label" , error.message)
         return rejectWithValue(
           error.response?.data || { message: "Unexpected error occurred" }
         );
@@ -67,7 +75,7 @@ export const CreateCoinLabel = createAsyncThunk(
             },
           }
         );
-        console.log("SingleLabelData" , response);
+        // console.log("SingleLabelData" , response);
         return response?.data?.data
       } catch (error) {
         console.error("Single Coin Label Error:", error.message);
@@ -81,12 +89,13 @@ export const CreateCoinLabel = createAsyncThunk(
 
   export const EditCoinLabel = createAsyncThunk(
     "EditCoinLabel",
-    async (label, { rejectWithValue }) => {
+    async ({values , EditId}, { rejectWithValue }) => {
+      
       try {
         const response = await axios.put(
-          `${API_URL}/updateCoinLabel`,
+          `${API_URL}/updateCoinLabel/${EditId}`,
           {
-            labelName:label?.labelNameVal
+            labelName:values?.editLabelName
           },
           {
             headers: {
@@ -94,11 +103,37 @@ export const CreateCoinLabel = createAsyncThunk(
             },
           }
         );
-        console.log("CoinLabelData" , response);
+        console.log("EditCoinLabel" , response);
         return response?.data?.data
       } catch (error) {
-        console.error("Create Coin Label Error:", error.message);
-        alert("Create Coin Label" , error.message)
+        console.error("Edit Coin Label Error:", error.message);
+        alert("Edit Coin Label" , error.message)
+        return rejectWithValue(
+          error.response?.data || { message: "Unexpected error occurred" }
+        );
+      }
+    }
+  );
+
+  export const DeleteCoinLabel = createAsyncThunk(
+    "DeleteCoinLabel",
+    async (EditId, { rejectWithValue }) => {
+      console.log("BNBNBNBNB" , EditId);
+      
+      try {
+        const response = await axios.delete(
+          `${API_URL}/deleteCoinLabel/${EditId}`,
+          {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("DeleteCoinLabel" , response);
+        return response?.data?.data
+      } catch (error) {
+        console.error("Delete Coin Label Error:", error.message);
+        alert("Delete Coin Label" , error.message)
         return rejectWithValue(
           error.response?.data || { message: "Unexpected error occurred" }
         );
@@ -174,7 +209,7 @@ const CoinLabelSlice = createSlice({
       .addCase(CreateCoinLabel.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.coinLaData = action.payload;
+        // state.coinLaData = action.payload;
         state.message = "Create Coin Label  SuccessFully";
       })
       .addCase(CreateCoinLabel.rejected, (state, action) => {
@@ -197,6 +232,38 @@ const CoinLabelSlice = createSlice({
         state.loading = false;
         state.success = false;
         state.message = action.payload?.message || "Failed To Sigle Coin Label";
+      })
+
+      .addCase(EditCoinLabel.pending, (state) => {
+        state.loading = true;
+        state.message = "Accepting Sigle Coin Label..";
+      })
+      .addCase(EditCoinLabel.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        // state.singleData = action.payload;
+        state.message = "Sigle Coin Label  SuccessFully";
+      })
+      .addCase(EditCoinLabel.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = action.payload?.message || "Failed To Sigle Coin Label";
+      })
+
+      .addCase(DeleteCoinLabel.pending, (state) => {
+        state.loading = true;
+        state.message = "Accepting Delete Coin Label..";
+      })
+      .addCase(DeleteCoinLabel.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        // state.singleData = action.payload;
+        state.message = "Delete Coin Label  SuccessFully";
+      })
+      .addCase(DeleteCoinLabel.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = action.payload?.message || "Failed To Delete Coin Label";
       })
 
   },

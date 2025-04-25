@@ -5,27 +5,38 @@ import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
 import { Modal } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { CoinLabelData, CreateCoinLabel, EditCoinLabel, SingleCoinLabel } from '../../Toolkit/Slices/CoinLabelSlice'
+import { CoinLabelData, CreateCoinLabel, DeleteCoinLabel, EditCoinLabel, SingleCoinLabel } from '../../Toolkit/Slices/CoinLabelSlice'
 import { useFormik } from 'formik'
-import { CreateLableSchema } from '../Formik'
+import { CreateLableSchema, EditLableSchema } from '../Formik'
 
 const CoinLabel = () => {
 
+let itemPerPage = 10;
 const [coinAdd, setCoinAdd] = useState(false)
 const [coinEdit, setCoinEdit] = useState(false)
 const [coinDelete, setCoinDelete] = useState(false)
-const totalPages = 10;
 const [currentPage, setCurrentPage] = useState(1);
 const allData =  useSelector((state)=> state?.coinLabel?.coinLaData)
 const dispatch = useDispatch()
 const singleData =  useSelector((state)=> state?.coinLabel?.singleData)
-console.log("zzzzzzzz" , singleData);
+const [EditId, setEditId] = useState(null)
+const [currentData,setCurrentData] = useState([]);
 
 
 useEffect(()=>{
   dispatch(CoinLabelData())
 },[])
 
+let totalPages = Math.ceil(allData?.length / itemPerPage);
+
+useEffect(() => {
+  console.log("bbbbbbbbbb" , allData);
+  
+  const startIndex = (currentPage - 1) * itemPerPage;
+  const endIndex = startIndex + itemPerPage;
+  const paginatedData = allData?.slice(startIndex, endIndex);
+  setCurrentData(paginatedData);
+}, [currentPage, allData]);
 
 const handlePageChange = (page) => {
   if (page >= 1 && page <= totalPages) {
@@ -122,13 +133,12 @@ const editLabel = {
 const EditLabelFromik = useFormik({
   enableReinitialize: true,
   initialValues:editLabel,
-  validationSchema:CreateLableSchema,
-  onSubmit:((value , action)=>{
-     // console.log("ccccccccccc" , value);
-     dispatch(CreateCoinLabel(value)).then((response)=>{
+  validationSchema:EditLableSchema,
+  onSubmit:((values , action)=>{
+     dispatch(EditCoinLabel({values , EditId})).then((response)=>{
          if(response?.payload){
            setCoinEdit(false)
-           dispatch(EditCoinLabel())
+           dispatch(CoinLabelData())
          }  
          else{
            setCoinEdit(true)
@@ -137,6 +147,13 @@ const EditLabelFromik = useFormik({
     action.resetForm()
   })
 })
+
+const handleDeleteLabel = () => {
+   dispatch(DeleteCoinLabel(EditId)).then((response)=>{
+     setCoinDelete(false)
+     dispatch(CoinLabelData())
+  })
+}
 
   return (
     <div className='ds_dash_master'>
@@ -163,18 +180,18 @@ const EditLabelFromik = useFormik({
                       </tr>
                     </thead>
                     <tbody>
-                      {allData?.map((element , index)=>{
+                      {currentData?.map((element , index)=>{
                         // console.log(element);
                         return(
                           <tr key={element?._id}>
-                            <td>{index+1}</td>
+                            <td>{((currentPage - 1) * 10) +( index + 1 )}</td>
                             <td>{element?.labelName}</td>
                             <td>
-                              <span className='ds_role_icon ds_cursor me-2' onClick={()=> {setCoinEdit(true) ; dispatch(SingleCoinLabel(element._id))}}>
+                              <span className='ds_role_icon ds_cursor me-2' onClick={()=> {setCoinEdit(true) ; dispatch(SingleCoinLabel(element._id)); setEditId(element._id)}}>
                                 <img src={pen} alt=""  />
                               </span>
-                              <span className='ds_role_icon ds_cursor' onClick={()=> setCoinDelete(true)}>
-                                <img src={trash} alt="" />
+                              <span className='ds_role_icon ds_cursor' onClick={()=>{  setCoinDelete(true) ; setEditId(element._id)}}>
+                                   <img src={trash} alt="" />
                               </span>
                             </td>
                           </tr>
@@ -238,10 +255,11 @@ const EditLabelFromik = useFormik({
               <div>
                  <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Label</label>
                  <input type="text" name='editLabelName' value={EditLabelFromik.values.editLabelName} onChange={EditLabelFromik.handleChange} onBlur={EditLabelFromik.handleBlur} className="form-control ds_role_input" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                 <p className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{EditLabelFromik.errors.editLabelName}</p>
               </div>
               <div className='mt-5 mb-3'>
                 <div className='text-center'>
-                   <button className='ds_role_save'>Save</button>
+                   <button type='submit' className='ds_role_save'>Save</button>
                    <button className='ds_sub_cancel' onClick={()=> setCoinEdit(false)}>Clear</button>
                 </div>
               </div>
@@ -257,7 +275,7 @@ const EditLabelFromik = useFormik({
                <p className='ds_role_text'>Are you sure you want to delete Coin Label?</p>
                <div className='mt-5 mb-5'>
                  <button className='ds_delete_cancel' onClick={()=> setCoinDelete(false)}>Cancel</button>
-                 <button className='ds_delete_yes'>Yes</button>
+                 <button className='ds_delete_yes' onClick={handleDeleteLabel}>Yes</button>
                </div>
             </div>
          </Modal.Body>

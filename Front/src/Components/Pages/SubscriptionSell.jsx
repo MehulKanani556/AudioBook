@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
@@ -6,6 +6,8 @@ import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
+import { useDispatch, useSelector } from 'react-redux'
+import { SubSellData } from '../../Toolkit/Slices/SubscriptionSellSlice'
 
 const SubscriptionSell = () => {
 
@@ -13,7 +15,12 @@ const SubscriptionSell = () => {
 
     const [viewSubscriptionSell, setViewSubscriptionSell] = useState(false);
     const [removeSubscriptionSell, setRemoveSubscriptionSell] = useState(false);
-
+    const dispatch = useDispatch()
+    const subData = useSelector((state)=> state.subSell.subSellDat)
+    
+    useEffect(()=>{
+        dispatch(SubSellData())
+    },[])
 
     const totalPages = 10;
     const [currentPage, setCurrentPage] = useState(1);
@@ -95,7 +102,7 @@ const SubscriptionSell = () => {
                             <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Subscription Sell</span></p>
                         </div>
                         <div>
-                            <button className='V_review_btn1' onClick={() => navigate('/layout/addSubscriptionSell')} ><i className="fa-solid fa-plus me-2"></i> Add</button>
+                            <button className='V_review_btn1' onClick={() => navigate('/admin/addSubscriptionSell')} ><i className="fa-solid fa-plus me-2"></i> Add</button>
                         </div>
                     </div>
 
@@ -115,26 +122,31 @@ const SubscriptionSell = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>01</td>
-                                        <td>9685</td>
-                                        <td>Johnwick08</td>
-                                        <td>20/09/02020</td>
-                                        <td>₹99</td>
-                                        <td>9658</td>
-                                        <td><span className='ds_sub_active'>Active</span></td>
-                                        <td className=''>
-                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewSubscriptionSell(true)} >
-                                                <img src={eye} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => navigate('/layout/editSubscriptionSell')} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveSubscriptionSell(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr>
+                                    {subData?.map((element)=>{
+                                         console.log(element);
+                                         return(
+                                            <tr key={element._id}>
+                                               <td>01</td>
+                                               <td>{element?.subscriptionData[0]?._id}</td>
+                                               <td>{element?._id}</td>
+                                               <td>20/09/02020</td>
+                                               <td>₹99</td>
+                                               <td>9658</td>
+                                               <td><span className='ds_sub_active'>Active</span></td>
+                                               <td className=''>
+                                                   <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewSubscriptionSell(true)} >
+                                                       <img src={eye} alt="" />
+                                                   </span>
+                                                   <span className='ds_role_icon ds_cursor me-2' onClick={() => navigate('/layout/editSubscriptionSell')} >
+                                                       <img src={pen} alt="" />
+                                                   </span>
+                                                   <span className='ds_role_icon ds_cursor' onClick={() => setRemoveSubscriptionSell(true)} >
+                                                       <img src={trash} alt="" />
+                                                   </span>
+                                               </td>
+                                            </tr>
+                                         )
+                                    })}
                                     <tr>
                                         <td>01</td>
                                         <td>9685</td>

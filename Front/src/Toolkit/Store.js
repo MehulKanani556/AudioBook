@@ -4,6 +4,7 @@ import profileReducer from "./Slices/EditProfileSlice";
 import CoinLabelSlice from "./Slices/CoinLabelSlice";
 import roleReducer from "./Slices/RoleSlice"
 import subscriptionReducer from "./Slices/SubscriptionSlice";
+import SubscriptionSellSlice from './Slices/SubscriptionSellSlice'
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     editProfile: profileReducer,
     role: roleReducer,
     subscription: subscriptionReducer,
-    coinLabel:CoinLabelSlice
+    coinLabel:CoinLabelSlice,
+    subSell:SubscriptionSellSlice
   },
 });
