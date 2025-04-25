@@ -2,25 +2,15 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 const API_URL = "http://localhost:4000/api";
 
-export const getRole = createAsyncThunk(
-    "getRole",
+export const getCoinMaster = createAsyncThunk(
+    "getCoinMaster",
     async (_, { rejectWithValue }) => {
       try {
-        const response = await axios.get(`${API_URL}/getAllRoles`,);
+        const response = await axios.get(`${API_URL}/getAllCoinMaster`,);
         console.log("Resposnse" , response.data.data);
-        if(response.data.success){
-          return response.data.data
-        }
-        else {
-          return[];
-        }
+        return response.data.data
       } catch (error) {
         console.error("LoginAdmin Error:", error.message);
-        if(error.status === 404){
-          console.error("Get Coin Label Error:", error.status);
-          var data =[];
-          return data;
-          }
         return rejectWithValue(
           error.response?.data || { message: "Unexpected error occurred" }
         );
@@ -28,22 +18,23 @@ export const getRole = createAsyncThunk(
     }
   );
 
-export const addRole=createAsyncThunk(
-    'addRole',
-    async(roleName,{rejectWithValue})=>{
-        try {
-        const response = await axios.post(`${API_URL}/createRole`,{
-            roleName
-        });
-        console.log("Resposnse" , response.data.data);
+export const addCoinMaster=createAsyncThunk(
+    'addCoinMaster',
+    async(coinMasterData,{rejectWithValue})=>{
+        console.log(coinMasterData);
+    //     try {
+    //     const response = await axios.post(`${API_URL}/createCoinMaster`,{
+            
+    //     });
+    //     console.log("Resposnse" , response.data.data);
         
-        return response.data
-      } catch (error) {
-        console.error("LoginAdmin Error:", error.message);
-        return rejectWithValue(
-          error.response?.data || { message: "Unexpected error occurred" }
-        );
-      }
+    //     return response.data
+    //   } catch (error) {
+    //     console.error("LoginAdmin Error:", error.message);
+    //     return rejectWithValue(
+    //       error.response?.data || { message: "Unexpected error occurred" }
+    //     );
+    //   }
     }
 )
 
@@ -82,21 +73,21 @@ export const updateRole = createAsyncThunk(
       }
     }
   );
-const roleAdminSlice = createSlice({
-  name: "role",
+const CoinMasterSlice = createSlice({
+  name: "CoinMaster",
   initialState: {
-    role:[],
+    coinMaster:[],
   },
   reducers: {
    
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getRole.fulfilled, (state,action) => {
-        state.role = action.payload;
+      .addCase(getCoinMaster.fulfilled, (state,action) => {
+        state.coinMaster = action.payload;
         console.log('data',state.role)
       })
       },
 });
 
-export default roleAdminSlice.reducer;
+export default CoinMasterSlice.reducer;

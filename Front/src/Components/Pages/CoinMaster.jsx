@@ -1,18 +1,41 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
 import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import '../../CSS/CoinMaster.css'
 import { Modal } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { getCoinMaster } from '../../Toolkit/Slices/CoinMasterSlice'
 
 const CoinMaster = () => {
 
  const navigate = useNavigate()
- const totalPages = 10;
  const [currentPage, setCurrentPage] = useState(1);
  const [coinEye, setCoinEye] = useState(false)
  const [coinRemove, setCoinRemove] = useState(false)
+ const [currentData,setCurrentData] = useState([]);
+
+//  backend implementation code here
+const dispatch = useDispatch();
+const coinMasterData = useSelector((state) => state.coinMaster.coinMaster);
+const itemPerPage =10;
+var totalPages = Math.ceil(coinMasterData.length / itemPerPage);
+
+
+useEffect(() => {
+  dispatch(getCoinMaster())
+}, [])
+
+
+// pagination code handling
+useEffect(() => {
+  const startIndex = (currentPage - 1) * itemPerPage;
+  const endIndex = startIndex + itemPerPage;
+  const paginatedData = coinMasterData.slice(startIndex, endIndex);
+  setCurrentData(paginatedData);
+}, [currentPage, coinMasterData]);
+
 
 const handlePageChange = (page) => {
   if (page >= 1 && page <= totalPages) {
@@ -36,50 +59,55 @@ const renderPagination = () => {
   let pages = [];
 
   pages.push(
-      <div
-          key="prev"
-          className={`V_pagination text-center ${currentPage === 1 ? "disabled" : ""}`}
-          onClick={handlePrev}
-      >
-          Prev
-      </div>
+    <div
+      key="prev"
+      className={`V_pagination text-center ${currentPage === 1 ? "disabled" : ""}`}
+      onClick={handlePrev}
+    >
+      Prev
+    </div>
   );
 
   for (let i = 1; i <= totalPages; i++) {
-      if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 1) {
-          pages.push(
-              <div
-                  key={i}
-                  onClick={() => handlePageChange(i)}
-                  className={`text-center ${currentPage === i ? "V_pagination1" : "V_pagination"}`}
-              >
-                  {i}
-              </div>
-          );
-      } else if (
-          (i === currentPage - 2 && currentPage > 3) ||
-          (i === currentPage + 2 && currentPage < totalPages - 2)
-      ) {
-          pages.push(
-              <div key={`dots-${i}`} className="V_pagination text-center">
-                  ...
-              </div>
-          );
-      }
+    if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 1) {
+      pages.push(
+        <div
+          key={i}
+          onClick={() => handlePageChange(i)}
+          className={`text-center ${currentPage === i ? "V_pagination1" : "V_pagination"}`}
+        >
+          {i}
+        </div>
+      );
+    } else if (
+      (i === currentPage - 2 && currentPage > 3) ||
+      (i === currentPage + 2 && currentPage < totalPages - 2)
+    ) {
+      pages.push(
+        <div key={`dots-${i}`} className="V_pagination text-center">
+          ...
+        </div>
+      );
+    }
   }
 
   pages.push(
-      <div
-          key="next"
-          className={`V_pagination text-center ${currentPage === totalPages ? "disabled" : ""}`}
-          onClick={handleNext}
-      >
-          Next
-      </div>
+    <div
+      key="next"
+      className={`V_pagination text-center ${currentPage === totalPages ? "disabled" : ""}`}
+      onClick={handleNext}
+    >
+      Next
+    </div>
   );
-
+  // const startIndex = (currentPage - 1) * itemPerPage;
+  // const endIndex = startIndex + itemPerPage;
+  // const paginatedData = roleData.slice(startIndex, endIndex);
+  // console.log(paginatedData);
+  // setCurrentData(paginatedData);
   return pages;
 };
+
 
   return (
     <div className='ds_dash_master'>
@@ -112,16 +140,18 @@ const renderPagination = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>01</td>
-                            <td>Coin Name</td>
-                            <td>₹99</td>
-                            <td>Coin Name</td>
-                            <td>Label ID</td>
-                            <td>03:31</td>
-                            <td>20/09/02020</td>
+                        {currentData.map((ele,ind)=>{
+                          return(
+                            <tr>
+                            <td>{((currentPage - 1) * 10) +( ind + 1 )}</td>
+                            <td>{ele.coin}</td>
+                            <td>₹{ele.payment}</td>
+                            <td>{ele.freeCoins}</td>
+                            <td>{ele.labelId}</td>
+                            <td>{ele.isOneTime}</td>
+                            <td>{ele.validTill}</td>
                             <td>
-                               <span className='ds_sub_active'>Active</span>
+                               <span className='ds_sub_active'>{ele.status}</span>
                             </td>
                             <td>
                             <span className='ds_sub_eye ds_cursor me-2' onClick={()=> setCoinEye(true)} >
@@ -135,30 +165,8 @@ const renderPagination = () => {
                               </span>
                             </td>
                           </tr>
-    
-                          <tr>
-                            <td>01</td>
-                            <td>Coin Name</td>
-                            <td>₹99</td>
-                            <td>Coin Name</td>
-                            <td>Label ID</td>
-                            <td>03:31</td>
-                            <td>20/09/02020</td>
-                            <td>
-                               <span className='ds_sub_block'>Block</span>
-                            </td>
-                            <td>
-                            <span className='ds_sub_eye ds_cursor me-2' onClick={()=> setCoinEye(true)} >
-                                <img src={eye} alt=""  />
-                            </span>
-                              <span className='ds_role_icon ds_cursor me-2' onClick={()=> navigate("/layout/editcoinmaster")} >
-                                <img src={pen} alt=""  />
-                              </span>
-                              <span className='ds_role_icon ds_cursor' onClick={()=> setCoinRemove(true)}>
-                                <img src={trash} alt="" />
-                              </span>
-                            </td>
-                          </tr>
+                          )
+                        })}
                         </tbody>
                       </table>
                     </div>
