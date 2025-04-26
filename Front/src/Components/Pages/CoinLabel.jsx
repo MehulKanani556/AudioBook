@@ -30,7 +30,6 @@ useEffect(()=>{
 let totalPages = Math.ceil(allData?.length / itemPerPage);
 
 useEffect(() => {
-  console.log("bbbbbbbbbb" , allData);
   
   const startIndex = (currentPage - 1) * itemPerPage;
   const endIndex = startIndex + itemPerPage;
