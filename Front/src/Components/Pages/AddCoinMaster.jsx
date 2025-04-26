@@ -1,13 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../CSS/CoinMaster.css'
 import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik';
 import { coinMasterSchema } from '../Formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addCoinMaster } from '../../Toolkit/Slices/CoinMasterSlice';
+import { CoinLabelData } from '../../Toolkit/Slices/CoinLabelSlice';
 
 const AddCoinMaster = () => {
-
+   const navigate = useNavigate();
+   const labelData= useSelector((state)=> state.coinLabel.coinLaData);
+   const dispatch = useDispatch();
+   useEffect(()=>{
+      dispatch(CoinLabelData());
+   },[])
    const coinMasterVal = {
       coin: "",
       payment: "",
@@ -17,28 +23,23 @@ const AddCoinMaster = () => {
       validTill: "",
       status: "",
    };
-   const dispatch = useDispatch();
 
    const coinMasterFormik = useFormik({
       initialValues: coinMasterVal,
       validationSchema: coinMasterSchema,
       onSubmit: (values) => {
-         dispatch(addCoinMaster(values))
-         //   console.log(values)
-         //   dispatch(addRole(values.role)).then((response)=>{
-         //     console.log(response)
-         //     if(response.payload.success){
-         //       setAdd(false);
-         //       dispatch(getRole());
-         //     }
-         //   })
+         dispatch(addCoinMaster(values)).then((response)=>{
+                console.log(response.payload.success)
+                if(response.payload.success){
+                  navigate('/admin/coinmaster')
+               }
+              })
       }
    })
    const [toggle, setToggle] = useState(false)
    const [redioVal, setRedioVal] = useState("Active")
    const [subCheck, setSubCheck] = useState(true)
-
-
+   
    return (
       <div className='ds_dash_master'>
          <div className='ds_dash_main'>
@@ -78,9 +79,16 @@ const AddCoinMaster = () => {
                      <div className="col-xl-6 col-lg-6 mt-4">
                         <div>
                            <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Label ID</label>
-                           <input type='text'  name='labelID' value={coinMasterFormik.values.labelID}
+                           <select type='text'  name='labelID' value={coinMasterFormik.values.labelID}
                               onChange={coinMasterFormik.handleChange}
-                                className="form-control ds_role_input"   />
+                                className="form-control ds_role_input" >
+                                 <option>select Label</option>
+                                 {labelData.map((ele,id)=>{
+                                    return (
+                                       <option value={ele._id}>{ele.labelName}</option>
+                                    )
+                                 })}
+                           </select>
                            <p className='text-danger mb-0 text-start ps-1 pt-1 text-capitalize' style={{ fontSize: "14px" }}>{coinMasterFormik.errors.labelID}</p>
                         </div>
                      </div>
@@ -96,7 +104,7 @@ const AddCoinMaster = () => {
                      <div className="col-xl-6 col-lg-6 mt-4">
                         <div>
                            <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Valid till</label>
-                           <input type='text' name='validTill' value={coinMasterFormik.values.validTill}
+                           <input type='date' name='validTill' value={coinMasterFormik.values.validTill}
                               onChange={coinMasterFormik.handleChange}
                               className="form-control ds_role_input"  />
                               <p className='text-danger mb-0 text-start ps-1 pt-1 text-capitalize' style={{ fontSize: "14px" }}>{coinMasterFormik.errors.validTill}</p>
@@ -125,9 +133,7 @@ const AddCoinMaster = () => {
                            </div>
                         </div>
                      </div>
-
                   </div>
-
                   <div className='text-center mt-5 pt-lg-5 mb-lg-0 pb-4'>
                      <button type='submit' className='ds_role_save'>Save</button>
                      <button className='ds_sub_cancel'>Clear</button>

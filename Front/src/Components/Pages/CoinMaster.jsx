@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../../CSS/CoinMaster.css'
 import { Modal } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCoinMaster } from '../../Toolkit/Slices/CoinMasterSlice'
+import { deleteCoinMaster, getCoinMaster } from '../../Toolkit/Slices/CoinMasterSlice'
 
 const CoinMaster = () => {
 
@@ -15,7 +15,8 @@ const CoinMaster = () => {
  const [coinEye, setCoinEye] = useState(false)
  const [coinRemove, setCoinRemove] = useState(false)
  const [currentData,setCurrentData] = useState([]);
-
+ const [deleteId, setDeleteId] = useState('');
+ const [selectData,setSelectData] =useState(null);
 //  backend implementation code here
 const dispatch = useDispatch();
 const coinMasterData = useSelector((state) => state.coinMaster.coinMaster);
@@ -27,7 +28,15 @@ useEffect(() => {
   dispatch(getCoinMaster())
 }, [])
 
-
+const handleDelete=()=>{
+  dispatch(deleteCoinMaster(deleteId)).then((response)=>{
+    console.log(response);
+    if(response.payload.success)
+      {
+        setCoinRemove(false);
+        dispatch(getCoinMaster())
+      }})
+}
 // pagination code handling
 useEffect(() => {
   const startIndex = (currentPage - 1) * itemPerPage;
@@ -57,7 +66,6 @@ const handleNext = () => {
 
 const renderPagination = () => {
   let pages = [];
-
   pages.push(
     <div
       key="prev"
@@ -116,10 +124,10 @@ const renderPagination = () => {
                 <div className='d-flex justify-content-between align-items-center'>
                         <div>
                            <h4 className="text-light pt-4 mb-0">Coin Master</h4>
-                           <p><Link to="/layout/dashboard" className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Coin Master</span></p>
+                           <p><Link to="/admin/dashboard" className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Coin Master</span></p>
                         </div>
                        <div>
-                         <button className='ds_role_btn' onClick={()=>navigate("/layout/addcoinmaster")} ><i className="fa-solid fa-plus me-2"></i> Add</button>
+                         <button className='ds_role_btn' onClick={()=>navigate("/admin/addcoinmaster")} ><i className="fa-solid fa-plus me-2"></i> Add</button>
                        </div>
                     </div>
     
@@ -147,20 +155,20 @@ const renderPagination = () => {
                             <td>{ele.coin}</td>
                             <td>₹{ele.payment}</td>
                             <td>{ele.freeCoins}</td>
-                            <td>{ele.labelId}</td>
+                            <td>{ele?.coinLabelData?.[0]?.labelName || '-'}</td>
                             <td>{ele.isOneTime}</td>
                             <td>{ele.validTill}</td>
                             <td>
-                               <span className='ds_sub_active'>{ele.status}</span>
+                               <span className={ele.status === 'Active' ? 'ds_sub_active' : 'ds_sub_block'}>{ele.status}</span>
                             </td>
                             <td>
-                            <span className='ds_sub_eye ds_cursor me-2' onClick={()=> setCoinEye(true)} >
+                            <span className='ds_sub_eye ds_cursor me-2' onClick={()=> {setCoinEye(true);setSelectData(ele)}} >
                                 <img src={eye} alt=""  />
                             </span>
-                              <span className='ds_role_icon ds_cursor me-2' onClick={()=> navigate("/layout/editcoinmaster")} >
+                              <span className='ds_role_icon ds_cursor me-2' onClick={()=> navigate("/admin/editcoinmaster/"+ele._id)} >
                                 <img src={pen} alt=""  />
                               </span>
-                              <span className='ds_role_icon ds_cursor' onClick={()=> setCoinRemove(true)}>
+                              <span className='ds_role_icon ds_cursor' onClick={()=> {setCoinRemove(true); setDeleteId(ele._id)}}>
                                 <img src={trash} alt="" />
                               </span>
                             </td>
@@ -191,6 +199,7 @@ const renderPagination = () => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            {/* {console.log(se)} */}
             <div>
               <div className="row">
                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
@@ -225,13 +234,13 @@ const renderPagination = () => {
                  </div>
                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                    <div>
-                      <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >Coin Name</h5>
-                      <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >₹99</h5>
-                      <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >Coin Name</h5>
-                      <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >Label ID</h5>
-                      <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >03:31</h5>
-                      <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >20/09/02020</h5>
-                      <h5 className='text-light ds_coin_master_text' style={{fontWeight:"400"}} >Active</h5>
+                      <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >{selectData?.coin}</h5>
+                      <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >{selectData?.payment}</h5>
+                      <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >{selectData?.freeCoins}</h5>
+                      <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >{selectData?.coinLabelData?.[0]?.labelName || '-'}</h5>
+                      <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >{selectData?.isOneTime}</h5>
+                      <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >{selectData?.validTill}</h5>
+                      <h5 className='text-light ds_coin_master_text' style={{fontWeight:"400"}} >{selectData?.status}</h5>
                    </div>
                  </div>
               </div>
@@ -247,7 +256,7 @@ const renderPagination = () => {
                <p className='ds_role_text'>Are you sure you want to delete Subscription ?</p>
                <div className='mt-5 mb-5'>
                  <button className='ds_delete_cancel' onClick={()=> setCoinRemove(false)}>Cancel</button>
-                 <button className='ds_delete_yes'>Yes</button>
+                 <button className='ds_delete_yes' onClick={()=>{handleDelete()}}>Yes</button>
                </div>
             </div>
          </Modal.Body>

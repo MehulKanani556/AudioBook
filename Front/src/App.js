@@ -62,7 +62,7 @@ const App = () => {
         <Route path="coinlabel" element={<CoinLabel />} />
         <Route path="coinmaster" element={<CoinMaster />} />
         <Route path="addcoinmaster" element={<AddCoinMaster />} />
-        <Route path="editcoinmaster" element={<EditCoinMaster />} />
+        <Route path="editcoinmaster/:id" element={<EditCoinMaster />} />
         <Route path="usermaster" element={<UserMaster />} />
         <Route path="addusermaster" element={<AddUserMaster />} />
         <Route path="editusermaster" element={<EditUserMaster />} />
