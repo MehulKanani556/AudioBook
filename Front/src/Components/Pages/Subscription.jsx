@@ -90,7 +90,6 @@ const Subscription = () => {
     },
   });
 
-
   const addSubscriptionVal = {
     name: "",
     discount: "",
@@ -479,7 +478,10 @@ const Subscription = () => {
                               checked={redioVal === "Active"}
                               onChange={() => setRedioVal("Active")}
                             />
-                            <label className="form-check-label" htmlFor="addActive">
+                            <label
+                              className="form-check-label"
+                              htmlFor="addActive"
+                            >
                               Active
                             </label>
                           </div>
@@ -493,7 +495,10 @@ const Subscription = () => {
                               checked={redioVal === "Block"}
                               onChange={() => setRedioVal("Block")}
                             />
-                            <label className="form-check-label" htmlFor="addBlock">
+                            <label
+                              className="form-check-label"
+                              htmlFor="addBlock"
+                            >
                               Block
                             </label>
                           </div>
@@ -505,11 +510,7 @@ const Subscription = () => {
               </div>
               <div className="mt-5 mb-3">
                 <div className="text-center">
-                  <button
-                    type="submit"
-                    className="ds_role_save"
-                    onClick={() => setSubAdd(false)}
-                  >
+                  <button type="submit" className="ds_role_save">
                     Save
                   </button>
                   <button

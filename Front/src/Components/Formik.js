@@ -85,11 +85,13 @@ export const changePassSchema = Yup.object().shape({
 
 export const editSubscriptionSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
-  discount: Yup.number()
-    .typeError("Discount must be a number")
-    .min(0, "Discount cannot be negative")
-    .max(100, "Discount cannot exceed 100%")
-    .required("discount is required"),
+  discount: Yup.string()
+    .test("is-valid-percentage", "Invalid percentage format", (value) => {
+      if (!value) return false;
+      const numValue = parseFloat(value.replace("%", ""));
+      return !isNaN(numValue) && numValue >= 0 && numValue <= 100;
+    })
+    .required("Discount is required"),
   scratchPrice: Yup.number()
     .typeError("Scratch price must be a number")
     .min(0, "Scratch price cannot be negative")
@@ -113,11 +115,13 @@ export const coinMasterSchema = Yup.object({
 
 export const addSubscriptionSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
-  discount: Yup.number()
-    .typeError("Discount must be a number")
-    .min(0, "Discount cannot be negative")
-    .max(100, "Discount cannot exceed 100%")
-    .required("discount is required"),
+  discount: Yup.string()
+    .test("is-valid-percentage", "Invalid percentage format", (value) => {
+      if (!value) return false;
+      const numValue = parseFloat(value.replace("%", ""));
+      return !isNaN(numValue) && numValue >= 0 && numValue <= 100;
+    })
+    .required("Discount is required"),
   scratchPrice: Yup.number()
     .typeError("Scratch price must be a number")
     .min(0, "Scratch price cannot be negative")
@@ -130,6 +134,40 @@ export const addSubscriptionSchema = Yup.object().shape({
 });
 
 export const editUserMasterSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required")
+    .matches(
+      /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+      "Invalid email format"
+    ),
+  phone: Yup.string()
+    .required("Mobile number is required")
+    .matches(/^[0-9]{10}$/, "Mobile number must be 10 digits")
+    .matches(/^[6-9]\d{9}$/, "Mobile number must start with 6-9"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+  roleId: Yup.string().required("Role ID is required"),
+  bio: Yup.string().required("Bio is required"),
+  age: Yup.number()
+    .required("Age is required")
+    .positive("Age must be positive")
+    .integer("Age must be an integer"),
+  occupation: Yup.string().required("Occupation is required"),
+  studentVerificationStatus: Yup.string().required(
+    "Verification status is required"
+  ),
+  studentIdImage: Yup.string().required("StudentIdImage is required"),
+  coins: Yup.number()
+    .min(0, "Coins cannot be negative")
+    .required("Coins is required"),
+  language: Yup.string().required("Language is required"),
+  image: Yup.string().required("Image is required"),
+  status: Yup.string().required("Status is required"),
+});
+
+export const addUserMasterSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required")

@@ -55,19 +55,21 @@ export const addSubscriptionData = createAsyncThunk(
   async (addSubs, { rejectWithValue }) => {
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.post(`${API_URL}/createSubScription`,
-      {
-        name: addSubs.name,
-        dicount: addSubs.discount,
-        scratchPrice: addSubs.scratchPrice,
-        price: addSubs.price,
-        status: addSubs.status
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await axios.post(
+        `${API_URL}/createSubScription`,
+        {
+          name: addSubs.name,
+          dicount: addSubs.discount,
+          scratchPrice: addSubs.scratchPrice,
+          price: addSubs.price,
+          status: addSubs.status,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       return response.data.data;
     } catch (error) {
       console.error("LoginAdmin Error:", error.message);
@@ -141,7 +143,7 @@ const SubscriptionSlice = createSlice({
     singlesubscription: [],
     editSubscription: [],
     deleteSubscription: [],
-    addSubscription:[],
+    addSubscription: [],
     loading: false,
     success: false,
     message: "",

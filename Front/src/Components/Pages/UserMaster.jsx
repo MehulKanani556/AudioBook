@@ -9,6 +9,7 @@ import { Modal } from "react-bootstrap";
 import bigimg from "../../Images/dhruvin/big_img.png";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  deleteUserMasterData,
   getAllUserMasterData,
   singleUserMasterData,
 } from "../../Toolkit/Slices/UserMasterSlice";
@@ -20,6 +21,16 @@ const UserMaster = () => {
   const [userDetail, setUserDetail] = useState(false);
   const [userDelete, setUserDelete] = useState(false);
 
+  const [deleteUserMater, setDeleteUserMater] = useState(null);
+  const hadleDelete = () => {
+    disPatch(deleteUserMasterData(deleteUserMater)).then((response) => {
+      console.log(response);
+      if (response.payload.status === 200) {
+        disPatch(getAllUserMasterData());
+        setUserDelete(false);
+      }
+    });
+  };
   const disPatch = useDispatch();
 
   const getAllUserMaster = useSelector(
@@ -163,59 +174,67 @@ const UserMaster = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {getAllUserMaster.map((e, index) => (
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>
-                        <img
-                          src={"http://localhost:4000/" + e?.image}
-                          className="ds_user_master_img"
-                          alt=""
-                        />
-                      </td>
-                      <td>{e.email}</td>
-                      <td>{e.mobileNo}</td>
-                      <td>-</td>
-                      <td>{e.roleId}</td>
-                      <td>{e.bio}</td>
-                      <td>{e.age}</td>
-                      <td>{e.occupation}</td>
-                      <td>
-                        <span className="ds_user_master_pending">
-                          {e.studentVerificationStatus}
-                        </span>
-                      </td>
-                      <td>{e.studentIdImage}</td>
-                      <td>{e.coins}</td>
-                      <td>{e.language}</td>
-                      <td>
-                        <span className="ds_sub_active">{e.status}</span>
-                      </td>
-                      <td className="d-flex">
-                        <span
-                          className="ds_sub_eye ds_cursor me-2"
-                          onClick={() => {
-                            setUserDetail(true);
-                            singleUserMaster(e._id);
-                          }}
-                        >
-                          <img src={eye} alt="" />
-                        </span>
-                        <span
-                          className="ds_role_icon ds_cursor me-2"
-                          onClick={() => navigate("/admin/editusermaster")}
-                        >
-                          <img src={pen} alt="" />
-                        </span>
-                        <span
-                          className="ds_role_icon ds_cursor"
-                          onClick={() => setUserDelete(true)}
-                        >
-                          <img src={trash} alt="" />
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
+                  {getAllUserMaster.map(
+                    (e, index) => (
+                      console.log("http://localhost:4000/" + e?.image),
+                      (
+                        <tr>
+                          <td>{index + 1}</td>
+                          <td>
+                            <img
+                              src={"http://localhost:4000/" + e?.image}
+                              className="ds_user_master_img"
+                              alt=""
+                            />
+                          </td>
+                          <td>{e.email}</td>
+                          <td>{e.mobileNo}</td>
+                          <td>-</td>
+                          <td>{e.roleId}</td>
+                          <td>{e.bio}</td>
+                          <td>{e.age}</td>
+                          <td>{e.occupation}</td>
+                          <td>
+                            <span className="ds_user_master_pending">
+                              {e.studentVerificationStatus}
+                            </span>
+                          </td>
+                          <td>{e.studentIdImage}</td>
+                          <td>{e.coins}</td>
+                          <td>{e.language}</td>
+                          <td>
+                            <span className="ds_sub_active">{e.status}</span>
+                          </td>
+                          <td className="d-flex">
+                            <span
+                              className="ds_sub_eye ds_cursor me-2"
+                              onClick={() => {
+                                setUserDetail(true);
+                                singleUserMaster(e._id);
+                              }}
+                            >
+                              <img src={eye} alt="" />
+                            </span>
+                            <span
+                              className="ds_role_icon ds_cursor me-2"
+                              onClick={() => navigate("/admin/editusermaster")}
+                            >
+                              <img src={pen} alt="" />
+                            </span>
+                            <span
+                              className="ds_role_icon ds_cursor"
+                              onClick={() => {
+                                setUserDelete(true);
+                                setDeleteUserMater(e._id);
+                              }}
+                            >
+                              <img src={trash} alt="" />
+                            </span>
+                          </td>
+                        </tr>
+                      )
+                    )
+                  )}
 
                   {/* <tr>
                     <td>01</td>
@@ -293,268 +312,299 @@ const UserMaster = () => {
         <Modal.Body>
           <div>
             {getSingleUserMaster.map((ele) => {
-              <div className="row">
-                <div className="col-xl-3 col-lg-3 col-md-12 mb-lg-0 mb-4 text-lg-start text-center">
-                  <div>
-                    <img src={bigimg} alt="" className="ds_user_master_big" />
-                  </div>
-                </div>
-
-                <div className="col-xl-9 col-lg-9 col-md-12">
-                  <div className="row">
-                    <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5
-                          className="ds_role_text ds_coin_master_text"
-                          style={{ fontWeight: "300" }}
-                        >
-                          Email
-                        </h5>
-                        <h5 className="ds_role_text ds_coin_master_text">:</h5>
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
-                      <h5
-                        className="text-light mb-3 ds_coin_master_text"
-                        style={{ fontWeight: "400" }}
-                      >
-                        {ele.email}
-                      </h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5
-                          className="ds_role_text ds_coin_master_text"
-                          style={{ fontWeight: "300" }}
-                        >
-                          Phone
-                        </h5>
-                        <h5 className="ds_role_text ds_coin_master_text">:</h5>
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
-                      <h5
-                        className="text-light mb-3 ds_coin_master_text"
-                        style={{ fontWeight: "400" }}
-                      >
-                        {ele.mobileNo}
-                      </h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5
-                          className="ds_role_text ds_coin_master_text"
-                          style={{ fontWeight: "300" }}
-                        >
-                          Password
-                        </h5>
-                        <h5 className="ds_role_text ds_coin_master_text">:</h5>
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
-                      <h5
-                        className="text-light mb-3 ds_coin_master_text"
-                        style={{ fontWeight: "400" }}
-                      >
-                        Coin Name
-                      </h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5
-                          className="ds_role_text ds_coin_master_text"
-                          style={{ fontWeight: "300" }}
-                        >
-                          Role ID{" "}
-                        </h5>
-                        <h5 className="ds_role_text ds_coin_master_text">:</h5>
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
-                      <h5
-                        className="text-light mb-3 ds_coin_master_text"
-                        style={{ fontWeight: "400" }}
-                      >
-                        {ele.roleId}
-                      </h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5
-                          className="ds_role_text ds_coin_master_text"
-                          style={{ fontWeight: "300" }}
-                        >
-                          Bio
-                        </h5>
-                        <h5 className="ds_role_text ds_coin_master_text">:</h5>
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
-                      <h5
-                        className="text-light mb-3 ds_coin_master_text"
-                        style={{ fontWeight: "400" }}
-                      >
-                        {ele.bio}
-                      </h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5
-                          className="ds_role_text ds_coin_master_text"
-                          style={{ fontWeight: "300" }}
-                        >
-                          Age
-                        </h5>
-                        <h5 className="ds_role_text ds_coin_master_text">:</h5>
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
-                      <h5
-                        className="text-light mb-3 ds_coin_master_text"
-                        style={{ fontWeight: "400" }}
-                      >
-                        {ele.age}
-                      </h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5
-                          className="ds_role_text ds_coin_master_text"
-                          style={{ fontWeight: "300" }}
-                        >
-                          Occupation
-                        </h5>
-                        <h5 className="ds_role_text ds_coin_master_text">:</h5>
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
-                      <h5
-                        className="text-light mb-3 ds_coin_master_text"
-                        style={{ fontWeight: "400" }}
-                      >
-                        {ele.occupation}
-                      </h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5
-                          className="ds_role_text ds_coin_master_text"
-                          style={{ fontWeight: "300", wordBreak: "break-word" }}
-                        >
-                          Student_verification_status
-                        </h5>
-                        <h5 className="ds_role_text ds_coin_master_text">:</h5>
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
-                      <h5
-                        className="text-light mb-3 ds_coin_master_text"
-                        style={{ fontWeight: "400" }}
-                      >
-                        {ele.studentVerificationStatus}
-                      </h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5
-                          className="ds_role_text ds_coin_master_text"
-                          style={{ fontWeight: "300", wordBreak: "break-word" }}
-                        >
-                          Student_ID_image
-                        </h5>
-                        <h5 className="ds_role_text ds_coin_master_text">:</h5>
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
-                      <h5
-                        className="text-light mb-3 ds_coin_master_text"
-                        style={{ fontWeight: "400" }}
-                      >
-                        {ele.studentIdImage}
-                      </h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5
-                          className="ds_role_text ds_coin_master_text"
-                          style={{ fontWeight: "300" }}
-                        >
-                          Coins
-                        </h5>
-                        <h5 className="ds_role_text ds_coin_master_text">:</h5>
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
-                      <h5
-                        className="text-light mb-3 ds_coin_master_text"
-                        style={{ fontWeight: "400" }}
-                      >
-                        {ele.coins}
-                      </h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5
-                          className="ds_role_text ds_coin_master_text"
-                          style={{ fontWeight: "300" }}
-                        >
-                          Language
-                        </h5>
-                        <h5 className="ds_role_text ds_coin_master_text">:</h5>
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
-                      <h5
-                        className="text-light mb-3 ds_coin_master_text"
-                        style={{ fontWeight: "400" }}
-                      >
-                        {ele.language}
-                      </h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5
-                          className="ds_role_text ds_coin_master_text"
-                          style={{ fontWeight: "300" }}
-                        >
-                          Status
-                        </h5>
-                        <h5 className="ds_role_text ds_coin_master_text">:</h5>
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
-                      <h5
-                        className="text-light mb-3 ds_coin_master_text"
-                        style={{ fontWeight: "400" }}
-                      >
-                        {ele.status}
-                      </h5>
+              return (
+                <div className="row">
+                  <div className="col-xl-3 col-lg-3 col-md-12 mb-lg-0 mb-4 text-lg-start text-center">
+                    <div>
+                      <img src={bigimg} alt="" className="ds_user_master_big" />
                     </div>
                   </div>
 
-                  {/* <div className="row">
+                  <div className="col-xl-9 col-lg-9 col-md-12">
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5
+                            className="ds_role_text ds_coin_master_text"
+                            style={{ fontWeight: "300" }}
+                          >
+                            Email
+                          </h5>
+                          <h5 className="ds_role_text ds_coin_master_text">
+                            :
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
+                        <h5
+                          className="text-light mb-3 ds_coin_master_text"
+                          style={{ fontWeight: "400" }}
+                        >
+                          {ele.email}
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5
+                            className="ds_role_text ds_coin_master_text"
+                            style={{ fontWeight: "300" }}
+                          >
+                            Phone
+                          </h5>
+                          <h5 className="ds_role_text ds_coin_master_text">
+                            :
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
+                        <h5
+                          className="text-light mb-3 ds_coin_master_text"
+                          style={{ fontWeight: "400" }}
+                        >
+                          {ele.mobileNo}
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5
+                            className="ds_role_text ds_coin_master_text"
+                            style={{ fontWeight: "300" }}
+                          >
+                            Password
+                          </h5>
+                          <h5 className="ds_role_text ds_coin_master_text">
+                            :
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
+                        <h5
+                          className="text-light mb-3 ds_coin_master_text"
+                          style={{ fontWeight: "400" }}
+                        >
+                          Coin Name
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5
+                            className="ds_role_text ds_coin_master_text"
+                            style={{ fontWeight: "300" }}
+                          >
+                            Role ID{" "}
+                          </h5>
+                          <h5 className="ds_role_text ds_coin_master_text">
+                            :
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
+                        <h5
+                          className="text-light mb-3 ds_coin_master_text"
+                          style={{ fontWeight: "400" }}
+                        >
+                          {ele.roleId}
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5
+                            className="ds_role_text ds_coin_master_text"
+                            style={{ fontWeight: "300" }}
+                          >
+                            Bio
+                          </h5>
+                          <h5 className="ds_role_text ds_coin_master_text">
+                            :
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
+                        <h5
+                          className="text-light mb-3 ds_coin_master_text"
+                          style={{ fontWeight: "400" }}
+                        >
+                          {ele.bio}
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5
+                            className="ds_role_text ds_coin_master_text"
+                            style={{ fontWeight: "300" }}
+                          >
+                            Age
+                          </h5>
+                          <h5 className="ds_role_text ds_coin_master_text">
+                            :
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
+                        <h5
+                          className="text-light mb-3 ds_coin_master_text"
+                          style={{ fontWeight: "400" }}
+                        >
+                          {ele.age}
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5
+                            className="ds_role_text ds_coin_master_text"
+                            style={{ fontWeight: "300" }}
+                          >
+                            Occupation
+                          </h5>
+                          <h5 className="ds_role_text ds_coin_master_text">
+                            :
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
+                        <h5
+                          className="text-light mb-3 ds_coin_master_text"
+                          style={{ fontWeight: "400" }}
+                        >
+                          {ele.occupation}
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5
+                            className="ds_role_text ds_coin_master_text"
+                            style={{
+                              fontWeight: "300",
+                              wordBreak: "break-word",
+                            }}
+                          >
+                            Student_verification_status
+                          </h5>
+                          <h5 className="ds_role_text ds_coin_master_text">
+                            :
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
+                        <h5
+                          className="text-light mb-3 ds_coin_master_text"
+                          style={{ fontWeight: "400" }}
+                        >
+                          {ele.studentVerificationStatus}
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5
+                            className="ds_role_text ds_coin_master_text"
+                            style={{
+                              fontWeight: "300",
+                              wordBreak: "break-word",
+                            }}
+                          >
+                            Student_ID_image
+                          </h5>
+                          <h5 className="ds_role_text ds_coin_master_text">
+                            :
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
+                        <h5
+                          className="text-light mb-3 ds_coin_master_text"
+                          style={{ fontWeight: "400" }}
+                        >
+                          {ele.studentIdImage}
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5
+                            className="ds_role_text ds_coin_master_text"
+                            style={{ fontWeight: "300" }}
+                          >
+                            Coins
+                          </h5>
+                          <h5 className="ds_role_text ds_coin_master_text">
+                            :
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
+                        <h5
+                          className="text-light mb-3 ds_coin_master_text"
+                          style={{ fontWeight: "400" }}
+                        >
+                          {ele.coins}
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5
+                            className="ds_role_text ds_coin_master_text"
+                            style={{ fontWeight: "300" }}
+                          >
+                            Language
+                          </h5>
+                          <h5 className="ds_role_text ds_coin_master_text">
+                            :
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
+                        <h5
+                          className="text-light mb-3 ds_coin_master_text"
+                          style={{ fontWeight: "400" }}
+                        >
+                          {ele.language}
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5
+                            className="ds_role_text ds_coin_master_text"
+                            style={{ fontWeight: "300" }}
+                          >
+                            Status
+                          </h5>
+                          <h5 className="ds_role_text ds_coin_master_text">
+                            :
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
+                        <h5
+                          className="text-light mb-3 ds_coin_master_text"
+                          style={{ fontWeight: "400" }}
+                        >
+                          {ele.status}
+                        </h5>
+                      </div>
+                    </div>
+
+                    {/* <div className="row">
                       <div className="col-xl-6">
                         <div className='d-flex justify-content-between mb-2'>
                            <h5 className='ds_role_text ds_coin_master_text' style={{fontWeight:"300"}}>Email</h5>
@@ -598,8 +648,8 @@ const UserMaster = () => {
                           <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >Coin Name</h5>
                       </div>
                   </div> */}
-                </div>
-                {/* <div className="col-xl-5 col-lg-5 col-md-6 col-sm-6 col-7">
+                  </div>
+                  {/* <div className="col-xl-5 col-lg-5 col-md-6 col-sm-6 col-7">
                  
                  <div className='d-flex justify-content-between mb-2'>
                     <h5 className='ds_role_text ds_coin_master_text' style={{fontWeight:"300"}}>Phone</h5>
@@ -646,7 +696,7 @@ const UserMaster = () => {
                     <h5 className='ds_role_text ds_coin_master_text'>:</h5>
                  </div>
                </div> */}
-                {/* <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-5">
+                  {/* <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-5">
                  <div>
                     <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >₹99</h5>
                     <h5 className='text-light mb-3 ds_coin_master_text' style={{fontWeight:"400"}} >Coin Name</h5>
@@ -661,7 +711,8 @@ const UserMaster = () => {
                     <h5 className='text-light ds_coin_master_text' style={{fontWeight:"400"}} >Active</h5>
                  </div>
                </div> */}
-              </div>;
+                </div>
+              );
             })}
           </div>
         </Modal.Body>
@@ -689,7 +740,14 @@ const UserMaster = () => {
               >
                 Cancel
               </button>
-              <button className="ds_delete_yes">Yes</button>
+              <button
+                className="ds_delete_yes"
+                onClick={() => {
+                  hadleDelete();
+                }}
+              >
+                Yes
+              </button>
             </div>
           </div>
         </Modal.Body>
