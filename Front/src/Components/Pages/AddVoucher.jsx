@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { voucherSchema } from '../Formik';
 import { getAllSubscriptionData } from '../../Toolkit/Slices/SubscriptionSlice';
+import { addVoucher } from '../../Toolkit/Slices/VoucherSlice';
 
 function AddVoucher() {
 
@@ -17,9 +18,9 @@ function AddVoucher() {
     const navigate = useNavigate();
     const subscriptionData = useSelector((state) => state.subscription.subscription);
     const dispatch = useDispatch();
-    useEffect(()=>{
-       dispatch(getAllSubscriptionData());
-    },[])
+    useEffect(() => {
+        dispatch(getAllSubscriptionData());
+    }, [])
     const voucherVal = {
         name: "",
         description: "",
@@ -28,19 +29,19 @@ function AddVoucher() {
         subscriptionId: "",
         validTill: "",
         forStudent: "",
-        status: "",
+        status: "Active",
     };
 
     const voucherFormik = useFormik({
         initialValues: voucherVal,
         validationSchema: voucherSchema,
         onSubmit: (values) => {
-            //   dispatch(addCoinMaster(values)).then((response)=>{
-            //          console.log(response.payload.success)
-            //          if(response.payload.success){
-            //            navigate('/admin/coinmaster')
-            //         }
-            //        })
+            dispatch(addVoucher(values)).then((response) => {
+                console.log(response.payload.success)
+                if (response.payload.success) {
+                    navigate('/admin/voucher')
+                }
+            })
         }
     })
 
@@ -52,8 +53,7 @@ function AddVoucher() {
                         <div>
                             <h2 className="text-light pt-4 mb-0">Add Vouchers</h2>
                         </div>
-
-                        <form onSubmit={voucherFormik.handleSubmit}>
+                        <form onSubmit={voucherFormik.handleSubmit} noValidate>
                             <div className="row py-5">
                                 <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
                                     <label className='V_label'>Name</label>
@@ -77,7 +77,7 @@ function AddVoucher() {
                                 </div>
                                 <div className="col-12 col-sm-6  pt-2 pt-md-3">
                                     <label className='V_label'>Discount</label>
-                                    <input type="text" name='code' value={voucherFormik.values.discount}
+                                    <input type="text" name='discount' value={voucherFormik.values.discount}
                                         onChange={voucherFormik.handleChange} className='V_input_text_for_all mt-1 mt-md-2' />
                                     <p className='text-danger mb-0 text-start ps-1 pt-1 text-capitalize' style={{ fontSize: "14px" }}>{voucherFormik.errors.discount}</p>
                                 </div>
@@ -106,7 +106,7 @@ function AddVoucher() {
                                             <option>Subscription ID</option>
                                             {subscriptionData.map((ele, id) => {
                                                 return (
-                                                    <option value={ele._id}>{ele.name}</option>
+                                                    <option key={ele._id} value={ele._id}>{ele.name}</option>
                                                 )
                                             })}
                                         </select>
@@ -115,13 +115,13 @@ function AddVoucher() {
                                 </div>
                                 <div className="col-12 col-sm-6  pt-2 pt-md-3">
                                     <label className='V_label'>Valid till</label>
-                                    <input type="date"  name='validTill' value={voucherFormik.values.validTill}
+                                    <input type="date" name='validTill' value={voucherFormik.values.validTill}
                                         onChange={voucherFormik.handleChange} className='V_input_text_for_all mt-1 mt-md-2' />
                                     <p className='text-danger mb-0 text-start ps-1 pt-1 text-capitalize' style={{ fontSize: "14px" }}>{voucherFormik.errors.validTill}</p>
                                 </div>
                                 <div className="col-12 col-sm-6  pt-2 pt-md-3">
                                     <label className='V_label'>For Student</label>
-                                    <input type="text"  name='forStudent' value={voucherFormik.values.forStudent}
+                                    <input type="text" name='forStudent' value={voucherFormik.values.forStudent}
                                         onChange={voucherFormik.handleChange} className='V_input_text_for_all mt-1 mt-md-2' />
                                     <p className='text-danger mb-0 text-start ps-1 pt-1 text-capitalize' style={{ fontSize: "14px" }}>{voucherFormik.errors.forStudent}</p>
                                 </div>
@@ -131,13 +131,21 @@ function AddVoucher() {
                                         <div className='select-wrapper position-relative'>
                                             <div className='ds_sub_select1' onClick={() => setToggle1(!toggle1)}>{redioVal1}</div>
                                             {toggle1 && (<div className='ds_sub_select_box'>
-                                                <div className="form-check mb-3" onClick={() => { setRedioVal1("Active"); setToggle1(false) }}>
+                                                <div className="form-check mb-3" onClick={() => {
+                                                    setRedioVal1("Active");
+                                                    setToggle1(false);
+                                                    voucherFormik.setFieldValue('status', 'Active'); // <-- important
+                                                }}>
                                                     <input className="form-check-input ds_sub_check" type="radio" name="exampleRadios" id="exampleRadios1" value="Active" checked={redioVal1 === "Active" && subAdd ? true : false} />
                                                     <label className="form-check-label" htmlFor="exampleRadios1">
                                                         Active
                                                     </label>
                                                 </div>
-                                                <div className="form-check" onClick={() => { setRedioVal1("Block"); setToggle1(false) }}>
+                                                <div className="form-check" onClick={() => {
+                                                    setRedioVal1("Block");
+                                                    setToggle1(false);
+                                                    voucherFormik.setFieldValue('status', 'Block'); // <-- important
+                                                }}>
                                                     <input className="form-check-input ds_sub_check" type="radio" name="exampleRadios" id="exampleRadios2" value="Block" checked={redioVal1 === "Block" && subAdd ? true : false} />
                                                     <label className="form-check-label" htmlFor="exampleRadios2">
                                                         Block
@@ -151,7 +159,7 @@ function AddVoucher() {
                             </div>
                             <div className='mt-5 mb-3 pb-5 '>
                                 <div className='text-center'>
-                                    <button className='ds_role_save'>Save</button>
+                                    <button type='submit' className='ds_role_save'>Save</button>
                                     <button className='ds_sub_cancel' onClick={() => setSubAdd(false)}>Clear</button>
                                 </div>
                             </div>

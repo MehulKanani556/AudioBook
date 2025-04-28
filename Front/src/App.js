@@ -83,7 +83,7 @@ const App = () => {
         <Route path="voucherused" element={<VoucherUsed />} />
         <Route path="voucher" element={<Voucher />} />
         <Route path="addvouchers" element={<AddVoucher />} />
-        <Route path="editvouchers" element={<EditVoucher />} />
+        <Route path="editvouchers/:id" element={<EditVoucher />} />
         <Route path="coinsell" element={<CoinSell />} />
         <Route path="subscriptionsell" element={<SubscriptionSell />} />
         <Route path="editsubscriptionsell" element={<EditSubscriptionSell />} />

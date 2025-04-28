@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
@@ -6,17 +6,37 @@ import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
+import { useDispatch, useSelector } from 'react-redux'
+import { getReview } from '../../Toolkit/Slices/reviewSlice'
 
 const Review = () => {
     const [modalShow, setModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
     const [viewModalShow, setViewModalShow] = useState(false);
     const [removeReview, setRemoveReview] = useState(false);
+    const [currentData, setCurrentData] = useState([]);
 
 
-    const totalPages = 10;
+    const [selectData,setSelectData] = useState(null);
+    // user connection code here
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch(getReview())
+    }, [])
+    var reviewData = useSelector((state) => state.review.review)
+    console.log('reviewData', reviewData);
+    const itemPerPage = 10;
+    var totalPages = Math.ceil(reviewData?.length / itemPerPage);
     const [currentPage, setCurrentPage] = useState(1);
 
+    useEffect(() => {
+        const startIndex = (currentPage - 1) * itemPerPage;
+        const endIndex = startIndex + itemPerPage;
+        const paginatedData = reviewData?.slice(startIndex, endIndex);
+        setCurrentData(paginatedData);
+    }, [currentPage, reviewData]);
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
@@ -37,7 +57,6 @@ const Review = () => {
 
     const renderPagination = () => {
         let pages = [];
-
         pages.push(
             <div
                 key="prev"
@@ -80,7 +99,11 @@ const Review = () => {
                 Next
             </div>
         );
-
+        // const startIndex = (currentPage - 1) * itemPerPage;
+        // const endIndex = startIndex + itemPerPage;
+        // const paginatedData = roleData.slice(startIndex, endIndex);
+        // console.log(paginatedData);
+        // setCurrentData(paginatedData);
         return pages;
     };
 
@@ -93,9 +116,9 @@ const Review = () => {
                             <h4 className="text-light pt-4 mb-0">Review</h4>
                             <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Review</span></p>
                         </div>
-                        <div>
+                        {/* <div>
                             <button className='V_review_btn' onClick={() => setModalShow(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className='V_review_bg mt-2'>
@@ -113,44 +136,29 @@ const Review = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>01</td>
-                                        <td>2541211</td>
-                                        <td>Johanwick08</td>
-                                        <td>12/12/2023</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>
-                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewModalShow(true)} >
-                                                <img src={eye} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditModalShow(true)} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveReview(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>02</td>
-                                        <td>2541211</td>
-                                        <td>Johanwick08</td>
-                                        <td>12/12/2023</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>
-                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewModalShow(true)} >
-                                                <img src={eye} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditModalShow(true)} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveReview(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr>
+                                    {currentData.map((ele,ind)=>{
+                                        return(
+                                            <tr>
+                                            <td>{((currentPage - 1) * 10) + (ind + 1)}</td>
+                                            <td>{ele.audioBookId}</td>
+                                            <td>{ele.userId}</td>
+                                            <td>{ele.date}</td>
+                                            <td>{ele.review}</td>
+                                            <td>{ele.rating}</td>
+                                            <td>
+                                                <span className='ds_sub_eye ds_cursor me-2' onClick={() => {setViewModalShow(true);setSelectData(ele)}} >
+                                                    <img src={eye} alt="" />
+                                                </span>
+                                                {/* <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditModalShow(true)} >
+                                                    <img src={pen} alt="" />
+                                                </span>
+                                                <span className='ds_role_icon ds_cursor' onClick={() => setRemoveReview(true)} >
+                                                    <img src={trash} alt="" />
+                                                </span> */}
+                                            </td>
+                                        </tr>
+                                        )
+                                    })}
                                 </tbody>
                             </table>
                         </div>
@@ -308,31 +316,31 @@ const Review = () => {
                                 <p className='V_label2 mb-0'>Audio Book ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>45256</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.audioBookId}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>User ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>Johanwick08</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.userId}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Date</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>12/12/2023</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.date}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Review</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>Lorem Ipsum</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.review}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Rating</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>Lorem Ipsum</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.rating}</span></p>
                             </div>
                         </div>
                     </Modal.Body>
