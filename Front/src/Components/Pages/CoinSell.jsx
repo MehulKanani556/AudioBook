@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
@@ -6,6 +6,8 @@ import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
+import { useDispatch, useSelector } from 'react-redux'
+import { getCoinSell } from '../../Toolkit/Slices/CoinSellSlices'
 
 const CoinSell = () => {
 
@@ -17,77 +19,99 @@ const CoinSell = () => {
     const [addCoinSell, setAddCoinSell] = useState(false);
     const [editCoinSell, setEditCoinSell] = useState(false);
     const [subAdd, setSubAdd] = useState(false);
-
-
-    const totalPages = 10;
     const [currentPage, setCurrentPage] = useState(1);
+    const [currentData, setCurrentData] = useState([])
+    // const [setselectID]
+    const dispatch = useDispatch();
 
-    const handlePageChange = (page) => {
+    useEffect(() => {
+        dispatch(getCoinSell());
+    }, [])
+
+    // const totalPages = 10;
+    var coinSellData = useSelector((state)=>state.coinSell.coinSell)
+    var itemPerPage = 1;
+    var totalPages = Math.ceil(coinSellData .length / itemPerPage);
+    useEffect(() => {
+        const startIndex = (currentPage - 1) * itemPerPage;
+        const endIndex = startIndex + itemPerPage;
+        const paginatedData = coinSellData .slice(startIndex, endIndex);
+        setCurrentData(paginatedData);
+      }, [currentPage, coinSellData ]);
+    
+     
+    
+      const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
-            setCurrentPage(page);
+          setCurrentPage(page);
         }
-    };
-
-    const handlePrev = () => {
+      };
+    
+      const handlePrev = () => {
         if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
+          setCurrentPage(currentPage - 1);
         }
-    };
-
-    const handleNext = () => {
+      };
+    
+      const handleNext = () => {
         if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
+          setCurrentPage(currentPage + 1);
         }
-    };
-
-    const renderPagination = () => {
+      };
+    
+      const renderPagination = () => {
         let pages = [];
-
+    
         pages.push(
-            <div
-                key="prev"
-                className={`V_pagination text-center ${currentPage === 1 ? "disabled" : ""}`}
-                onClick={handlePrev}
-            >
-                Prev
-            </div>
+          <div
+            key="prev"
+            className={`V_pagination text-center ${currentPage === 1 ? "disabled" : ""}`}
+            onClick={handlePrev}
+          >
+            Prev
+          </div>
         );
-
+    
         for (let i = 1; i <= totalPages; i++) {
-            if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 1) {
-                pages.push(
-                    <div
-                        key={i}
-                        onClick={() => handlePageChange(i)}
-                        className={`text-center ${currentPage === i ? "V_pagination1" : "V_pagination"}`}
-                    >
-                        {i}
-                    </div>
-                );
-            } else if (
-                (i === currentPage - 2 && currentPage > 3) ||
-                (i === currentPage + 2 && currentPage < totalPages - 2)
-            ) {
-                pages.push(
-                    <div key={`dots-${i}`} className="V_pagination text-center">
-                        ...
-                    </div>
-                );
-            }
+          if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 1) {
+            pages.push(
+              <div
+                key={i}
+                onClick={() => handlePageChange(i)}
+                className={`text-center ${currentPage === i ? "V_pagination1" : "V_pagination"}`}
+              >
+                {i}
+              </div>
+            );
+          } else if (
+            (i === currentPage - 2 && currentPage > 3) ||
+            (i === currentPage + 2 && currentPage < totalPages - 2)
+          ) {
+            pages.push(
+              <div key={`dots-${i}`} className="V_pagination text-center">
+                ...
+              </div>
+            );
+          }
         }
-
+    
         pages.push(
-            <div
-                key="next"
-                className={`V_pagination text-center ${currentPage === totalPages ? "disabled" : ""}`}
-                onClick={handleNext}
-            >
-                Next
-            </div>
+          <div
+            key="next"
+            className={`V_pagination text-center ${currentPage === totalPages ? "disabled" : ""}`}
+            onClick={handleNext}
+          >
+            Next
+          </div>
         );
-
+        // const startIndex = (currentPage - 1) * itemPerPage;
+        // const endIndex = startIndex + itemPerPage;
+        // const paginatedData = roleData.slice(startIndex, endIndex);
+        // console.log(paginatedData);
+        // setCurrentData(paginatedData);
         return pages;
-    };
+      };
+    
 
     return (
         <div className="ds_dash_master">
@@ -98,9 +122,9 @@ const CoinSell = () => {
                             <h4 className="text-light pt-4 mb-0">Coin Sell</h4>
                             <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Coin Sell</span></p>
                         </div>
-                        <div>
+                        {/* <div>
                             <button className='V_review_btn' onClick={() => setAddCoinSell(true)} ><i className="fa-solid fa-plus me-2"></i> Add</button>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className='V_review_bg mt-2'>
@@ -118,7 +142,30 @@ const CoinSell = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    {currentData.map((ele,ind)=>{
+                                        return(
+                                            <tr>
+                                            <td>{((currentPage - 1) * 10) +( ind + 1 )}</td>
+                                            <td>{ele?.userData?.[0]?.name || '-'}</td>
+                                            <td>{ele?.coinMasterData?.[0]?.name || '-'}</td>
+                                            <td>₹ {ele?.amount}</td>
+                                            <td>{ele?.paymentId}</td>
+                                            <td><span className={ele.status === 'Active' ? 'ds_sub_active' : 'ds_sub_block'}>{ele.status}</span></td>
+                                            <td className=''>
+                                                {/* <span className='ds_sub_eye ds_cursor me-2' onClick={() => {setViewCoinSell(true);setselectID(ele._id)}} >
+                                                    <img src={eye} alt="" />
+                                                </span> */}
+                                                {/* <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditCoinSell(true)} >
+                                                    <img src={pen} alt="" />
+                                                </span>
+                                                <span className='ds_role_icon ds_cursor' onClick={() => setViewCoinSell(true)} >
+                                                    <img src={trash} alt="" />
+                                                </span> */}
+                                            </td>
+                                        </tr>
+                                        )
+                                    })}
+                                    {/* <tr>
                                         <td>0123</td>
                                         <td>Johnwick08</td>
                                         <td>1254</td>
@@ -126,7 +173,7 @@ const CoinSell = () => {
                                         <td>785</td>
                                         <td><span className='ds_sub_active'>Active</span></td>
                                         <td className=''>
-                                        <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewCoinSell(true)} >
+                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewCoinSell(true)} >
                                                 <img src={eye} alt="" />
                                             </span>
                                             <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditCoinSell(true)} >
@@ -136,26 +183,8 @@ const CoinSell = () => {
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0123</td>
-                                        <td>Johnwick08</td>
-                                        <td>1254</td>
-                                        <td>₹99</td>
-                                        <td>785</td>
-                                        <td><span className='ds_sub_block'>Block</span></td>
-                                        <td className=''>
-                                        <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewCoinSell(true)} >
-                                                <img src={eye} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditCoinSell(true)} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setViewCoinSell(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr>
+                                    </tr> */}
+
                                 </tbody>
                             </table>
                         </div>
@@ -310,7 +339,7 @@ const CoinSell = () => {
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
                             <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel'  onClick={() => setEditCoinSell(false)}>Clear</button>
+                            <button className='ds_sub_cancel' onClick={() => setEditCoinSell(false)}>Clear</button>
                         </div>
                     </Modal.Footer>
                 </Modal>

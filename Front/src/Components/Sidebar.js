@@ -123,14 +123,14 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/admin/coinsell" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/coinsell'); setColor("coinsell")}}>
+                 {/* <div className={` ms-3 ds_active_pad ${color === "/admin/coinsell" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/coinsell'); setColor("coinsell")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={sell} className="ds_side_icon" />
                      </div>
                      <h5 className='ms-3 text-light mb-0 ds_side_title'>Coin Sell</h5>
                    </div>
-                 </div>
+                 </div> */}
 
                  <div className={` ms-3 ds_active_pad ${color === "/admin/voucher" || color === "/admin/addVouchers" || color === "/admin/editvouchers" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/voucher'); setColor("voucher")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
@@ -340,14 +340,14 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/admin/coinsell" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/coinsell'); setColor("coinsell"); setOffToggle(false)}}>
+                 {/* <div className={` ms-3 ds_active_pad ${color === "/admin/coinsell" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/coinsell'); setColor("coinsell"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={sell} className="ds_side_icon" />
                      </div>
                      <h5 className='ms-3 text-light mb-0 ds_side_title'>Coin Sell</h5>
                    </div>
-                 </div>
+                 </div> */}
 
                  <div className={` ms-3 ds_active_pad ${color === "/admin/voucher" || color === "/admin/addVouchers" || color === "/admin/editvouchers" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/voucher'); setColor("voucher"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
