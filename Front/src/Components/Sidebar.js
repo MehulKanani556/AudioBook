@@ -87,7 +87,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={`ms-3 ds_active_pad ${color === "/admin/coinlabel" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/admin/coinlabel'); setColor("coinlabel")}}>
+                 {/* <div className={`ms-3 ds_active_pad ${color === "/admin/coinlabel" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/admin/coinlabel'); setColor("coinlabel")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={coin} className="ds_side_icon" />
@@ -103,7 +103,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                      </div>
                      <h5 className='ms-3 text-light mb-0 ds_side_title'>Coin Master</h5>
                    </div>
-                 </div>
+                 </div> */}
 
                  <div className={`ms-3 ds_active_pad ${color === "/admin/usermaster" || color === "/admin/addusermaster" || color === "/admin/editusermaster" ? 'ds_active_color' : '' } mt-3`} onClick={() => {navigate('/admin/usermaster'); setColor("usermaster")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
@@ -304,7 +304,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={`ms-3 ds_active_pad ${color === "/admin/coinlabel" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/admin/coinlabel'); setColor("coinlabel"); setOffToggle(false)}}>
+                 {/* <div className={`ms-3 ds_active_pad ${color === "/admin/coinlabel" ? 'ds_active_color' : '' }  mt-3`} onClick={() => {navigate('/admin/coinlabel'); setColor("coinlabel"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={coin} className="ds_side_icon" />
@@ -320,7 +320,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                      </div>
                      <h5 className='ms-3 text-light mb-0 ds_side_title'>Coin Master</h5>
                    </div>
-                 </div>
+                 </div> */}
 
                  <div className={`ms-3 ds_active_pad ${color === "/admin/usermaster" || color === "/admin/addusermaster" || color === "/admin/editusermaster"  ? 'ds_active_color' : '' } mt-3`} onClick={() => {navigate('/admin/usermaster'); setColor("usermaster"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>

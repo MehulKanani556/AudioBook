@@ -7,6 +7,7 @@ import subscriptionReducer from "./Slices/SubscriptionSlice";
 import SubscriptionSellSlice from './Slices/SubscriptionSellSlice'
 import userMasterReducer from './Slices/UserMasterSlice'
 import coinSellReducer from './Slices/CoinSellSlices'
+import voucherReducer from './Slices/VoucherSlice'
 import coinMasterReducer from "./Slices/CoinMasterSlice"
 import genreReducer from "./Slices/GenreSlice"
 
@@ -21,6 +22,7 @@ export const store = configureStore({
     coinMaster: coinMasterReducer,
     userMaster: userMasterReducer,
     coinSell: coinSellReducer,
-    genre:genreReducer
+    genre:genreReducer,
+    voucher : voucherReducer
   },
 });

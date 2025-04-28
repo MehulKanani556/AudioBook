@@ -206,3 +206,14 @@ export const CreateGenreSchema = Yup.object({
     .required('Name is required')
     .max(50, 'Name must be 50 characters or less'),
 });
+export const voucherSchema = Yup.object({
+  name: Yup.string().required("name is required"),
+  description: Yup.string().required("description is required"),
+  code: Yup.string().required("code is required"),
+  discount: Yup.string().required("discount is required"),
+  coinMasterId: Yup.string().required("coinMasterId is required"),
+  subscriptionId: Yup.string().required("subscriptionId is required"),
+  validTill:  Yup.string().required("validTill is required"),
+  forStudent: Yup.string().required("forStudent is required"),
+  status: Yup.string().required("status is required"),
+});
