@@ -6,8 +6,9 @@ import {
   addAudioBookData,
   getAllAudioBookData,
 } from "../../Toolkit/Slices/AudioBookSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { GenreData } from "../../Toolkit/Slices/GenreSlice";
 const AddAudioBook = () => {
   const [toggle, setToggle] = useState(false);
   const [redioVal, setRedioVal] = useState("English");
@@ -16,6 +17,13 @@ const AddAudioBook = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const genreSelect = useSelector((state) => state.genre?.genreData);
+  console.log(genreSelect);
+
+  useEffect(() => {
+    dispatch(GenreData());
+  }, []);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -61,20 +69,23 @@ const AddAudioBook = () => {
                 <div className="row py-5 ">
                   <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
                     <label className="V_label">Genre ID</label>
-                    <input
-                      type="text"
+                    <select
                       className="V_input_text_for_all mt-1 mt-md-2 "
                       name="genreId"
                       value={addAudioBookFormik.values.genreId}
                       onChange={addAudioBookFormik.handleChange}
                       onBlur={addAudioBookFormik.handleBlur}
-                    />
-                    <p
+                    >
+                      {genreSelect.map((ele) => {
+                        return <option value={ele._id}>{ele.name}</option>;
+                      })}
+                    </select>
+                    {/* <p
                       className="text-danger mb-0 text-start ps-1 pt-1"
                       style={{ fontSize: "14px" }}
                     >
                       {addAudioBookFormik.errors.genreId}
-                    </p>
+                    </p> */}
                   </div>
                   <div className="col-12 col-sm-6  pt-2 pt-md-3">
                     <label className="V_label">Name</label>
@@ -116,7 +127,7 @@ const AddAudioBook = () => {
                         htmlFor="exampleInputEmail1"
                         className="form-label ds_role_text"
                       >
-                        Sample File
+                        Thumbnail File
                       </label>
 
                       <div className="custom-input-group ">
@@ -140,13 +151,13 @@ const AddAudioBook = () => {
                           //     onChange={addAudioBookFormik.handleChange}
                           //   onBlur={addAudioBookFormik.handleBlur}
                         />
-                        {/* <p
-                          className="text-danger mb-0 text-start ps-1 pt-1"
-                          style={{ fontSize: "14px" }}
-                        >
-                          {addAudioBookFormik.errors.sampleFile}
-                        </p> */}
                       </div>
+                      <p
+                        className="text-danger mb-0 text-start ps-1 pt-1"
+                        style={{ fontSize: "14px" }}
+                      >
+                        {addAudioBookFormik.errors.sampleFile}
+                      </p>
                     </div>
                   </div>
                   <div className="col-12 col-sm-6  pt-2 pt-md-3">

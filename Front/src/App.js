@@ -78,7 +78,7 @@ const App = () => {
         <Route path="castcrew" element={<CastCrew />} />
         <Route path="audiobooks" element={<AudioBook />} />
         <Route path="addaudiobook" element={<AddAudioBook />} />
-        <Route path="editaudiobook" element={<EditAudiobooks />} />
+        <Route path="editaudiobook/:id" element={<EditAudiobooks />} />
         <Route path="genre" element={<Genre />} />
         <Route path="voucherused" element={<VoucherUsed />} />
         <Route path="voucher" element={<Voucher />} />
