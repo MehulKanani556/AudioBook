@@ -141,14 +141,14 @@ const UserMaster = () => {
                 <span className="text-light">User Master</span>
               </p>
             </div>
-            <div>
+            {/* <div>
               <button
                 className="ds_role_btn"
                 onClick={() => navigate("/admin/addusermaster")}
               >
                 <i className="fa-solid fa-plus me-2"></i> Add
               </button>
-            </div>
+            </div> */}
           </div>
 
           <div className="ds_role_bg mt-2">
@@ -160,7 +160,7 @@ const UserMaster = () => {
                     <th>Image</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <th>Password </th>
+                    {/* <th>Password </th> */}
                     <th>Role ID</th>
                     <th>Bio</th>
                     <th>Age</th>
@@ -189,7 +189,7 @@ const UserMaster = () => {
                           </td>
                           <td>{e.email}</td>
                           <td>{e.mobileNo}</td>
-                          <td>-</td>
+                          {/* <td>-</td> */}
                           <td>{e.roleId}</td>
                           <td>{e.bio}</td>
                           <td>{e.age}</td>
@@ -215,7 +215,7 @@ const UserMaster = () => {
                             >
                               <img src={eye} alt="" />
                             </span>
-                            <span
+                            {/* <span
                               className="ds_role_icon ds_cursor me-2"
                               onClick={() => navigate("/admin/editusermaster")}
                             >
@@ -229,7 +229,7 @@ const UserMaster = () => {
                               }}
                             >
                               <img src={trash} alt="" />
-                            </span>
+                            </span> */}
                           </td>
                         </tr>
                       )
