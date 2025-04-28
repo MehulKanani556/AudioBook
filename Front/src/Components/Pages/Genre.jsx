@@ -7,7 +7,7 @@ import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
 import { useDispatch, useSelector } from 'react-redux'
-import { CreateGenreData, GenreData } from '../../Toolkit/Slices/GenreSlice'
+import { CreateGenreData, DeleteGenreData, EditGenreData, GenreData } from '../../Toolkit/Slices/GenreSlice'
 import { useFormik } from 'formik'
 import { CreateGenreSchema, CreateLableSchema } from '../Formik'
 
@@ -25,8 +25,9 @@ const Genre = () => {
     const [currentData,setCurrentData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [file, setFile] = useState(null);
+    const [editObj, setEditObj] = useState({})
+    const [deleteId, setDeleteId] = useState(null)
     
-
     useEffect(()=>{
       dispatch(GenreData())
     },[])
@@ -125,21 +126,59 @@ const Genre = () => {
           }
     
           dispatch(CreateGenreData({values , file}));
-          dispatch(GenreData())
           resetForm();
-          setFileName("No File Chosen");
           setFile(null);
           setAddGenreModal(false)
         },
-      });
+    });
 
-      const handleFileChange = (e) => {
+    const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
         if (selectedFile) {
           setFile(selectedFile);
           setFileName(selectedFile.name);
         }
-      };
+    };
+
+    const editVal = {
+        name: editObj?.name, 
+    }
+
+    const EditGenreFormik = useFormik({
+        enableReinitialize: true,
+        initialValues:editVal,
+        validationSchema: CreateGenreSchema, 
+        onSubmit: async (values, { resetForm }) => {
+          
+            if (!file && !editObj?.generImage) {
+                alert("Please choose an image file!");
+                return;
+            }
+            let payload = {
+                values,
+                id: editObj?._id,
+            };
+        
+            if (file) {
+                payload.file = file; 
+            } else {
+                payload.oldImage = editObj?.generImage; 
+            }
+    
+          dispatch(EditGenreData(payload));
+          resetForm();
+          setFile(null);
+          setAddGenreModal(false)
+          setEditGenre(false)
+        },
+    });
+
+    const handleDelete = () => {
+        dispatch(DeleteGenreData(deleteId))
+        setRemoveGenre(false)
+    }
+
+    
 
     return (
         <div className="ds_dash_master">
@@ -176,10 +215,10 @@ const Genre = () => {
                                                </td>
                                                <td>{element?.name}</td>
                                                <td className=''>
-                                                   <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditGenre(true)} >
+                                                   <span className='ds_role_icon ds_cursor me-2' onClick={() =>{ setEditGenre(true) ; setEditObj(element)}} >
                                                        <img src={pen} alt="" />
                                                    </span>
-                                                   <span className='ds_role_icon ds_cursor' onClick={() => setRemoveGenre(true)} >
+                                                   <span className='ds_role_icon ds_cursor' onClick={() =>{setRemoveGenre(true); setDeleteId(element?._id)}}>
                                                        <img src={trash} alt="" />
                                                    </span>
                                                </td>
@@ -264,7 +303,7 @@ const Genre = () => {
                           <div className='V_modal_header mx-auto pb-4 pt-5'>
                             <div className="d-flex justify-content-center">
                               <button type='submit' className='ds_role_save'>Save</button>
-                              <button type='button' className='ds_sub_cancel' onClick={() => {   setAddGenreModal(false);   setFileName("No File Chosen");   setFile(null);   CreateGenreFormik.resetForm(); }}>
+                              <button type='button' className='ds_sub_cancel' onClick={() => {   setAddGenreModal(false);   setFileName("No file Chosen");   setFile(null);   CreateGenreFormik.resetForm(); }}>
                                 Clear
                               </button>
                             </div>
@@ -298,27 +337,34 @@ const Genre = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12 col-sm-6   pt-2 pt-md-3">
-                                <label className='V_label'>Image</label>
-                                <div className="custom-input-group">
-                                    <input type="text" className="custom-text" placeholder="" value={fileName} readonly />
-                                    <label htmlFor="fileInput" className="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" className="custom-file-input " onChange={handleFileChange} />
+                       <form onSubmit={EditGenreFormik.handleSubmit}>
+                          <div className="row py-md-3  px-lg-5 ">
+                              <div className="col-12 col-sm-6   pt-2 pt-md-3">
+                                  <label className='V_label'>Image</label>
+                                  <div className="custom-input-group">
+                                      {/* {console.log("file" , fileName)} */}
+                                      <input type="text" className="custom-text" placeholder="" value={fileName !== "No file chosen" ? fileName : editObj?.generImage?.replace(/\\/g, "/")?.split("/")?.pop()} readonly />
+                                      <label htmlFor="fileInput" className="custom-button">CHOOSE</label>
+                                      <input type="file" id="fileInput" className="custom-file-input " onChange={handleFileChange} />
+                                  </div>
+                              </div>
+                              <div className="col-12 col-sm-6  pt-2 pt-md-3">
+                                  <label className='V_label'>Name</label>
+                                  <input type="text" name='name' value={EditGenreFormik.values.name} onChange={EditGenreFormik.handleChange} onBlur={EditGenreFormik.handleBlur} className='V_input_text_for_all ' />
+                                  {EditGenreFormik.touched.name && EditGenreFormik.errors.name ? (
+                                     <div style={{ color: 'red', fontSize: '12px' }}>
+                                        {EditGenreFormik.errors.name}
+                                     </div>) : null}
+                              </div>
+                              <div className='V_modal_header mx-auto pb-4 pt-5'>
+                               <div className="d-flex justify-content-center">
+                                  <button type='submit' className='ds_role_save'>Save</button>
+                                  <button type='button' className='ds_sub_cancel' onClick={() => {setEditGenre(false); setFileName("No file chosen")}}>Clear</button>
                                 </div>
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Name</label>
-                                <input type="text" className='V_input_text_for_all ' />
-                            </div>
-                        </div>
+                              </div>
+                          </div>
+                        </form>
                     </Modal.Body>
-                    <Modal.Footer className='V_modal_header mx-auto pb-4'>
-                        <div className="d-flex justify-content-center">
-                            <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel' onClick={() => {setEditGenre(false); setFileName("No File Choosen")}}>Clear</button>
-                        </div>
-                    </Modal.Footer>
                 </Modal>
             </div>
 
@@ -333,7 +379,7 @@ const Genre = () => {
                         <p className='ds_role_text'>Are you sure you want to delete Genre?</p>
                         <div className='mt-5 mb-5'>
                             <button className='ds_delete_cancel' onClick={() => setRemoveGenre(false)}>Cancel</button>
-                            <button className='ds_delete_yes'>Yes</button>
+                            <button className='ds_delete_yes' onClick={handleDelete}>Yes</button>
                         </div>
                     </div>
                 </Modal.Body>
