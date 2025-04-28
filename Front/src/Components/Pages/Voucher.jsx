@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
@@ -6,83 +6,106 @@ import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
+import { useDispatch, useSelector } from 'react-redux'
+import { getVoucher } from '../../Toolkit/Slices/VoucherSlice'
 
 const Voucher = () => {
     const navigate = useNavigate();
 
     const [viewVouchers, setViewVouchers] = useState(false);
     const [removeVouchers, setRemoveVouchers] = useState(false);
+    const [currentData, setCurrentData] = useState([]);
 
+    // user connection code here
+    const dispatch = useDispatch();
+    
 
-    const totalPages = 10;
+    useEffect(()=>{
+        dispatch(getVoucher())
+    },[])
+    var voucherData = useSelector((state)=> state.voucher.vouchers)
+    console.log('vouch',voucherData);
+    const itemPerPage = 10;
+    var totalPages = Math.ceil(voucherData?.length / itemPerPage);
     const [currentPage, setCurrentPage] = useState(1);
 
-    const handlePageChange = (page) => {
+    useEffect(() => {
+        const startIndex = (currentPage - 1) * itemPerPage;
+        const endIndex = startIndex + itemPerPage;
+        const paginatedData = voucherData?.slice(startIndex, endIndex);
+        setCurrentData(paginatedData);
+      }, [currentPage, voucherData]);
+    
+    
+      const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
-            setCurrentPage(page);
+          setCurrentPage(page);
         }
-    };
-
-    const handlePrev = () => {
+      };
+    
+      const handlePrev = () => {
         if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
+          setCurrentPage(currentPage - 1);
         }
-    };
-
-    const handleNext = () => {
+      };
+    
+      const handleNext = () => {
         if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
+          setCurrentPage(currentPage + 1);
         }
-    };
-
-    const renderPagination = () => {
+      };
+    
+      const renderPagination = () => {
         let pages = [];
-
         pages.push(
-            <div
-                key="prev"
-                className={`V_pagination text-center ${currentPage === 1 ? "disabled" : ""}`}
-                onClick={handlePrev}
-            >
-                Prev
-            </div>
+          <div
+            key="prev"
+            className={`V_pagination text-center ${currentPage === 1 ? "disabled" : ""}`}
+            onClick={handlePrev}
+          >
+            Prev
+          </div>
         );
-
+    
         for (let i = 1; i <= totalPages; i++) {
-            if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 1) {
-                pages.push(
-                    <div
-                        key={i}
-                        onClick={() => handlePageChange(i)}
-                        className={`text-center ${currentPage === i ? "V_pagination1" : "V_pagination"}`}
-                    >
-                        {i}
-                    </div>
-                );
-            } else if (
-                (i === currentPage - 2 && currentPage > 3) ||
-                (i === currentPage + 2 && currentPage < totalPages - 2)
-            ) {
-                pages.push(
-                    <div key={`dots-${i}`} className="V_pagination text-center">
-                        ...
-                    </div>
-                );
-            }
+          if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 1) {
+            pages.push(
+              <div
+                key={i}
+                onClick={() => handlePageChange(i)}
+                className={`text-center ${currentPage === i ? "V_pagination1" : "V_pagination"}`}
+              >
+                {i}
+              </div>
+            );
+          } else if (
+            (i === currentPage - 2 && currentPage > 3) ||
+            (i === currentPage + 2 && currentPage < totalPages - 2)
+          ) {
+            pages.push(
+              <div key={`dots-${i}`} className="V_pagination text-center">
+                ...
+              </div>
+            );
+          }
         }
-
+    
         pages.push(
-            <div
-                key="next"
-                className={`V_pagination text-center ${currentPage === totalPages ? "disabled" : ""}`}
-                onClick={handleNext}
-            >
-                Next
-            </div>
+          <div
+            key="next"
+            className={`V_pagination text-center ${currentPage === totalPages ? "disabled" : ""}`}
+            onClick={handleNext}
+          >
+            Next
+          </div>
         );
-
+        // const startIndex = (currentPage - 1) * itemPerPage;
+        // const endIndex = startIndex + itemPerPage;
+        // const paginatedData = roleData.slice(startIndex, endIndex);
+        // console.log(paginatedData);
+        // setCurrentData(paginatedData);
         return pages;
-    };
+      };
 
     return (
         <div className="ds_dash_master">
@@ -94,7 +117,7 @@ const Voucher = () => {
                             <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Vouchers</span></p>
                         </div>
                         <div>
-                            <button className='V_review_btn' onClick={() => navigate('/layout/addVouchers')} ><i className="fa-solid fa-plus me-2"></i> Add</button>
+                            <button className='V_review_btn' onClick={() => navigate('/admin/addVouchers')} ><i className="fa-solid fa-plus me-2"></i> Add</button>
                         </div>
                     </div>
 
@@ -117,16 +140,18 @@ const Voucher = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>01</td>
-                                        <td>Johnwick</td>
-                                        <td>Lorem Inspuml</td>
-                                        <td>1234</td>
-                                        <td>5%</td>
-                                        <td>9632</td>
-                                        <td>9685</td>
-                                        <td>20/09/02020</td>
-                                        <td>Lorem inspum</td>
+                                {currentData?.map((ele,ind)=>{
+                                    return(
+                                        <tr>
+                                        <td>{((currentPage - 1) * 10) + (ind + 1)}</td>
+                                        <td>{ele?.name}</td>
+                                        <td>{ele?.description}</td>
+                                        <td>{ele?.code}</td>
+                                        <td>{ele?.discount}</td>
+                                        <td>{ele?.coinMaster?.[0]?.name || ele.coinMasterId}</td>
+                                        <td>{ele?.subScriptionSell?.[0]?.name || ele.subScriptionSellId}</td>
+                                        <td>{ele?.validTill}</td>
+                                        <td>{ele?.forStudent}</td>
                                         <td><span className='ds_sub_active'>Active</span></td>
                                         <td className=''>
                                             <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewVouchers(true)} >
@@ -140,29 +165,8 @@ const Voucher = () => {
                                             </span>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>01</td>
-                                        <td>Johnwick</td>
-                                        <td>Lorem Inspuml</td>
-                                        <td>1234</td>
-                                        <td>5%</td>
-                                        <td>9632</td>
-                                        <td>9685</td>
-                                        <td>20/09/02020</td>
-                                        <td>Lorem inspum</td>
-                                        <td><span className='ds_sub_block'>Block</span></td>
-                                        <td className=''>
-                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewVouchers(true)} >
-                                                <img src={eye} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => navigate('/layout/editvouchers')} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveVouchers(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr>
+                                    )
+                                })}
                                 </tbody>
                             </table>
                         </div>

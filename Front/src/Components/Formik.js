@@ -200,3 +200,15 @@ export const addUserMasterSchema = Yup.object().shape({
   image: Yup.string().required("Image is required"),
   status: Yup.string().required("Status is required"),
 });
+
+export const voucherSchema = Yup.object({
+  name: Yup.string().required("name is required"),
+  description: Yup.string().required("description is required"),
+  code: Yup.string().required("code is required"),
+  discount: Yup.string().required("discount is required"),
+  coinMasterId: Yup.string().required("coinMasterId is required"),
+  subscriptionId: Yup.string().required("subscriptionId is required"),
+  validTill:  Yup.string().required("validTill is required"),
+  forStudent: Yup.string().required("forStudent is required"),
+  status: Yup.string().required("status is required"),
+});
