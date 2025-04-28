@@ -1,92 +1,267 @@
-import React, { useState } from 'react'
-import '../../CSS/Review.css';
-
-
+import React, { useState, useEffect } from "react";
+import "../../CSS/Review.css";
+import { addAudioBookSchema } from "../Formik";
+import { useFormik } from "formik";
+import {
+  addAudioBookData,
+  getAllAudioBookData,
+} from "../../Toolkit/Slices/AudioBookSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const AddAudioBook = () => {
-    const [toggle, setToggle] = useState(false);
-    const [redioVal, setRedioVal] = useState("English");
-    const [subAdd, setSubAdd] = useState(false);
-    const [fileName, setFileName] = useState("No file chosen");
+  const [toggle, setToggle] = useState(false);
+  const [redioVal, setRedioVal] = useState("English");
+  const [subAdd, setSubAdd] = useState(false);
+  const [fileName, setFileName] = useState("No file chosen");
 
-    const handleFileChange = (event) => {
-      const file = event.target.files[0];
-      setFileName(file ? file.name : "No file chosen");
-    };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    return (
-        <>
-            <div className="ds_dash_master">
-                <div className='ds_dash_main'>
-                    <div className='ds_dash_inner'>
-                        <div>
-                            <h2 className="text-light pt-4 mb-0">Add Audio Book</h2>
-                        </div>
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setFileName(file ? file.name : "No file chosen");
+    addAudioBookFormik.setFieldValue("sampleFile", file);
+  };
 
-                        <div>
-                            <div className="row py-5 ">
-                                <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                    <label className='V_label'>Genre ID</label>
-                                    <input type="text" className='V_input_text_for_all mt-1 mt-md-2 ' />
-                                </div>
-                                <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                    <label className='V_label'>Name</label>
-                                    <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                                </div>
-                                <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                    <label className='V_label'>Description</label>
-                                    <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                                </div>
-                                <div className="col-12 col-sm-6 pt-2 pt-md-3">
-                                    <div>
-                                        <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Sample File</label>
+  const addAudioBookVal = {
+    genreId: "",
+    name: "",
+    description: "",
+    tags: "",
+    language: "English",
+    sampleFile: null,
+  };
 
-                                        <div class="custom-input-group ">
-                                            <input type="text" class="custom-text" placeholder="" value={fileName} readonly />
-                                            <label for="fileInput" class="custom-button">CHOOSE</label>
-                                            <input type="file" id="fileInput" class="custom-file-input " onChange={handleFileChange}/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                    <label className='V_label'>Tags</label>
-                                    <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                                </div>
-                                <div className="col-12 col-sm-6 pt-2 pt-md-3">
-                                    <div>
-                                        <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Language</label>
-                                        <div className='select-wrapper position-relative'>
-                                            <div className='ds_sub_select1' onClick={() => setToggle(!toggle)}>{redioVal}</div>
-                                            {toggle && (<div className='ds_sub_select_box'>
-                                                <div className="form-check mb-3" onClick={() => { setRedioVal("English"); setToggle(false) }}>
-                                                    <input className="form-check-input ds_sub_check" type="radio" name="exampleRadios" id="exampleRadios1" value="English" checked={redioVal === "English" && subAdd ? true : false} />
-                                                    <label className="form-check-label" htmlFor="exampleRadios1">
-                                                        English
-                                                    </label>
-                                                </div>
-                                                <div className="form-check" onClick={() => { setRedioVal("Franch"); setToggle(false) }}>
-                                                    <input className="form-check-input ds_sub_check" type="radio" name="exampleRadios" id="exampleRadios2" value="Franch" checked={redioVal === "Franch" && subAdd ? true : false} />
-                                                    <label className="form-check-label" htmlFor="exampleRadios2">
-                                                        Franch
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='mt-5 mb-3 pb-5 '>
-                                <div className='text-center'>
-                                    <button className='ds_role_save'>Save</button>
-                                    <button className='ds_sub_cancel' onClick={() => {setSubAdd(false); setFileName("No File Choosen")}}>Clear</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  const addAudioBookFormik = useFormik({
+    initialValues: addAudioBookVal,
+    validationSchema: addAudioBookSchema,
+    onSubmit: (values) => {
+      dispatch(addAudioBookData(values)).then(() => {
+        dispatch(getAllAudioBookData());
+      });
+      navigate("/admin/audiobooks");
+    },
+  });
+
+  useEffect(() => {
+    addAudioBookFormik.setFieldValue("language", redioVal);
+  }, [redioVal]);
+
+  return (
+    <>
+      <div className="ds_dash_master h-100">
+        <div className="ds_dash_main">
+          <div className="ds_dash_inner">
+            <div>
+              <h2 className="text-light pt-4 mb-0">Add Audio Book</h2>
             </div>
-        </>
-    )
-}
 
-export default AddAudioBook
+            <form onSubmit={addAudioBookFormik.handleSubmit}>
+              <div>
+                <div className="row py-5 ">
+                  <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
+                    <label className="V_label">Genre ID</label>
+                    <input
+                      type="text"
+                      className="V_input_text_for_all mt-1 mt-md-2 "
+                      name="genreId"
+                      value={addAudioBookFormik.values.genreId}
+                      onChange={addAudioBookFormik.handleChange}
+                      onBlur={addAudioBookFormik.handleBlur}
+                    />
+                    <p
+                      className="text-danger mb-0 text-start ps-1 pt-1"
+                      style={{ fontSize: "14px" }}
+                    >
+                      {addAudioBookFormik.errors.genreId}
+                    </p>
+                  </div>
+                  <div className="col-12 col-sm-6  pt-2 pt-md-3">
+                    <label className="V_label">Name</label>
+                    <input
+                      type="text"
+                      className="V_input_text_for_all mt-1 mt-md-2"
+                      name="name"
+                      value={addAudioBookFormik.values.name}
+                      onChange={addAudioBookFormik.handleChange}
+                      onBlur={addAudioBookFormik.handleBlur}
+                    />
+                    <p
+                      className="text-danger mb-0 text-start ps-1 pt-1"
+                      style={{ fontSize: "14px" }}
+                    >
+                      {addAudioBookFormik.errors.name}
+                    </p>
+                  </div>
+                  <div className="col-12 col-sm-6  pt-2 pt-md-3">
+                    <label className="V_label">Description</label>
+                    <input
+                      type="text"
+                      className="V_input_text_for_all mt-1 mt-md-2"
+                      name="description"
+                      value={addAudioBookFormik.values.description}
+                      onChange={addAudioBookFormik.handleChange}
+                      onBlur={addAudioBookFormik.handleBlur}
+                    />
+                    <p
+                      className="text-danger mb-0 text-start ps-1 pt-1"
+                      style={{ fontSize: "14px" }}
+                    >
+                      {addAudioBookFormik.errors.description}
+                    </p>
+                  </div>
+                  <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                    <div>
+                      <label
+                        htmlFor="exampleInputEmail1"
+                        className="form-label ds_role_text"
+                      >
+                        Sample File
+                      </label>
+
+                      <div className="custom-input-group ">
+                        <input
+                          type="text"
+                          className="custom-text"
+                          placeholder=""
+                          value={fileName}
+                          readOnly
+                        />
+                        <label htmlFor="fileInput" className="custom-button">
+                          CHOOSE
+                        </label>
+                        <input
+                          type="file"
+                          id="fileInput"
+                          className="custom-file-input "
+                          onChange={handleFileChange}
+                          //   name="sampleFile"
+                          //   value={addAudioBookFormik.values.sampleFile}
+                          //     onChange={addAudioBookFormik.handleChange}
+                          //   onBlur={addAudioBookFormik.handleBlur}
+                        />
+                        {/* <p
+                          className="text-danger mb-0 text-start ps-1 pt-1"
+                          style={{ fontSize: "14px" }}
+                        >
+                          {addAudioBookFormik.errors.sampleFile}
+                        </p> */}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-12 col-sm-6  pt-2 pt-md-3">
+                    <label className="V_label">Tags</label>
+                    <input
+                      type="text"
+                      className="V_input_text_for_all mt-1 mt-md-2"
+                      name="tags"
+                      value={addAudioBookFormik.values.tags}
+                      onChange={addAudioBookFormik.handleChange}
+                      onBlur={addAudioBookFormik.handleBlur}
+                    />
+                    <p
+                      className="text-danger mb-0 text-start ps-1 pt-1"
+                      style={{ fontSize: "14px" }}
+                    >
+                      {addAudioBookFormik.errors.tags}
+                    </p>
+                  </div>
+                  <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                    <div>
+                      <label
+                        htmlFor="exampleInputEmail1"
+                        className="form-label ds_role_text"
+                      >
+                        Language
+                      </label>
+                      <div className="select-wrapper position-relative">
+                        <div
+                          className="ds_sub_select1"
+                          onClick={() => setToggle(!toggle)}
+                        >
+                          {redioVal}
+                        </div>
+                        {toggle && (
+                          <div className="ds_sub_select_box">
+                            <div
+                              className="form-check mb-3"
+                              onClick={() => {
+                                setRedioVal("English");
+                                setToggle(false);
+                              }}
+                            >
+                              <input
+                                className="form-check-input ds_sub_check"
+                                type="radio"
+                                name="exampleRadios"
+                                id="exampleRadios1"
+                                value="English"
+                                checked={
+                                  redioVal === "English" && subAdd
+                                    ? true
+                                    : false
+                                }
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor="exampleRadios1"
+                              >
+                                English
+                              </label>
+                            </div>
+                            <div
+                              className="form-check"
+                              onClick={() => {
+                                setRedioVal("French");
+                                setToggle(false);
+                              }}
+                            >
+                              <input
+                                className="form-check-input ds_sub_check"
+                                type="radio"
+                                name="exampleRadios"
+                                id="exampleRadios2"
+                                value="French"
+                                checked={
+                                  redioVal === "French" && subAdd ? true : false
+                                }
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor="exampleRadios2"
+                              >
+                                French
+                              </label>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-5 mb-3 pb-5 ">
+                  <div className="text-center">
+                    <button type="submit" className="ds_role_save">
+                      Save
+                    </button>
+                    <button
+                      className="ds_sub_cancel"
+                      onClick={() => {
+                        setSubAdd(false);
+                        setFileName("No File Choosen");
+                      }}
+                    >
+                      Clear
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default AddAudioBook;

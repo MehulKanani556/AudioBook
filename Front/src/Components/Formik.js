@@ -216,4 +216,12 @@ export const voucherSchema = Yup.object({
   validTill:  Yup.string().required("validTill is required"),
   forStudent: Yup.string().required("forStudent is required"),
   status: Yup.string().required("status is required"),
+})  
+export const addAudioBookSchema = Yup.object().shape({
+  genreId: Yup.string().required("Genre ID is required"),
+  name: Yup.string().required("Name is required"),
+  description: Yup.string().required("Description is required"),
+  tags: Yup.string().required("Tags are required"),
+  language: Yup.string().required("Language is required"),
+  sampleFile: Yup.mixed().required("Sample file is required"),
 });
