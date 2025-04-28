@@ -200,3 +200,9 @@ export const addUserMasterSchema = Yup.object().shape({
   image: Yup.string().required("Image is required"),
   status: Yup.string().required("Status is required"),
 });
+
+export const CreateGenreSchema = Yup.object({
+  name: Yup.string()
+    .required('Name is required')
+    .max(50, 'Name must be 50 characters or less'),
+});

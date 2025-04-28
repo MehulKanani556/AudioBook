@@ -96,7 +96,7 @@ const AudioBook = () => {
                             <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Audio Book</span></p>
                         </div>
                         <div>
-                            <button className='V_review_btn' onClick={() => navigate('/layout/addaudiobook')} ><i className="fa-solid fa-plus me-2"></i> Add</button>
+                            <button className='V_review_btn' onClick={() => navigate('/admin/addaudiobook')} ><i className="fa-solid fa-plus me-2"></i> Add</button>
                         </div>
                     </div>
 

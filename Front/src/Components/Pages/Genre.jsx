@@ -1,26 +1,49 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link , } from 'react-router-dom'
 import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
 import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
+import { useDispatch, useSelector } from 'react-redux'
+import { CreateGenreData, GenreData } from '../../Toolkit/Slices/GenreSlice'
+import { useFormik } from 'formik'
+import { CreateGenreSchema, CreateLableSchema } from '../Formik'
+
 
 const Genre = () => {
 
+    let itemPerPage = 10;
     const [addGenreModal, setAddGenreModal] = useState(false);
     const [editGenre, setEditGenre] = useState(false);
     const [removeGenre, setRemoveGenre] = useState(false);
     const [fileName, setFileName] = useState("No file chosen");
-
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        setFileName(file ? file.name : "No file chosen");
-    };
-
-    const totalPages = 10;
+    const dispatch = useDispatch()
+    const genreGet = useSelector((state)=> state?.genre?.genreData)
+    // console.log("hihihihiih" , genreGet?.genre?.genreData);
+    const [currentData,setCurrentData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [file, setFile] = useState(null);
+    
+
+    useEffect(()=>{
+      dispatch(GenreData())
+    },[])
+
+    // const handleFileChange = (event) => {
+    //     const file = event.target.files[0];
+    //     setFileName(file ? file.name : "No file chosen");
+    // };
+
+    let totalPages = Math.ceil(genreGet?.length / itemPerPage);
+
+    useEffect(() => {
+        const startIndex = (currentPage - 1) * itemPerPage;
+        const endIndex = startIndex + itemPerPage;
+        const paginatedData = genreGet?.slice(startIndex, endIndex);
+        setCurrentData(paginatedData);
+      }, [currentPage, genreGet]);
 
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
@@ -89,6 +112,35 @@ const Genre = () => {
         return pages;
     };
 
+
+    const CreateGenreFormik = useFormik({
+        initialValues: {
+          name: '',
+        },
+        validationSchema: CreateGenreSchema, 
+        onSubmit: async (values, { resetForm }) => {
+          if (!file) {
+            alert("Please choose an image file!");
+            return;
+          }
+    
+          dispatch(CreateGenreData({values , file}));
+          dispatch(GenreData())
+          resetForm();
+          setFileName("No File Chosen");
+          setFile(null);
+          setAddGenreModal(false)
+        },
+      });
+
+      const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        if (selectedFile) {
+          setFile(selectedFile);
+          setFileName(selectedFile.name);
+        }
+      };
+
     return (
         <div className="ds_dash_master">
             <div className='ds_dash_main'>
@@ -115,22 +167,26 @@ const Genre = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>01</td>
-                                        <td>
-                                            <img src={require("../../Images/Parth/homeCorouselImage.png")} alt="" className='V_home_corousel_image' />
-                                        </td>
-                                        <td>Johnwick</td>
-                                        <td className=''>
-                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditGenre(true)} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveGenre(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
+                                    {currentData?.map((element , index)=>{
+                                        return(
+                                            <tr key={element._id}>
+                                               <td>{((currentPage - 1) * 10) +( index + 1 )}</td>
+                                               <td>
+                                                   <img src={`http://localhost:4000/${element?.generImage}`} alt="" className='V_home_corousel_image' />
+                                               </td>
+                                               <td>{element?.name}</td>
+                                               <td className=''>
+                                                   <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditGenre(true)} >
+                                                       <img src={pen} alt="" />
+                                                   </span>
+                                                   <span className='ds_role_icon ds_cursor' onClick={() => setRemoveGenre(true)} >
+                                                       <img src={trash} alt="" />
+                                                   </span>
+                                               </td>
+                                            </tr>
+                                        )
+                                    })}
+                                    {/* <tr>
                                         <td>02</td>
                                         <td>
                                             <img src={require("../../Images/Parth/homeCorouselImage.png")} alt="" className='V_home_corousel_image' />
@@ -144,7 +200,7 @@ const Genre = () => {
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
-                                    </tr>
+                                    </tr> */}
                                 </tbody>
                             </table>
                         </div>
@@ -180,29 +236,42 @@ const Genre = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12 col-sm-6   pt-2 pt-md-3">
-                                <label className='V_label'>Image</label>
-                                <div class="custom-input-group">
-                                    <input type="text" class="custom-text" placeholder="" value={fileName} readonly />
-                                    <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input " onChange={handleFileChange} />
+                    <form onSubmit={CreateGenreFormik.handleSubmit}>
+                          <div className="row py-md-3 px-lg-5">
+                            {/* File Input */}
+                            <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                              <label className='V_label'>Image</label>
+                              <div className="custom-input-group">
+                                <input type="text" className="custom-text" placeholder="" value={fileName} readOnly  />
+                                <label htmlFor="fileInput" className="custom-button">CHOOSE</label>
+                                <input type="file" id="fileInput" className="custom-file-input" onChange={handleFileChange}/>
+                              </div>
+                            </div>
+                    
+                            {/* Name Input */}
+                            <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                              <label className='V_label'>Name</label>
+                              <input type="text" name='name' value={CreateGenreFormik.values.name} onChange={CreateGenreFormik.handleChange} onBlur={CreateGenreFormik.handleBlur} className='V_input_text_for_all'/>
+                              {CreateGenreFormik.touched.name && CreateGenreFormik.errors.name ? (
+                                <div style={{ color: 'red', fontSize: '12px' }}>
+                                  {CreateGenreFormik.errors.name}
                                 </div>
+                              ) : null}
                             </div>
-                            <div className="col-12 col-sm-6   pt-2 pt-md-3">
-                                <label className='V_label'>Name</label>
-                                <input type="text" className='V_input_text_for_all ' />
+                          </div>
+                    
+                          {/* Buttons */}
+                          <div className='V_modal_header mx-auto pb-4 pt-5'>
+                            <div className="d-flex justify-content-center">
+                              <button type='submit' className='ds_role_save'>Save</button>
+                              <button type='button' className='ds_sub_cancel' onClick={() => {   setAddGenreModal(false);   setFileName("No File Chosen");   setFile(null);   CreateGenreFormik.resetForm(); }}>
+                                Clear
+                              </button>
                             </div>
-                        </div>
-
-
+                          </div>
+                    </form>
                     </Modal.Body>
-                    <Modal.Footer className='V_modal_header mx-auto pb-4'>
-                        <div className="d-flex justify-content-center">
-                            <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel' onClick={() => {setAddGenreModal(false); setFileName("No File Choosen")}}>Clear</button>
-                        </div>
-                    </Modal.Footer>
+                   
                 </Modal>
             </div>
 
@@ -232,10 +301,10 @@ const Genre = () => {
                         <div className="row py-md-3  px-lg-5 ">
                             <div className="col-12 col-sm-6   pt-2 pt-md-3">
                                 <label className='V_label'>Image</label>
-                                <div class="custom-input-group">
-                                    <input type="text" class="custom-text" placeholder="" value={fileName} readonly />
-                                    <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input " onChange={handleFileChange} />
+                                <div className="custom-input-group">
+                                    <input type="text" className="custom-text" placeholder="" value={fileName} readonly />
+                                    <label htmlFor="fileInput" className="custom-button">CHOOSE</label>
+                                    <input type="file" id="fileInput" className="custom-file-input " onChange={handleFileChange} />
                                 </div>
                             </div>
                             <div className="col-12 col-sm-6  pt-2 pt-md-3">

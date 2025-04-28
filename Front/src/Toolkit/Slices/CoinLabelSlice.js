@@ -142,36 +142,6 @@ export const CreateCoinLabel = createAsyncThunk(
   );
 
 
-// export const hi = createAsyncThunk(
-//     "LoginAdmin",
-//     async (loginData, { rejectWithValue }) => {
-//       try {
-//         const response = await axios.post(
-//           `${API_URL}/adminLogin`,
-//           {
-//             email:loginData.email,
-//             password:loginData.password
-//           }
-//         );
-//         console.log("Resposnse" , response);
-        
-//         localStorage.setItem("token" , response?.data?.token)
-//         localStorage.setItem("adminId" , response?.data?.data?._id)
-//         alert("SignUp SuccessFully")
-//         return response.data.data
-        
-//       } catch (error) {
-//         console.error("LoginAdmin Error:", error.message);
-//         alert("Login" , error.message)
-//         return rejectWithValue(
-//           error.response?.data || { message: "Unexpected error occurred" }
-//         );
-//       }
-//     }
-//   );
-
-
-
 const CoinLabelSlice = createSlice({
   name: "coinlabel",
   initialState: {

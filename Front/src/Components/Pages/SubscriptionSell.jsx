@@ -133,11 +133,11 @@ const SubscriptionSell = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {currentData?.map((element)=>{
+                                    {currentData?.map((element , index)=>{
                                         //  console.log(element);
                                          return(
                                             <tr key={element._id}>
-                                               <td>01</td>
+                                               <td>{((currentPage - 1) * 10) +( index + 1 )}</td>
                                                <td>{element?.subscriptionData[0]?.name}</td>
                                                <td>{element?.userData[0]?.firstName}</td>
                                                <td>{element?.expiryDate}</td>
