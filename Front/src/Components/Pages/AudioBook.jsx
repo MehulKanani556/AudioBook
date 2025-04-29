@@ -22,6 +22,7 @@ const AudioBook = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [deleteId, setDeleteId] = useState(null);
+  const [viewBook, setViewBook] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -176,7 +177,10 @@ const AudioBook = () => {
                         <td className="">
                           <span
                             className="ds_sub_eye ds_cursor me-2"
-                            onClick={() => setViewAudioBook(true)}
+                            onClick={() => {
+                              setViewAudioBook(true);
+                              setViewBook(ele);
+                            }}
                           >
                             <img src={eye} alt="" />
                           </span>
@@ -270,51 +274,53 @@ const AudioBook = () => {
           <Modal.Body>
             <div className="row py-md-3  px-md-5 ">
               <div className="col-6  pt-2 pt-sm-0">
-                <p className="V_label2 mb-0">Subscription Plan ID</p>
+                <p className="V_label2 mb-0">Genre ID</p>
               </div>
               <div className="col-6 pt-2 pt-sm-0">
                 <p>
-                  : <span className="ms-2 V_label1">9854</span>
+                  : <span className="ms-2 V_label1">{viewBook?.genreId}</span>
                 </p>
               </div>
               <div className="col-6  pt-2 pt-sm-0">
-                <p className="V_label2 mb-0">User ID</p>
+                <p className="V_label2 mb-0">Name</p>
               </div>
               <div className="col-6 pt-2 pt-sm-0">
                 <p>
-                  : <span className="ms-2 V_label1">9854</span>
+                  : <span className="ms-2 V_label1">{viewBook?.name}</span>
                 </p>
               </div>
               <div className="col-6  pt-2 pt-sm-0">
-                <p className="V_label2 mb-0">Expiry Date</p>
+                <p className="V_label2 mb-0">Thumbnail File</p>
               </div>
               <div className="col-6 pt-2 pt-sm-0">
                 <p>
-                  : <span className="ms-2 V_label1">20/09/2020</span>
+                  :{" "}
+                  <span className="ms-2 V_label1">{viewBook?.sampleFile}</span>
                 </p>
               </div>
               <div className="col-6  pt-2 pt-sm-0">
-                <p className="V_label2 mb-0">Amount</p>
+                <p className="V_label2 mb-0">Description</p>
               </div>
               <div className="col-6 pt-2 pt-sm-0">
                 <p>
-                  : <span className="ms-2 V_label1">₹99</span>
+                  :{" "}
+                  <span className="ms-2 V_label1">{viewBook?.description}</span>
                 </p>
               </div>
               <div className="col-6  pt-2 pt-sm-0">
-                <p className="V_label2 mb-0">Payment ID</p>
+                <p className="V_label2 mb-0">Tags</p>
               </div>
               <div className="col-6 pt-2 pt-sm-0">
                 <p>
-                  : <span className="ms-2 V_label1">5845</span>
+                  : <span className="ms-2 V_label1">{viewBook?.tags}</span>
                 </p>
               </div>
               <div className="col-6  pt-2 pt-sm-0">
-                <p className="V_label2 mb-0">Status</p>
+                <p className="V_label2 mb-0">Language</p>
               </div>
               <div className="col-6 pt-2 pt-sm-0">
                 <p>
-                  : <span className="ms-2 V_label1">Active</span>
+                  : <span className="ms-2 V_label1">{viewBook?.language}</span>
                 </p>
               </div>
             </div>

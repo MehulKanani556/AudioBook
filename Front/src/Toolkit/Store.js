@@ -13,7 +13,8 @@ import genreReducer from "./Slices/GenreSlice"
 import voucherUsedReducer from "./Slices/VoucherUsedSlice";
 import audioBookReducer from './Slices/AudioBookSlice'
 import reviewReducer from "./Slices/reviewSlice";
-
+import homeCarouselReducer from './Slices/HomeCarouselSlice';
+import homeLebelJoinReducer from './Slices/HomeLabelJoinSlice'
 
 export const store = configureStore({
   reducer: {
@@ -30,6 +31,8 @@ export const store = configureStore({
     voucher : voucherReducer,
     voucherUsed: voucherUsedReducer,
     audioBook: audioBookReducer,
-    review: reviewReducer
+    review: reviewReducer,
+    homeCarousel: homeCarouselReducer,
+    homeLabelJoin: homeLebelJoinReducer
   },
 });

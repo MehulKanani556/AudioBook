@@ -235,3 +235,9 @@ export const editAudioBookSchema = Yup.object().shape({
   sampleFile: Yup.mixed().required("Thumbnail file is required"),
 });
 
+export const addHomeCarouselSchema = Yup.object({
+  image: Yup.mixed()
+    .test("fileRequired", "Image is required", (value) => {
+      return value && (typeof value === 'string' || value instanceof File);
+    })
+});

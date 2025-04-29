@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
@@ -6,6 +6,8 @@ import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
+import { useDispatch, useSelector } from "react-redux";
+import { allHomeLabelJoin } from '../../Toolkit/Slices/HomeLabelJoinSlice'
 
 const HomeLabelJoin = () => {
     const [addHomeLabelJoinModal, setAddHomeLabelJoinModal] = useState(false);
@@ -15,6 +17,15 @@ const HomeLabelJoin = () => {
 
     const totalPages = 10;
     const [currentPage, setCurrentPage] = useState(1);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(allHomeLabelJoin());
+    }, [])
+    const homeLabelJoin = useSelector((state) => state.homeLabelJoin.homeLabelJoin)
+    console.log(homeLabelJoin);
+    
 
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
@@ -109,10 +120,12 @@ const HomeLabelJoin = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>01</td>
-                                        <td>9632</td>
-                                        <td>2541211</td>
+                                    {homeLabelJoin.map((ele, index) => {
+                                        return(
+                                    <tr key={index}>
+                                        <td>{index+1}</td>
+                                        <td>{ele?.homeLabelId}</td>
+                                        <td>{ele?.audioBookId}</td>
                                         <td>
                                             <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditHomeLabelJoinModal(true)} >
                                                 <img src={pen} alt="" />
@@ -122,7 +135,10 @@ const HomeLabelJoin = () => {
                                             </span>
                                         </td>
                                     </tr>
-                                    <tr>
+                                        )
+                                    })}
+                                    
+                                    {/* <tr>
                                         <td>02</td>
                                         <td>9632</td>
                                         <td>2541211</td>
@@ -134,7 +150,7 @@ const HomeLabelJoin = () => {
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
-                                    </tr>
+                                    </tr> */}
                                 </tbody>
                             </table>
                         </div>
