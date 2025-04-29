@@ -23,19 +23,20 @@ export const getVoucher = createAsyncThunk(
   }
 );
 
-export const addCoinMaster = createAsyncThunk(
-  'addCoinMaster',
-  async (coinMasterData, { rejectWithValue }) => {
-    console.log(coinMasterData);
+export const addVoucher = createAsyncThunk(
+  'addVoucher',
+  async (voucherData, { rejectWithValue }) => {
+    console.log(voucherData);
     try {
-      const response = await axios.post(`${API_URL}/createCoinMaster`, {
-        coin: coinMasterData.coin,
-        payment: coinMasterData.payment,
-        freeCoins: coinMasterData.freeCoin,
-        labelId: coinMasterData.labelID,
-        isOneTime: coinMasterData.isoneTime,
-        validTill: coinMasterData.validTill,
-        status: coinMasterData.status
+      const response = await axios.post(`${API_URL}/createVoucher`, {
+        name: voucherData.name,
+        description: voucherData.description,
+        code: voucherData.code,
+        discount: voucherData.discount,
+        subScriptionSellId: voucherData.subscriptionId,
+        validTill: voucherData.validTill,
+        forStudent:voucherData.forStudent ,
+        status: voucherData.status
       });
       console.log("Resposnse", response.data.data);
       return response.data;
@@ -48,11 +49,11 @@ export const addCoinMaster = createAsyncThunk(
   }
 )
 
-export const deleteCoinMaster = createAsyncThunk(
-  'deleteRole',
+export const deleteVoucher = createAsyncThunk(
+  'deleteVoucher',
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(`${API_URL}/deleteCoinMaster/` + id);
+      const response = await axios.delete(`${API_URL}/deleteVoucher/`+id);
       console.log("Resposnse", response.data.data);
       return response.data
     } catch (error) {
@@ -64,19 +65,20 @@ export const deleteCoinMaster = createAsyncThunk(
   }
 )
 
-export const UpdateCoinMaster = createAsyncThunk(
+export const UpdateVoucher = createAsyncThunk(
   "CoinMaster",
-  async ({ coinMasterData, id }, { rejectWithValue }) => {
-    console.log(coinMasterData);
+  async ({ voucherData, id }, { rejectWithValue }) => {
+    console.log(voucherData);
     try {
-      const response = await axios.put(`${API_URL}/updateCoinMaster/` + id, {
-        coin: coinMasterData.coin,
-        payment: coinMasterData.payment,
-        freeCoins: coinMasterData.freeCoin,
-        labelId: coinMasterData.labelID,
-        isOneTime: coinMasterData.isoneTime,
-        validTill: coinMasterData.validTill,
-        status: coinMasterData.status
+      const response = await axios.put(`${API_URL}/updateVoucher/` + id, {
+        name: voucherData.name,
+        description: voucherData.description,
+        code: voucherData.code,
+        discount: voucherData.discount,
+        subScriptionSellId: voucherData.subscriptionId,
+        validTill:voucherData.validTill,
+        forStudent:voucherData.forStudent,
+        status: voucherData.status
       });
       console.log("Resposnse", response.data.data);
       return response.data;
@@ -88,11 +90,11 @@ export const UpdateCoinMaster = createAsyncThunk(
     }
   }
 );
-export const getSingleCoinMaster = createAsyncThunk(
+export const getSingleVoucher = createAsyncThunk(
   "getSingleCoinMaster",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${API_URL}/getCoinMaster/` + id,);
+      const response = await axios.get(`${API_URL}/getVoucher/` + id,);
       console.log("Resposnse", response.data.data);
       return response.data.data
     } catch (error) {
@@ -117,8 +119,8 @@ const CoinMasterSlice = createSlice({
       .addCase(getVoucher.fulfilled, (state, action) => {
         state.vouchers = action.payload;
         console.log('data',state.vouchers)
-      }).addCase(getSingleCoinMaster.fulfilled, (state, action) => {
-        state.singleCoinMaster = action.payload;
+      }).addCase(getSingleVoucher.fulfilled, (state, action) => {
+        state.singleVoucher = action.payload;
       })
   },
 });

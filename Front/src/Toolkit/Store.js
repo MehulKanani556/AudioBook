@@ -14,6 +14,7 @@ import voucherUsedReducer from "./Slices/VoucherUsedSlice";
 import audioBookReducer from './Slices/AudioBookSlice'
 
 
+import reviewReducer from "./Slices/reviewSlice";
 export const store = configureStore({
   reducer: {
     login: loginReducer,
@@ -28,6 +29,7 @@ export const store = configureStore({
     genre:genreReducer,
     voucher : voucherReducer,
     voucherUsed: voucherUsedReducer,
-    audioBook: audioBookReducer
+    audioBook: audioBookReducer,
+    review: reviewReducer
   },
 });

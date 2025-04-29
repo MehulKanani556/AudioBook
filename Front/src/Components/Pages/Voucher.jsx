@@ -7,7 +7,7 @@ import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
 import { useDispatch, useSelector } from 'react-redux'
-import { getVoucher } from '../../Toolkit/Slices/VoucherSlice'
+import { deleteVoucher, getVoucher } from '../../Toolkit/Slices/VoucherSlice'
 
 const Voucher = () => {
     const navigate = useNavigate();
@@ -15,89 +15,101 @@ const Voucher = () => {
     const [viewVouchers, setViewVouchers] = useState(false);
     const [removeVouchers, setRemoveVouchers] = useState(false);
     const [currentData, setCurrentData] = useState([]);
-
+    const [deleteId, setDeleteId] = useState();
+    const [selectData,setSelectData] = useState(null);
     // user connection code here
     const dispatch = useDispatch();
-    
 
-    useEffect(()=>{
+
+    useEffect(() => {
         dispatch(getVoucher())
-    },[])
-    var voucherData = useSelector((state)=> state.voucher.vouchers)
-    console.log('vouch',voucherData);
+    }, [])
+    var voucherData = useSelector((state) => state.voucher.vouchers)
+    console.log('vouch', voucherData);
     const itemPerPage = 10;
     var totalPages = Math.ceil(voucherData?.length / itemPerPage);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const handleDelete = () => {
+        console.log('deleteId', deleteId)
+        dispatch(deleteVoucher(deleteId)).then((response) => {
+            console.log(response);
+            if (response.payload.success) {
+                setRemoveVouchers(false);
+                dispatch(getVoucher())
+            }
+        })
+    }
 
     useEffect(() => {
         const startIndex = (currentPage - 1) * itemPerPage;
         const endIndex = startIndex + itemPerPage;
         const paginatedData = voucherData?.slice(startIndex, endIndex);
         setCurrentData(paginatedData);
-      }, [currentPage, voucherData]);
-    
-    
-      const handlePageChange = (page) => {
+    }, [currentPage, voucherData]);
+
+
+    const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
-          setCurrentPage(page);
+            setCurrentPage(page);
         }
-      };
-    
-      const handlePrev = () => {
+    };
+
+    const handlePrev = () => {
         if (currentPage > 1) {
-          setCurrentPage(currentPage - 1);
+            setCurrentPage(currentPage - 1);
         }
-      };
-    
-      const handleNext = () => {
+    };
+
+    const handleNext = () => {
         if (currentPage < totalPages) {
-          setCurrentPage(currentPage + 1);
+            setCurrentPage(currentPage + 1);
         }
-      };
-    
-      const renderPagination = () => {
+    };
+
+    const renderPagination = () => {
         let pages = [];
         pages.push(
-          <div
-            key="prev"
-            className={`V_pagination text-center ${currentPage === 1 ? "disabled" : ""}`}
-            onClick={handlePrev}
-          >
-            Prev
-          </div>
+            <div
+                key="prev"
+                className={`V_pagination text-center ${currentPage === 1 ? "disabled" : ""}`}
+                onClick={handlePrev}
+            >
+                Prev
+            </div>
         );
-    
+
         for (let i = 1; i <= totalPages; i++) {
-          if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 1) {
-            pages.push(
-              <div
-                key={i}
-                onClick={() => handlePageChange(i)}
-                className={`text-center ${currentPage === i ? "V_pagination1" : "V_pagination"}`}
-              >
-                {i}
-              </div>
-            );
-          } else if (
-            (i === currentPage - 2 && currentPage > 3) ||
-            (i === currentPage + 2 && currentPage < totalPages - 2)
-          ) {
-            pages.push(
-              <div key={`dots-${i}`} className="V_pagination text-center">
-                ...
-              </div>
-            );
-          }
+            if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 1) {
+                pages.push(
+                    <div
+                        key={i}
+                        onClick={() => handlePageChange(i)}
+                        className={`text-center ${currentPage === i ? "V_pagination1" : "V_pagination"}`}
+                    >
+                        {i}
+                    </div>
+                );
+            } else if (
+                (i === currentPage - 2 && currentPage > 3) ||
+                (i === currentPage + 2 && currentPage < totalPages - 2)
+            ) {
+                pages.push(
+                    <div key={`dots-${i}`} className="V_pagination text-center">
+                        ...
+                    </div>
+                );
+            }
         }
-    
+
         pages.push(
-          <div
-            key="next"
-            className={`V_pagination text-center ${currentPage === totalPages ? "disabled" : ""}`}
-            onClick={handleNext}
-          >
-            Next
-          </div>
+            <div
+                key="next"
+                className={`V_pagination text-center ${currentPage === totalPages ? "disabled" : ""}`}
+                onClick={handleNext}
+            >
+                Next
+            </div>
         );
         // const startIndex = (currentPage - 1) * itemPerPage;
         // const endIndex = startIndex + itemPerPage;
@@ -105,7 +117,7 @@ const Voucher = () => {
         // console.log(paginatedData);
         // setCurrentData(paginatedData);
         return pages;
-      };
+    };
 
     return (
         <div className="ds_dash_master">
@@ -131,7 +143,7 @@ const Voucher = () => {
                                         <th>Description </th>
                                         <th>Code</th>
                                         <th>Discount</th>
-                                        <th>Coin Master ID</th>
+                                        {/* <th>Coin Master ID</th> */}
                                         <th>Subscription ID</th>
                                         <th>Valid till</th>
                                         <th>For Student</th>
@@ -140,33 +152,35 @@ const Voucher = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {currentData?.map((ele,ind)=>{
-                                    return(
-                                        <tr>
-                                        <td>{((currentPage - 1) * 10) + (ind + 1)}</td>
-                                        <td>{ele?.name}</td>
-                                        <td>{ele?.description}</td>
-                                        <td>{ele?.code}</td>
-                                        <td>{ele?.discount}</td>
-                                        <td>{ele?.coinMaster?.[0]?.name || ele.coinMasterId}</td>
-                                        <td>{ele?.subScriptionSell?.[0]?.name || ele.subScriptionSellId}</td>
-                                        <td>{ele?.validTill}</td>
-                                        <td>{ele?.forStudent}</td>
-                                        <td><span className='ds_sub_active'>Active</span></td>
-                                        <td className=''>
-                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewVouchers(true)} >
-                                                <img src={eye} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => navigate('/layout/editvouchers')} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveVouchers(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    )
-                                })}
+                                    {currentData?.map((ele, ind) => {
+                                        return (
+                                            <tr>
+                                                <td>{((currentPage - 1) * 10) + (ind + 1)}</td>
+                                                <td>{ele?.name}</td>
+                                                <td>{ele?.description}</td>
+                                                <td>{ele?.code}</td>
+                                                <td>{ele?.discount}</td>
+                                                {/* <td>{ele?.coinMaster?.[0]?.name || ele.coinMasterId}</td> */}
+                                                <td>{ele?.subScriptionSell?.[0]?.name || ele.subScriptionSellId}</td>
+                                                <td>{ele?.validTill}</td>
+                                                <td>{ele?.forStudent}</td>
+                                                <td>
+                                                    <span className={ele.status === 'Active' ? 'ds_sub_active' : 'ds_sub_block'}>{ele?.status}</span>
+                                                </td>
+                                                <td className=''>
+                                                    <span className='ds_sub_eye ds_cursor me-2' onClick={() => { setViewVouchers(true);setSelectData(ele)}} >
+                                                        <img src={eye} alt="" />
+                                                    </span>
+                                                    <span className='ds_role_icon ds_cursor me-2' onClick={() => navigate('/admin/editvouchers/' + ele._id)} >
+                                                        <img src={pen} alt="" />
+                                                    </span>
+                                                    <span className='ds_role_icon ds_cursor' onClick={() => { setRemoveVouchers(true); setDeleteId(ele?._id) }} >
+                                                        <img src={trash} alt="" />
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
                                 </tbody>
                             </table>
                         </div>
@@ -180,7 +194,7 @@ const Voucher = () => {
 
 
 
-          
+
 
 
 
@@ -211,55 +225,55 @@ const Voucher = () => {
                                 <p className='V_label2 mb-0'>Name</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>9854</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.name}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Description</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>9854</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.description}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Code</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>20/09/2020</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.code}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Discount</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>₹99</span></p>
+                                <p>: <span className='ms-2 V_label1'>₹{selectData?.discount}</span></p>
                             </div>
-                            <div className="col-6  pt-2 pt-sm-0">
+                            {/* <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Coin Master ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>5845</span></p>
-                            </div>
+                            </div> */}
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Subscription ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>Active</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.subScriptionSellId || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Valid till</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>Active</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.validTill}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>For Student</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>Active</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.forStudent}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Status</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>Active</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.status}</span></p>
                             </div>
                         </div>
                     </Modal.Body>
@@ -275,7 +289,7 @@ const Voucher = () => {
                         <p className='ds_role_text'>Are you sure you want to delete Vouchers?</p>
                         <div className='mt-5 mb-5'>
                             <button className='ds_delete_cancel' onClick={() => setRemoveVouchers(false)}>Cancel</button>
-                            <button className='ds_delete_yes'>Yes</button>
+                            <button className='ds_delete_yes' onClick={handleDelete}>Yes</button>
                         </div>
                     </div>
                 </Modal.Body>
