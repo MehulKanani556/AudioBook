@@ -6,7 +6,10 @@ import eye from "../../Images/dhruvin/eye_icon.svg";
 import { Button, Modal } from "react-bootstrap";
 import "../../CSS/Review.css";
 import Close from "../../Images/Parth/close_button.png";
-import { deleteAudioBookData, getAllAudioBookData } from "../../Toolkit/Slices/AudioBookSlice";
+import {
+  deleteAudioBookData,
+  getAllAudioBookData,
+} from "../../Toolkit/Slices/AudioBookSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const AudioBook = () => {
@@ -31,10 +34,10 @@ const AudioBook = () => {
 
   const deleteAudioBook = (deleteAudioBookId) => {
     dispatch(deleteAudioBookData(deleteAudioBookId)).then(() => {
-        dispatch(getAllAudioBookData());
-    })
+      dispatch(getAllAudioBookData());
+    });
     setRemoveAudioBook(false);
-  }
+  };
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -144,7 +147,7 @@ const AudioBook = () => {
                     <th>No</th>
                     <th>Genre ID</th>
                     <th>Name</th>
-                    <th>Image</th>
+                    <th>Thumbnail File</th>
                     <th>Description </th>
                     <th>Tags</th>
                     <th>Language</th>
@@ -153,6 +156,8 @@ const AudioBook = () => {
                 </thead>
                 <tbody>
                   {audioBook.map((ele, index) => {
+                    console.log(audioBook);
+
                     return (
                       <tr key={index}>
                         <td>{index + 1}</td>
@@ -177,7 +182,9 @@ const AudioBook = () => {
                           </span>
                           <span
                             className="ds_role_icon ds_cursor me-2"
-                            onClick={() => navigate("/admin/editaudiobook")}
+                            onClick={() => {
+                              navigate("/admin/editaudiobook/" + ele._id);
+                            }}
                           >
                             <img src={pen} alt="" />
                           </span>

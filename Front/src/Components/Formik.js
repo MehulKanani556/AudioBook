@@ -222,5 +222,16 @@ export const addAudioBookSchema = Yup.object().shape({
   description: Yup.string().required("Description is required"),
   tags: Yup.string().required("Tags are required"),
   language: Yup.string().required("Language is required"),
-  sampleFile: Yup.mixed().required("Sample file is required"),
+  sampleFile: Yup.mixed().required("Thumbnail file is required"),
 });
+
+
+export const editAudioBookSchema = Yup.object().shape({
+  genreId: Yup.string().required("Genre ID is required"),
+  name: Yup.string().required("Name is required"),
+  description: Yup.string().required("Description is required"),
+  tags: Yup.string().required("Tags are required"),
+  language: Yup.string().required("Language is required"),
+  sampleFile: Yup.mixed().required("Thumbnail file is required"),
+});
+

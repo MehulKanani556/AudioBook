@@ -37,8 +37,8 @@ export const addAudioBookData = createAsyncThunk(
     const token = localStorage.getItem("token");
     try {
       const formData = new FormData();
-
-      formData.append("generId", add.genreId);
+      console.log(add.genreId);
+      formData.append("genreId", add.genreId);
       formData.append("name", add.name);
       formData.append("description", add.description);
       formData.append("tags", add.tags);
@@ -55,6 +55,62 @@ export const addAudioBookData = createAsyncThunk(
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response);
+      return response.data.data;
+    } catch (error) {
+      console.error("LoginAdmin Error:", error.message);
+      return rejectWithValue(
+        error.response?.data || { message: "Unexpected error occurred" }
+      );
+    }
+  }
+);
+
+export const singleAudioBookData = createAsyncThunk(
+  "getSingleAudioBook",
+  async (singleAudioBook, { rejectWithValue }) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.get(
+        `${API_URL}/getAudiobook/${singleAudioBook}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data.data;
+    } catch (error) {
+      console.error("LoginAdmin Error:", error.message);
+      return rejectWithValue(
+        error.response?.data || { message: "Unexpected error occurred" }
+      );
+    }
+  }
+);
+
+export const editAudioBookData = createAsyncThunk(
+  "editAudioBook",
+  async (editAudioBook, { rejectWithValue }) => {
+    console.log(editAudioBook);
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.put(
+        `${API_URL}/updateAudiobook/${editAudioBook._id}`,
+        {
+          genreId: editAudioBook.genreId,
+          name: editAudioBook.name,
+          description: editAudioBook.description,
+          sampleFile: editAudioBook.sampleFile,
+          tags: editAudioBook.tags,
+          language: editAudioBook.language,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -97,7 +153,9 @@ const AudioBookSlice = createSlice({
   name: "coinlabel",
   initialState: {
     audioBook: [],
+    singleAudioBook: [],
     addAudioBook: [],
+    editAudioBook: [],
     deleteAudioBook: [],
     loading: false,
     success: false,
@@ -135,6 +193,40 @@ const AudioBookSlice = createSlice({
         state.message = "Coin Label Get SuccessFully";
       })
       .addCase(addAudioBookData.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = action.payload?.message || "Failed To Coin Label";
+      })
+
+      //   single audiobook
+      .addCase(singleAudioBookData.pending, (state) => {
+        state.loading = true;
+        state.message = "Accepting Coin Label..";
+      })
+      .addCase(singleAudioBookData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.singleAudioBook = action.payload;
+        state.message = "Coin Label Get SuccessFully";
+      })
+      .addCase(singleAudioBookData.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = action.payload?.message || "Failed To Coin Label";
+      })
+
+      //  edit audiobook
+      .addCase(editAudioBookData.pending, (state) => {
+        state.loading = true;
+        state.message = "Accepting Coin Label..";
+      })
+      .addCase(editAudioBookData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.editAudioBook = action.payload;
+        state.message = "Coin Label Get SuccessFully";
+      })
+      .addCase(editAudioBookData.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.message = action.payload?.message || "Failed To Coin Label";
