@@ -235,3 +235,15 @@ export const editAudioBookSchema = Yup.object().shape({
   sampleFile: Yup.mixed().required("Thumbnail file is required"),
 });
 
+export const CreateEpisodeSchema = Yup.object({
+  audioBookId: Yup.string().required('Audio Book is required'),
+  premium: Yup.string().required('Premium is required'),
+  duration: Yup.string().required('Duration is required')
+});
+
+export const CreateHomeLableSchema = Yup.object({
+  labelName: Yup.string().required("LableName Is Required"),
+});
+
+
+

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
@@ -6,15 +6,33 @@ import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
+import { useDispatch, useSelector } from 'react-redux'
+import { CreateHomeLabel, HomeLabelData } from '../../Toolkit/Slices/HomeLabelsSlice'
+import { useFormik } from 'formik'
+import { CreateHomeLableSchema } from '../Formik'
 
 const HomeLabels = () => {
     const [addHomeLabelsModal, setAddHomeLabelsModal] = useState(false);
     const [editHomeLabelsModal, setEditHomeLabelsModal] = useState(false);
     const [removeHomeLabels, setRemoveHomeLabels] = useState(false);
+    let itemPerPage = 10;
+    const dispatch = useDispatch()
+    const homeLabelMap = useSelector(state => state?.homeLabel?.homeLabelData)
 
-
-    const totalPages = 10;
+    useEffect(()=>{
+       dispatch(HomeLabelData())
+    },[])
+   
+    let totalPages = Math.ceil(homeLabelMap?.length / itemPerPage);
     const [currentPage, setCurrentPage] = useState(1);
+    const [currentData,setCurrentData] = useState([]);
+
+    useEffect(() => {
+        const startIndex = (currentPage - 1) * itemPerPage;
+        const endIndex = startIndex + itemPerPage;
+        const paginatedData = homeLabelMap?.slice(startIndex, endIndex);
+        setCurrentData(paginatedData);
+    }, [currentPage, homeLabelMap]);
 
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
@@ -83,6 +101,17 @@ const HomeLabels = () => {
         return pages;
     };
 
+    const CreateHomeLabelFormik = useFormik({
+        initialValues:{
+            labelName:""
+        },
+        validationSchema:CreateHomeLableSchema,
+        onSubmit:(values)=>{
+            dispatch(CreateHomeLabel(values))
+            setAddHomeLabelsModal(false)
+        }
+    })
+
     return (
         <div className="ds_dash_master">
             <div className='ds_dash_main'>
@@ -108,30 +137,22 @@ const HomeLabels = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>01</td>
-                                        <td>Label  Name</td>
-                                        <td className=''>
-                                        <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditHomeLabelsModal(true)} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveHomeLabels(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>02</td>
-                                        <td>Label  Name</td>
-                                        <td className=''>
-                                        <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditHomeLabelsModal(true)} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveHomeLabels(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr>
+                                    {currentData?.map((element , index)=>{
+                                        return(
+                                            <tr key={element?._id}>
+                                               <td>{((currentPage - 1) * 10) +( index + 1 )}</td>
+                                               <td>{element?.labelName}</td>
+                                               <td className=''>
+                                               <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditHomeLabelsModal(true)} >
+                                                       <img src={pen} alt="" />
+                                                   </span>
+                                                   <span className='ds_role_icon ds_cursor' onClick={() => setRemoveHomeLabels(true)} >
+                                                       <img src={trash} alt="" />
+                                                   </span>
+                                               </td>
+                                            </tr>
+                                        )
+                                    })}
                                 </tbody>
                             </table>
                         </div>
@@ -147,41 +168,37 @@ const HomeLabels = () => {
 
             {/* ==========     Add Home Labels    ========== */}
             <div className=''>
-                <Modal
-                    show={addHomeLabelsModal}
-                    onHide={() => setAddHomeLabelsModal(false)}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    className='text-white V_modal_width'
-                    centered>
+                <Modal show={addHomeLabelsModal} onHide={() => setAddHomeLabelsModal(false)} size="lg" aria-labelledby="contained-modal-title-vcenter" className='text-white V_modal_width' centered>
                     <Modal.Header className='V_modal_header'>
                         <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
                                     Add Home Labels
                                 </div>
-                                <div className='ms-auto' onClick={() => setAddHomeLabelsModal(false)}>
+                                <div className='ms-auto ds_cursor' onClick={() => setAddHomeLabelsModal(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12   pt-2 pt-md-3">
-                                <label className='V_label'>Name</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                        </div>
-
-
+                        <form onSubmit={CreateHomeLabelFormik.handleSubmit}>
+                          <div className="row py-md-3  px-lg-5 ">
+                              <div className="col-12   pt-2 pt-md-3">
+                                  <label className='V_label'>Name</label>
+                                  <input type="text" name='labelName' value={CreateHomeLabelFormik.values.labelName} onChange={CreateHomeLabelFormik.handleChange} onBlur={CreateHomeLabelFormik.handleBlur} className='V_input_text_for_all mt-1 mt-md-2' />
+                                  <p className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{CreateHomeLabelFormik.errors.labelName}</p>
+                              </div>
+                          </div>
+                          <div className='V_modal_header mx-auto pb-4 pt-4'>
+                            <div className="d-flex justify-content-center">
+                              <button type='submit' className='ds_role_save'>Save</button>
+                              <button className='ds_sub_cancel' onClick={() => setAddHomeLabelsModal(false)}>Clear</button>
+                             </div>
+                          </div>
+                        </form>                  
                     </Modal.Body>
-                    <Modal.Footer className='V_modal_header mx-auto pb-4'>
-                        <div className="d-flex justify-content-center">
-                            <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel' onClick={() => setAddHomeLabelsModal(false)}>Clear</button>
-                        </div>
-                    </Modal.Footer>
+                    
                 </Modal>
             </div>
 

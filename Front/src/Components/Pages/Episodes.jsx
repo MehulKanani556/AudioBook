@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
@@ -6,6 +6,11 @@ import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
+import { useDispatch, useSelector } from 'react-redux'
+import { CreateEpisode, DeleteEpisode, EditEpisode, EpisodeData } from '../../Toolkit/Slices/EpisodesSlice'
+import { useFormik } from 'formik'
+import { getAllAudioBookData } from '../../Toolkit/Slices/AudioBookSlice'
+import { CreateEpisodeSchema } from '../Formik'
 
 const Episodes = () => {
     const [addEpisodes, setAddEpisodes] = useState(false);
@@ -13,15 +18,55 @@ const Episodes = () => {
     const [viewEpisodes, setViewEpisodes] = useState(false);
     const [removeEpisodes, setRemoveEpisodes] = useState(false);
     const [fileName, setFileName] = useState("No file chosen");
-    
-        const handleFileChange = (event) => {
-          const file = event.target.files[0];
-          setFileName(file ? file.name : "No file chosen");
-        };
+    const [file, setFile] = useState("")
+    const episodeMap = useSelector((state)=>state?.episode?.episodeData)
+    const audioBookMap = useSelector((state)=>state?.audioBook?.audioBook)
+    const dispatch = useDispatch()
 
-
-    const totalPages = 10;
+    let itemPerPage = 10;
+    let totalPages = Math.ceil(episodeMap?.length / itemPerPage);
     const [currentPage, setCurrentPage] = useState(1);
+    const [currentData,setCurrentData] = useState([]);
+    const [fileError, setFileError] = useState("");
+    const [deleteId, setDeleteId] = useState(null)
+    const [viewData, setViewData] = useState({})
+    const [editObj, setEditObj] = useState({})
+    const [editId, setEditId] = useState(null)
+
+
+    useEffect(()=>{
+        dispatch(EpisodeData())
+    },[])
+
+    useEffect(()=>{
+        dispatch(getAllAudioBookData())
+    },[])
+
+    useEffect(() => {
+        const startIndex = (currentPage - 1) * itemPerPage;
+        const endIndex = startIndex + itemPerPage;
+        const paginatedData = episodeMap?.slice(startIndex, endIndex);
+        setCurrentData(paginatedData);
+      }, [currentPage, episodeMap]);
+    
+      const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const validAudioTypes = ['audio/mpeg', 'audio/wav', 'audio/mp3', 'audio/x-wav', 'audio/x-m4a', 'audio/mp4'];
+          if (!validAudioTypes.includes(file.type)) {
+            setFileName("No file chosen");
+            setFileError("Only audio files are allowed (e.g., .mp3, .wav)");
+            return;
+          }
+          setFileName(file.name);
+          setFile(file)
+          setFileError("");
+        } else {
+          setFileName("No file chosen");
+          setFileError("");
+          setFile("")
+        }
+      }; 
 
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
@@ -90,6 +135,69 @@ const Episodes = () => {
         return pages;
     };
 
+    const createEpisodeVal = {
+        audioBookId:"",
+        premium:"",
+        duration:""
+    }
+  
+    const CreateEpisodeFormik = useFormik({
+        initialValues:createEpisodeVal,
+        validationSchema: CreateEpisodeSchema,
+        onSubmit:(values)=>{
+           if(fileError === ""){
+            //   console.log("jjjjjjj",values , file);
+              dispatch(CreateEpisode({values , file}))
+              setAddEpisodes(false)
+           }
+           else{
+            alert("Please Select Audio File")
+           }
+        }
+    })
+
+    const handleDelete = () => {
+        if(deleteId){
+            dispatch(DeleteEpisode(deleteId))
+            setRemoveEpisodes(false) 
+        }
+    }
+
+    const editEposideVal = {
+        audioBookId:editObj?.audioBookData?.length ? editObj?.audioBookData[0]._id : "",
+        premium:editObj?.premium,
+        duration:editObj?.duration
+    }
+    const EditEpisodeFormik = useFormik({
+        enableReinitialize: true,
+        initialValues:editEposideVal,
+        validationSchema: CreateEpisodeSchema,
+        onSubmit:(values)=>{
+           if (!file && !editObj?.audioFile ) {
+              alert("Please choose an audio file!");
+            return;
+           }
+           else if(fileError){
+            alert("Please choose an audio file!");
+            return;
+           }
+
+          let payload = {
+            values,
+            id: editObj?._id,
+           };
+    
+          if (file) {
+            payload.file = file; 
+          } else {
+            payload.audioFile = editObj?.audioFile; 
+          }
+
+         dispatch(EditEpisode(payload));
+         setEditEpisodes(false)
+        }
+    })
+
     return (
         <div className="ds_dash_master">
             <div className='ds_dash_main'>
@@ -112,31 +220,35 @@ const Episodes = () => {
                                         <th>No</th>
                                         <th>Audio Book ID</th>
                                         <th>Premium</th>
-                                        <th>Coins Required</th>
+                                        {/* <th>Coins Required</th> */}
                                         <th>Duration</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>01</td>
-                                        <td>2541211</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>
-                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewEpisodes(true)} >
-                                                <img src={eye} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditEpisodes(true)} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveEpisodes(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
+                                    {currentData?.map((element ,index)=>{
+                                        return(
+                                            <tr key={element?._id}>
+                                               <td>{((currentPage - 1) * 10) +( index + 1 )}</td>
+                                               <td>{element?.audioBookData[0]?.name}</td>
+                                               <td>{element?.premium}</td>
+                                               {/* <td>{element?.coinRequired}</td> */}
+                                               <td>{element?.duration}</td>
+                                               <td>
+                                                   <span className='ds_sub_eye ds_cursor me-2' onClick={() => {setViewEpisodes(true) ; setViewData(element)}} >
+                                                       <img src={eye} alt="" />
+                                                   </span>
+                                                   <span className='ds_role_icon ds_cursor me-2' onClick={() => {setEditEpisodes(true) ; setEditObj(element) ; setEditId(element?._id)}} >
+                                                       <img src={pen} alt="" />
+                                                   </span>
+                                                   <span className='ds_role_icon ds_cursor' onClick={() => {setRemoveEpisodes(true) ; setDeleteId(element?._id)}} >
+                                                       <img src={trash} alt="" />
+                                                   </span>
+                                               </td>
+                                           </tr>
+                                        )
+                                    })}
+                                    {/* <tr>
                                         <td>02</td>
                                         <td>8216614</td>
                                         <td>Lorem Ipsum</td>
@@ -153,7 +265,7 @@ const Episodes = () => {
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
-                                    </tr>
+                                    </tr> */}
                                 </tbody>
                             </table>
                         </div>
@@ -169,72 +281,79 @@ const Episodes = () => {
 
             {/* ==========    Add Episodes Modal    ========== */}
             <div className=''>
-                <Modal
-                    show={addEpisodes}
-                    onHide={() => setAddEpisodes(false)}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    className='text-white V_modal_width'
-                    centered>
+                <Modal show={addEpisodes} onHide={() => setAddEpisodes(false)} size="lg" aria-labelledby="contained-modal-title-vcenter" className='text-white V_modal_width' centered>
                     <Modal.Header className='V_modal_header'>
                         <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
                                     Add Episodes
                                 </div>
-                                <div className='ms-auto' onClick={() => setAddEpisodes(false)}>
+                                <div className='ms-auto ds_cursor' onClick={() => setAddEpisodes(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Audio Book ID</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Audio file</label>
-                                <div class="custom-input-group mt-1 mt-md-2">
-                                    <input type="text" class="custom-text" placeholder="" value={fileName} readonly />
-                                    <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input " onChange={handleFileChange} />
+                            <form onSubmit={CreateEpisodeFormik.handleSubmit}>
+                             <div className="row py-md-3  px-lg-5 ">
+                                <div className="col-12 col-sm-6  pt-2 pt-md-3">
+                                    <label className='V_label'>Audio Book ID</label>
+                                    {/* <input type="text"  /> */}
+                                    <select name="audioBookId" value={CreateEpisodeFormik.values.audioBookId} onChange={CreateEpisodeFormik.handleChange} onBlur={ CreateEpisodeFormik.handleBlur} className='V_input_text_for_all mt-1 mt-md-2' >
+                                        <option value="">select audio book</option>
+                                        {
+                                            audioBookMap?.map((element)=>{
+                                                return(
+                                                    <option key={element?._id} value={element?._id}>{element?.name}</option>
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                    {CreateEpisodeFormik.touched.audioBookId && CreateEpisodeFormik.errors.audioBookId && (
+                                     <div className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{CreateEpisodeFormik.errors.audioBookId}</div>
+                                     )}
+                                </div>
+                                <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
+                                    <label className='V_label'>Audio file</label>
+                                    <div class="custom-input-group mt-1 mt-md-2">
+                                        <input type="text" class="custom-text" placeholder="" value={fileName} readonly  accept="audio/*"/>
+                                        <label for="fileInput" class="custom-button">CHOOSE</label>
+                                        <input type="file" id="fileInput"  class="custom-file-input " onChange={handleFileChange} />
+                                    </div>
+                                    {fileError && <p className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{fileError}</p>}
+                                </div>
+                                <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
+                                    <label className='V_label'>Premium</label>
+                                    <input type="text" name="premium" value={CreateEpisodeFormik.values.premium} onChange={CreateEpisodeFormik.handleChange} onBlur={ CreateEpisodeFormik.handleBlur}  className='V_input_text_for_all mt-1 mt-md-2' />
+                                    {CreateEpisodeFormik.touched.premium && CreateEpisodeFormik.errors.premium && (
+                                      <div className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{CreateEpisodeFormik.errors.premium}</div>
+                                    )}
+                                </div>
+                                
+                                <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
+                                    <label className='V_label'>Duration</label>
+                                    <input type="text" name="duration" value={CreateEpisodeFormik.values.duration} onChange={CreateEpisodeFormik.handleChange} onBlur={ CreateEpisodeFormik.handleBlur}  className='V_input_text_for_all mt-1 mt-md-2' />
+                                    {CreateEpisodeFormik.touched.duration && CreateEpisodeFormik.errors.duration && (
+                                       <div className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{CreateEpisodeFormik.errors.duration}</div>
+                                     )}
                                 </div>
                             </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Premium</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
+                            <div className='V_modal_header mx-auto pb-4 pt-5'>
+                                <div className="d-flex justify-content-center">
+                                    <button type='submit' className='ds_role_save'>Save</button>
+                                    <button type='button' className='ds_sub_cancel'onClick={() => {setAddEpisodes(false); setFileName("No File Choosen")}}>Clear</button>
+                                </div>
                             </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Coins required</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Duration</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                        </div>
+                            </form>
                     </Modal.Body>
-                    <Modal.Footer className='V_modal_header mx-auto pb-4'>
-                        <div className="d-flex justify-content-center">
-                            <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel'onClick={() => {setAddEpisodes(false); setFileName("No File Choosen")}}>Clear</button>
-                        </div>
-                    </Modal.Footer>
                 </Modal>
             </div>
 
 
             {/* ==========    Edit Episodes Modal    ========== */}
             <div className=''>
-                <Modal
-                    show={editEpisodes}
-                    onHide={() => setEditEpisodes(false)}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    className='text-white V_modal_width'
-                    centered>
+                <Modal show={editEpisodes} onHide={() => setEditEpisodes(false)} size="lg" aria-labelledby="contained-modal-title-vcenter" className='text-white V_modal_width' centered>
                     <Modal.Header className='V_modal_header'>
                         <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
                             <div className="d-flex justify-content-between ">
@@ -248,39 +367,58 @@ const Episodes = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Audio Book ID</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Audio file</label>
-                                <div class="custom-input-group mt-1 mt-md-2">
-                                <input type="text" class="custom-text" placeholder="" value={fileName} readonly />
-                                    <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input " onChange={handleFileChange} />
+                       <form onSubmit={EditEpisodeFormik.handleSubmit}>
+                             <div className="row py-md-3  px-lg-5 ">
+                                <div className="col-12 col-sm-6  pt-2 pt-md-3">
+                                    <label className='V_label'>Audio Book ID</label>
+                                    {/* <input type="text"  /> */}
+                                    <select name="audioBookId" value={EditEpisodeFormik.values.audioBookId} onChange={EditEpisodeFormik.handleChange} onBlur={ EditEpisodeFormik.handleBlur} className='V_input_text_for_all mt-1 mt-md-2' >
+                                        <option value="">select audio book</option>
+                                        {
+                                            audioBookMap?.map((element)=>{
+                                                return(
+                                                    <option key={element?._id} value={element?._id}>{element?.name}</option>
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                    {EditEpisodeFormik.touched.audioBookId && EditEpisodeFormik.errors.audioBookId && (
+                                     <div className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{EditEpisodeFormik.errors.audioBookId}</div>
+                                     )}
+                                </div>
+                                <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
+                                    <label className='V_label'>Audio file</label>
+                                    <div class="custom-input-group mt-1 mt-md-2">
+                                        <input type="text" class="custom-text" placeholder="" value={fileName !== "No file chosen" ? fileName : editObj?.audioFile?.replace(/\\/g, "/")?.split("/")?.pop()} readonly  accept="audio/*"/>
+                                        <label for="fileInput" class="custom-button">CHOOSE</label>
+                                        <input type="file" id="fileInput"  class="custom-file-input " onChange={handleFileChange} />
+                                    </div>
+                                    {fileError && <p className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{fileError}</p>}
+                                </div>
+                                <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
+                                    <label className='V_label'>Premium</label>
+                                    <input type="text" name="premium" value={EditEpisodeFormik.values.premium} onChange={EditEpisodeFormik.handleChange} onBlur={ EditEpisodeFormik.handleBlur}  className='V_input_text_for_all mt-1 mt-md-2' />
+                                    {EditEpisodeFormik.touched.premium && EditEpisodeFormik.errors.premium && (
+                                      <div className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{EditEpisodeFormik.errors.premium}</div>
+                                    )}
+                                </div>
+                                
+                                <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
+                                    <label className='V_label'>Duration</label>
+                                    <input type="text" name="duration" value={EditEpisodeFormik.values.duration} onChange={EditEpisodeFormik.handleChange} onBlur={ EditEpisodeFormik.handleBlur}  className='V_input_text_for_all mt-1 mt-md-2' />
+                                    {EditEpisodeFormik.touched.duration && EditEpisodeFormik.errors.duration && (
+                                       <div className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{EditEpisodeFormik.errors.duration}</div>
+                                     )}
                                 </div>
                             </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Premium</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
+                            <div className='V_modal_header mx-auto pb-4 pt-5'>
+                                <div className="d-flex justify-content-center">
+                                    <button type='submit' className='ds_role_save'>Save</button>
+                                    <button type='button' className='ds_sub_cancel'onClick={() => {setEditEpisodes(false); setFileName("No file chosen")}}>Clear</button>
+                                </div>
                             </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Coins required</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Duration</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                        </div>
+                            </form>
                     </Modal.Body>
-                    <Modal.Footer className='V_modal_header mx-auto pb-4'>
-                        <div className="d-flex justify-content-center">
-                            <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel' onClick={() => {setEditEpisodes(false); setFileName("No File Choosen")}}>Clear</button>
-                        </div>
-                    </Modal.Footer>
                 </Modal>
             </div>
 
@@ -288,20 +426,14 @@ const Episodes = () => {
 
             {/* ==========    View Episodes Modal    ========== */}
             <div className=''>
-                <Modal
-                    show={viewEpisodes}
-                    onHide={() => setViewEpisodes(false)}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    className='text-white V_modal_width '
-                    centered>
+                <Modal show={viewEpisodes} onHide={() => setViewEpisodes(false)} size="lg" aria-labelledby="contained-modal-title-vcenter" className='text-white V_modal_width ' centered>
                     <Modal.Header className='V_modal_header'>
                         <Modal.Title id="contained-modal-title-vcenter" className='px-md-5 w-100' >
                             <div className="d-flex justify-content-between ">
                                 <div>
                                     Episodes Details
                                 </div>
-                                <div className='ms-auto' onClick={() => setViewEpisodes(false)}>
+                                <div className='ms-auto ds_cursor' onClick={() => setViewEpisodes(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
@@ -313,25 +445,25 @@ const Episodes = () => {
                                 <p className='V_label2 mb-0'>Audio Book ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>45256</span></p>
+                                <p>: <span className='ms-2 V_label1'>{viewData?.audioBookData?.length ? viewData?.audioBookData[0]?.name : ""}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Premium</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>Johanwick08</span></p>
+                                <p>: <span className='ms-2 V_label1'>{viewData?.premium}</span></p>
                             </div>
-                            <div className="col-6  pt-2 pt-sm-0">
+                            {/* <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Coins Required</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>12/12/2023</span></p>
-                            </div>
+                            </div> */}
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Duration</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>Lorem Ipsum</span></p>
+                                <p>: <span className='ms-2 V_label1'>{viewData?.duration}</span></p>
                             </div>
                         </div>
                     </Modal.Body>
@@ -348,7 +480,7 @@ const Episodes = () => {
                         <p className='ds_role_text'>Are you sure you want to delete Episodes?</p>
                         <div className='mt-5 mb-5'>
                             <button className='ds_delete_cancel' onClick={() => setRemoveEpisodes(false)}>Cancel</button>
-                            <button className='ds_delete_yes'>Yes</button>
+                            <button className='ds_delete_yes' onClick={handleDelete}>Yes</button>
                         </div>
                     </div>
                 </Modal.Body>
