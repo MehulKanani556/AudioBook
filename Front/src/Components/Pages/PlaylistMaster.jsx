@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
@@ -6,16 +6,24 @@ import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
+import { useDispatch, useSelector } from 'react-redux'
+import { getPlaylistMaster } from '../../Toolkit/Slices/PlaylistMasterSlice'
 
 
 const PlaylistMaster = () => {
     const [addPlaylistMasterModal, setAddPlaylistMasterModal] = useState(false);
     const [editPlaylistMasterModal, setEditPlaylistMasterModal] = useState(false);
     const [removePlaylistMaster, setRemovePlaylistMaster] = useState(false);
-
-
-    const totalPages = 10;
+    const playlist = useSelector((state)=>state.playlist.playlist);
     const [currentPage, setCurrentPage] = useState(1);
+    const itemPerPage = 10;
+    var totalPages = Math.ceil(playlist.length / itemPerPage);
+    console.log('playlist',playlist)
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(getPlaylistMaster())
+    },[])
+
 
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
@@ -93,9 +101,9 @@ const PlaylistMaster = () => {
                             <h4 className="text-light pt-4 mb-0">Playlist Master</h4>
                             <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Playlist Master</span></p>
                         </div>
-                        <div>
+                        {/* <div>
                             <button className='V_review_btn1' onClick={() => setAddPlaylistMasterModal(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className='V_review_bg mt-2'>
@@ -106,11 +114,11 @@ const PlaylistMaster = () => {
                                         <th>No</th>
                                         <th>User ID</th>
                                         <th>Name</th>
-                                        <th>Action</th>
+                                        {/* <th>Action</th> */}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    {/* <tr>
                                         <td>01</td>
                                         <td>Johnwick08</td>
                                         <td>Lorem Ipsum</td>
@@ -122,19 +130,19 @@ const PlaylistMaster = () => {
                                                 <img src={trash} alt="" />
                                             </span>
                                         </td>
-                                    </tr>
+                                    </tr> */}
                                     <tr>
                                         <td>02</td>
                                         <td>Johnwick08</td>
                                         <td>Lorem Ipsum</td>
-                                        <td className=''>
+                                        {/* <td className=''>
                                             <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditPlaylistMasterModal(true)} >
                                                 <img src={pen} alt="" />
                                             </span>
                                             <span className='ds_role_icon ds_cursor' onClick={() => setRemovePlaylistMaster(true)} >
                                                 <img src={trash} alt="" />
                                             </span>
-                                        </td>
+                                        </td> */}
                                     </tr>
                                 </tbody>
                             </table>
@@ -181,8 +189,6 @@ const PlaylistMaster = () => {
                                 <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                         </div>
-
-
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">
@@ -226,8 +232,6 @@ const PlaylistMaster = () => {
                                 <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
                             </div>
                         </div>
-
-
                     </Modal.Body>
                     <Modal.Footer className='V_modal_header mx-auto pb-4'>
                         <div className="d-flex justify-content-center">

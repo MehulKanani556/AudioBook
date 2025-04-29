@@ -13,8 +13,8 @@ import genreReducer from "./Slices/GenreSlice"
 import voucherUsedReducer from "./Slices/VoucherUsedSlice";
 import audioBookReducer from './Slices/AudioBookSlice'
 import reviewReducer from "./Slices/reviewSlice";
-
-
+import CastCrewReducer from "./Slices/CastCrew";
+import PlaylistMaster from "./Slices/PlaylistMasterSlice";
 export const store = configureStore({
   reducer: {
     login: loginReducer,
@@ -30,6 +30,8 @@ export const store = configureStore({
     voucher : voucherReducer,
     voucherUsed: voucherUsedReducer,
     audioBook: audioBookReducer,
-    review: reviewReducer
+    review: reviewReducer,
+    castCrew: CastCrewReducer,
+    playlist: PlaylistMaster,
   },
 });

@@ -2,13 +2,18 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 const API_URL = "http://localhost:4000/api";
 
-export const getRole = createAsyncThunk(
-    "getRole",
+export const getCastCrew = createAsyncThunk(
+    "getCastCrew",
     async (_, { rejectWithValue }) => {
       try {
-        const response = await axios.get(`${API_URL}/getAllRoles`,);
+        const response = await axios.get(`${API_URL}/getAllCrew`); 
         console.log("Resposnse" , response.data.data);
-          return response.data.data
+        if(response.data.success){
+          return response.data.data ;
+        }
+        else {
+          return[];
+        }
       } catch (error) {
         console.error("LoginAdmin Error:", error.message);
         if(error.status === 404){
@@ -23,15 +28,20 @@ export const getRole = createAsyncThunk(
     }
   );
 
-export const addRole=createAsyncThunk(
-    'addRole',
-    async(roleName,{rejectWithValue})=>{
+export const addCastCrewFunc = createAsyncThunk(
+    'addCastCrew',
+    async(castCrewData,{rejectWithValue})=>{
+        console.log('data data',castCrewData)
+        const formData = new FormData();
+        formData.append("audiBookId", castCrewData.audiBookId);
+        formData.append("name", castCrewData.name);
+        formData.append("roleId", castCrewData.roleId);
+        formData.append("crewImage", castCrewData.crewImage); // it's a File
         try {
-        const response = await axios.post(`${API_URL}/createRole`,{
-            roleName
-        });
+        const response = await axios.post(`${API_URL}/createCrew`,
+            formData
+        );
         console.log("Resposnse" , response.data.data);
-        
         return response.data
       } catch (error) {
         console.error("LoginAdmin Error:", error.message);
@@ -42,11 +52,11 @@ export const addRole=createAsyncThunk(
     }
 )
 
-export const deleteRole = createAsyncThunk(
-    'deleteRole',
+export const deleteCastCrew = createAsyncThunk(
+    'deleteCastCrew',
     async(id,{rejectWithValue})=>{
         try {
-            const response = await axios.delete(`${API_URL}/deleteRole/`+id);
+            const response = await axios.delete(`${API_URL}/deleteCrew/`+id);
             console.log("Resposnse" , response.data.data);
             
             return response.data
@@ -59,16 +69,18 @@ export const deleteRole = createAsyncThunk(
     }
 )
 
-export const updateRole = createAsyncThunk(
-    "updateRole",
-    async ({role,id}, { rejectWithValue }) => {
+export const updateCastCrew = createAsyncThunk(
+    "updateCastCrew",
+    async ({castCrewData,id}, { rejectWithValue }) => {
       try {
-        const response = await axios.put(`${API_URL}/updateRole/`+id,{
-            roleName:role
-        });
+        const formData = new FormData();
+        formData.append("audiBookId", castCrewData.audiBookId);
+        formData.append("name", castCrewData.name);
+        formData.append("roleId", castCrewData.roleId);
+        formData.append("crewImage", castCrewData.crewImage); // it's a File
+        const response = await axios.put(`${API_URL}/updateCrew/`+id,formData);
         console.log("Resposnse" , response.data.data);
-        
-        return response.data
+        return response.data ;
       } catch (error) {
         console.error("LoginAdmin Error:", error.message);
         return rejectWithValue(
@@ -77,21 +89,21 @@ export const updateRole = createAsyncThunk(
       }
     }
   );
-const roleAdminSlice = createSlice({
-  name: "role",
+
+const CastCrewAdminSlice = createSlice({
+  name: "CastCrew",
   initialState: {
-    role:[],
+    castCrew:[],
   },
   reducers: {
    
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getRole.fulfilled, (state,action) => {
-        state.role = action.payload;
-        console.log('data',state.role)
+      .addCase(getCastCrew.fulfilled, (state,action) => {
+        state.castCrew = action.payload;
       })
       },
 });
 
-export default roleAdminSlice.reducer;
+export default CastCrewAdminSlice.reducer;

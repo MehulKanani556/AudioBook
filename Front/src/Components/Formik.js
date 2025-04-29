@@ -235,3 +235,9 @@ export const editAudioBookSchema = Yup.object().shape({
   sampleFile: Yup.mixed().required("Thumbnail file is required"),
 });
 
+export const crewSchema = Yup.object({
+  audiBookId: Yup.string().required("Audio Book is required"),
+  name:Yup.string().required("Name ID is required"),
+  roleId:Yup.string().required("Role is required"),
+  crewImage:Yup.string().required("Crew image is required")
+})  

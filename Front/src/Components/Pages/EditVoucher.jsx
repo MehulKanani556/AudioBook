@@ -16,18 +16,17 @@ const EditVoucher = () => {
     const [subAdd, setSubAdd] = useState(false)
     const navigate = useNavigate();
     const subscriptionData = useSelector((state) => state.subscription.subscription);
-    console.log('hey',subscriptionData)
-    const singleVoucher = useSelector((state)=>state.voucher.singleVoucher)
+    console.log('hey', subscriptionData)
+    const singleVoucher = useSelector((state) => state.voucher.singleVoucher)
     const dispatch = useDispatch();
 
-    const {id} = useParams();
+    const { id } = useParams();
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getAllSubscriptionData());
         dispatch(getSingleVoucher(id))
-    },[])
-    console.log('adas',singleVoucher)
-
+    }, [])
+    console.log('adas', singleVoucher)
     const voucherVal = {
         name: "",
         description: "",
@@ -42,27 +41,29 @@ const EditVoucher = () => {
         initialValues: voucherVal,
         validationSchema: voucherSchema,
         onSubmit: (values) => {
-            dispatch(UpdateVoucher({voucherData:values,id:id})).then((response)=>{
+            dispatch(UpdateVoucher({ voucherData: values, id: id })).then((response) => {
                 console.log(response.payload.success)
-                if(response.payload.success){
-                  navigate('/admin/voucher')
-               }
-              })
+                if (response.payload.success) {
+                    navigate('/admin/voucher')
+                }
+                else {
+                    alert('something gone wrong ! try again.')
+                }
+            })
         }
     });
-    
     useEffect(() => {
-            voucherFormik.setValues({
-                name: singleVoucher?.[0]?.name || "",
-                description: singleVoucher?.[0]?.description || "",
-                code: singleVoucher?.[0]?.code || "",
-                discount: singleVoucher?.[0]?.discount || "",
-                subscriptionId: singleVoucher?.[0]?.subScriptionSellId || "",
-                validTill: singleVoucher?.[0]?.validTill || "",
-                forStudent: singleVoucher?.[0]?.forStudent || "",
-                status: singleVoucher?.[0]?.status,
-            });
-            setRedioVal1(singleVoucher?.[0]?.status)
+        voucherFormik.setValues({
+            name: singleVoucher?.[0]?.name || "",
+            description: singleVoucher?.[0]?.description || "",
+            code: singleVoucher?.[0]?.code || "",
+            discount: singleVoucher?.[0]?.discount || "",
+            subscriptionId: singleVoucher?.[0]?.subScriptionSellId || "",
+            validTill: singleVoucher?.[0]?.validTill || "",
+            forStudent: singleVoucher?.[0]?.forStudent || "",
+            status: singleVoucher?.[0]?.status,
+        });
+        setRedioVal1(singleVoucher?.[0]?.status)
     }, [singleVoucher]);
 
     return (
