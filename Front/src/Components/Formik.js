@@ -259,3 +259,8 @@ export const addHomeCarouselSchema = Yup.object({
       return value && (typeof value === 'string' || value instanceof File);
     })
 });
+
+export const addHomeLabelJoinSchema = Yup.object({
+  homeLabelId: Yup.string().required("Home Label ID is required"),
+  audioBookId: Yup.string().required("Audio Book ID is required"),
+});

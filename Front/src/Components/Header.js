@@ -344,7 +344,15 @@ const Header = ({ setOffToggle }) => {
                 >
                   Cancel
                 </button>
-                <button className="ds_log_yes">Yes</button>
+                <button
+                  className="ds_log_yes"
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    navigate("/")
+                  }}
+                >
+                  Yes
+                </button>
               </div>
             </div>
           </Modal.Body>
