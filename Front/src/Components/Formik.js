@@ -253,3 +253,9 @@ export const crewSchema = Yup.object({
   roleId:Yup.string().required("Role is required"),
   crewImage:Yup.string().required("Crew image is required")
 })  
+export const addHomeCarouselSchema = Yup.object({
+  image: Yup.mixed()
+    .test("fileRequired", "Image is required", (value) => {
+      return value && (typeof value === 'string' || value instanceof File);
+    })
+});

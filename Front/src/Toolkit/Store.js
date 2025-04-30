@@ -16,6 +16,8 @@ import reviewReducer from "./Slices/reviewSlice";
 import episodeReducer from './Slices/EpisodesSlice'
 import homeLabelReducer from './Slices/HomeLabelsSlice'
 
+import homeCarouselReducer from './Slices/HomeCarouselSlice';
+import homeLebelJoinReducer from './Slices/HomeLabelJoinSlice'
 
 import CastCrewReducer from "./Slices/CastCrew";
 import PlaylistMaster from "./Slices/PlaylistMasterSlice";
@@ -39,5 +41,7 @@ export const store = configureStore({
     homeLabel:homeLabelReducer,
     castCrew: CastCrewReducer,
     playlist: PlaylistMaster,
+    homeCarousel: homeCarouselReducer,
+    homeLabelJoin: homeLebelJoinReducer
   },
 });
