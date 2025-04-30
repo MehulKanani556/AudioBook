@@ -67,6 +67,9 @@ export const CreateEpisode = createAsyncThunk(
             let data =[];
             return data;
          }
+         else if(error.status === 409){
+          alert(error.message)
+         }
          else{
            alert("Create Episode" , error.message)
          }

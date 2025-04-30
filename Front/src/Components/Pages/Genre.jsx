@@ -119,15 +119,16 @@ const Genre = () => {
           name: '',
         },
         validationSchema: CreateGenreSchema, 
-        onSubmit: async (values, { resetForm }) => {
+        onSubmit: async (values, action) => {
           if (!file) {
             alert("Please choose an image file!");
             return;
           }
     
           dispatch(CreateGenreData({values , file}));
-          resetForm();
+          action.resetForm();
           setFile(null);
+          setFileName("No file chosen")
           setAddGenreModal(false)
         },
     });
@@ -187,7 +188,7 @@ const Genre = () => {
                     <div className='d-flex justify-content-between align-items-center'>
                         <div>
                             <h4 className="text-light pt-4 mb-0">Genre</h4>
-                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Genre</span></p>
+                            <p><Link to="/admin/dashboard" className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Genre</span></p>
                         </div>
                         <div>
                             <button className='V_review_btn' onClick={() => setAddGenreModal(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
@@ -268,7 +269,7 @@ const Genre = () => {
                                 <div>
                                     Add Genre
                                 </div>
-                                <div className='ms-auto' onClick={() => setAddGenreModal(false)}>
+                                <div className='ms-auto ds_cursor' onClick={() => setAddGenreModal(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
@@ -303,7 +304,7 @@ const Genre = () => {
                           <div className='V_modal_header mx-auto pb-4 pt-5'>
                             <div className="d-flex justify-content-center">
                               <button type='submit' className='ds_role_save'>Save</button>
-                              <button type='button' className='ds_sub_cancel' onClick={() => {   setAddGenreModal(false);   setFileName("No file Chosen");   setFile(null);   CreateGenreFormik.resetForm(); }}>
+                              <button type='button' className='ds_sub_cancel' onClick={() => {   setAddGenreModal(false);   setFileName("No file chosen");   setFile(null);   CreateGenreFormik.resetForm(); }}>
                                 Clear
                               </button>
                             </div>
@@ -330,7 +331,7 @@ const Genre = () => {
                                 <div>
                                     Edit Genre
                                 </div>
-                                <div className='ms-auto' onClick={() => setEditGenre(false)}>
+                                <div className='ms-auto ds_cursor' onClick={() => setEditGenre(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
@@ -343,7 +344,7 @@ const Genre = () => {
                                   <label className='V_label'>Image</label>
                                   <div className="custom-input-group">
                                       {/* {console.log("file" , fileName)} */}
-                                      <input type="text" className="custom-text" placeholder="" value={fileName !== "No file chosen" ? fileName : editObj?.generImage?.replace(/\\/g, "/")?.split("/")?.pop()} readonly />
+                                      <input type="text" className="custom-text" placeholder="" value={fileName !== "No file chosen"   ? fileName : editObj?.generImage?.replace(/\\/g, "/")?.split("/")?.pop()} readonly />
                                       <label htmlFor="fileInput" className="custom-button">CHOOSE</label>
                                       <input type="file" id="fileInput" className="custom-file-input " onChange={handleFileChange} />
                                   </div>
@@ -359,7 +360,7 @@ const Genre = () => {
                               <div className='V_modal_header mx-auto pb-4 pt-5'>
                                <div className="d-flex justify-content-center">
                                   <button type='submit' className='ds_role_save'>Save</button>
-                                  <button type='button' className='ds_sub_cancel' onClick={() => {setEditGenre(false); setFileName("No file chosen")}}>Clear</button>
+                                  <button type='button' className='ds_sub_cancel' onClick={() => {setEditGenre(false); }}>Clear</button>
                                 </div>
                               </div>
                           </div>

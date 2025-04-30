@@ -63,6 +63,9 @@ export const CreateHomeLabel = createAsyncThunk(
            let data =[];
            return data;
         }
+        else if(error.status === 409){
+          alert(error.message)
+        }
         else{
           alert("Get Create HomeLabel" , error.message)
         }
@@ -72,6 +75,78 @@ export const CreateHomeLabel = createAsyncThunk(
   
       }
     }
+);
+
+export const EditHomeLabel = createAsyncThunk(
+  "EditHomeLabel",
+  async ({values , editObj}, { rejectWithValue , dispatch }) => {
+
+    try {
+      const response = await axios.put(
+        `${API_URL}/updateHomeLabel/${editObj?._id}`,
+        {
+           labelName: values?.labelName
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+              },
+        }
+      );
+      console.log("EditHomeLabel" , response.data.data);
+      dispatch(HomeLabelData())
+      return response?.data?.data
+      
+    } catch (error) {
+      console.error("Edit HomeLabel Error:", error.message);
+      if(error.status === 404){
+         console.error("Edit HomeLabel Error:", error.status);
+         let data =[];
+         return data;
+      }
+      else{
+        alert("Get Edit HomeLabel" , error.message)
+      }
+      return rejectWithValue(
+        error.response?.data || { message: "Unexpected error occurred" }
+      );
+
+    }
+  }
+);
+
+export const DeleteHomeLabel = createAsyncThunk(
+  "DeleteHomeLabel",
+  async (deleteId, { rejectWithValue , dispatch }) => {
+    try {
+      const response = await axios.delete(
+        `${API_URL}/deleteHomeLabel/${deleteId}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+              },
+        }
+      );
+      // console.log("DeleteHomeLabel" , response.data.data);
+      dispatch(HomeLabelData())
+      return response?.data?.data
+      
+    } catch (error) {
+      console.error("Delete HomeLabel Error:", error.message);
+      if(error.status === 404){
+         console.error("Delete HomeLabel Error:", error.status);
+         let data =[];
+         return data;
+      }
+      else{
+        alert("Get Delete HomeLabel" , error.message)
+      }
+      return rejectWithValue(
+        error.response?.data || { message: "Unexpected error occurred" }
+      );
+
+    }
+  }
 );
 
 
@@ -123,6 +198,21 @@ const HomeLabelSlice = createSlice({
         state.message = action.payload?.message || "Failed To Create HomeLabel";
       })
 
+      .addCase(EditHomeLabel.pending, (state) => {
+        state.loading = true;
+        state.message = "Accepting Edit HomeLabel..";
+      })
+      .addCase(EditHomeLabel.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        // state.homeLabelData = action.payload;
+        state.message = "Edi HomeLabel SuccessFully";
+      })
+      .addCase(EditHomeLabel.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = action.payload?.message || "Failed To Edit HomeLabel";
+      })
 
   },
 });

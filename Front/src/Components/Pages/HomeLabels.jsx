@@ -7,9 +7,10 @@ import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
 import { useDispatch, useSelector } from 'react-redux'
-import { CreateHomeLabel, HomeLabelData } from '../../Toolkit/Slices/HomeLabelsSlice'
+import { CreateHomeLabel, DeleteHomeLabel, EditHomeLabel, HomeLabelData } from '../../Toolkit/Slices/HomeLabelsSlice'
 import { useFormik } from 'formik'
 import { CreateHomeLableSchema } from '../Formik'
+import { EditCoinLabel } from '../../Toolkit/Slices/CoinLabelSlice'
 
 const HomeLabels = () => {
     const [addHomeLabelsModal, setAddHomeLabelsModal] = useState(false);
@@ -18,6 +19,7 @@ const HomeLabels = () => {
     let itemPerPage = 10;
     const dispatch = useDispatch()
     const homeLabelMap = useSelector(state => state?.homeLabel?.homeLabelData)
+    const [editObj, setEditObj] = useState({})
 
     useEffect(()=>{
        dispatch(HomeLabelData())
@@ -26,6 +28,7 @@ const HomeLabels = () => {
     let totalPages = Math.ceil(homeLabelMap?.length / itemPerPage);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentData,setCurrentData] = useState([]);
+    const [deleteId, setDeleteId] = useState(null)
 
     useEffect(() => {
         const startIndex = (currentPage - 1) * itemPerPage;
@@ -106,11 +109,31 @@ const HomeLabels = () => {
             labelName:""
         },
         validationSchema:CreateHomeLableSchema,
-        onSubmit:(values)=>{
+        onSubmit:(values , action)=>{
             dispatch(CreateHomeLabel(values))
             setAddHomeLabelsModal(false)
+            action.resetForm()
         }
     })
+
+    const editHomeLabelVal = {
+        labelName:editObj?.labelName
+    }
+    const EditHomeLabelFormik = useFormik({
+        enableReinitialize: true,
+        initialValues:editHomeLabelVal,
+        validationSchema:CreateHomeLableSchema,
+        onSubmit:(values , action)=>{
+            dispatch(EditHomeLabel({values , editObj}))
+            setEditHomeLabelsModal(false)
+            action.resetForm()
+        }
+    })
+
+    const handleDelete = () => {
+        dispatch(DeleteHomeLabel(deleteId))
+        setRemoveHomeLabels(false)
+    }
 
     return (
         <div className="ds_dash_master">
@@ -119,7 +142,7 @@ const HomeLabels = () => {
                     <div className='d-flex justify-content-between align-items-center'>
                         <div>
                             <h4 className="text-light pt-4 mb-0">Home Labels</h4>
-                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Home Labels</span></p>
+                            <p><Link to="/admin/dashboard" className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Home Labels</span></p>
                         </div>
                         <div>
                             <button className='V_review_btn' onClick={() => setAddHomeLabelsModal(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
@@ -143,10 +166,10 @@ const HomeLabels = () => {
                                                <td>{((currentPage - 1) * 10) +( index + 1 )}</td>
                                                <td>{element?.labelName}</td>
                                                <td className=''>
-                                               <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditHomeLabelsModal(true)} >
+                                               <span className='ds_role_icon ds_cursor me-2' onClick={() => {setEditHomeLabelsModal(true); setEditObj(element)}} >
                                                        <img src={pen} alt="" />
                                                    </span>
-                                                   <span className='ds_role_icon ds_cursor' onClick={() => setRemoveHomeLabels(true)} >
+                                                   <span className='ds_role_icon ds_cursor' onClick={() => {setRemoveHomeLabels(true) ; setDeleteId(element?._id)}} >
                                                        <img src={trash} alt="" />
                                                    </span>
                                                </td>
@@ -205,13 +228,7 @@ const HomeLabels = () => {
 
             {/* ==========    Edit Home Labels     ========== */}
             <div className=''>
-                <Modal
-                    show={editHomeLabelsModal}
-                    onHide={() => setEditHomeLabelsModal(false)}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    className='text-white V_modal_width'
-                    centered>
+                <Modal show={editHomeLabelsModal} onHide={() => setEditHomeLabelsModal(false)} size="lg" aria-labelledby="contained-modal-title-vcenter" className='text-white V_modal_width' centered>
                     <Modal.Header className='V_modal_header'>
                         <Modal.Title id="contained-modal-title-vcenter" className='px-lg-5 w-100' >
                             <div className="d-flex justify-content-between ">
@@ -225,21 +242,22 @@ const HomeLabels = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12   pt-2 pt-md-3">
-                                <label className='V_label'>Name</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                        </div>
-
-
+                        <form onSubmit={EditHomeLabelFormik.handleSubmit}>
+                           <div className="row py-md-3  px-lg-5 ">
+                               <div className="col-12   pt-2 pt-md-3">
+                                   <label className='V_label'>Name</label>
+                                   <input type="text" name='labelName' value={EditHomeLabelFormik.values.labelName} onChange={EditHomeLabelFormik.handleChange} onBlur={EditHomeLabelFormik.handleBlur} className='V_input_text_for_all mt-1 mt-md-2' />
+                                   <p className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{EditHomeLabelFormik.errors.labelName}</p>
+                               </div>
+                           </div>
+                           <div className='V_modal_header mx-auto pb-4 pt-4'>
+                             <div className="d-flex justify-content-center">
+                               <button type='submit' className='ds_role_save'>Save</button>
+                               <button type='button' className='ds_sub_cancel' onClick={() => setEditHomeLabelsModal(false)}>Clear</button>
+                              </div>
+                           </div>
+                        </form>  
                     </Modal.Body>
-                    <Modal.Footer className='V_modal_header mx-auto pb-4'>
-                        <div className="d-flex justify-content-center">
-                            <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel' onClick={() => setEditHomeLabelsModal(false)}>Clear</button>
-                        </div>
-                    </Modal.Footer>
                 </Modal>
             </div>
 
@@ -253,7 +271,7 @@ const HomeLabels = () => {
                         <p className='ds_role_text'>Are you sure you want to delete Home Labels?</p>
                         <div className='mt-5 mb-5'>
                             <button className='ds_delete_cancel' onClick={() => setRemoveHomeLabels(false)}>Cancel</button>
-                            <button className='ds_delete_yes'>Yes</button>
+                            <button className='ds_delete_yes' onClick={handleDelete}>Yes</button>
                         </div>
                     </div>
                 </Modal.Body>

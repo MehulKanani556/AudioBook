@@ -43,7 +43,7 @@ export const CreateGenreData = createAsyncThunk(
         const formData = new FormData();
         formData.append('generImage', file);
         formData.append('name', values.name);
-        console.log("hihihih" , formData);
+        // console.log("hihihih" , formData);
 
       try {
         const response = await axios.post(
@@ -66,6 +66,9 @@ export const CreateGenreData = createAsyncThunk(
            console.error("Create Genre Error:", error.status);
            let data =[];
            return data;
+        }
+        else if(error.status === 409){
+          alert(error.message)
         }
         else{
           alert("Get Create" , error.message)

@@ -205,9 +205,9 @@ const UserMaster = () => {
                           <td>
                             <span className="ds_sub_active">{e.status}</span>
                           </td>
-                          <td className="d-flex">
+                          <td className="d-flex ">
                             <span
-                              className="ds_sub_eye ds_cursor me-2"
+                              className="ds_sub_eye ds_cursor me-2 mt-1"
                               onClick={() => {
                                 setUserDetail(true);
                                 singleUserMaster(e._id);

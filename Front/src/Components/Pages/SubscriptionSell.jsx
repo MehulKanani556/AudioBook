@@ -110,7 +110,7 @@ const SubscriptionSell = () => {
                     <div className='d-flex justify-content-between align-items-center'>
                         <div>
                             <h4 className="text-light pt-4 mb-0">Subscription Sell</h4>
-                            <p><Link to="/admin/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Subscription Sell</span></p>
+                            <p><Link to="/admin/dashboard" className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Subscription Sell</span></p>
                         </div>
                         {/* <div>
                             <button className='V_review_btn1'  ><i className="fa-solid fa-plus me-2"></i> Add</button>

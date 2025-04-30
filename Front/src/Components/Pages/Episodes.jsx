@@ -144,11 +144,14 @@ const Episodes = () => {
     const CreateEpisodeFormik = useFormik({
         initialValues:createEpisodeVal,
         validationSchema: CreateEpisodeSchema,
-        onSubmit:(values)=>{
-           if(fileError === ""){
+        onSubmit:(values ,action)=>{
+           if(fileError === "" && file){
             //   console.log("jjjjjjj",values , file);
               dispatch(CreateEpisode({values , file}))
               setAddEpisodes(false)
+              action.resetForm()
+              setFileName("No file chosen")
+              setFile("")
            }
            else{
             alert("Please Select Audio File")
@@ -205,7 +208,7 @@ const Episodes = () => {
                     <div className='d-flex justify-content-between align-items-center'>
                         <div>
                             <h4 className="text-light pt-4 mb-0">Episodes</h4>
-                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Episodes</span></p>
+                            <p><Link to="/admin/dashboard" className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Episodes</span></p>
                         </div>
                         <div>
                             <button className='V_review_btn' onClick={() => setAddEpisodes(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>
@@ -342,7 +345,7 @@ const Episodes = () => {
                             <div className='V_modal_header mx-auto pb-4 pt-5'>
                                 <div className="d-flex justify-content-center">
                                     <button type='submit' className='ds_role_save'>Save</button>
-                                    <button type='button' className='ds_sub_cancel'onClick={() => {setAddEpisodes(false); setFileName("No File Choosen")}}>Clear</button>
+                                    <button type='button' className='ds_sub_cancel'onClick={() => {setAddEpisodes(false); setFileName("No file chosen")}}>Clear</button>
                                 </div>
                             </div>
                             </form>
