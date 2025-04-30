@@ -70,7 +70,11 @@ const userSchema = mongoose.Schema({
         type: String,
         enum: ['Active', 'Block'],
         require: true
-    }
+    },
+    subScriptionId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'subscription',
+    },
 }, {
     timestamps: true,
     versionKey: false
