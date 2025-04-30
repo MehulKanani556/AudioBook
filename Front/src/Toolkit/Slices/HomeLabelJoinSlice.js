@@ -27,10 +27,93 @@ export const allHomeLabelJoin = createAsyncThunk(
   }
 );
 
+export const addHomeLabelJoin = createAsyncThunk(
+  "addHomeLabelJoin",
+  async (addHomeLabelJoin, { rejectWithValue }) => {
+    console.log(addHomeLabelJoin);
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.post(
+        `${API_URL}/createHomeLabelJoin`,
+        {
+          homeLabelId: addHomeLabelJoin.homeLabelId,
+          audioBookId: addHomeLabelJoin.audioBookId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data.data;
+    } catch (error) {
+      console.error("LoginAdmin Error:", error.message);
+      return rejectWithValue(
+        error.response?.data || { message: "Unexpected error occurred" }
+      );
+    }
+  }
+);
+
+export const editHomeLabelJoin = createAsyncThunk(
+  "editHomeLabelJoin",
+  async (editHomeLabelJoin, { rejectWithValue }) => {
+    console.log(editHomeLabelJoin);
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.put(
+        `${API_URL}/updateHomeLabelJoin/${editHomeLabelJoin._id}`,
+        {
+          homeLabelId: editHomeLabelJoin.homeLabelId,
+          audioBookId: editHomeLabelJoin.audioBookId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+      return response.data.data;
+    } catch (error) {
+      console.error("LoginAdmin Error:", error.message);
+      return rejectWithValue(
+        error.response?.data || { message: "Unexpected error occurred" }
+      );
+    }
+  }
+);
+
+export const deleteHomeLabelJoin = createAsyncThunk(
+  "deleteHomeLabelJoin",
+  async (deleteHomeLabelJoin, { rejectWithValue }) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.delete(
+        `${API_URL}/deleteHomeLabelJoin/${deleteHomeLabelJoin}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+      return response.data.data;
+    } catch (error) {
+      console.error("LoginAdmin Error:", error.message);
+      return rejectWithValue(
+        error.response?.data || { message: "Unexpected error occurred" }
+      );
+    }
+  }
+);
+
 const HomeLabelJoinSlice = createSlice({
   name: "login",
   initialState: {
     homeLabelJoin: [],
+    editHomeLabelJoin: [],
     loading: false,
     success: false,
     message: "",
@@ -39,7 +122,7 @@ const HomeLabelJoinSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-      // all home carousel
+      // all homelabelJoin
       .addCase(allHomeLabelJoin.pending, (state) => {
         state.loading = true;
         state.message = "Accepting Login Admin...";
@@ -51,6 +134,23 @@ const HomeLabelJoinSlice = createSlice({
         state.message = "Login SuccessFully";
       })
       .addCase(allHomeLabelJoin.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.message = action.payload?.message || "Failed To Login";
+      })
+
+      // edit homelabelJoin
+      .addCase(editHomeLabelJoin.pending, (state) => {
+        state.loading = true;
+        state.message = "Accepting Login Admin...";
+      })
+      .addCase(editHomeLabelJoin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.editHomeLabelJoin = action.payload;
+        state.message = "Login SuccessFully";
+      })
+      .addCase(editHomeLabelJoin.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.message = action.payload?.message || "Failed To Login";

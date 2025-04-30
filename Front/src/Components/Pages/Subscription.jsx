@@ -23,7 +23,7 @@ const Subscription = () => {
   const [redioVal, setRedioVal] = useState("Active");
   const [subCheck, setSubCheck] = useState(true);
   const [subDes, setSubDes] = useState(false);
-  const totalPages = 10;
+  const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [subRemove, setSubRemove] = useState(false);
 
@@ -39,6 +39,8 @@ const Subscription = () => {
   const getSubscriptionData = useSelector(
     (state) => state.subscription?.subscription
   );
+
+  const totalPages = Math.ceil(getSubscriptionData?.length / itemsPerPage);
 
   useEffect(() => {
     dispatch(getAllSubscriptionData());
@@ -146,6 +148,12 @@ const Subscription = () => {
     }
   };
 
+  const getCurrentPageData = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return getSubscriptionData?.slice(startIndex, endIndex);
+  };
+
   const renderPagination = () => {
     let pages = [];
 
@@ -240,9 +248,9 @@ const Subscription = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {getSubscriptionData?.map((ele, index) => (
+                  {getCurrentPageData()?.map((ele, index) => (
                     <tr key={index}>
-                      <td>{index + 1}</td>
+                      <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
                       <td>{ele?.name}</td>
                       <td>{ele?.dicount}</td>
                       <td>{ele?.scratchPrice}</td>
