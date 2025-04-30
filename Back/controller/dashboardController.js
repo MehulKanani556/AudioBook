@@ -141,7 +141,7 @@ exports.CategoryChart = async (req, res) => {
       color: colors[index % colors.length]
     }));
 
-    res.json(pieData);
+    res.json({data : pieData});
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error' });

@@ -139,7 +139,7 @@ const SubscriptionSell = () => {
                                             <tr key={element._id}>
                                                <td>{((currentPage - 1) * 10) +( index + 1 )}</td>
                                                <td>{element?.subscriptionData[0]?.name}</td>
-                                               <td>{element?.userData[0]?.firstName}</td>
+                                               <td>{element?.userData[0]?.firstName || '-'}</td>
                                                <td>{element?.expiryDate}</td>
                                                <td>₹{element?.amount}</td>
                                                <td>{element?.paymentId}</td>

@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, useEffect } from "react";
 import "../../CSS/Dashboard.css"
 import eye from "../../Images/dhruvin/eye.svg";
 import star from "../../Images/dhruvin/star_img.svg";
@@ -19,24 +19,29 @@ import {
   YAxis,
 } from "recharts";
 import { Tooltip } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { BarChartData, FirstDashData, PieChartData } from "../../Toolkit/Slices/DashboardSlice";
 
 const Dashboard = (props) => {
-  const barData = [
-    { name: "Jan", premium: 200, normal: 100 },
-    { name: "Feb", premium: 300, normal: 150 },
-    { name: "Mar", premium: 350, normal: 200 },
-    { name: "Apr", premium: 250, normal: 100 },
-    { name: "May", premium: 400, normal: 250 },
-  ];
 
-  const pieData = [
-    { name: "Historical", value: 50 , color:"#1E2A5E" },
-    { name: "Crime", value: 25 , color:"#55679C" },
-    { name: "Career", value: 18 , color:"#7C93C3" },
-    { name: "Information", value: 10 , color:"#CCD6EB" },
-  ];
+  const dispatch = useDispatch()
 
-  const COLORS = ["#1E2A5E", "#55679C", "#7C93C3", "#CCD6EB"];
+  useEffect(()=>{
+     dispatch(FirstDashData())
+     dispatch(BarChartData())
+     dispatch(PieChartData())
+  },[])
+
+  const firstData = useSelector((state)=>state?.firstDashboardData?.firstDashData)
+  const f1irstData = useSelector((state)=>state?.firstDashboardData?.pieData)
+  console.log("Hello New",f1irstData);
+  
+
+  const barData = useSelector((state)=>state?.firstDashboardData?.barData)
+
+  const pieData = useSelector((state)=>state?.firstDashboardData?.pieData)
+
+  const COLORS = ["#1E2A5E", "#55679C", "#7C93C3", "#CCD6EB", "#E6ECF7"];
 
 
 
@@ -50,7 +55,7 @@ const Dashboard = (props) => {
               <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 mt-3">
                 <div className="ds_dash_bg">
                   <p className="ds_head_txt mb-0">View</p>
-                  <h4 className="text-light mt-2">+24K</h4>
+                  <h4 className="text-light mt-2">{firstData?.totalUsers}</h4>
                   <div className="text-end">
                     <img src={eye} alt="" />
                   </div>
@@ -60,7 +65,7 @@ const Dashboard = (props) => {
               <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 mt-3">
                 <div className="ds_dash_bg">
                   <p className="ds_head_txt mb-0">Rated This App</p>
-                  <h4 className="text-light mt-2">+50K</h4>
+                  <h4 className="text-light mt-2">{firstData?.ratedThis}</h4>
                   <div className="text-end">
                     <img src={star} alt="" />
                   </div>
@@ -70,7 +75,7 @@ const Dashboard = (props) => {
               <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 mt-3">
                 <div className="ds_dash_bg">
                   <p className="ds_head_txt mb-0">Download</p>
-                  <h4 className="text-light mt-2">+1M</h4>
+                  <h4 className="text-light mt-2">{firstData?.totalDownLoad}</h4>
                   <div className="text-end">
                     <img src={download} alt="" />
                   </div>
@@ -79,8 +84,8 @@ const Dashboard = (props) => {
 
               <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 mt-3">
                 <div className="ds_dash_bg">
-                  <p className="ds_head_txt mb-0">Visitors</p>
-                  <h4 className="text-light mt-2">+2M</h4>
+                  <p className="ds_head_txt mb-0">AudioBook</p>
+                  <h4 className="text-light mt-2">{firstData?.totalAudioBooks}</h4>
                   <div className="text-end">
                     <img src={person} alt="" />
                   </div>
@@ -90,8 +95,8 @@ const Dashboard = (props) => {
 
             <div className="mt-3">
               <div className="row ">
-                <div className="col-xl-6 mt-4">
-                  <div className="ds_dash_chart">
+                <div className="col-xl-6 mt-4 mb-4">
+                  <div className="ds_dash_chart h-100">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart
                         width={500}
@@ -138,7 +143,7 @@ const Dashboard = (props) => {
                 </div>
 
                 <div className="col-xl-6 mt-4 mb-4">
-                  <div className="ds_dash_chart2">
+                  <div className="ds_dash_chart2 h-100">
                     <h5 className="text-light mb-0">Top Category</h5>
                     {/* <div className='row ds_dash_manage'>
                                       <div className='col-sm-6 d-flex align-items-center justify-content-sm-end justify-content-center'>
@@ -210,7 +215,7 @@ const Dashboard = (props) => {
                                   width: "20px",
                                   height: "20px",
                                   backgroundColor: COLORS[index],
-                                  marginRight: "15px",
+                                  marginRight: "18px",
                                   borderRadius: "4px",
                                 }}
                               ></div>

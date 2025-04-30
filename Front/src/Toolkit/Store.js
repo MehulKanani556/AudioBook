@@ -21,6 +21,8 @@ import homeLebelJoinReducer from './Slices/HomeLabelJoinSlice'
 
 import CastCrewReducer from "./Slices/CastCrew";
 import PlaylistMaster from "./Slices/PlaylistMasterSlice";
+import firstDashboardReducer from "./Slices/DashboardSlice"
+
 export const store = configureStore({
   reducer: {
     login: loginReducer,
@@ -42,6 +44,7 @@ export const store = configureStore({
     castCrew: CastCrewReducer,
     playlist: PlaylistMaster,
     homeCarousel: homeCarouselReducer,
-    homeLabelJoin: homeLebelJoinReducer
+    homeLabelJoin: homeLebelJoinReducer,
+    firstDashboardData:firstDashboardReducer
   },
 });
