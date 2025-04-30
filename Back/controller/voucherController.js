@@ -53,7 +53,7 @@ exports.getAllVoucher = async (req, res) => {
             },
             {
                 $lookup: {
-                    from: 'subscriptionsells',
+                    from: 'subscriptions',
                     localField: 'subScriptionSellId',
                     foreignField: '_id',
                     as: 'subScriptionSell'
@@ -101,7 +101,7 @@ exports.getVoucherById = async (req, res) => {
             },
             {
                 $lookup: {
-                    from: 'subscriptionsells',
+                    from: 'subscriptions',
                     localField: 'subScriptionSellId',
                     foreignField: '_id',
                     as: 'subScriptionSell'

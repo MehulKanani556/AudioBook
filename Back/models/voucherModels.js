@@ -24,7 +24,7 @@ const voucherSchema = mongoose.Schema({
     },
     subScriptionSellId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'SubScriptionSell',
+        ref: 'subscriptions',
         require: true
     },
     validTill: {

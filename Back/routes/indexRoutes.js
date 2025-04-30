@@ -22,7 +22,7 @@ const { createHomeCorousel, getAllHomeCorousel, getHomeCorouselById, updateHomeC
 const { createHomeLabel, getAllHomeLabel, getHomeLabelById, updateHomeLabelById, deleteHomeLabelById } = require('../controller/homelabelController');
 const { createHomeLabelJoin, getAllHomeLabelJoin, getHomeLabelJoinById, updateHomeLabelJoinById, deleteHomeLabelJoinById } = require('../controller/homeLabelJoinController');
 const { adminLogin, userLogin, verifyOtp, forgotPassword, emailOtpVerify, resedMobileOtp, changePassword, updatePassword } = require('../auth/userlogin');
-const { DashboardList, UserChart, CategoryChart } = require('../controller/dashboardController');
+const { DashboardList, UserChart, CategoryChart, globalSearch } = require('../controller/dashboardController');
 const indexRoutes = express.Router();
 
 // auth Routes 
@@ -210,4 +210,5 @@ indexRoutes.delete('/deleteHomeLabelJoin/:id', deleteHomeLabelJoinById)
 indexRoutes.get('/dashboardList',DashboardList);
 indexRoutes.get('/dashboardUserChart',UserChart);
 indexRoutes.get('/dashboardCatChart',CategoryChart);
+indexRoutes.post('/globalSearch',globalSearch)
 module.exports = indexRoutes;

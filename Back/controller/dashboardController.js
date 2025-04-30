@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const user = require('../models/userModels');
 const audiobooks = require('../models/audioBookModels');
+const role = require('../models/roleModels');
+const subscriptions = require('../models/subScriptionModels');
 // Helper function to format numbers
 function formatNumber(num) {
   if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B';
@@ -145,5 +147,26 @@ exports.CategoryChart = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+exports.globalSearch = async (req, res) => {
+  const { query } = req.query;
+  try {
+      const results = await Promise.all([audiobooks.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
+      role.find({ $or: [{ roleName: { $regex: query, $options: 'i' } },] }).select(''),
+      subscriptions.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
+    ]);
+      const filteredResults = {
+          audiobooks: results[0].length ? results[0] : [],
+          role: results[0].length ? results[1] : [],
+          subscriptions: results[0].length ? results[2] : [], 
+      };
+
+      return res.status(200).json({ status: 200, filteredResults });
+
+  } catch (error) {
+      console.log(error);
+      return res.status(500).json({ status: 500, message: error.message });
   }
 };

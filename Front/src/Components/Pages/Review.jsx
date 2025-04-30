@@ -140,8 +140,8 @@ const Review = () => {
                                         return(
                                             <tr>
                                             <td>{((currentPage - 1) * 10) + (ind + 1)}</td>
-                                            <td>{ele.audioBookId}</td>
-                                            <td>{ele.userId}</td>
+                                            <td>{ele?.audioBookData?.[0]?.name || '-'}</td>
+                                            <td>{ele?.userData?.[0]?.firstName || '-'}</td>
                                             <td>{ele.date}</td>
                                             <td>{ele.review}</td>
                                             <td>{ele.rating}</td>
