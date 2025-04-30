@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import pen from '../../Images/dhruvin/pancil.svg'
 import trash from '../../Images/dhruvin/trash.svg'
@@ -6,21 +6,129 @@ import eye from '../../Images/dhruvin/eye_icon.svg'
 import { Button, Modal } from 'react-bootstrap'
 import "../../CSS/Review.css"
 import Close from "../../Images/Parth/close_button.png"
+import { useDispatch, useSelector } from 'react-redux'
+import { addCastCrewFunc, deleteCastCrew, getCastCrew, updateCastCrew } from '../../Toolkit/Slices/CastCrew'
+import { useFormik } from 'formik'
+import { crewSchema } from '../Formik'
+import { getAllAudioBookData } from '../../Toolkit/Slices/AudioBookSlice'
+import { getRole } from '../../Toolkit/Slices/RoleSlice'
 
 const CastCrew = () => {
+    useEffect(() => {
+        dispatch(getAllAudioBookData());
+        dispatch(getRole());
+        dispatch(getCastCrew());
+    }, [])
     const [addCastCrew, setAddCastCrew] = useState(false);
     const [editCastCrew, setEditCastCrew] = useState(false);
     const [viewCastCrew, setViewCastCrew] = useState(false);
     const [removeCastCrew, setRemoveCastCrew] = useState(false);
     const [fileName, setFileName] = useState("No file chosen");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [currentData, setCurrentData] = useState([]);
+    const dispatch = useDispatch();
+    const [deleteId, setDeleteId] = useState();
+    const [updateId, setUpdateId] = useState(null);
+    const [selectData,setSelectData] = useState();
+    const audioBookData = useSelector((state) => state.audioBook?.audioBook);
+    const roleData = useSelector((state) => state.role.role);
+    const crewData = useSelector((state) => state.castCrew.castCrew);
+    console.log(crewData)
+    const itemPerPage = 10;
+    var totalPages = Math.ceil(crewData.length / itemPerPage);
 
-    const handleFileChange = (event) => {
-      const file = event.target.files[0];
-      setFileName(file ? file.name : "No file chosen");
+
+
+    // formik code here
+
+    const crewVal = {
+        audiBookId: "",
+        name: "",
+        roleId: "",
+        crewImage: ""
     };
 
-    const totalPages = 10;
-    const [currentPage, setCurrentPage] = useState(1);
+    const crewValFormik = useFormik({
+        initialValues: crewVal,
+        validationSchema: crewSchema,
+        onSubmit: (values, { resetForm }) => {
+            if (updateId === null) {
+                dispatch(addCastCrewFunc(values)).then((response) => {
+                    console.log(response)
+                    if (response.payload.success) {
+                        setAddCastCrew(false);
+                        dispatch(getCastCrew());
+                        resetForm();
+                        setFileName("No file chosen");
+                    }
+                    else {
+                        alert('something gone wrong ! try again.')
+                    }
+                })
+            }
+            else {
+                dispatch(updateCastCrew({ castCrewData: values, id: updateId })).then((response) => {
+                    console.log(response)
+                    if (response.payload.success) {
+                        setEditCastCrew(false);
+                        dispatch(getCastCrew());
+                        resetForm();
+                        setFileName("No file chosen");
+                    }
+                    else {
+                        alert('something gone wrong ! try again.')
+                    }
+                })
+            }
+
+        }
+    })
+
+
+
+    // update code handling
+
+    const getUpdateData = (ele) => {
+        console.log('ele', ele);
+        crewValFormik.setValues({ audiBookId: ele?.audiBookId, name: ele?.name, roleId: ele?.roleId, crewImage: ele?.crewImage });
+        setFileName(ele?.crewImage)
+        setUpdateId(ele._id)
+    }
+    const handleCloseEditModal = () => {
+        setEditCastCrew(false);
+        crewValFormik.setValues({ audiBookId: '', name: '', roleId: '', crewImage: '' });
+        crewValFormik.setErrors({});
+        crewValFormik.setTouched({});
+        setFileName("No file chosen");
+    }
+
+
+    //  handle delete funtion;
+    const handleDelete = () => {
+        dispatch(deleteCastCrew(deleteId)).then((response) => {
+            console.log(response);
+            if (response.payload.success) {
+                setRemoveCastCrew(false)
+                dispatch(getCastCrew());
+            }
+        })
+    }
+
+
+    // pagination and image handling is here 
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        setFileName(file ? file.name : "No file chosen");
+    };
+
+    useEffect(() => {
+        const startIndex = (currentPage - 1) * itemPerPage;
+        const endIndex = startIndex + itemPerPage;
+        const paginatedData = crewData.slice(startIndex, endIndex);
+        setCurrentData(paginatedData);
+    }, [currentPage, crewData]);
+
+
 
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
@@ -89,6 +197,7 @@ const CastCrew = () => {
         return pages;
     };
 
+
     return (
         <div className="ds_dash_master">
             <div className='ds_dash_main'>
@@ -117,52 +226,36 @@ const CastCrew = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>01</td>
-                                        <td>
-                                            <img src={require("../../Images/Parth/homeCorouselImage.png")} alt="" className='V_home_corousel_image' />
-                                        </td>
-                                        <td>2541211</td>
-                                        <td>Johan patel</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td className=''>
-                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewCastCrew(true)} >
-                                                <img src={eye} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditCastCrew(true)} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveCastCrew(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>02</td>
-                                        <td>
-                                            <img src={require("../../Images/Parth/homeCorouselImage.png")} alt="" className='V_home_corousel_image' />
-                                        </td>
-                                        <td>8216614</td>
-                                        <td>Johan patel</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td className=''>
-                                            <span className='ds_sub_eye ds_cursor me-2' onClick={() => setViewCastCrew(true)} >
-                                                <img src={eye} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditCastCrew(true)} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveCastCrew(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr>
+                                    {currentData.map((ele, ind) => {
+                                        return (
+                                            <tr key={ele?._id}>
+                                                <td>{((currentPage - 1) * 10) + (ind + 1)}</td>
+                                                <td>
+                                                    <img src={`http://localhost:4000/${ele?.crewImage}`} alt={ele._id} className='V_home_corousel_image' />
+                                                </td>
+                                                <td>{ele?.audiBookData?.[0]?.name || '-'}</td>
+                                                <td>{ele?.name}</td>
+                                                <td>{ele?.roleData?.[0]?.roleName || '-'}</td>
+                                                <td className=''>
+                                                    <span className='ds_sub_eye ds_cursor me-2' onClick={() => {setViewCastCrew(true);setSelectData(ele)}} >
+                                                        <img src={eye} alt="" />
+                                                    </span>
+                                                    <span className='ds_role_icon ds_cursor me-2' onClick={() => { setEditCastCrew(true); getUpdateData(ele) }} >
+                                                        <img src={pen} alt="" />
+                                                    </span>
+                                                    <span className='ds_role_icon ds_cursor' onClick={() => { setRemoveCastCrew(true); setDeleteId(ele._id) }} >
+                                                        <img src={trash} alt="" />
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-
                 <div className="py-3 d-flex justify-content-center justify-content-md-end px-5">
                     {renderPagination()}
                 </div>
@@ -192,35 +285,92 @@ const CastCrew = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Audio Book ID</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Name</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Role</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Image</label>
-                                <div class="custom-input-group mt-1 mt-md-2">
-                                <input type="text" class="custom-text" placeholder=""  value={fileName}  readonly />
-                                    <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input "  onChange={handleFileChange}/>
+                        <form onSubmit={crewValFormik.handleSubmit} className="row py-md-3 px-lg-5">
+                            {/* Audio Book ID */}
+                            <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                                <div>
+                                    <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Audio Book ID</label>
+                                    <select type='text' name='audiBookId' value={crewValFormik.values.audiBookId}
+                                        onChange={crewValFormik.handleChange}
+                                        className="form-control ds_role_input" >
+                                        <option>Audio Book</option>
+                                        {audioBookData.map((ele, id) => {
+                                            return (
+                                                <option key={ele._id} value={ele._id}>{ele.name}</option>
+                                            )
+                                        })}
+                                    </select>
+                                    <p className='text-danger mb-0 text-start ps-1 pt-1 text-capitalize' style={{ fontSize: "14px" }}>{crewValFormik.errors.audiBookId}</p>
                                 </div>
                             </div>
-                        </div>
+
+                            {/* Name */}
+                            <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                                <label className='V_label'>Name</label>
+                                <input
+                                    type="text"
+                                    className='V_input_text_for_all mt-1 mt-md-2'
+                                    name="name"
+                                    value={crewValFormik.values.name}
+                                    onChange={crewValFormik.handleChange}
+                                />
+                                <p className='text-danger mb-0 text-start ps-1 pt-1 text-capitalize' style={{ fontSize: "14px" }}>
+                                    {crewValFormik.errors.name}
+                                </p>
+                            </div>
+
+                            {/* Role */}
+                            <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                                <div>
+                                    <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Role ID</label>
+                                    <select type='text' name='roleId' value={crewValFormik.values.roleId}
+                                        onChange={crewValFormik.handleChange}
+                                        className="form-control ds_role_input" >
+                                        <option>Role ID</option>
+                                        {roleData?.map((ele, id) => {
+                                            return (
+                                                <option key={ele._id} value={ele._id}>{ele?.roleName}</option>
+                                            )
+                                        })}
+                                    </select>
+                                    <p className='text-danger mb-0 text-start ps-1 pt-1 text-capitalize' style={{ fontSize: "14px" }}>{crewValFormik.errors.roleId}</p>
+                                </div>
+                            </div>
+
+                            {/* Image Upload */}
+                            <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                                <label className='V_label'>Image</label>
+                                <div className="custom-input-group mt-1 mt-md-2">
+                                    <input
+                                        type="text"
+                                        className="custom-text"
+                                        placeholder=""
+                                        value={fileName}
+                                        readOnly
+                                    />
+                                    <label htmlFor="fileInput" className="custom-button">CHOOSE</label>
+                                    <input
+                                        type="file"
+                                        id="fileInput"
+                                        className="custom-file-input"
+                                        onChange={(e) => {
+                                            const file = e.target.files[0];
+                                            setFileName(file?.name || ""); // assuming you track fileName in state
+                                            crewValFormik.setFieldValue("crewImage", file);
+                                        }}
+                                    />
+                                </div>
+                                <p className='text-danger mb-0 text-start ps-1 pt-1 text-capitalize' style={{ fontSize: "14px" }}>
+                                    {crewValFormik.errors.crewImage}
+                                </p>
+                            </div>
+
+                            <div className="d-flex justify-content-center py-4">
+                                <button type='submit' className='ds_role_save'>Save</button>
+                                <button className='ds_sub_cancel' onClick={() => { setAddCastCrew(false); setFileName("No File Choosen") }}>Clear</button>
+                            </div>
+                        </form>
                     </Modal.Body>
-                    <Modal.Footer className='V_modal_header mx-auto pb-4'>
-                        <div className="d-flex justify-content-center">
-                            <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel' onClick={() => {setAddCastCrew(false); setFileName("No File Choosen")}}>Clear</button>
-                        </div>
-                    </Modal.Footer>
                 </Modal>
             </div>
 
@@ -229,7 +379,7 @@ const CastCrew = () => {
             <div className=''>
                 <Modal
                     show={editCastCrew}
-                    onHide={() => setEditCastCrew(false)}
+                    onHide={() => handleCloseEditModal()}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     className='text-white V_modal_width'
@@ -240,42 +390,99 @@ const CastCrew = () => {
                                 <div>
                                     Edit Cast Crew
                                 </div>
-                                <div className='ms-auto' onClick={() => setEditCastCrew(false)}>
+                                <div className='ms-auto' onClick={() => handleCloseEditModal()}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row py-md-3  px-lg-5 ">
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3">
-                                <label className='V_label'>Audio Book ID</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Name</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Role</label>
-                                <input type="text" className='V_input_text_for_all mt-1 mt-md-2' />
-                            </div>
-                            <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
-                                <label className='V_label'>Image</label>
-                                <div class="custom-input-group mt-1 mt-md-2">
-                                    <input type="text" class="custom-text" placeholder=""  value={fileName}  readonly />
-                                    <label for="fileInput" class="custom-button">CHOOSE</label>
-                                    <input type="file" id="fileInput" class="custom-file-input "  onChange={handleFileChange}/>
+                        <form onSubmit={crewValFormik.handleSubmit} className="row py-md-3 px-lg-5">
+                            {/* Audio Book ID */}
+                            <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                                <div>
+                                    <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Audio Book ID</label>
+                                    <select type='text' name='audiBookId' value={crewValFormik.values.audiBookId}
+                                        onChange={crewValFormik.handleChange}
+                                        className="form-control ds_role_input" >
+                                        <option>Audio Book</option>
+                                        {audioBookData.map((ele, id) => {
+                                            return (
+                                                <option key={ele._id} value={ele._id}>{ele.name}</option>
+                                            )
+                                        })}
+                                    </select>
+                                    <p className='text-danger mb-0 text-start ps-1 pt-1 text-capitalize' style={{ fontSize: "14px" }}>{crewValFormik.errors.audiBookId}</p>
                                 </div>
                             </div>
-                        </div>
+
+                            {/* Name */}
+                            <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                                <label className='V_label'>Name</label>
+                                <input
+                                    type="text"
+                                    className='V_input_text_for_all mt-1 mt-md-2'
+                                    name="name"
+                                    value={crewValFormik.values.name}
+                                    onChange={crewValFormik.handleChange}
+                                />
+                                <p className='text-danger mb-0 text-start ps-1 pt-1 text-capitalize' style={{ fontSize: "14px" }}>
+                                    {crewValFormik.errors.name}
+                                </p>
+                            </div>
+
+                            {/* Role */}
+                            <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                                <div>
+                                    <label htmlFor="exampleInputEmail1" className="form-label ds_role_text">Role ID</label>
+                                    <select type='text' name='roleId' value={crewValFormik.values.roleId}
+                                        onChange={crewValFormik.handleChange}
+                                        className="form-control ds_role_input" >
+                                        <option>Role ID</option>
+                                        {roleData?.map((ele, id) => {
+                                            return (
+                                                <option key={ele._id} value={ele._id}>{ele?.roleName}</option>
+                                            )
+                                        })}
+                                    </select>
+                                    <p className='text-danger mb-0 text-start ps-1 pt-1 text-capitalize' style={{ fontSize: "14px" }}>{crewValFormik.errors.roleId}</p>
+                                </div>
+                            </div>
+
+                            {/* Image Upload */}
+                            <div className="col-12 col-sm-6 pt-2 pt-md-3">
+                                <label className='V_label'>Image</label>
+                                <div className="custom-input-group mt-1 mt-md-2">
+                                    <input
+                                        type="text"
+                                        className="custom-text"
+                                        placeholder=""
+                                        value={fileName}
+                                        readOnly
+                                    />
+                                    <label htmlFor="fileInput" className="custom-button">CHOOSE</label>
+                                    <input
+                                        type="file"
+                                        id="fileInput"
+                                        className="custom-file-input"
+                                        onChange={(e) => {
+                                            const file = e.target.files[0];
+                                            setFileName(file?.name || ""); // assuming you track fileName in state
+                                            crewValFormik.setFieldValue("crewImage", file);
+                                        }}
+                                    />
+                                </div>
+                                <p className='text-danger mb-0 text-start ps-1 pt-1 text-capitalize' style={{ fontSize: "14px" }}>
+                                    {crewValFormik.errors.crewImage}
+                                </p>
+                            </div>
+
+                            <div className="d-flex justify-content-center py-4">
+                                <button type='submit' className='ds_role_save'>Save</button>
+                                <button className='ds_sub_cancel' onClick={() => { handleCloseEditModal(); setFileName("No File Choosen") }}>Clear</button>
+                            </div>
+                        </form>
                     </Modal.Body>
-                    <Modal.Footer className='V_modal_header mx-auto pb-4'>
-                        <div className="d-flex justify-content-center">
-                            <button className='ds_role_save'>Save</button>
-                            <button className='ds_sub_cancel' onClick={() => {setEditCastCrew(false); setFileName("No File Choosen")}}>Clear</button>
-                        </div>
-                    </Modal.Footer>
                 </Modal>
             </div>
 
@@ -305,7 +512,7 @@ const CastCrew = () => {
                     <Modal.Body>
                         <div className="row  justify-content-center  py-md-3  px-lg-5 ">
                             <div className="col-12 col-sm-3  align-self-center text-center pt-2 pt-md-3">
-                                <img src={require('../../Images/Parth/homeCorouselImage.png')} alt="" className='V_castCrew_image' />
+                                <img src={`http://localhost:4000/${selectData?.crewImage}`} alt="" className='V_castCrew_image' />
                             </div>
 
                             <div className='col-12 col-sm-9   pt-3 '>
@@ -314,19 +521,19 @@ const CastCrew = () => {
                                         <p className='V_label2 mb-0'>Audio Book ID</p>
                                     </div>
                                     <div className="col-7 col-md-6 pt-2 pt-sm-0">
-                                        <p>: <span className='ms-2 V_label1'>9854</span></p>
+                                        <p>: <span className='ms-2 V_label1'>{selectData?.audiBookData?.[0]?.name || '-'}</span></p>
                                     </div>
                                     <div className="col-5 col-md-6  pt-2 pt-sm-0">
                                         <p className='V_label2 mb-0'>Name</p>
                                     </div>
                                     <div className="col-7 col-md-6 pt-2 pt-sm-0">
-                                        <p>: <span className='ms-2 V_label1'>Johan Patel</span></p>
+                                        <p>: <span className='ms-2 V_label1'>{selectData?.name}</span></p>
                                     </div>
                                     <div className="col-5 col-md-6  pt-2 pt-sm-0">
                                         <p className='V_label2 mb-0'>Role</p>
                                     </div>
                                     <div className="col-7 col-md-6 pt-2 pt-sm-0">
-                                        <p>: <span className='ms-2 V_label1'>Lorem Ipsum</span></p>
+                                        <p>: <span className='ms-2 V_label1'>{selectData?.roleData?.[0]?.roleName || '-'}</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -345,7 +552,7 @@ const CastCrew = () => {
                         <p className='ds_role_text'>Are you sure you want to delete Cast Crew?</p>
                         <div className='mt-5 mb-5'>
                             <button className='ds_delete_cancel' onClick={() => setRemoveCastCrew(false)}>Cancel</button>
-                            <button className='ds_delete_yes'>Yes</button>
+                            <button className='ds_delete_yes' onClick={handleDelete}>Yes</button>
                         </div>
                     </div>
                 </Modal.Body>

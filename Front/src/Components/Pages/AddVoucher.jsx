@@ -41,6 +41,9 @@ function AddVoucher() {
                 if (response.payload.success) {
                     navigate('/admin/voucher')
                 }
+                else{
+                    alert('something gone wrong ! try again.')
+                }
             })
         }
     })

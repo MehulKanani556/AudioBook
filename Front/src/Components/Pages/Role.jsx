@@ -41,13 +41,14 @@ const Role = () => {
   const roleValFormik = useFormik({
     initialValues: roleVal,
     validationSchema: roleSchema,
-    onSubmit: (values) => {
+    onSubmit: (values,{ resetForm }) => {
       console.log(values)
       dispatch(addRole(values.role)).then((response)=>{
         console.log(response)
         if(response.payload.success){
           setAdd(false);
           dispatch(getRole());
+          resetForm();
         }
       })
     }
@@ -89,6 +90,9 @@ const Role = () => {
         roleValFormik.setTouched({});
         dispatch(getRole())
       }
+      else{
+        alert('something gone wrong ! try again.')
+    }
     });
   }
 

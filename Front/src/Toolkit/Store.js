@@ -17,6 +17,8 @@ import episodeReducer from './Slices/EpisodesSlice'
 import homeLabelReducer from './Slices/HomeLabelsSlice'
 
 
+import CastCrewReducer from "./Slices/CastCrew";
+import PlaylistMaster from "./Slices/PlaylistMasterSlice";
 export const store = configureStore({
   reducer: {
     login: loginReducer,
@@ -34,6 +36,8 @@ export const store = configureStore({
     audioBook: audioBookReducer,
     review: reviewReducer,
     episode:episodeReducer,
-    homeLabel:homeLabelReducer
+    homeLabel:homeLabelReducer,
+    castCrew: CastCrewReducer,
+    playlist: PlaylistMaster,
   },
 });

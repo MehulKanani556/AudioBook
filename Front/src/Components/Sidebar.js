@@ -195,7 +195,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/admin/episodeunlock" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/episodeunlock'); setColor("episodeunlock")}}>
+                 {/* <div className={` ms-3 ds_active_pad ${color === "/admin/episodeunlock" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/episodeunlock'); setColor("episodeunlock")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
                         <img src={unlock} className="ds_side_icon" />
@@ -211,7 +211,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                      </div>
                      <h5 className='ms-3 text-light mb-0 ds_side_title'>Episode State</h5>
                    </div>
-                 </div>
+                 </div> */}
 
                  <div className={` ms-3 ds_active_pad ${color === "/admin/playlistmaster" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/playlistmaster'); setColor("playlistmaster")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
@@ -221,7 +221,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                      <h5 className='ms-3 text-light mb-0 ds_side_title'>Playlist Master</h5>
                    </div>
                  </div>
-
+{/* 
                  <div className={` ms-3 ds_active_pad ${color === "/admin/playlistsongs" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/playlistsongs'); setColor("playlistsongs")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
                      <div>
@@ -229,7 +229,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                      </div>
                      <h5 className='ms-3 text-light mb-0 ds_side_title'>Playlist Songs</h5>
                    </div>
-                 </div>
+                 </div> */}
 
                  <div className={` ms-3 ds_active_pad ${color === "/admin/homecorousel" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/homecorousel'); setColor("homecorousel")}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
@@ -403,7 +403,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/admin/episodes" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/episodes'); setColor("episodes"); setOffToggle(false)}}>
+                 {/* <div className={` ms-3 ds_active_pad ${color === "/admin/episodes" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/episodes'); setColor("episodes"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={episode} className="ds_side_icon" />
@@ -419,7 +419,7 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                      </div>
                      <h5 className='ms-3 text-light mb-0 ds_side_title'>Episode Unlock</h5>
                    </div>
-                 </div>
+                 </div> */}
 
                  <div className={` ms-3 ds_active_pad ${color === "/admin/episodestate" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/episodestate'); setColor("episodestate"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
@@ -439,14 +439,14 @@ const Sidebar = ({offToggle , setOffToggle }) => {
                    </div>
                  </div>
 
-                 <div className={` ms-3 ds_active_pad ${color === "/admin/playlistsongs" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/playlistsongs'); setColor("playlistsongs"); setOffToggle(false)}}>
+                 {/* <div className={` ms-3 ds_active_pad ${color === "/admin/playlistsongs" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/playlistsongs'); setColor("playlistsongs"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3' >
                      <div>
                         <img src={song} className="ds_side_icon" />
                      </div>
                      <h5 className='ms-3 text-light mb-0 ds_side_title'>Playlist Songs</h5>
                    </div>
-                 </div>
+                 </div> */}
 
                  <div className={` ms-3 ds_active_pad ${color === "/admin/homecorousel" ? 'ds_active_color' : '' } mt-3 `} onClick={() => {navigate('/admin/homecorousel'); setColor("homecorousel"); setOffToggle(false)}}>
                    <div className='d-flex align-items-center  ms-xl-5 ms-3'>
