@@ -98,19 +98,23 @@ export const editAudioBookData = createAsyncThunk(
     console.log(editAudioBook);
     const token = localStorage.getItem("token");
     try {
+      const formData = new FormData();
+
+      formData.append("genreId", editAudioBook.genreId);
+      formData.append("name", editAudioBook.name);
+      formData.append("description", editAudioBook.description);
+      formData.append("language", editAudioBook.language);
+      formData.append("tags", JSON.stringify(editAudioBook.tags));
+      if (editAudioBook.sampleFile instanceof File) {
+        formData.append("sampleFile", editAudioBook.sampleFile);
+      }
       const response = await axios.put(
         `${API_URL}/updateAudiobook/${editAudioBook._id}`,
-        {
-          genreId: editAudioBook.genreId,
-          name: editAudioBook.name,
-          description: editAudioBook.description,
-          sampleFile: editAudioBook.sampleFile,
-          tags: editAudioBook.tags,
-          language: editAudioBook.language,
-        },
+        formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       );

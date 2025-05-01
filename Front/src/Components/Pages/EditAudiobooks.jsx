@@ -16,7 +16,7 @@ const EditAudiobooks = () => {
   const [redioVal, setRedioVal] = useState("English");
   const [subAdd, setSubAdd] = useState(false);
   const [fileName, setFileName] = useState("No file chosen");
-
+  const [actualFile, setActualFile] = useState(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ const EditAudiobooks = () => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setFileName(file ? file.name : "No file chosen");
+    setActualFile(file);
     editAudioBookFormik.setFieldValue("sampleFile", file);
   };
 
@@ -60,7 +61,7 @@ const EditAudiobooks = () => {
       const updateAudioBookData = {
         ...values,
         language: redioVal,
-        sampleFile: fileName,
+        sampleFile: actualFile,
         _id: id,
       };
       dispatch(editAudioBookData(updateAudioBookData)).then(() => {
@@ -77,7 +78,7 @@ const EditAudiobooks = () => {
       description: singleAudioData?.[0]?.description,
       tags: singleAudioData?.[0]?.tags,
       language: singleAudioData?.[0]?.language,
-      sampleFile: singleAudioData?.[0]?.sampleFile,
+      sampleFile: null,
     });
     setFileName(singleAudioData?.[0]?.sampleFile);
     setRedioVal(singleAudioData?.[0]?.language);
