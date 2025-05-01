@@ -221,13 +221,13 @@ const SubscriptionSell = () => {
                                 <p className='V_label2 mb-0'>Subscription Plan ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'> {viewObject?.subscriptionData?.length ? viewObject.subscriptionData[0].name : ''}</span></p>
+                                <p>: <span className='ms-2 V_label1'> {viewObject?.subscriptionData?.length ? viewObject.subscriptionData[0].name : '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>User ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'> {viewObject?.userData?.length ? viewObject.userData[0].firstName : ''}</span></p> 
+                                <p>: <span className='ms-2 V_label1'> {viewObject?.userData?.length ? viewObject.userData[0].firstName : '-'}</span></p> 
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Expiry Date</p>

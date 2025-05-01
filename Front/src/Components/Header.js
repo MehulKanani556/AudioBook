@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../CSS/Header.css";
 import search from "../Images/dhruvin/search.svg";
 import bell from "../Images/dhruvin/bell.svg";
@@ -14,8 +14,8 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { changePassSchema } from "./Formik";
-import { changePassAdmin } from "../Toolkit/Slices/EditProfileSlice";
-import { useDispatch } from "react-redux";
+import { changePassAdmin, getSingleAdmin } from "../Toolkit/Slices/EditProfileSlice";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 const Header = ({ setOffToggle }) => {
@@ -32,6 +32,15 @@ const Header = ({ setOffToggle }) => {
   const API_URL = "http://localhost:4000/api";
 
   const dispatch = useDispatch();
+
+  const getAdminData = useSelector((state) => state.editProfile?.getAdmin);
+  useEffect(() => {
+    dispatch(getSingleAdmin());
+  }, []);
+
+  const admin = getAdminData?.[0]
+  console.log("new created" ,admin);
+  
 
   const changePassval = {
     oldPassword: "",
@@ -125,15 +134,7 @@ const Header = ({ setOffToggle }) => {
               />
             </div>
             <div className="ds_noti_bell">
-              <img
-                src={profile}
-                alt=""
-                className="ds_profile_img ds_cursor"
-                onClick={() => {
-                  setProfileToggle(!profileToggle);
-                  setToggle(false);
-                }}
-              />
+                {admin?.image ? <img src={`http://localhost:4000/${admin?.image}`} alt="" className="ds_profile_img_main ds_cursor" onClick={() => {  setProfileToggle(!profileToggle);   setToggle(false); }}/> : <img src={profile} alt="" className="ds_profile_img ds_cursor" onClick={() => {  setProfileToggle(!profileToggle);   setToggle(false); }}/>}
             </div>
             <div className="d-md-none d-block">
               <i

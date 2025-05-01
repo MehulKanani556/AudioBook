@@ -16,6 +16,7 @@ export const getRole = createAsyncThunk(
           var data =[];
           return data;
           }
+       
         return rejectWithValue(
           error.response?.data || { message: "Unexpected error occurred" }
         );
@@ -34,7 +35,10 @@ export const addRole=createAsyncThunk(
         
         return response.data
       } catch (error) {
-        console.error("LoginAdmin Error:", error.message);
+        console.error("LoginAdmin Error:", error.message)
+         if(error.status === 409){
+          alert("Role Name already exists")
+        }
         return rejectWithValue(
           error.response?.data || { message: "Unexpected error occurred" }
         );

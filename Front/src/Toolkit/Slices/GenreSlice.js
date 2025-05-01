@@ -68,7 +68,7 @@ export const CreateGenreData = createAsyncThunk(
            return data;
         }
         else if(error.status === 409){
-          alert(error.message)
+          alert("Genre already exists")
         }
         else{
           alert("Get Create" , error.message)

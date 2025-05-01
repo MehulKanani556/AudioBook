@@ -136,6 +136,7 @@ const Episodes = () => {
     };
 
     const createEpisodeVal = {
+        name:"",
         audioBookId:"",
         premium:"",
         duration:""
@@ -167,6 +168,7 @@ const Episodes = () => {
     }
 
     const editEposideVal = {
+        name:editObj?.name,
         audioBookId:editObj?.audioBookData?.length ? editObj?.audioBookData[0]._id : "",
         premium:editObj?.premium,
         duration:editObj?.duration
@@ -221,6 +223,7 @@ const Episodes = () => {
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Name</th>
                                         <th>Audio Book ID</th>
                                         <th>Premium</th>
                                         {/* <th>Coins Required</th> */}
@@ -230,9 +233,11 @@ const Episodes = () => {
                                 </thead>
                                 <tbody>
                                     {currentData?.map((element ,index)=>{
+                                        console.log('hi' , element);
                                         return(
                                             <tr key={element?._id}>
                                                <td>{((currentPage - 1) * 10) +( index + 1 )}</td>
+                                               <td>{element?.name}</td>
                                                <td>{element?.audioBookData[0]?.name}</td>
                                                <td>{element?.premium}</td>
                                                {/* <td>{element?.coinRequired}</td> */}
@@ -300,6 +305,13 @@ const Episodes = () => {
                     <Modal.Body>
                             <form onSubmit={CreateEpisodeFormik.handleSubmit}>
                              <div className="row py-md-3  px-lg-5 ">
+                                <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
+                                    <label className='V_label'>Name</label>
+                                    <input type="text" name="name" value={CreateEpisodeFormik.values.name} onChange={CreateEpisodeFormik.handleChange} onBlur={ CreateEpisodeFormik.handleBlur}  className='V_input_text_for_all mt-1 mt-md-2' />
+                                    {CreateEpisodeFormik.touched.name && CreateEpisodeFormik.errors.name && (
+                                      <div className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{CreateEpisodeFormik.errors.name}</div>
+                                    )}
+                                </div>
                                 <div className="col-12 col-sm-6  pt-2 pt-md-3">
                                     <label className='V_label'>Audio Book ID</label>
                                     {/* <input type="text"  /> */}
@@ -372,6 +384,13 @@ const Episodes = () => {
                     <Modal.Body>
                        <form onSubmit={EditEpisodeFormik.handleSubmit}>
                              <div className="row py-md-3  px-lg-5 ">
+                                <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
+                                    <label className='V_label'>Name</label>
+                                    <input type="text" name="name" value={EditEpisodeFormik.values.name} onChange={EditEpisodeFormik.handleChange} onBlur={ EditEpisodeFormik.handleBlur}  className='V_input_text_for_all mt-1 mt-md-2' />
+                                    {EditEpisodeFormik.touched.name && EditEpisodeFormik.errors.name && (
+                                      <div className='text-danger mb-0 text-start ps-1 pt-1' style={{fontSize:"14px"}}>{EditEpisodeFormik.errors.name}</div>
+                                    )}
+                                </div>
                                 <div className="col-12 col-sm-6  pt-2 pt-md-3">
                                     <label className='V_label'>Audio Book ID</label>
                                     {/* <input type="text"  /> */}
@@ -444,6 +463,12 @@ const Episodes = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <div className="row py-md-3  px-md-5 ">
+                        <div className="col-6  pt-2 pt-sm-0">
+                                <p className='V_label2 mb-0'>Name</p>
+                            </div>
+                            <div className="col-6 pt-2 pt-sm-0">
+                                <p>: <span className='ms-2 V_label1'>{viewData?.name}</span></p>
+                            </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Audio Book ID</p>
                             </div>

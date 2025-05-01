@@ -236,9 +236,12 @@ export const editAudioBookSchema = Yup.object().shape({
 });
 
 export const CreateEpisodeSchema = Yup.object({
+  name: Yup.string().required("Name is required"),
   audioBookId: Yup.string().required('Audio Book is required'),
   premium: Yup.string().required('Premium is required'),
-  duration: Yup.string().required('Duration is required')
+  duration: Yup.string()
+    .required('Duration is required')
+    .matches(/^([0-9]{1,2}):([0-5][0-9])(:([0-5][0-9]))?$/, 'Invalid duration format. Use HH:mm or HH:mm:ss'),
 });
 
 export const CreateHomeLableSchema = Yup.object({

@@ -42,6 +42,9 @@ export const addVoucher = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.error("LoginAdmin Error:", error.message);
+      if(error.status === 409){
+        alert("Voucher already exists")
+      }
       return rejectWithValue(
         error.response?.data || { message: "Unexpected error occurred" }
       );

@@ -64,7 +64,7 @@ export const CreateHomeLabel = createAsyncThunk(
            return data;
         }
         else if(error.status === 409){
-          alert(error.message)
+          alert("Home Label already exists")
         }
         else{
           alert("Get Create HomeLabel" , error.message)

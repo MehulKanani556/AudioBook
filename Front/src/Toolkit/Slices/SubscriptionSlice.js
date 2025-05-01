@@ -43,6 +43,9 @@ export const singleSubscriptionData = createAsyncThunk(
       return response.data.data;
     } catch (error) {
       console.error("LoginAdmin Error:", error.message);
+      if(error.status === 409){
+        alert("Subscription Name already exists")
+      }
       return rejectWithValue(
         error.response?.data || { message: "Unexpected error occurred" }
       );

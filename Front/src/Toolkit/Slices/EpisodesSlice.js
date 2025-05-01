@@ -42,6 +42,7 @@ export const CreateEpisode = createAsyncThunk(
       console.log("nnnnnnnnnnnnn" ,values , file);
       
       const formData = new FormData()
+      formData.append("name" , values.name)
       formData.append("audioBookId" , values.audioBookId)
       formData.append("audioFile" , file)
       formData.append("premium" , values.premium)
@@ -68,7 +69,7 @@ export const CreateEpisode = createAsyncThunk(
             return data;
          }
          else if(error.status === 409){
-          alert(error.message)
+          alert("Episodes already exists")
          }
          else{
            alert("Create Episode" , error.message)
@@ -118,6 +119,7 @@ export const EditEpisode = createAsyncThunk(
       console.log("ccccccccccc" , payload);
       
       const formData = new FormData()
+      formData.append("name" , payload?.values?.name)
       formData.append("audioBookId" , payload?.values.audioBookId)
       formData.append("audioFile" , payload?.audioFile)
       formData.append("premium" , payload?.values.premium)

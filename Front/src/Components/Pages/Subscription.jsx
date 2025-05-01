@@ -478,33 +478,33 @@ const Subscription = () => {
                         <div className="ds_sub_select_box">
                           <div className="form-check">
                             <input
-                              className="form-check-input ds_sub_check"
+                              className="form-check-input ds_sub_check ds_cursor"
                               type="radio"
                               name="status"
                               id="addActive"
                               value="Active"
                               checked={redioVal === "Active"}
-                              onChange={() => setRedioVal("Active")}
+                              onChange={() => {setRedioVal("Active"); setToggle(false)}}
                             />
                             <label
-                              className="form-check-label"
+                              className="form-check-label ds_cursor"
                               htmlFor="addActive"
                             >
                               Active
                             </label>
                           </div>
-                          <div className="form-check">
+                          <div className="form-check mt-2">
                             <input
-                              className="form-check-input ds_sub_check"
+                              className="form-check-input ds_sub_check ds_cursor"
                               type="radio"
                               name="status"
                               id="addBlock"
                               value="Block"
                               checked={redioVal === "Block"}
-                              onChange={() => setRedioVal("Block")}
+                              onChange={() => {setRedioVal("Block"); setToggle(false)}}
                             />
                             <label
-                              className="form-check-label"
+                              className="form-check-label ds_cursor"
                               htmlFor="addBlock"
                             >
                               Block
@@ -687,7 +687,7 @@ const Subscription = () => {
                             }}
                           >
                             <input
-                              className="form-check-input ds_sub_check"
+                              className="form-check-input ds_sub_check ds_cursor"
                               type="radio"
                               name="exampleRadios"
                               id="exampleRadios1"
@@ -697,21 +697,21 @@ const Subscription = () => {
                               }
                             />
                             <label
-                              className="form-check-label"
+                              className="form-check-label ds_cursor"
                               htmlFor="exampleRadios1"
                             >
                               Active
                             </label>
                           </div>
                           <div
-                            className="form-check"
+                            className="form-check "
                             onClick={() => {
                               setRedioVal("Block");
                               setToggle(false);
                             }}
                           >
                             <input
-                              className="form-check-input ds_sub_check"
+                              className="form-check-input ds_sub_check ds_cursor"
                               type="radio"
                               name="exampleRadios"
                               id="exampleRadios2"
@@ -721,7 +721,7 @@ const Subscription = () => {
                               }
                             />
                             <label
-                              className="form-check-label"
+                              className="form-check-label ds_cursor"
                               htmlFor="exampleRadios2"
                             >
                               Block

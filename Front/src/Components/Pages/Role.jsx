@@ -266,7 +266,7 @@ const Role = () => {
             <div className='mt-5 mb-3'>
               <div className='text-center'>
                 <button type='submit' className='ds_role_save' >Save</button>
-                <button className='ds_sub_cancel' onClick={() => setAdd(false)}>Clear</button>
+                <button type='button' className='ds_sub_cancel' onClick={() => setAdd(false)}>Clear</button>
               </div>
             </div>
           </form>
