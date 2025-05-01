@@ -457,7 +457,7 @@ const CastCrew = () => {
                                         type="text"
                                         className="custom-text"
                                         placeholder=""
-                                        value={fileName}
+                                        value={fileName.replace(/\\/g, "/")?.split("/")?.pop()}
                                         readOnly
                                     />
                                     <label htmlFor="fileInput" className="custom-button">CHOOSE</label>

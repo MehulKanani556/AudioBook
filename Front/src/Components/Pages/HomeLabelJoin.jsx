@@ -211,8 +211,8 @@ const HomeLabelJoin = () => {
                     return (
                       <tr key={index}>
                         <td>{actualIndex}</td>
-                        <td>{ele?.homeLabelData[0]?.labelName}</td>
-                        <td>{ele?.audioBookData[0]?.name}</td>
+                        <td>{ele?.homeLabelData[0]?.labelName || "-"}</td>
+                        <td>{ele?.audioBookData[0]?.name || "-"}</td>
                         <td>
                           <span
                             className="ds_role_icon ds_cursor me-2"
@@ -286,16 +286,17 @@ const HomeLabelJoin = () => {
                     onChange={addHomeLabelJoinFormik.handleChange}
                     onBlur={addHomeLabelJoinFormik.handleBlur}
                   >
+                    <option value="">select audio book</option>
                     {selectHomeLabel.map((ele) => {
-                      return <option value={ele._id}>{ele.labelName}</option>
+                      return <option value={ele._id}>{ele.labelName}</option>;
                     })}
                   </select>
-                  {/* <p
+                  <p
                     className="text-danger mb-0 text-start ps-1 pt-1"
                     style={{ fontSize: "14px" }}
                   >
                     {addHomeLabelJoinFormik.errors.homeLabelId}
-                  </p> */}
+                  </p>
                 </div>
                 <div className="col-12 col-sm-6  pt-2 pt-md-3 ">
                   <label className="V_label">Audio Book ID</label>
@@ -307,16 +308,17 @@ const HomeLabelJoin = () => {
                     onChange={addHomeLabelJoinFormik.handleChange}
                     onBlur={addHomeLabelJoinFormik.handleBlur}
                   >
+                    <option value="">select audio book</option>
                     {selectAudioBook.map((ele) => {
                       return <option value={ele._id}>{ele.name}</option>;
                     })}
                   </select>
-                  {/* <p
+                  <p
                     className="text-danger mb-0 text-start ps-1 pt-1"
                     style={{ fontSize: "14px" }}
                   >
                     {addHomeLabelJoinFormik.errors.audioBookId}
-                  </p> */}
+                  </p>
                 </div>
               </div>
             </Modal.Body>

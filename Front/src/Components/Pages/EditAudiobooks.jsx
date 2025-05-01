@@ -80,7 +80,9 @@ const EditAudiobooks = () => {
       language: singleAudioData?.[0]?.language,
       sampleFile: null,
     });
-    setFileName(singleAudioData?.[0]?.sampleFile);
+    setFileName(
+      singleAudioData?.[0]?.sampleFile.replace(/\\/g, "/")?.split("/")?.pop()
+    );
     setRedioVal(singleAudioData?.[0]?.language);
   }, [singleAudioData]);
 

@@ -368,7 +368,7 @@ const HomeCorousel = () => {
                     type="text"
                     className="custom-text"
                     placeholder=""
-                    value={fileName}
+                    value={fileName.replace(/\\/g, "/")?.split("/")?.pop()}
                     readonly
                   />
                   <label htmlFor="fileInput" className="custom-button">
