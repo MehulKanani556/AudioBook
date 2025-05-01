@@ -12,7 +12,6 @@ export const getAllAudioBookData = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-
       console.log(response);
       return response.data.data;
     } catch (error) {

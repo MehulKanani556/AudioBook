@@ -210,5 +210,5 @@ indexRoutes.delete('/deleteHomeLabelJoin/:id', deleteHomeLabelJoinById)
 indexRoutes.get('/dashboardList',DashboardList);
 indexRoutes.get('/dashboardUserChart',UserChart);
 indexRoutes.get('/dashboardCatChart',CategoryChart);
-indexRoutes.post('/globalSearch',globalSearch)
+indexRoutes.get('/globalSearch',globalSearch)
 module.exports = indexRoutes;

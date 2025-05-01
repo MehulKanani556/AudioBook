@@ -11,6 +11,7 @@
     "axios": "^1.8.4",
     "formik": "^2.4.6",
     "langs": "^2.0.0",
+    "nodemon": "^3.1.10",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
