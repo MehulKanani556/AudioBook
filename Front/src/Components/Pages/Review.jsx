@@ -143,7 +143,7 @@ const Review = () => {
                                             <td>{ele?.audioBookData?.[0]?.name || '-'}</td>
                                             <td>{ele?.userData?.[0]?.firstName || '-'}</td>
                                             <td>{ele.date}</td>
-                                            <td>{ele.review}</td>
+                                            <td>{ele.review.slice(0, 10)}</td>
                                             <td>{ele.rating}</td>
                                             <td>
                                                 <span className='ds_sub_eye ds_cursor me-2' onClick={() => {setViewModalShow(true);setSelectData(ele)}} >

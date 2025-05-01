@@ -176,7 +176,7 @@ const AudioBook = () => {
                             alt=""
                           />
                         </td>
-                        <td>{ele.description}</td>
+                        <td>{ele.description.slice(0, 10)}</td>
                         <td>{ele.tags}</td>
                         <td>{ele.language}</td>
                         <td className="">
