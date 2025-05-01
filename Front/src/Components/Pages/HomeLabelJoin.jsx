@@ -23,7 +23,7 @@ const HomeLabelJoin = () => {
   const [editHomeLabelJoinModal, setEditHomeLabelJoinModal] = useState(false);
   const [removeHomeLabelJoin, setRemoveHomeLabelJoin] = useState(false);
 
-  const totalPages = 10;
+  const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
   const [updateHLJ, setUpdateHLJ] = useState(null);
@@ -75,9 +75,9 @@ const HomeLabelJoin = () => {
         setAddHomeLabelJoinModal(false);
       } else {
         const updatedData = {
-            ...values,
-            _id: updateHLJ,
-          };
+          ...values,
+          _id: updateHLJ,
+        };
         dispatch(editHomeLabelJoin(updatedData)).then(() => {
           dispatch(allHomeLabelJoin());
         });
@@ -86,6 +86,12 @@ const HomeLabelJoin = () => {
       }
     },
   });
+
+  const totalPages = Math.ceil(homeLabelJoin.length / itemsPerPage);
+  const currentData = homeLabelJoin.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -189,7 +195,7 @@ const HomeLabelJoin = () => {
 
           <div className="V_review_bg mt-2">
             <div className="ds_user_master_scroll overflow-auto">
-              <table className="w-100 text-light V_review_table  text-nowrap ">
+              <table className="w-100 text-light V_review_table text-nowrap">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -199,12 +205,12 @@ const HomeLabelJoin = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {homeLabelJoin.map((ele, index) => {
-                    console.log(homeLabelJoin);
-
+                  {currentData.map((ele, index) => {
+                    const actualIndex =
+                      (currentPage - 1) * itemsPerPage + index + 1;
                     return (
                       <tr key={index}>
-                        <td>{index + 1}</td>
+                        <td>{actualIndex}</td>
                         <td>{ele?.homeLabelData[0]?.labelName}</td>
                         <td>{ele?.audioBookData[0]?.name}</td>
                         <td>
@@ -230,20 +236,6 @@ const HomeLabelJoin = () => {
                       </tr>
                     );
                   })}
-
-                  {/* <tr>
-                                        <td>02</td>
-                                        <td>9632</td>
-                                        <td>2541211</td>
-                                        <td className=''>
-                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditHomeLabelJoinModal(true)} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemoveHomeLabelJoin(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr> */}
                 </tbody>
               </table>
             </div>
@@ -295,7 +287,7 @@ const HomeLabelJoin = () => {
                     onBlur={addHomeLabelJoinFormik.handleBlur}
                   >
                     {selectHomeLabel.map((ele) => {
-                      return <option value={ele._id}>{ele.labelName}</option>;
+                      return <option value={ele._id}>{ele.labelName}</option>
                     })}
                   </select>
                   {/* <p

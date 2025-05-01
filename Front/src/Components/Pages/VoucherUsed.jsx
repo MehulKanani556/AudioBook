@@ -22,8 +22,14 @@ const VoucherUsed = () => {
   const voucherUsed = useSelector((state) => state.voucherUsed?.voucherUsed);
   console.log(voucherUsed);
 
-  const totalPages = 10;
+  const itemsPerPage = 10; 
   const [currentPage, setCurrentPage] = useState(1);
+  
+  const totalPages = Math.ceil(voucherUsed.length / itemsPerPage);
+  const currentItems = voucherUsed.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -138,27 +144,29 @@ const VoucherUsed = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {voucherUsed.map((ele, index) => {
+                  {currentItems.map((ele, index) => {
+                    console.log(currentItems);
+                    
                     return (
                       <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{ele.voucharId}</td>
+                        <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
+                        <td>{ele.voucharData?.[0]?.name}</td>
                         <td>{ele.userId}</td>
                         <td>{ele.usedDate}</td>
-                        {/* <td className="">
-                          <span
-                            className="ds_role_icon ds_cursor me-2"
-                            onClick={() => setEditVoucherUsedModal(true)}
-                          >
-                            <img src={pen} alt="" />
-                          </span>
-                          <span
-                            className="ds_role_icon ds_cursor"
-                            onClick={() => setRemoveVoucherUsed(true)}
-                          >
-                            <img src={trash} alt="" />
-                          </span>
-                        </td> */}
+                          {/* <td className="">
+                            <span
+                              className="ds_role_icon ds_cursor me-2"
+                              onClick={() => setEditVoucherUsedModal(true)}
+                            >
+                              <img src={pen} alt="" />
+                            </span>
+                            <span
+                              className="ds_role_icon ds_cursor"
+                              onClick={() => setRemoveVoucherUsed(true)}
+                            >
+                              <img src={trash} alt="" />
+                            </span>
+                          </td> */}
                       </tr>
                     );
                   })}

@@ -18,7 +18,7 @@ const AudioBook = () => {
   const [viewAudioBook, setViewAudioBook] = useState(false);
   const [removeAudioBook, setRemoveAudioBook] = useState(false);
 
-  const totalPages = 10;
+  const ITEMS_PER_PAGE = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
   const [deleteId, setDeleteId] = useState(null);
@@ -58,6 +58,11 @@ const AudioBook = () => {
     }
   };
 
+  const totalPages = Math.ceil(audioBook?.length / ITEMS_PER_PAGE);
+  const paginatedData = audioBook?.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
   const renderPagination = () => {
     let pages = [];
 
@@ -156,12 +161,12 @@ const AudioBook = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {audioBook.map((ele, index) => {
+                  {paginatedData?.map((ele, index) => {
                     console.log(audioBook);
 
                     return (
                       <tr key={index}>
-                        <td>{index + 1}</td>
+                        <td>{(currentPage - 1) * ITEMS_PER_PAGE + index + 1}</td>
                         <td>{ele.genreId}</td>
                         <td>{ele.name}</td>
                         <td>

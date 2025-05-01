@@ -16,12 +16,14 @@ import {
 
 const UserMaster = () => {
   const navigate = useNavigate();
-  const totalPages = 10;
+  // const totalPages = 10;
   const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
   const [userDetail, setUserDetail] = useState(false);
   const [userDelete, setUserDelete] = useState(false);
 
   const [deleteUserMater, setDeleteUserMater] = useState(null);
+
   const hadleDelete = () => {
     disPatch(deleteUserMasterData(deleteUserMater)).then((response) => {
       console.log(response);
@@ -67,6 +69,13 @@ const UserMaster = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
+  };
+
+  const totalPages = Math.ceil(getAllUserMaster?.length / itemsPerPage);
+  const getCurrentPageData = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return getAllUserMaster?.slice(startIndex, endIndex);
   };
 
   const renderPagination = () => {
@@ -174,12 +183,14 @@ const UserMaster = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {getAllUserMaster.map(
+                  {getCurrentPageData().map(
                     (e, index) => (
                       console.log("http://localhost:4000/" + e?.image),
                       (
-                        <tr>
-                          <td>{index + 1}</td>
+                        <tr key={e._id}>
+                          <td>
+                            {(currentPage - 1) * itemsPerPage + index + 1}
+                          </td>
                           <td>
                             <img
                               src={"http://localhost:4000/" + e?.image}

@@ -29,20 +29,19 @@ export const allHomeLabelJoin = createAsyncThunk(
 
 export const addHomeLabelJoin = createAsyncThunk(
   "addHomeLabelJoin",
-  async (addHomeLabelJoin, { rejectWithValue }) => {
-    console.log(addHomeLabelJoin);
+  async (values, { rejectWithValue }) => {
+    console.log("valuesbjbjbjbjbjb", values);
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
         `${API_URL}/createHomeLabelJoin`,
         {
-          homeLabelId: addHomeLabelJoin.homeLabelId,
-          audioBookId: addHomeLabelJoin.audioBookId,
+          homeLabelId: values?.homeLabelId,
+          audioBookId: values?.audioBookId,
         },
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
           },
         }
       );
