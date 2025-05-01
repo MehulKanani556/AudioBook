@@ -14,11 +14,14 @@ import {
 const EditProfile = () => {
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
+  const [file, setFile] = useState("")
+  const [imageFile, seImageFile] = useState("")
 
   const getAdminData = useSelector((state) => state.editProfile?.getAdmin);
   useEffect(() => {
     dispatch(getSingleAdmin());
   }, []);
+
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -27,21 +30,26 @@ const EditProfile = () => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
+    const imageUrl = URL.createObjectURL(file);
       editProfileFormik.setValues({
         ...editProfileFormik.values,
-        image: imageUrl,
+        image: file,
       });
+      console.log("HIHIHI" , imageUrl);
+      seImageFile(imageUrl)
+      setFile(file)
     }
   };
 
   const admin = getAdminData?.[0] || {};
+  // console.log("hihi" , admin);
+  
   const editProfileVal = {
     firstName: admin.firstName || "",
     lastName: admin.lastName || "",
     email: admin.email || "",
     mobileNo: admin.mobileNo || "",
-    image: admin.image || profile,
+    image: file ? file : admin?.image || profile ,
   };
 
   const editProfileFormik = useFormik({
@@ -50,6 +58,8 @@ const EditProfile = () => {
     validationSchema: editProfileSchema,
     onSubmit: (values) => {
       dispatch(editProfileAdmin(values));
+      setFile("")
+      seImageFile("")
     },
   });
 
@@ -73,14 +83,16 @@ const EditProfile = () => {
           <div className="ds_profile_inner p-sm-5 p-4">
             <div className="d-flex flex-wrap justify-content-between align-items-center">
               <div className="d-flex align-items-center ">
-                <div className="ds_profile_box text-center me-4">
-                  <img
-                    src={editProfileFormik.values.image}
-                    alt=""
-                    className="mt-3"
-                    style={{ width: "75%" }}
-                  />
-                </div>
+                {
+                  imageFile ? <div className="ds_profile_box text-center me-4">
+                                 <img src={imageFile} alt="" className="h-100"  style={{ width: "100%" , borderRadius:"50%" , objectFit:"cover"}}/>
+                             </div> 
+                     : editProfileFormik?.values?.image ? (<div className="ds_profile_box text-center me-4">
+                    <img src={`${editProfileFormik?.values?.image ? `http://localhost:4000/${editProfileFormik?.values?.image}` : profile }  `} alt="" className="h-100"  style={{ width: "100%" , borderRadius:"50%" , objectFit:"cover"}}/>
+                  </div>) : (<div className="ds_profile_box text-center me-4">
+                       <img src={profile} alt="" className="mt-3" style={{ width: "75%" }}/>
+                  </div>)
+                }
                 <div>
                   <h5 className="text-light mb-0">
                     {admin.firstName} {admin.lastName}

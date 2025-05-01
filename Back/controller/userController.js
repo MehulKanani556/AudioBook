@@ -122,7 +122,10 @@ exports.updateUserById = async (req, res) => {
         if (!updateUserId) {
             return res.status(404).json({ status: 404, success: false, message: "User Not Found" })
         }
-
+        if (req.file) {
+            req.body.image = req.file.path
+        }
+        console.log(req.body.image);
         updateUserId = await user.findByIdAndUpdate(id, { ...req.body }, { new: true })
 
         return res.status(200).json({ status: 200, message: "User Updated SuccessFully...", data: updateUserId })

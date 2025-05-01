@@ -25,7 +25,7 @@ export const getSingleAdmin = createAsyncThunk(
 
 export const editProfileAdmin = createAsyncThunk(
   "EditProfile-Admin",
-  async (adminUpdate, { rejectWithValue }) => {
+  async (adminUpdate, { rejectWithValue , dispatch}) => {
     const editProfileId = localStorage.getItem("adminId");
     const token = localStorage.getItem("token");
 
@@ -35,11 +35,10 @@ export const editProfileAdmin = createAsyncThunk(
     formData.append("email", adminUpdate.email);
     formData.append("mobileNo", adminUpdate.mobileNo);
 
-    if (adminUpdate.image instanceof File) {
+    console.log("zzzzzzzzzzzzzzzz" ,adminUpdate.image);
+
       formData.append("image", adminUpdate.image);
-    } else {
-      formData.append("image", adminUpdate.image);
-    }
+
     try {
       const response = await axios.put(
         `${API_URL}/updateUser/${editProfileId}`,
@@ -52,6 +51,7 @@ export const editProfileAdmin = createAsyncThunk(
         }
       );
       console.log("Resposnse", editProfileId);
+      dispatch(getSingleAdmin())
       return response.data.data;
     } catch (error) {
       console.error("LoginAdmin Error:", error.message);
