@@ -3,6 +3,13 @@ const user = require('../models/userModels');
 const audiobooks = require('../models/audioBookModels');
 const role = require('../models/roleModels');
 const subscriptions = require('../models/subScriptionModels');
+const voucher = require('../models/voucherModels');
+const genre = require('../models/genreModels');
+const cast = require('../models/crewModels');
+const review = require('../models/reviewModels');
+const episodes = require('../models/EpisodesModels');
+const playlist = require('../models/playListMasterModels');
+const homeLabel = require('../models/homeLabelModels');
 // Helper function to format numbers
 function formatNumber(num) {
   if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B';
@@ -40,8 +47,6 @@ exports.DashboardList = async (req, res) => {
 };
 
 exports.UserChart = async (req, res) => {
-
-
   // Find users where createdAt is within that range
   const rawData = await user.aggregate([
     {
@@ -156,14 +161,28 @@ exports.globalSearch = async (req, res) => {
       const results = await Promise.all([audiobooks.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
       role.find({ $or: [{ roleName: { $regex: query, $options: 'i' } },] }).select(''),
       subscriptions.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
+      user.find({ $or: [{ firstName: { $regex: query, $options: 'i' } },] }).select(''),
+      voucher.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
+      genre.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
+      cast.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
+      review.find({ $or: [{ review: { $regex: query, $options: 'i' } },] }).select(''),
+      episodes.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
+      playlist.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
+      homeLabel.find({ $or: [{ labelName: { $regex: query, $options: 'i' } },] }).select(''),
     ]);
-      const filteredResults = {
+      const data = {
           audiobooks: results[0].length ? results[0] : [],
-          role: results[0].length ? results[1] : [],
-          subscriptions: results[0].length ? results[2] : [], 
+          role: results[1].length ? results[1] : [],
+          subscriptions: results[2].length ? results[2] : [],
+          user: results[3].length ? results[3]:[],
+          voucher:results[4].length ? results[4] : [],
+          genre:results[5].length ? results[5] : [],
+          cast:results[6].length ? results[6] : [],
+          review:results[7].length ? results[7] : [],
+          episodes: results[8].length ? results[8] : [],
+          homeLabel:results[9].length ? results[9] : [],
       };
-
-      return res.status(200).json({ status: 200, filteredResults });
+      return res.status(200).json({ status: 200, data });
 
   } catch (error) {
       console.log(error);

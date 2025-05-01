@@ -6,6 +6,10 @@ const episodesSchema = mongoose.Schema({
         ref: 'AudioBook',
         required: true
     },
+    name:{
+        type: String,
+        require:true,
+    },
     audioFile: {
         type: String,
         require: true

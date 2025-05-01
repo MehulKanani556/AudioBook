@@ -16,6 +16,7 @@ import { useFormik } from "formik";
 import { changePassSchema } from "./Formik";
 import { changePassAdmin } from "../Toolkit/Slices/EditProfileSlice";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const Header = ({ setOffToggle }) => {
   const [toggle, setToggle] = useState(false);
@@ -25,7 +26,10 @@ const Header = ({ setOffToggle }) => {
   const [passwordText2, setPasswordText2] = useState("password");
   const [passwordText3, setPasswordText3] = useState("password");
   const [logOut, setLogOut] = useState(false);
+  const [searchModal, setsearchModal] = useState(false);
+  const [searchData, setSearchData] = useState([]);
   const navigate = useNavigate();
+  const API_URL = "http://localhost:4000/api";
 
   const dispatch = useDispatch();
 
@@ -43,6 +47,29 @@ const Header = ({ setOffToggle }) => {
     },
   });
 
+  const handleSearch = async (value) => {
+    console.log('searchData', value);
+    if (value.length > 0) {
+      setsearchModal(true);
+      try {
+        const response = await axios.get(`${API_URL}/globalSearch?query=` + value,);
+
+        console.log('hey', response.data.data);
+        setSearchData(response.data.data)
+      } catch (error) {
+        if (error.status === 404) {
+          console.error("Get Coin Label Error:", error.status);
+          var data = [];
+          return data;
+        }
+        console.error("LoginAdmin Error:", error.message);
+      }
+    }
+    else {
+      setsearchModal(false);
+    }
+
+  }
   return (
     <div>
       <div className="ds_header_img">
@@ -58,10 +85,31 @@ const Header = ({ setOffToggle }) => {
                 type="text"
                 className="ds_header_input"
                 placeholder="Search.."
+                onChange={(e) => {
+                  handleSearch(e.target.value);
+                }}
               />
               <div className="ds_search">
                 <img src={search} alt="" />
               </div>
+              {searchModal && (
+                <div className="position-absolute top-100 left-0 w-100 bg-dark overflow-auto text-white" style={{ minHeight: '400px', minHeight: '400px' }}>
+                  {Object.entries(searchData).map(([key, value]) => (
+                    <div key={key} className="mb-3">
+                      <h5>{key}</h5>
+                      {value.length > 0 ? (
+                        <ul className="list-unstyled">
+                          {value.map((item, idx) => (
+                            <li key={idx}>{JSON.stringify(item?.name)}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="text-muted">No data</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           <div className="d-flex align-items-center mt-2 position-relative">

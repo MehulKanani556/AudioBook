@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 exports.createEpisodes = async (req, res) => {
     try {
-        let { audioBookId, audioFile, premium, coinRequired, duration } = req.body
+        let { audioBookId, name, audioFile, premium, coinRequired, duration } = req.body
 
         let checkEpisodes = await episodes.findOne({ audioBookId })
 
@@ -13,6 +13,7 @@ exports.createEpisodes = async (req, res) => {
 
         checkEpisodes = await episodes.create({
             audioBookId,
+            name,
             audioFile: req.file.path,
             premium,
             coinRequired,
