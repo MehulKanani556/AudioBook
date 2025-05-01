@@ -11,19 +11,29 @@ import { getPlaylistMaster } from '../../Toolkit/Slices/PlaylistMasterSlice'
 
 
 const PlaylistMaster = () => {
+
+    const [currentData, setCurrentData] = useState([]);
     const [addPlaylistMasterModal, setAddPlaylistMasterModal] = useState(false);
     const [editPlaylistMasterModal, setEditPlaylistMasterModal] = useState(false);
     const [removePlaylistMaster, setRemovePlaylistMaster] = useState(false);
-    const playlist = useSelector((state)=>state.playlist.playlist);
+    const playlist = useSelector((state) => state.playlist.playlist);
     const [currentPage, setCurrentPage] = useState(1);
     const itemPerPage = 10;
     var totalPages = Math.ceil(playlist.length / itemPerPage);
-    console.log('playlist',playlist)
-    const dispatch = useDispatch()
-    useEffect(()=>{
-        dispatch(getPlaylistMaster())
-    },[])
+    console.log('playlist', playlist)
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(getPlaylistMaster())
+    }, [])
+
+
+    useEffect(() => {
+        const startIndex = (currentPage - 1) * itemPerPage;
+        const endIndex = startIndex + itemPerPage;
+        const paginatedData = playlist.slice(startIndex, endIndex);
+        setCurrentData(paginatedData);
+    }, [currentPage, playlist]);
 
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
@@ -88,7 +98,11 @@ const PlaylistMaster = () => {
                 Next
             </div>
         );
-
+        // const startIndex = (currentPage - 1) * itemPerPage;
+        // const endIndex = startIndex + itemPerPage;
+        // const paginatedData = roleData.slice(startIndex, endIndex);
+        // console.log(paginatedData);
+        // setCurrentData(paginatedData);
         return pages;
     };
 
@@ -118,32 +132,24 @@ const PlaylistMaster = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/* <tr>
-                                        <td>01</td>
-                                        <td>Johnwick08</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td className=''>
-                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditPlaylistMasterModal(true)} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemovePlaylistMaster(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td>
-                                    </tr> */}
-                                    <tr>
-                                        <td>02</td>
-                                        <td>Johnwick08</td>
-                                        <td>Lorem Ipsum</td>
-                                        {/* <td className=''>
-                                            <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditPlaylistMasterModal(true)} >
-                                                <img src={pen} alt="" />
-                                            </span>
-                                            <span className='ds_role_icon ds_cursor' onClick={() => setRemovePlaylistMaster(true)} >
-                                                <img src={trash} alt="" />
-                                            </span>
-                                        </td> */}
-                                    </tr>
+                                    {currentData.map((ele,ind)=>{
+                                        return(
+                                            <tr>
+                                            <td>{((currentPage - 1) * 10) +( ind + 1 )}</td>
+                                            <td>{ele.user?.[0]?.firstName || '-'}</td>
+                                            <td>{ele.name}</td>
+                                            {/* <td className=''>
+                                                <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditPlaylistMasterModal(true)} >
+                                                    <img src={pen} alt="" />
+                                                </span>
+                                                <span className='ds_role_icon ds_cursor' onClick={() => setRemovePlaylistMaster(true)} >
+                                                    <img src={trash} alt="" />
+                                                </span>
+                                            </td> */}
+                                        </tr>
+                                        )
+                                    })}
+                                   
                                 </tbody>
                             </table>
                         </div>
