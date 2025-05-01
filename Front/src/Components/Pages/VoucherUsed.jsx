@@ -151,7 +151,7 @@ const VoucherUsed = () => {
                       <tr key={index}>
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
                         <td>{ele.voucharData?.[0]?.name}</td>
-                        <td>{ele.userId}</td>
+                        <td>{ele.userData?.[0]?.firstName}</td>
                         <td>{ele.usedDate}</td>
                           {/* <td className="">
                             <span
