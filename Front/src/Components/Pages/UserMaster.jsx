@@ -201,7 +201,7 @@ const UserMaster = () => {
                           <td>{e.email}</td>
                           <td>{e.mobileNo}</td>
                           {/* <td>-</td> */}
-                          <td>{e.roleId}</td>
+                          <td>{e.roleData?.[0]?.roleName}</td>
                           <td>{e.bio}</td>
                           <td>{e.age}</td>
                           <td>{e.occupation}</td>
@@ -327,7 +327,11 @@ const UserMaster = () => {
                 <div className="row">
                   <div className="col-xl-3 col-lg-3 col-md-12 mb-lg-0 mb-4 text-lg-start text-center">
                     <div>
-                      <img src={bigimg} alt="" className="ds_user_master_big" />
+                      <img
+                        src={"http://localhost:4000/" + ele?.image || bigimg}
+                        alt=""
+                        className="ds_user_master_big"
+                      />
                     </div>
                   </div>
 

@@ -240,6 +240,8 @@ const Episodes = () => {
                                                <td>{element?.name}</td>
                                                <td>{element?.audioBookData[0]?.name}</td>
                                                <td>{element?.premium}</td>
+                                               <td>{element?.audioBookData[0]?.name || '-'}</td>
+                                               <td>{element?.premium || '-'}</td>
                                                {/* <td>{element?.coinRequired}</td> */}
                                                <td>{element?.duration}</td>
                                                <td>

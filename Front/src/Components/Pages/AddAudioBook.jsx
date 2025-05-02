@@ -76,16 +76,17 @@ const AddAudioBook = () => {
                       onChange={addAudioBookFormik.handleChange}
                       onBlur={addAudioBookFormik.handleBlur}
                     >
+                      <option value="">select audio book</option>
                       {genreSelect.map((ele) => {
                         return <option value={ele._id}>{ele.name}</option>;
                       })}
                     </select>
-                    {/* <p
+                    <p
                       className="text-danger mb-0 text-start ps-1 pt-1"
                       style={{ fontSize: "14px" }}
                     >
                       {addAudioBookFormik.errors.genreId}
-                    </p> */}
+                    </p>
                   </div>
                   <div className="col-12 col-sm-6  pt-2 pt-md-3">
                     <label className="V_label">Name</label>

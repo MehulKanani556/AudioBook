@@ -166,9 +166,11 @@ const AudioBook = () => {
 
                     return (
                       <tr key={index}>
-                        <td>{(currentPage - 1) * ITEMS_PER_PAGE + index + 1}</td>
-                        <td>{ele.genre?.[0]?.name}</td>
-                        <td>{ele.name}</td>
+                        <td>
+                          {(currentPage - 1) * ITEMS_PER_PAGE + index + 1}
+                        </td>
+                        <td>{ele.genre?.[0]?.name || "-"}</td>
+                        <td>{ele.name || "-"}</td>
                         <td>
                           <img
                             src={"http://localhost:4000/" + ele?.sampleFile}
