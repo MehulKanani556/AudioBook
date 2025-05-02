@@ -113,8 +113,6 @@ const HomeCorousel = () => {
   };
 
   const renderPagination = () => {
-    if (totalPages <= 1) return null;
-
     let pages = [];
 
     pages.push(
@@ -250,7 +248,7 @@ const HomeCorousel = () => {
         </div>
 
         <div className="py-3 d-flex justify-content-center justify-content-md-end px-5">
-          {renderPagination()}
+          {homeCarousel.length > 0 && renderPagination()}
         </div>
       </div>
 
@@ -290,7 +288,7 @@ const HomeCorousel = () => {
                       type="text"
                       className="custom-text"
                       placeholder=""
-                      value={fileName}
+                      value={fileName.replace(/\\/g, "/")?.split("/")?.pop()}
                       readonly
                     />
                     <label htmlFor="fileInput" className="custom-button">

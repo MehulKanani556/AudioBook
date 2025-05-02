@@ -251,12 +251,12 @@ const Subscription = () => {
                   {getCurrentPageData()?.map((ele, index) => (
                     <tr key={index}>
                       <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
-                      <td>{ele?.name}</td>
-                      <td>{ele?.dicount}</td>
-                      <td>{ele?.scratchPrice}</td>
-                      <td>{ele?.price}</td>
+                      <td>{ele?.name || '-'}</td>
+                      <td>{ele?.dicount || '-'}</td>
+                      <td>{ele?.scratchPrice || '-'}</td>
+                      <td>{ele?.price || '-'}</td>
                       <td>
-                        <span className="ds_sub_active">{ele?.status}</span>
+                        <span className={ele.status === 'Active' ? 'ds_sub_active' : 'ds_sub_block'}>{ele?.status}</span>
                       </td>
                       <td>
                         <span
@@ -813,11 +813,11 @@ const Subscription = () => {
 
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 p-0">
                 <div>
-                  <h6 className="mt-1">{singleSubData.name}</h6>
-                  <h6 className="mt-3 pt-1">{singleSubData?.dicount}</h6>
-                  <h6 className="mt-3 pt-1">{singleSubData?.scratchPrice}</h6>
-                  <h6 className="mt-3 pt-2">{singleSubData?.price}</h6>
-                  <h6 className="mt-3 pt-1">{singleSubData?.status}</h6>
+                  <h6 className="mt-1">{singleSubData.name || '-'}</h6>
+                  <h6 className="mt-3 pt-1">{singleSubData?.dicount || '-'}</h6>
+                  <h6 className="mt-3 pt-1">{singleSubData?.scratchPrice || '-'}</h6>
+                  <h6 className="mt-3 pt-2">{singleSubData?.price || '-'}</h6>
+                  <h6 className="mt-3 pt-1">{singleSubData?.status || '-'}</h6>
                 </div>
               </div>
             </div>

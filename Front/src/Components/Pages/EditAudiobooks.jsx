@@ -226,23 +226,21 @@ const EditAudiobooks = () => {
                               onClick={() => {
                                 setRedioVal("English");
                                 setToggle(false);
+                                editAudioBookFormik.setFieldValue('language', 'English');
                               }}
                             >
                               <input
                                 className="form-check-input ds_sub_check"
                                 type="radio"
-                                name="exampleRadios"
-                                id="exampleRadios1"
+                                name="language"
+                                id="languageEnglish"
                                 value="English"
-                                checked={
-                                  redioVal === "English" && subAdd
-                                    ? true
-                                    : false
-                                }
+                                checked={editAudioBookFormik.values.language === "English"}
+                                onChange={() => {}}
                               />
                               <label
                                 className="form-check-label"
-                                htmlFor="exampleRadios1"
+                                htmlFor="languageEnglish"
                               >
                                 English
                               </label>
@@ -252,21 +250,21 @@ const EditAudiobooks = () => {
                               onClick={() => {
                                 setRedioVal("Franch");
                                 setToggle(false);
+                                editAudioBookFormik.setFieldValue('language', 'Franch');
                               }}
                             >
                               <input
                                 className="form-check-input ds_sub_check"
                                 type="radio"
-                                name="exampleRadios"
-                                id="exampleRadios2"
+                                name="language"
+                                id="languageFranch"
                                 value="Franch"
-                                checked={
-                                  redioVal === "Franch" && subAdd ? true : false
-                                }
+                                checked={editAudioBookFormik.values.language === "Franch"}
+                                onChange={() => {}}
                               />
                               <label
                                 className="form-check-label"
-                                htmlFor="exampleRadios2"
+                                htmlFor="languageFranch"
                               >
                                 Franch
                               </label>
