@@ -78,7 +78,7 @@ const EditAudiobooks = () => {
       description: singleAudioData?.[0]?.description,
       tags: singleAudioData?.[0]?.tags,
       language: singleAudioData?.[0]?.language,
-      sampleFile: null,
+      sampleFile: singleAudioData?.[0]?.sampleFile,
     });
     setFileName(
       singleAudioData?.[0]?.sampleFile.replace(/\\/g, "/")?.split("/")?.pop()
@@ -166,12 +166,14 @@ const EditAudiobooks = () => {
                           type="text"
                           className="custom-text"
                           placeholder=""
+                          onChange={handleFileChange}
                           value={fileName}
                           readonly
                         />
                         <label htmlFor="fileInput" className="custom-button">
                           CHOOSE
                         </label>
+                        {console.log('asfasfa',editAudioBookFormik.values.sampleFile)}
                         <input
                           type="file"
                           id="fileInput"
@@ -179,12 +181,6 @@ const EditAudiobooks = () => {
                           onChange={handleFileChange}
                         />
                       </div>
-                      <p
-                        className="text-danger mb-0 text-start ps-1 pt-1"
-                        style={{ fontSize: "14px" }}
-                      >
-                        {editAudioBookFormik.errors.sampleFile}
-                      </p>
                     </div>
                   </div>
                   <div className="col-12 col-sm-6  pt-2 pt-md-3">

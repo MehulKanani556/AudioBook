@@ -103,7 +103,7 @@ const Subscription = () => {
   const addSubscriptionFormik = useFormik({
     initialValues: addSubscriptionVal,
     validationSchema: addSubscriptionSchema,
-    onSubmit: (values) => {
+    onSubmit: (values , action) => {
       const subscriptionData = {
         ...values,
         status: redioVal,
@@ -111,6 +111,8 @@ const Subscription = () => {
       dispatch(addSubscriptionData(subscriptionData)).then(() => {
         dispatch(getAllSubscriptionData());
         setSubAdd(false);
+        action.resetForm();
+        setRedioVal("Active")
       });
     },
   });
@@ -235,7 +237,7 @@ const Subscription = () => {
 
           <div className="ds_role_bg mt-2">
             <div className="ds_table_wrapper overflow-auto">
-              <table className="w-100 text-light ds_sub_table ">
+              <table className="w-100 text-light ds_sub_table text-capitalize">
                 <thead>
                   <tr>
                     <th>No.</th>
@@ -252,9 +254,9 @@ const Subscription = () => {
                     <tr key={index}>
                       <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
                       <td>{ele?.name || '-'}</td>
-                      <td>{ele?.dicount || '-'}</td>
-                      <td>{ele?.scratchPrice || '-'}</td>
-                      <td>{ele?.price || '-'}</td>
+                      <td>{ele?.dicount+"%" || '-'}</td>
+                      <td>{"₹"+ele?.scratchPrice || '-'}</td>
+                      <td>{"₹"+ele?.price || '-'}</td>
                       <td>
                         <span className={ele.status === 'Active' ? 'ds_sub_active' : 'ds_sub_block'}>{ele?.status}</span>
                       </td>
@@ -777,7 +779,7 @@ const Subscription = () => {
         </Modal.Header>
         <Modal.Body>
           <div>
-            <div className="row">
+            <div className="row text-capitalize">
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                 <div>
                   <p className="d-flex justify-content-between">
@@ -814,9 +816,9 @@ const Subscription = () => {
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 p-0">
                 <div>
                   <h6 className="mt-1">{singleSubData.name || '-'}</h6>
-                  <h6 className="mt-3 pt-1">{singleSubData?.dicount || '-'}</h6>
-                  <h6 className="mt-3 pt-1">{singleSubData?.scratchPrice || '-'}</h6>
-                  <h6 className="mt-3 pt-2">{singleSubData?.price || '-'}</h6>
+                  <h6 className="mt-3 pt-1">{singleSubData?.dicount || '-'}%</h6>
+                  <h6 className="mt-3 pt-1">{"₹"+singleSubData?.scratchPrice || '-'}</h6>
+                  <h6 className="mt-3 pt-2">{"₹"+singleSubData?.price || '-'}</h6>
                   <h6 className="mt-3 pt-1">{singleSubData?.status || '-'}</h6>
                 </div>
               </div>

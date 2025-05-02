@@ -175,8 +175,8 @@ const HomeLabelJoin = () => {
               <h4 className="text-light pt-4 mb-0">Home Label Join</h4>
               <p>
                 <Link
-                  to="/layout/dashboard"
-                  className="ds_head_txt text-decoration-none"
+                  to="/admin/dashboard"
+                  className="ds_head_txt ds_role_link text-decoration-none"
                 >
                   Dashboard /
                 </Link>{" "}

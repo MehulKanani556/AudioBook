@@ -126,7 +126,7 @@ const Voucher = () => {
                     <div className='d-flex justify-content-between align-items-center'>
                         <div>
                             <h4 className="text-light pt-4 mb-0">Vouchers</h4>
-                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Vouchers</span></p>
+                            <p><Link to="/layout/dashboard" className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Vouchers</span></p>
                         </div>
                         <div>
                             <button className='V_review_btn' onClick={() => navigate('/admin/addVouchers')} ><i className="fa-solid fa-plus me-2"></i> Add</button>
@@ -135,7 +135,7 @@ const Voucher = () => {
 
                     <div className='V_review_bg mt-2'>
                         <div className='ds_user_master_scroll overflow-auto'>
-                            <table className='w-100 text-light V_review_table  text-nowrap ' style={{ minWidth: "1800px" }}>
+                            <table className='w-100 text-light V_review_table  text-nowrap text-capitalize' style={{ minWidth: "1800px" }}>
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -220,7 +220,7 @@ const Voucher = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row py-md-3  px-md-5 ">
+                        <div className="row py-md-3  px-md-5 text-capitalize">
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Name</p>
                             </div>

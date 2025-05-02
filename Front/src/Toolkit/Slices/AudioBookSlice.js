@@ -106,7 +106,7 @@ export const editAudioBookData = createAsyncThunk(
       formData.append("name", editAudioBook.name);
       formData.append("description", editAudioBook.description);
       formData.append("language", editAudioBook.language);
-      formData.append("tags", JSON.stringify(editAudioBook.tags));
+      formData.append("tags", editAudioBook.tags);
       if (editAudioBook.sampleFile instanceof File) {
         formData.append("sampleFile", editAudioBook.sampleFile);
       }

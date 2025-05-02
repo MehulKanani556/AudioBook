@@ -114,7 +114,7 @@ const VoucherUsed = () => {
               <p>
                 <Link
                   to="/layout/dashboard"
-                  className="ds_head_txt text-decoration-none"
+                  className="ds_head_txt ds_role_link text-decoration-none"
                 >
                   Dashboard /
                 </Link>{" "}

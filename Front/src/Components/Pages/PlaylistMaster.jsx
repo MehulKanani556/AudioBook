@@ -113,7 +113,7 @@ const PlaylistMaster = () => {
                     <div className='d-flex justify-content-between align-items-center'>
                         <div>
                             <h4 className="text-light pt-4 mb-0">Playlist Master</h4>
-                            <p><Link to="/layout/dashboard" className='ds_head_txt text-decoration-none'>Dashboard /</Link> <span className='text-light'>Playlist Master</span></p>
+                            <p><Link to="/admin/dashboard" className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Playlist Master</span></p>
                         </div>
                         {/* <div>
                             <button className='V_review_btn1' onClick={() => setAddPlaylistMasterModal(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>

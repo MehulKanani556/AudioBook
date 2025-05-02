@@ -119,7 +119,7 @@ const SubscriptionSell = () => {
 
                     <div className='V_review_bg mt-2'>
                         <div className='ds_user_master_scroll overflow-auto'>
-                            <table className='w-100 text-light V_review_table  text-nowrap '>
+                            <table className='w-100 text-light V_review_table text-nowrap text-capitalize'>
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -216,7 +216,7 @@ const SubscriptionSell = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row py-md-3  px-md-5 ">
+                        <div className="row py-md-3  px-md-5 text-capitalize">
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Subscription Plan ID</p>
                             </div>

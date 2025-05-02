@@ -162,7 +162,7 @@ const UserMaster = () => {
 
           <div className="ds_role_bg mt-2">
             <div className="ds_table_wrapper ds_user_master_scroll overflow-auto">
-              <table className="w-100 text-light ds_user_master">
+              <table className="w-100 text-light ds_user_master text-capitalize">
                 <thead>
                   <tr>
                     <th>No.</th>
@@ -176,7 +176,7 @@ const UserMaster = () => {
                     <th>Occupation</th>
                     <th>student_verification_status</th>
                     <th>student_ID_image</th>
-                    <th>Coins</th>
+                    {/* <th>Coins</th> */}
                     <th>Language</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -198,7 +198,7 @@ const UserMaster = () => {
                               alt=""
                             />
                           </td>
-                          <td>{e.email || '-'}</td>
+                          <td className="text-lowercase">{e.email || '-'}</td>
                           <td>{e.mobileNo || '-'}</td>
                           {/* <td>-</td> */}
                           <td>{e.roleData?.[0]?.roleName || '-'}</td>
@@ -211,10 +211,10 @@ const UserMaster = () => {
                             </span>
                           </td>
                           <td>{e.studentIdImage || '-'}</td>
-                          <td>{e.coins || '-'}</td>
+                          {/* <td>{e.coins || '-'}</td> */}
                           <td>{e.language || '-'}</td>
                           <td>
-                            <span className="ds_sub_active">{e.status}</span>
+                          <span className={e.status === 'Active' ? 'ds_sub_active' : 'ds_sub_block'}>{e?.status}</span>
                           </td>
                           <td className="d-flex ">
                             <span
@@ -321,7 +321,7 @@ const UserMaster = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div>
+          <div className="text-capitalize">
             {getSingleUserMaster.map((ele) => {
               return (
                 <div className="row">
@@ -350,7 +350,7 @@ const UserMaster = () => {
                           </h5>
                         </div>
                       </div>
-                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5">
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5 text-lowercase">
                         <h5
                           className="text-light mb-3 ds_coin_master_text"
                           style={{ fontWeight: "400" }}
