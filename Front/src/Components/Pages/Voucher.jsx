@@ -157,7 +157,7 @@ const Voucher = () => {
                                             <tr>
                                                 <td>{((currentPage - 1) * 10) + (ind + 1)}</td>
                                                 <td>{ele?.name}</td>
-                                                <td>{ele?.description}</td>
+                                                <td>{ele?.description?.slice(0, 10)}...</td>
                                                 <td>{ele?.code}</td>
                                                 <td>{ele?.discount}</td>
                                                 {/* <td>{ele?.coinMaster?.[0]?.name || ele.coinMasterId}</td> */}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import "../CSS/Header.css";
 import search from "../Images/dhruvin/search.svg";
 import bell from "../Images/dhruvin/bell.svg";
@@ -15,8 +16,11 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { changePassSchema } from "./Formik";
 import { changePassAdmin, getSingleAdmin } from "../Toolkit/Slices/EditProfileSlice";
+import { changePassAdmin } from "../Toolkit/Slices/EditProfileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import Close from "../Images/Parth/close_button.png"
+import { getReview } from "../Toolkit/Slices/reviewSlice";
 
 const Header = ({ setOffToggle }) => {
   const [toggle, setToggle] = useState(false);
@@ -26,8 +30,18 @@ const Header = ({ setOffToggle }) => {
   const [passwordText2, setPasswordText2] = useState("password");
   const [passwordText3, setPasswordText3] = useState("password");
   const [logOut, setLogOut] = useState(false);
+  const [viewModal, setViewModal] = useState(false);
+  const [selectData, setselectData] = useState();
   const [searchModal, setsearchModal] = useState(false);
   const [searchData, setSearchData] = useState([]);
+  const reviews = useSelector((state) => state.review.review || []); // fallback to [] in case it's undefined
+
+  const notification = reviews
+    .slice() // make a shallow copy to avoid mutating Redux state
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // sort by newest
+    .slice(0, 3); // take top 3
+
+  console.log('notification', notification);
   const navigate = useNavigate();
   const API_URL = "http://localhost:4000/api";
 
@@ -42,6 +56,9 @@ const Header = ({ setOffToggle }) => {
   console.log("new created" ,admin);
   
 
+  useEffect(() => {
+    dispatch(getReview());
+  }, [])
   const changePassval = {
     oldPassword: "",
     newPassword: "",
@@ -77,8 +94,21 @@ const Header = ({ setOffToggle }) => {
     else {
       setsearchModal(false);
     }
-
   }
+
+
+  // for chnaging date format
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    return date.toLocaleString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+  };
   return (
     <div>
       <div className="ds_header_img">
@@ -102,21 +132,40 @@ const Header = ({ setOffToggle }) => {
                 <img src={search} alt="" />
               </div>
               {searchModal && (
-                <div className="position-absolute top-100 left-0 w-100 bg-dark overflow-auto text-white" style={{ minHeight: '400px', minHeight: '400px' }}>
-                  {Object.entries(searchData).map(([key, value]) => (
-                    <div key={key} className="mb-3">
-                      <h5>{key}</h5>
-                      {value.length > 0 ? (
-                        <ul className="list-unstyled">
-                          {value.map((item, idx) => (
-                            <li key={idx}>{JSON.stringify(item?.name)}</li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <p className="text-muted">No data</p>
-                      )}
-                    </div>
-                  ))}
+                <div className="sp_search_box">
+                  {Object.values(searchData).every((val) => val.length === 0) ? (
+                    <p className="text-center text-muted py-5 ">Data not found</p>
+                  ) : (
+                    Object.entries(searchData).map(([key, value]) =>
+                      value.length > 0 && (
+                        <div key={key} className="mb-3">
+                          <h5 className="p-3">{key}</h5>
+                          <ul className="list-unstyled">
+                            {value.map((item, idx) => (
+                              <li
+                                key={idx}
+                                className=""
+                                onClick={() => {
+                                  setViewModal(true);
+                                  setselectData({ ...item, key });
+                                }}
+                              >
+                                {key === "roles"
+                                  ? item?.roleName
+                                  : key === "users"
+                                    ? item?.firstName
+                                    : key === "reviews"
+                                      ? item?.review
+                                      : key === "homeLabels"
+                                        ? item?.labelName
+                                        : item?.name}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )
+                    )
+                  )}
                 </div>
               )}
             </div>
@@ -158,53 +207,35 @@ const Header = ({ setOffToggle }) => {
                     </div>
                   </div>
                   <div className="ds_border"></div>
-                  <div className="d-none">
-                    <div className="px-4 py-3">
-                      <h5 className="text-light">Lorem Ipsum</h5>
-                      <p className="ds_head_txt ds_lh">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
-                      </p>
-                      <p className="ds_head_text">24 Aug 2024, 14:24</p>
-                      <div className="ds_border"></div>
+                  {notification.length > 0 ?
+                    <div className="">
+                      {notification.map((item) => (
+                        <div className="px-4 py-3" key={item._id}>
+                          <h5 className="text-light">{item?.userData?.[0]?.firstName}</h5>
+                          <p className="ds_head_txt ds_lh mb-1" style={{ fontSize: '12px' }} >{item.review}</p>
+                          <p className="ds_head_text" style={{ fontSize: '14px' }}>{formatDate(item.createdAt)}</p>
+                          <div className="ds_border"></div>
+                        </div>
+                      ))}
                     </div>
-                    <div className="px-4 pt-1">
-                      <h5 className="text-light">Lorem Ipsum</h5>
-                      <p className="ds_head_txt ds_lh">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
-                      </p>
-                      <p className="ds_head_text">24 Aug 2024, 14:24</p>
-                      <div className="ds_border"></div>
-                    </div>
-                    <div className="px-4 pt-3">
-                      <h5 className="text-light">Lorem Ipsum</h5>
-                      <p className="ds_head_txt ds_lh">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
-                      </p>
-                      <p className="ds_head_text">24 Aug 2024, 14:24</p>
-                      <div className="ds_border"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="d-non">
-                  <div className="ds_notification">
-                    <div className="d-flex justify-content-center align-items-center h-100">
-                      <div className="text-center">
-                        <img src={noti} alt="" width="50%" />
-                        <h5 className="text-light">No notifications</h5>
-                        <p className="ds_head_text mx-xl-5 px-5 ds_lh">
-                          There is no notification to show right now.
-                        </p>
+                    :
+                    <div className="">
+                      <div className="ds_notification">
+                        <div className="d-flex justify-content-center align-items-center h-100">
+                          <div className="text-center">
+                            <img src={noti} alt="" width="50%" />
+                            <h5 className="text-light">No notifications</h5>
+                            <p className="ds_head_text mx-xl-5 px-5 ds_lh">
+                              There is no notification to show right now.
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  }
                 </div>
+
+
               </div>
             )}
 
@@ -406,6 +437,73 @@ const Header = ({ setOffToggle }) => {
             </div>
           </Modal.Body>
         </Modal>
+
+
+        {/* =================++++++++++++ selectData view modal */}
+        {console.log(selectData)}
+        <div className=''>
+          <Modal
+            show={viewModal}
+            onHide={() => setViewModal(false)}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            className='text-white V_modal_width '
+            centered>
+            <Modal.Header className='V_modal_header text-capitalize'>
+              <Modal.Title id="contained-modal-title-vcenter" className='px-md-5 w-100' >
+                <div className="d-flex justify-content-between ">
+                  <div>
+                    {selectData?.key} Details
+                  </div>
+                  <div className='ms-auto ds_cursor' onClick={() => setViewModal(false)}>
+                    <img src={Close} alt="" />
+                  </div>
+                </div>
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="  px-md-5 text-capitalize">
+                {selectData && (
+                  Object.entries(selectData).map(([key, value]) => (
+                    (key !== '_id' && key !== 'password' && key !== 'createdAt' && key !== 'updatedAt' && key !== 'key' && key !== 'coinMaster' && key !== 'subScriptionSellId') && (
+                      <div className="row" key={key}>
+                        <div className="col-6 pt-2 pt-sm-0">
+                          <p className='V_label2 mb-0'>{key}</p>
+                        </div>
+                        <div className="col-6 pt-2 pt-sm-0">
+                          <p>:
+                            {(key === 'sampleFile' || key === 'image' || key === 'generImage' || key === 'crewImage') ? (
+                              <img src={`http://localhost:4000/${String(value)}`} alt={value} className='ms-2 V_home_corousel_image' />
+                            ) : (key === 'user') ? (
+                              <span className='ms-2 V_label1 text-break'>
+                                {value?.firstName || 'N/A'}
+                              </span>
+                            ) : Array.isArray(value) ? (
+                              value.map((item, idx) => (
+                                <span key={idx} className='ms-2 V_label1 text-break'>
+                                  {key === 'roleData' ? item?.roleName : item?.name || String(item)}
+                                  {idx < value.length - 1 && ', '}
+                                </span>
+                              ))
+                            ) : (typeof value === 'object' && value !== null) ? (
+                              <span className='ms-2 V_label1 text-break'>
+                                {key === 'roleData' ? value?.roleName : value?.name || JSON.stringify(value)}
+                              </span>
+                            ) : (
+                              <span className='ms-2 V_label1 text-break'>
+                                {(key === 'price' || key === 'amount') ? `₹ ${String(value)}` : String(value)}
+                              </span>
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    )
+                  ))
+                )}
+              </div>
+            </Modal.Body>
+          </Modal>
+        </div>
       </div>
     </div>
   );

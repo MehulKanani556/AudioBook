@@ -157,35 +157,201 @@ exports.CategoryChart = async (req, res) => {
 
 exports.globalSearch = async (req, res) => {
   const { query } = req.query;
-  try {
-      const results = await Promise.all([audiobooks.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
-      role.find({ $or: [{ roleName: { $regex: query, $options: 'i' } },] }).select(''),
-      subscriptions.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
-      user.find({ $or: [{ firstName: { $regex: query, $options: 'i' } },] }).select(''),
-      voucher.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
-      genre.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
-      cast.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
-      review.find({ $or: [{ review: { $regex: query, $options: 'i' } },] }).select(''),
-      episodes.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
-      playlist.find({ $or: [{ name: { $regex: query, $options: 'i' } },] }).select(''),
-      homeLabel.find({ $or: [{ labelName: { $regex: query, $options: 'i' } },] }).select(''),
-    ]);
-      const data = {
-          audiobooks: results[0].length ? results[0] : [],
-          role: results[1].length ? results[1] : [],
-          subscriptions: results[2].length ? results[2] : [],
-          user: results[3].length ? results[3]:[],
-          voucher:results[4].length ? results[4] : [],
-          genre:results[5].length ? results[5] : [],
-          cast:results[6].length ? results[6] : [],
-          review:results[7].length ? results[7] : [],
-          episodes: results[8].length ? results[8] : [],
-          homeLabel:results[9].length ? results[9] : [],
-      };
-      return res.status(200).json({ status: 200, data });
+  
 
+  
+  // Limit regex search complexity by escaping special characters
+  const sanitizedQuery = query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+  
+  // Add timeout for aggregation operations
+  const aggregationOptions = { maxTimeMS: 5000 }; // 5 second timeout
+  
+  try {
+    // Use Promise.allSettled instead of Promise.all to prevent one failing query from breaking everything
+    const resultsPromises = [
+      // Audiobooks with genre - limit results
+      audiobooks.aggregate([
+        { $match: { name: { $regex: sanitizedQuery, $options: 'i' } } },
+        { $limit: 20 }, // Limit matching documents
+        { $lookup: {
+            from: "genres",
+            localField: "genreId",
+            foreignField: "_id",
+            as: "genre"
+          }
+        },
+        { $project: {  } } // Only return needed fields
+      ]).option(aggregationOptions),
+  
+      // Roles - simplified query with limit
+      role.find({ roleName: { $regex: sanitizedQuery, $options: 'i' } })
+        .limit(10)
+        .select('roleName permissions'),
+  
+      // Subscriptions - simplified query with limit
+      subscriptions.find({ name: { $regex: sanitizedQuery, $options: 'i' } })
+        .limit(10)
+        .select('name price duration'),
+  
+      // Users with roles - limit and project only needed fields
+      user.aggregate([
+        { $match: { firstName: { $regex: sanitizedQuery, $options: 'i' } } },
+        { $limit: 20 },
+        { $lookup: {
+            from: 'roles',
+            localField: 'roleId',
+            foreignField: '_id',
+            as: 'roleData'
+          }
+        },
+      ]).option(aggregationOptions),
+  
+      // Vouchers - limit and project needed fields
+      voucher.aggregate([
+        { $match: { name: { $regex: sanitizedQuery, $options: 'i' } } },
+        { $limit: 10 },
+        { $lookup: {
+            from: 'coinmasters',
+            localField: 'coinMasterId',
+            foreignField: '_id',
+            as: 'coinMaster'
+          }
+        },
+        { $lookup: {
+            from: 'subscriptions',
+            localField: 'subScriptionSellId',
+            foreignField: '_id',
+            as: 'subScriptionSell'
+          }
+        },
+      ]).option(aggregationOptions),
+  
+      // Genres - simple query with limit
+      genre.find({ name: { $regex: sanitizedQuery, $options: 'i' } })
+        .limit(10)
+        .select('name description'),
+  
+      // Cast / Crew - limit and project needed fields
+      cast.aggregate([
+        { $match: { name: { $regex: sanitizedQuery, $options: 'i' } } },
+        { $limit: 10 },
+        { $lookup: {
+            from: "audiobooks",
+            localField: "audiBookId",
+            foreignField: "_id",
+            as: "audiBookData"
+          }
+        },
+        { $lookup: {
+            from: "roles",
+            localField: "roleId",
+            foreignField: "_id",
+            as: "roleData"
+          }
+        },
+      ]).option(aggregationOptions),
+  
+      // Reviews - limit and project needed fields
+      review.aggregate([
+        { $match: { review: { $regex: sanitizedQuery, $options: 'i' } } },
+        { $limit: 10 },
+        { $lookup: {
+            from: 'audiobooks',
+            localField: 'audioBookId',
+            foreignField: '_id',
+            as: 'audioBookData'
+          }
+        },
+        { $lookup: {
+            from: 'users',
+            localField: 'userId',
+            foreignField: '_id',
+            as: 'userData'
+          }
+        },
+      ]).option(aggregationOptions),
+  
+      // Episodes - limit and project needed fields
+      episodes.aggregate([
+        { $match: { name: { $regex: sanitizedQuery, $options: 'i' } } },
+        { $limit: 10 },
+        { $lookup: {
+            from: 'audiobooks',
+            localField: 'audioBookId',
+            foreignField: '_id',
+            as: 'audioBookData'
+          }
+        },
+      ]).option(aggregationOptions),
+  
+      // Playlist - limit and project needed fields
+      playlist.aggregate([
+        { $match: { name: { $regex: sanitizedQuery, $options: 'i' } } },
+        { $limit: 10 },
+        { $lookup: {
+            from: "users",
+            localField: "userId",
+            foreignField: "_id",
+            as: "user"
+          }
+        },
+      ]).option(aggregationOptions),
+  
+      // Home Labels - simple query with limit
+      homeLabel.find({ labelName: { $regex: sanitizedQuery, $options: 'i' } })
+        .limit(10)
+        .select('labelName displayOrder'),
+    ];
+  
+    const results = await Promise.allSettled(resultsPromises);
+    
+    // Process results, including handling any failed queries
+    const [
+      audiobookResult,
+      roleResult,
+      subscriptionsResult,
+      userResult,
+      voucherResult,
+      genreResult,
+      castResult,
+      reviewResult,
+      episodesResult,
+      playlistResult,
+      homeLabelResult
+    ] = results;
+    
+    // Format and structure the response
+    const formattedResults = {
+      audiobooks: audiobookResult.status === 'fulfilled' ? audiobookResult.value : [],
+      roles: roleResult.status === 'fulfilled' ? roleResult.value : [],
+      subscriptions: subscriptionsResult.status === 'fulfilled' ? subscriptionsResult.value : [],
+      users: userResult.status === 'fulfilled' ? userResult.value : [],
+      vouchers: voucherResult.status === 'fulfilled' ? voucherResult.value : [],
+      genres: genreResult.status === 'fulfilled' ? genreResult.value : [],
+      cast: castResult.status === 'fulfilled' ? castResult.value : [],
+      reviews: reviewResult.status === 'fulfilled' ? reviewResult.value : [],
+      episodes: episodesResult.status === 'fulfilled' ? episodesResult.value : [],
+      playlists: playlistResult.status === 'fulfilled' ? playlistResult.value : [],
+      homeLabels: homeLabelResult.status === 'fulfilled' ? homeLabelResult.value : [],
+    };
+    
+    // Optional: Count total results
+    const totalResults = Object.values(formattedResults).reduce(
+      (sum, arr) => sum + arr.length, 0
+    );
+    
+    return res.status(200).json({
+      success: true,
+      totalResults,
+      data: formattedResults
+    });
+    
   } catch (error) {
-      console.log(error);
-      return res.status(500).json({ status: 500, message: error.message });
+    console.error("Search aggregation failed:", error);
+    return res.status(500).json({
+      success: false,
+      message: 'An error occurred during search',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 };

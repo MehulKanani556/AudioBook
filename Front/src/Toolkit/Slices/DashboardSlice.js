@@ -10,23 +10,23 @@ export const FirstDashData = createAsyncThunk(
       const response = await axios.get(
         `${API_URL}/dashboardList`,
         {
-            headers: {
-                Authorization: `Bearer ${token}`,
-              },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
-      console.log("FirstDashData" , response.data);
+      console.log("FirstDashData", response.data);
       return response?.data?.data
-      
+
     } catch (error) {
       console.error("Get FirstDashData Error:", error.message);
-      if(error.status === 404){
-         console.error("Get FirstDashData Error:", error.status);
-         let data =[];
-         return data;
+      if (error.status === 404) {
+        console.error("Get FirstDashData Error:", error.status);
+        let data = [];
+        return data;
       }
-      else{
-        alert("Get FirstDashData" , error.message)
+      else {
+        alert("Get FirstDashData", error.message)
       }
       return rejectWithValue(
         error.response?.data || { message: "Unexpected error occurred" }
@@ -43,23 +43,23 @@ export const BarChartData = createAsyncThunk(
       const response = await axios.get(
         `${API_URL}/dashboardUserChart`,
         {
-            headers: {
-                Authorization: `Bearer ${token}`,
-              },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
-      console.log("BarChartData" , response.data);
+      console.log("BarChartData", response.data);
       return response?.data?.data
-      
+
     } catch (error) {
       console.error("Get BarChartData Error:", error.message);
-      if(error.status === 404){
-         console.error("Get BarChartData Error:", error.status);
-         let data =[];
-         return data;
+      if (error.status === 404) {
+        console.error("Get BarChartData Error:", error.status);
+        let data = [];
+        return data;
       }
-      else{
-        alert("Get BarChartData" , error.message)
+      else {
+        alert("Get BarChartData", error.message)
       }
       return rejectWithValue(
         error.response?.data || { message: "Unexpected error occurred" }
@@ -76,23 +76,23 @@ export const PieChartData = createAsyncThunk(
       const response = await axios.get(
         `${API_URL}/dashboardCatChart`,
         {
-            headers: {
-                Authorization: `Bearer ${token}`,
-              },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
-      console.log("PieChartData" , response.data);
+      console.log("PieChartData", response.data);
       return response?.data?.data
-      
+
     } catch (error) {
       console.error("Get PieChartData Error:", error.message);
-      if(error.status === 404){
-         console.error("Get PieChartData Error:", error.status);
-         let data =[];
-         return data;
+      if (error.status === 404) {
+        console.error("Get PieChartData Error:", error.status);
+        let data = [];
+        return data;
       }
-      else{
-        alert("Get PieChartData" , error.message)
+      else {
+        alert("Get PieChartData", error.message)
       }
       return rejectWithValue(
         error.response?.data || { message: "Unexpected error occurred" }
@@ -102,19 +102,24 @@ export const PieChartData = createAsyncThunk(
   }
 );
 
+const setSearchDataid = () => {
+
+}
 
 const DashboardSlice = createSlice({
   name: "DashboardSlice",
   initialState: {
-    firstDashData:[],
-    barData:[],
-    pieData:[],
+    firstDashData: [],
+    barData: [],
+    pieData: [],
     loading: false,
     success: false,
     message: "",
   },
   reducers: {
-    
+    setSearchDataId: (state, action) => {
+      state.searchDataId = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -167,5 +172,5 @@ const DashboardSlice = createSlice({
       })
   },
 });
-
+export const { setSearchDataId } = DashboardSlice.actions;
 export default DashboardSlice.reducer;
