@@ -142,9 +142,9 @@ const Review = () => {
                                             <td>{((currentPage - 1) * 10) + (ind + 1)}</td>
                                             <td>{ele?.audioBookData?.[0]?.name || '-'}</td>
                                             <td>{ele?.userData?.[0]?.firstName || '-'}</td>
-                                            <td>{ele.date}</td>
-                                            <td>{ele.review?.slice(0, 10)}</td>
-                                            <td>{ele.rating}</td>
+                                            <td>{ele.date || '-'}</td>
+                                            <td>{ele.review?.slice(0, 10) || '-'}...</td>
+                                            <td>{ele.rating || '-'}</td>
                                             <td>
                                                 <span className='ds_sub_eye ds_cursor me-2' onClick={() => {setViewModalShow(true);setSelectData(ele)}} >
                                                     <img src={eye} alt="" />
@@ -316,31 +316,31 @@ const Review = () => {
                                 <p className='V_label2 mb-0'>Audio Book ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{selectData?.audioBookId}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.audioBookData?.[0]?.name || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>User ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{selectData?.userId}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.userData?.[0]?.firstName || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Date</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{selectData?.date}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.date || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Review</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{selectData?.review}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.review || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Rating</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{selectData?.rating}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.rating || '-'}</span></p>
                             </div>
                         </div>
                     </Modal.Body>

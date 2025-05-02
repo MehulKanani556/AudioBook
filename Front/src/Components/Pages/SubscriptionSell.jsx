@@ -143,7 +143,7 @@ const SubscriptionSell = () => {
                                                <td>{element?.expiryDate || '-'}</td>
                                                <td>₹{element?.amount || '-'}</td>
                                                <td>{element?.paymentId || '-'}</td>
-                                               <td><span className={`${element?.status === "Active" ?  'ds_sub_active' : 'ds_sub_block'} `}>{element?.status || '-'}</span></td>
+                                               <td><span className={`${element?.status === "Active" ?  'ds_sub_active' : 'ds_sub_block'} `}>{element?.status}</span></td>
                                                <td className=''>
                                                    <span className='ds_sub_eye ds_cursor me-2' onClick={() => {setViewSubscriptionSell(true) ; setViewObject(element)}} >
                                                        <img src={eye} alt="" />

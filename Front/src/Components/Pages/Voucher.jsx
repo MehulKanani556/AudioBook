@@ -156,14 +156,14 @@ const Voucher = () => {
                                         return (
                                             <tr>
                                                 <td>{((currentPage - 1) * 10) + (ind + 1)}</td>
-                                                <td>{ele?.name}</td>
-                                                <td>{ele?.description?.slice(0, 10)}...</td>
-                                                <td>{ele?.code}</td>
-                                                <td>{ele?.discount}</td>
+                                                <td>{ele?.name || '-'}</td>
+                                                <td>{ele?.description?.slice(0, 10) || '-'}...</td>
+                                                <td>{ele?.code || '-'}</td>
+                                                <td>{ele?.discount || '-'}</td>
                                                 {/* <td>{ele?.coinMaster?.[0]?.name || ele.coinMasterId}</td> */}
-                                                <td>{ele?.subScriptionSell?.[0]?.name || ele.subScriptionSellId}</td>
-                                                <td>{ele?.validTill}</td>
-                                                <td>{ele?.forStudent}</td>
+                                                <td>{ele?.subScriptionSell?.[0]?.name || '-'}</td>
+                                                <td>{ele?.validTill || '-'}</td>
+                                                <td>{ele?.forStudent || '-'}</td>
                                                 <td>
                                                     <span className={ele.status === 'Active' ? 'ds_sub_active' : 'ds_sub_block'}>{ele?.status}</span>
                                                 </td>
@@ -225,25 +225,25 @@ const Voucher = () => {
                                 <p className='V_label2 mb-0'>Name</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{selectData?.name}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.name || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Description</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{selectData?.description}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.description || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Code</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{selectData?.code}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.code || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Discount</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>₹{selectData?.discount}</span></p>
+                                <p>: <span className='ms-2 V_label1'>₹{selectData?.discount || '-'}</span></p>
                             </div>
                             {/* <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Coin Master ID</p>
@@ -255,19 +255,19 @@ const Voucher = () => {
                                 <p className='V_label2 mb-0'>Subscription ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{selectData?.subScriptionSellId || '-'}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.subScriptionSell?.[0]?.name || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Valid till</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{selectData?.validTill}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.validTill || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>For Student</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{selectData?.forStudent}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.forStudent || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Status</p>

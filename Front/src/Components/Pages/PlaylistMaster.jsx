@@ -137,7 +137,7 @@ const PlaylistMaster = () => {
                                             <tr>
                                             <td>{((currentPage - 1) * 10) +( ind + 1 )}</td>
                                             <td>{ele.user?.[0]?.firstName || '-'}</td>
-                                            <td>{ele.name}</td>
+                                            <td>{ele.name || '-'}</td>
                                             {/* <td className=''>
                                                 <span className='ds_role_icon ds_cursor me-2' onClick={() => setEditPlaylistMasterModal(true)} >
                                                     <img src={pen} alt="" />

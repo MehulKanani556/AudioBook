@@ -215,7 +215,7 @@ const Role = () => {
                     return (
                       <tr>
                         <td>{((currentPage - 1) * 10) +( ind + 1 )}</td>
-                        <td className='text-capitalize'>{ele.roleName}</td>
+                        <td className='text-capitalize'>{ele.roleName || '-'}</td>
                         <td>
                           <span className='ds_role_icon ds_cursor me-2' onClick={() => {setEdit(true);getUpdateData(ele)}}>
                             <img src={pen} alt="" />
