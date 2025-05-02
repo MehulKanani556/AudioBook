@@ -101,7 +101,7 @@ const EditCoinMaster = () => {
                            <select type='text' name='labelID' value={coinMasterFormik.values.labelID}
                               onChange={coinMasterFormik.handleChange}
                               className="form-control ds_role_input" >
-                              <option>select Label</option>
+                              <option value='' disabled>select Label</option>
                               {labelData.map((ele, id) => {
                                  return (
                                     <option value={ele._id}>{ele.labelName}</option>

@@ -14,7 +14,7 @@
         rgba(255, 255, 255, 0.0447917) 77.08%, 
         rgba(255, 255, 255, 0) 100%);
     
-    border: 1px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.2)  ;
     border-radius: 5px; /* Adjust as needed */
     background-clip: padding-box;
     outline: none;

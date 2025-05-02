@@ -280,6 +280,16 @@ const AudioBook = () => {
           </Modal.Header>
           <Modal.Body>
             <div className="row py-md-3  px-md-5 text-capitalize">
+            <div className="col-6  pt-2 pt-sm-0">
+                <p className="V_label2 mb-0">Thumbnail File</p>
+              </div>
+              <div className="col-6 pt-2 pt-sm-0">
+                <p>
+                  :{" "}
+                  <img style={{width:"100px"}} src={"http://localhost:4000/" + viewBook?.sampleFile || '-'} alt="" />
+                  {/* <span className="ms-2 V_label1">{viewBook?.sampleFile.replace(/\\/g, "/")?.split("/")?.pop() || '-'}</span> */}
+                </p>
+              </div>
               <div className="col-6  pt-2 pt-sm-0">
                 <p className="V_label2 mb-0">Genre ID</p>
               </div>
@@ -296,16 +306,7 @@ const AudioBook = () => {
                   : <span className="ms-2 V_label1">{viewBook?.name || '-'}</span>
                 </p>
               </div>
-              <div className="col-6  pt-2 pt-sm-0">
-                <p className="V_label2 mb-0">Thumbnail File</p>
-              </div>
-              <div className="col-6 pt-2 pt-sm-0">
-                <p>
-                  :{" "}
-                  <img style={{width:"180px"}} src={"http://localhost:4000/" + viewBook?.sampleFile || '-'} alt="" />
-                  <span className="ms-2 V_label1">{viewBook?.sampleFile.replace(/\\/g, "/")?.split("/")?.pop() || '-'}</span>
-                </p>
-              </div>
+              
               <div className="col-6  pt-2 pt-sm-0">
                 <p className="V_label2 mb-0">Description</p>
               </div>

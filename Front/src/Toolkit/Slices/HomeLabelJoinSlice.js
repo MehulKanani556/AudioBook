@@ -19,6 +19,9 @@ export const allHomeLabelJoin = createAsyncThunk(
         var data = [];
         return data;
       }
+      else if(error.status === 409){
+        alert("Home Label Join already exists")
+      }
       console.error("LoginAdmin Error:", error.message);
       return rejectWithValue(
         error.response?.data || { message: "Unexpected error occurred" }
@@ -47,6 +50,9 @@ export const addHomeLabelJoin = createAsyncThunk(
       );
       return response.data.data;
     } catch (error) {
+      if(error.status === 409){
+        alert("Home Label Join already exists")
+      }
       console.error("LoginAdmin Error:", error.message);
       return rejectWithValue(
         error.response?.data || { message: "Unexpected error occurred" }

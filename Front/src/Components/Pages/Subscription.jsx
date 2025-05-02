@@ -783,43 +783,43 @@ const Subscription = () => {
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                 <div>
                   <p className="d-flex justify-content-between">
-                    <span className="ds_role_text">Name</span>
-                    <span className="ds_role_text">:</span>
+                    <h5 className="ds_role_text">Name</h5>
+                    <h5 className="ds_role_text">:</h5>
                   </p>
                 </div>
                 <div>
                   <p className="d-flex justify-content-between">
-                    <span className="ds_role_text">Discount</span>
-                    <span className="ds_role_text">:</span>
+                    <h5 className="ds_role_text">Discount</h5>
+                    <h5 className="ds_role_text">:</h5>
                   </p>
                 </div>
                 <div>
                   <p className="d-flex justify-content-between">
-                    <span className="ds_role_text">Scratch price</span>
-                    <span className="ds_role_text">:</span>
+                    <h5 className="ds_role_text">Scratch price</h5>
+                    <h5 className="ds_role_text">:</h5>
                   </p>
                 </div>
                 <div>
                   <p className="d-flex justify-content-between">
-                    <span className="ds_role_text">Price</span>
-                    <span className="ds_role_text">:</span>
+                    <h5 className="ds_role_text">Price</h5>
+                    <h5 className="ds_role_text">:</h5>
                   </p>
                 </div>
                 <div>
                   <p className="d-flex justify-content-between">
-                    <span className="ds_role_text">Status</span>
-                    <span className="ds_role_text">:</span>
+                    <h5 className="ds_role_text">Status</h5>
+                    <h5 className="ds_role_text">:</h5>
                   </p>
                 </div>
               </div>
 
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 p-0">
                 <div>
-                  <h6 className="mt-1">{singleSubData.name || '-'}</h6>
-                  <h6 className="mt-3 pt-1">{singleSubData?.dicount || '-'}%</h6>
-                  <h6 className="mt-3 pt-1">{"₹"+singleSubData?.scratchPrice || '-'}</h6>
-                  <h6 className="mt-3 pt-2">{"₹"+singleSubData?.price || '-'}</h6>
-                  <h6 className="mt-3 pt-1">{singleSubData?.status || '-'}</h6>
+                  <h5 className="mt-1">{singleSubData.name || '-'}</h5>
+                  <h5 className="mt-4 pt-0">{singleSubData?.dicount || '-'}%</h5>
+                  <h5 className="mt-3 pt-1">{"₹"+singleSubData?.scratchPrice || '-'}</h5>
+                  <h5 className="mt-3 pt-2">{"₹"+singleSubData?.price || '-'}</h5>
+                  <h5 className="mt-3 pt-2">{singleSubData?.status || '-'}</h5>
                 </div>
               </div>
             </div>

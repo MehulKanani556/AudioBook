@@ -76,7 +76,7 @@ const AddAudioBook = () => {
                       onChange={addAudioBookFormik.handleChange}
                       onBlur={addAudioBookFormik.handleBlur}
                     >
-                      <option value="">select audio book</option>
+                      <option value='' disabled>Select Gerne ID</option>
                       {genreSelect.map((ele) => {
                         return <option value={ele._id}>{ele.name}</option>;
                       })}

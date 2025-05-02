@@ -286,7 +286,7 @@ const HomeLabelJoin = () => {
                     onChange={addHomeLabelJoinFormik.handleChange}
                     onBlur={addHomeLabelJoinFormik.handleBlur}
                   >
-                    <option value="">select audio book</option>
+                    <option value='' disabled>Select Home Label</option>
                     {selectHomeLabel.map((ele) => {
                       return <option value={ele._id}>{ele.labelName}</option>;
                     })}
@@ -308,7 +308,7 @@ const HomeLabelJoin = () => {
                     onChange={addHomeLabelJoinFormik.handleChange}
                     onBlur={addHomeLabelJoinFormik.handleBlur}
                   >
-                    <option value="">select audio book</option>
+                    <option value='' disabled>Select Audio Book</option>
                     {selectAudioBook.map((ele) => {
                       return <option value={ele._id}>{ele.name}</option>;
                     })}

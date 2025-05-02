@@ -214,7 +214,7 @@ const CastCrew = () => {
 
                     <div className='V_review_bg mt-2'>
                         <div className='ds_user_master_scroll overflow-auto'>
-                            <table className='w-100 text-light V_review_table  text-nowrap '>
+                            <table className='w-100 text-light V_review_table  text-nowrap text-capitalize'>
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -293,7 +293,7 @@ const CastCrew = () => {
                                     <select type='text' name='audiBookId' value={crewValFormik.values.audiBookId}
                                         onChange={crewValFormik.handleChange}
                                         className="form-control ds_role_input" >
-                                        <option>Audio Book</option>
+                                        <option value='' disabled>Select Audio Book</option>
                                         {audioBookData.map((ele, id) => {
                                             return (
                                                 <option key={ele._id} value={ele._id}>{ele.name}</option>
@@ -326,7 +326,7 @@ const CastCrew = () => {
                                     <select type='text' name='roleId' value={crewValFormik.values.roleId}
                                         onChange={crewValFormik.handleChange}
                                         className="form-control ds_role_input" >
-                                        <option>Role ID</option>
+                                        <option value='' disabled>Select Role ID</option>
                                         {roleData?.map((ele, id) => {
                                             return (
                                                 <option key={ele._id} value={ele._id}>{ele?.roleName}</option>
@@ -510,7 +510,7 @@ const CastCrew = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="row  justify-content-center  py-md-3  px-lg-5 ">
+                        <div className="row  justify-content-center  py-md-3  px-lg-5 text-capitalize">
                             <div className="col-12 col-sm-3  align-self-center text-center pt-2 pt-md-3">
                                 <img src={`http://localhost:4000/${selectData?.crewImage}`} alt="" className='V_castCrew_image' />
                             </div>

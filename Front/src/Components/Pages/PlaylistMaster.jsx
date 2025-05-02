@@ -122,7 +122,7 @@ const PlaylistMaster = () => {
 
                     <div className='V_review_bg mt-2'>
                         <div className='ds_user_master_scroll overflow-auto'>
-                            <table className='w-100 text-light V_review_table  text-nowrap '>
+                            <table className='w-100 text-light V_review_table  text-nowrap text-capitalize'>
                                 <thead>
                                     <tr>
                                         <th>No</th>

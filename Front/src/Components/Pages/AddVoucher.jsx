@@ -106,7 +106,7 @@ function AddVoucher() {
                                         <select type='text' name='subscriptionId' value={voucherFormik.values.subscriptionId}
                                             onChange={voucherFormik.handleChange}
                                             className="form-control ds_role_input" >
-                                            <option>Subscription ID</option>
+                                            <option value='' disabled> Select Subscription ID</option>
                                             {subscriptionData.map((ele, id) => {
                                                 return (
                                                     <option key={ele._id} value={ele._id}>{ele.name}</option>

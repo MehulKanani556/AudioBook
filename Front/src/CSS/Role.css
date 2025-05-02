@@ -57,11 +57,12 @@
     font-size: 13px;
     width: 32px;
     height: 32px;
-    background: #949090;
+    background: white !important;
     color: black;
     font-weight: 600;
     padding-top: 6px;
     margin: 0 5px;
+    border-radius: 4px;
 }
 
 .V_pagination.disabled {

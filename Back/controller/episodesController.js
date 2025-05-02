@@ -5,7 +5,7 @@ exports.createEpisodes = async (req, res) => {
     try {
         let { audioBookId, name, audioFile, premium, coinRequired, duration } = req.body
 
-        let checkEpisodes = await episodes.findOne({ audioBookId })
+        let checkEpisodes = await episodes.findOne({ name })
 
         if (checkEpisodes) {
             return res.status(409).json({ status: 409, success: false, message: "Episodes already exists" })
