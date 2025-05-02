@@ -164,7 +164,7 @@ const HomeLabels = () => {
                                         return(
                                             <tr key={element?._id}>
                                                <td>{((currentPage - 1) * 10) +( index + 1 )}</td>
-                                               <td>{element?.labelName}</td>
+                                               <td>{element?.labelName || '-'}</td>
                                                <td className=''>
                                                <span className='ds_role_icon ds_cursor me-2' onClick={() => {setEditHomeLabelsModal(true); setEditObj(element)}} >
                                                        <img src={pen} alt="" />

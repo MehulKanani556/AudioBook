@@ -237,9 +237,7 @@ const Episodes = () => {
                                         return(
                                             <tr key={element?._id}>
                                                <td>{((currentPage - 1) * 10) +( index + 1 )}</td>
-                                               <td>{element?.name}</td>
-                                               <td>{element?.audioBookData[0]?.name}</td>
-                                               <td>{element?.premium}</td>
+                                               <td>{element?.name || '-'}</td>
                                                <td>{element?.audioBookData[0]?.name || '-'}</td>
                                                <td>{element?.premium || '-'}</td>
                                                {/* <td>{element?.coinRequired}</td> */}

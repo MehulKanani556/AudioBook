@@ -138,12 +138,12 @@ const SubscriptionSell = () => {
                                          return(
                                             <tr key={element._id}>
                                                <td>{((currentPage - 1) * 10) +( index + 1 )}</td>
-                                               <td>{element?.subscriptionData[0]?.name}</td>
+                                               <td>{element?.subscriptionData[0]?.name || '-'}</td>
                                                <td>{element?.userData[0]?.firstName || '-'}</td>
-                                               <td>{element?.expiryDate}</td>
-                                               <td>₹{element?.amount}</td>
-                                               <td>{element?.paymentId}</td>
-                                               <td><span className={`${element?.status === "Active" ?  'ds_sub_active' : 'ds_sub_block'} `}>{element?.status}</span></td>
+                                               <td>{element?.expiryDate || '-'}</td>
+                                               <td>₹{element?.amount || '-'}</td>
+                                               <td>{element?.paymentId || '-'}</td>
+                                               <td><span className={`${element?.status === "Active" ?  'ds_sub_active' : 'ds_sub_block'} `}>{element?.status || '-'}</span></td>
                                                <td className=''>
                                                    <span className='ds_sub_eye ds_cursor me-2' onClick={() => {setViewSubscriptionSell(true) ; setViewObject(element)}} >
                                                        <img src={eye} alt="" />
@@ -233,25 +233,25 @@ const SubscriptionSell = () => {
                                 <p className='V_label2 mb-0'>Expiry Date</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{viewObject?.expiryDate}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{viewObject?.expiryDate || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Amount</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>₹{viewObject?.amount}</span></p>
+                                <p>: <span className='ms-2 V_label1'>₹{viewObject?.amount || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Payment ID</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{viewObject?.paymentId}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{viewObject?.paymentId || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Status</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>{viewObject?.status}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{viewObject?.status || '-'}</span></p>
                             </div>
                         </div>
                     </Modal.Body>

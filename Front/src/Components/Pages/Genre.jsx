@@ -214,7 +214,7 @@ const Genre = () => {
                                                <td>
                                                    <img src={`http://localhost:4000/${element?.generImage}`} alt="" className='V_home_corousel_image' />
                                                </td>
-                                               <td>{element?.name}</td>
+                                               <td>{element?.name || '-'}</td>
                                                <td className=''>
                                                    <span className='ds_role_icon ds_cursor me-2' onClick={() =>{ setEditGenre(true) ; setEditObj(element)}} >
                                                        <img src={pen} alt="" />

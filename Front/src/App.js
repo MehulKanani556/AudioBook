@@ -48,8 +48,8 @@ const ProtectedRoute = ({ children }) => {
 const App = () => {
   return (
     <Routes>
-
-      <Route path="/" element={<Login />} />
+      
+      <Route path="/" element={<Login/>} />
       <Route path="/admin" element={
         <ProtectedRoute>
           <Layout />
