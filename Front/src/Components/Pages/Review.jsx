@@ -309,7 +309,7 @@ const Review = () => {
                                 <div>
                                     Review Details
                                 </div>
-                                <div className='ms-auto' onClick={() => setViewModalShow(false)}>
+                                <div className='ms-auto ds_cursor' onClick={() => setViewModalShow(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>

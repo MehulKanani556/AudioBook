@@ -265,7 +265,7 @@ const HomeLabelJoin = () => {
               <div className="d-flex justify-content-between ">
                 <div>Add Home Label Join</div>
                 <div
-                  className="ms-auto"
+                  className="ms-auto ds_cursor"
                   onClick={() => setAddHomeLabelJoinModal(false)}
                 >
                   <img src={Close} alt="" />
@@ -346,7 +346,7 @@ const HomeLabelJoin = () => {
           onHide={() => setEditHomeLabelJoinModal(false)}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
-          className="text-white V_modal_width"
+          className="text-white V_modal_width ds_cursor"
           centered
         >
           <Modal.Header className="V_modal_header">

@@ -57,6 +57,7 @@ const HomeCorousel = () => {
           dispatch(getAllHomeCarouselData());
           resetForm();
           setFileName("No file chosen");
+          setUpdateHC(null);
         });
         setEditHomeLabelCorousel(false);
       }
@@ -270,7 +271,7 @@ const HomeCorousel = () => {
               <div className="d-flex justify-content-between ">
                 <div>Add Home Corousel</div>
                 <div
-                  className="ms-auto"
+                  className="ms-auto ds_cursor"
                   onClick={() => setAddHomeLabelCorouselModal(false)}
                 >
                   <img src={Close} alt="" />
@@ -348,7 +349,7 @@ const HomeCorousel = () => {
             <div className="d-flex justify-content-between ">
               <div>Edit Home Corousel</div>
               <div
-                className="ms-auto"
+                className="ms-auto ds_cursor"
                 onClick={() => setEditHomeLabelCorousel(false)}
               >
                 <img src={Close} alt="" />

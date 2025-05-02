@@ -235,7 +235,7 @@ const HomeLabels = () => {
                                 <div>
                                     Edit Home Labels
                                 </div>
-                                <div className='ms-auto' onClick={() => setEditHomeLabelsModal(false)}>
+                                <div className='ms-auto ds_cursor' onClick={() => setEditHomeLabelsModal(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>

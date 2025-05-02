@@ -270,7 +270,7 @@ const AudioBook = () => {
               <div className="d-flex justify-content-between ">
                 <div>Audio Book Details</div>
                 <div
-                  className="ms-auto"
+                  className="ms-auto ds_cursor"
                   onClick={() => setViewAudioBook(false)}
                 >
                   <img src={Close} alt="" />

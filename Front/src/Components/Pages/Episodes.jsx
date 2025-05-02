@@ -375,7 +375,7 @@ const Episodes = () => {
                                 <div>
                                     Edit Episodes
                                 </div>
-                                <div className='ms-auto' onClick={() => setEditEpisodes(false)}>
+                                <div className='ms-auto ds_cursor' onClick={() => setEditEpisodes(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>

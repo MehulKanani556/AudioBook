@@ -213,7 +213,7 @@ const Voucher = () => {
                                 <div>
                                     Vouchers Details
                                 </div>
-                                <div className='ms-auto' onClick={() => setViewVouchers(false)}>
+                                <div className='ms-auto ds_cursor' onClick={() => setViewVouchers(false)}>
                                     <img src={Close} alt="" />
                                 </div>
                             </div>
