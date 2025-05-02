@@ -198,21 +198,21 @@ const UserMaster = () => {
                               alt=""
                             />
                           </td>
-                          <td>{e.email}</td>
-                          <td>{e.mobileNo}</td>
+                          <td>{e.email || '-'}</td>
+                          <td>{e.mobileNo || '-'}</td>
                           {/* <td>-</td> */}
-                          <td>{e.roleData?.[0]?.roleName}</td>
-                          <td>{e.bio}</td>
-                          <td>{e.age}</td>
-                          <td>{e.occupation}</td>
+                          <td>{e.roleData?.[0]?.roleName || '-'}</td>
+                          <td>{e.bio || '-'}</td>
+                          <td>{e.age || '-'}</td>
+                          <td>{e.occupation || '-'}</td>
                           <td>
                             <span className="ds_user_master_pending">
-                              {e.studentVerificationStatus}
+                              {e.studentVerificationStatus || '-'}
                             </span>
                           </td>
-                          <td>{e.studentIdImage}</td>
-                          <td>{e.coins}</td>
-                          <td>{e.language}</td>
+                          <td>{e.studentIdImage || '-'}</td>
+                          <td>{e.coins || '-'}</td>
+                          <td>{e.language || '-'}</td>
                           <td>
                             <span className="ds_sub_active">{e.status}</span>
                           </td>
@@ -355,7 +355,7 @@ const UserMaster = () => {
                           className="text-light mb-3 ds_coin_master_text"
                           style={{ fontWeight: "400" }}
                         >
-                          {ele.email}
+                          {ele.email || '-'}
                         </h5>
                       </div>
                     </div>
@@ -378,7 +378,7 @@ const UserMaster = () => {
                           className="text-light mb-3 ds_coin_master_text"
                           style={{ fontWeight: "400" }}
                         >
-                          {ele.mobileNo}
+                          {ele.mobileNo || '-'}
                         </h5>
                       </div>
                     </div>
@@ -424,7 +424,7 @@ const UserMaster = () => {
                           className="text-light mb-3 ds_coin_master_text"
                           style={{ fontWeight: "400" }}
                         >
-                          {ele.roleId}
+                          {ele.roleData?.[0]?.roleName || '-'}
                         </h5>
                       </div>
                     </div>
@@ -447,7 +447,7 @@ const UserMaster = () => {
                           className="text-light mb-3 ds_coin_master_text"
                           style={{ fontWeight: "400" }}
                         >
-                          {ele.bio}
+                          {ele.bio || '-'}
                         </h5>
                       </div>
                     </div>
@@ -470,7 +470,7 @@ const UserMaster = () => {
                           className="text-light mb-3 ds_coin_master_text"
                           style={{ fontWeight: "400" }}
                         >
-                          {ele.age}
+                          {ele.age || '-'}
                         </h5>
                       </div>
                     </div>
@@ -493,7 +493,7 @@ const UserMaster = () => {
                           className="text-light mb-3 ds_coin_master_text"
                           style={{ fontWeight: "400" }}
                         >
-                          {ele.occupation}
+                          {ele.occupation || '-'}
                         </h5>
                       </div>
                     </div>
@@ -519,7 +519,7 @@ const UserMaster = () => {
                           className="text-light mb-3 ds_coin_master_text"
                           style={{ fontWeight: "400" }}
                         >
-                          {ele.studentVerificationStatus}
+                          {ele.studentVerificationStatus || '-'}
                         </h5>
                       </div>
                     </div>
@@ -545,7 +545,7 @@ const UserMaster = () => {
                           className="text-light mb-3 ds_coin_master_text"
                           style={{ fontWeight: "400" }}
                         >
-                          {ele.studentIdImage}
+                          {ele.studentIdImage || '-'}
                         </h5>
                       </div>
                     </div>
@@ -568,7 +568,7 @@ const UserMaster = () => {
                           className="text-light mb-3 ds_coin_master_text"
                           style={{ fontWeight: "400" }}
                         >
-                          {ele.coins}
+                          {ele.coins || '-'}
                         </h5>
                       </div>
                     </div>
@@ -591,7 +591,7 @@ const UserMaster = () => {
                           className="text-light mb-3 ds_coin_master_text"
                           style={{ fontWeight: "400" }}
                         >
-                          {ele.language}
+                          {ele.language || '-'}
                         </h5>
                       </div>
                     </div>
