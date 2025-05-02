@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import React, { use, useEffect, useRef, useState } from "react";
 import "../CSS/Header.css";
 import search from "../Images/dhruvin/search.svg";
 import bell from "../Images/dhruvin/bell.svg";
@@ -16,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { changePassSchema } from "./Formik";
 import { changePassAdmin, getSingleAdmin } from "../Toolkit/Slices/EditProfileSlice";
-import { changePassAdmin } from "../Toolkit/Slices/EditProfileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Close from "../Images/Parth/close_button.png"
@@ -53,8 +51,8 @@ const Header = ({ setOffToggle }) => {
   }, []);
 
   const admin = getAdminData?.[0]
-  console.log("new created" ,admin);
-  
+  console.log("new created", admin);
+
 
   useEffect(() => {
     dispatch(getReview());
@@ -96,6 +94,49 @@ const Header = ({ setOffToggle }) => {
     }
   }
 
+  const handleSearchNav = (item, key) => {
+    setsearchModal(false);
+    if (key === 'audio_books') {
+      navigate('/admin/audiobooks')
+    }
+    else if (key === 'roles') {
+      navigate('/admin/role')
+    }
+    else if (key === 'subscriptions') {
+      navigate('/admin/subscription')
+    }
+    else if (key === 'users') {
+      navigate('/admin/usermaster')
+    }
+    else if (key === 'vouchers') {
+      navigate('/admin/voucher')
+    } 
+    else if (key === 'genres') {
+      navigate('/admin/genre')
+    } 
+    else if (key === 'cast') {
+      navigate('/admin/castcrew')
+    } 
+    else if (key === 'reviews') {
+      navigate('/admin/review')
+    } 
+    else if (key === 'episodes') {
+      navigate('/admin/episodes')
+    }
+    else if (key === 'playlists') {
+      navigate('/admin/playlistmaster')
+    } 
+    else if (key === 'home_Labels') {
+      navigate('/admin/homelabels')
+    }
+
+    setTimeout(() => {
+      setselectData({ ...item, key });
+      setViewModal(true);
+
+    }, 500)
+
+  }
 
   // for chnaging date format
   const formatDate = (isoDate) => {
@@ -146,8 +187,7 @@ const Header = ({ setOffToggle }) => {
                                 key={idx}
                                 className=""
                                 onClick={() => {
-                                  setViewModal(true);
-                                  setselectData({ ...item, key });
+                                  handleSearchNav(item, key)
                                 }}
                               >
                                 {key === "roles"
@@ -156,7 +196,7 @@ const Header = ({ setOffToggle }) => {
                                     ? item?.firstName
                                     : key === "reviews"
                                       ? item?.review
-                                      : key === "homeLabels"
+                                      : key === "home_Labels"
                                         ? item?.labelName
                                         : item?.name}
                               </li>
@@ -183,7 +223,7 @@ const Header = ({ setOffToggle }) => {
               />
             </div>
             <div className="ds_noti_bell">
-                {admin?.image ? <img src={`http://localhost:4000/${admin?.image}`} alt="" className="ds_profile_img_main ds_cursor" onClick={() => {  setProfileToggle(!profileToggle);   setToggle(false); }}/> : <img src={profile} alt="" className="ds_profile_img ds_cursor" onClick={() => {  setProfileToggle(!profileToggle);   setToggle(false); }}/>}
+              {admin?.image ? <img src={`http://localhost:4000/${admin?.image}`} alt="" className="ds_profile_img_main ds_cursor" onClick={() => { setProfileToggle(!profileToggle); setToggle(false); }} /> : <img src={profile} alt="" className="ds_profile_img ds_cursor" onClick={() => { setProfileToggle(!profileToggle); setToggle(false); }} />}
             </div>
             <div className="d-md-none d-block">
               <i
@@ -234,8 +274,6 @@ const Header = ({ setOffToggle }) => {
                     </div>
                   }
                 </div>
-
-
               </div>
             )}
 
@@ -453,7 +491,7 @@ const Header = ({ setOffToggle }) => {
               <Modal.Title id="contained-modal-title-vcenter" className='px-md-5 w-100' >
                 <div className="d-flex justify-content-between ">
                   <div>
-                    {selectData?.key} Details
+                    {selectData?.key?.replace(/_/g, ' ')} Details
                   </div>
                   <div className='ms-auto ds_cursor' onClick={() => setViewModal(false)}>
                     <img src={Close} alt="" />

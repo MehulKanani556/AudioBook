@@ -180,18 +180,17 @@ exports.globalSearch = async (req, res) => {
             as: "genre"
           }
         },
-        { $project: {  } } // Only return needed fields
       ]).option(aggregationOptions),
   
       // Roles - simplified query with limit
       role.find({ roleName: { $regex: sanitizedQuery, $options: 'i' } })
         .limit(10)
-        .select('roleName permissions'),
+        .select(''),
   
       // Subscriptions - simplified query with limit
       subscriptions.find({ name: { $regex: sanitizedQuery, $options: 'i' } })
         .limit(10)
-        .select('name price duration'),
+        .select(''),
   
       // Users with roles - limit and project only needed fields
       user.aggregate([
@@ -229,7 +228,7 @@ exports.globalSearch = async (req, res) => {
       // Genres - simple query with limit
       genre.find({ name: { $regex: sanitizedQuery, $options: 'i' } })
         .limit(10)
-        .select('name description'),
+        .select(),
   
       // Cast / Crew - limit and project needed fields
       cast.aggregate([
@@ -289,7 +288,7 @@ exports.globalSearch = async (req, res) => {
         { $match: { name: { $regex: sanitizedQuery, $options: 'i' } } },
         { $limit: 10 },
         { $lookup: {
-            from: "users",
+            from: "user",
             localField: "userId",
             foreignField: "_id",
             as: "user"
@@ -300,7 +299,7 @@ exports.globalSearch = async (req, res) => {
       // Home Labels - simple query with limit
       homeLabel.find({ labelName: { $regex: sanitizedQuery, $options: 'i' } })
         .limit(10)
-        .select('labelName displayOrder'),
+        .select(),
     ];
   
     const results = await Promise.allSettled(resultsPromises);
@@ -322,7 +321,7 @@ exports.globalSearch = async (req, res) => {
     
     // Format and structure the response
     const formattedResults = {
-      audiobooks: audiobookResult.status === 'fulfilled' ? audiobookResult.value : [],
+      audio_books: audiobookResult.status === 'fulfilled' ? audiobookResult.value : [],
       roles: roleResult.status === 'fulfilled' ? roleResult.value : [],
       subscriptions: subscriptionsResult.status === 'fulfilled' ? subscriptionsResult.value : [],
       users: userResult.status === 'fulfilled' ? userResult.value : [],
@@ -332,7 +331,7 @@ exports.globalSearch = async (req, res) => {
       reviews: reviewResult.status === 'fulfilled' ? reviewResult.value : [],
       episodes: episodesResult.status === 'fulfilled' ? episodesResult.value : [],
       playlists: playlistResult.status === 'fulfilled' ? playlistResult.value : [],
-      homeLabels: homeLabelResult.status === 'fulfilled' ? homeLabelResult.value : [],
+      home_Labels: homeLabelResult.status === 'fulfilled' ? homeLabelResult.value : [],
     };
     
     // Optional: Count total results

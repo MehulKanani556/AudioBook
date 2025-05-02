@@ -234,7 +234,7 @@ const CastCrew = () => {
                                                     <img src={`http://localhost:4000/${ele?.crewImage}`} alt={ele._id} className='V_home_corousel_image' />
                                                 </td>
                                                 <td>{ele?.audiBookData?.[0]?.name || '-'}</td>
-                                                <td>{ele?.name}</td>
+                                                <td>{ele?.name || '-'}</td>
                                                 <td>{ele?.roleData?.[0]?.roleName || '-'}</td>
                                                 <td className=''>
                                                     <span className='ds_sub_eye ds_cursor me-2' onClick={() => {setViewCastCrew(true);setSelectData(ele)}} >
@@ -527,7 +527,7 @@ const CastCrew = () => {
                                         <p className='V_label2 mb-0'>Name</p>
                                     </div>
                                     <div className="col-7 col-md-6 pt-2 pt-sm-0">
-                                        <p>: <span className='ms-2 V_label1'>{selectData?.name}</span></p>
+                                        <p>: <span className='ms-2 V_label1'>{selectData?.name || '-'}</span></p>
                                     </div>
                                     <div className="col-5 col-md-6  pt-2 pt-sm-0">
                                         <p className='V_label2 mb-0'>Role</p>
