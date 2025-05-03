@@ -193,7 +193,7 @@ const Role = () => {
           <div className='d-flex justify-content-between align-items-center'>
             <div>
               <h4 className="text-light pt-4 mb-0">Role</h4>
-              <p><Link to="/layout/dashboard" onClick={() => { setLocal(true) }} className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Role</span></p>
+              <p><Link to="/admin/dashboard" onClick={() => { setLocal(true) }} className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Role</span></p>
             </div>
             <div>
               <button className='ds_role_btn' onClick={() => setAdd(true)}><i className="fa-solid fa-plus me-2"></i> Add</button>

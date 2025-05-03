@@ -126,7 +126,7 @@ const Voucher = () => {
                     <div className='d-flex justify-content-between align-items-center'>
                         <div>
                             <h4 className="text-light pt-4 mb-0">Vouchers</h4>
-                            <p><Link to="/layout/dashboard" className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Vouchers</span></p>
+                            <p><Link to="/admin/dashboard" className='ds_head_txt ds_role_link text-decoration-none'>Dashboard /</Link> <span className='text-light'>Vouchers</span></p>
                         </div>
                         <div>
                             <button className='V_review_btn' onClick={() => navigate('/admin/addVouchers')} ><i className="fa-solid fa-plus me-2"></i> Add</button>

@@ -220,7 +220,7 @@ const Subscription = () => {
               <h4 className="text-light pt-4 mb-0">Subscription</h4>
               <p>
                 <Link
-                  to="/layout/dashboard"
+                  to="/admin/dashboard"
                   className="ds_head_txt ds_role_link text-decoration-none"
                 >
                   Dashboard /
