@@ -168,6 +168,7 @@ const UserMaster = () => {
                     <th>No.</th>
                     <th>Image</th>
                     <th>Email</th>
+                    <th>Name</th>
                     <th>Phone</th>
                     {/* <th>Password </th> */}
                     <th>Role ID</th>
@@ -199,6 +200,7 @@ const UserMaster = () => {
                             />
                           </td>
                           <td className="text-lowercase">{e.email || '-'}</td>
+                          <td>{e.firstName || '-'}</td>
                           <td>{e.mobileNo || '-'}</td>
                           {/* <td>-</td> */}
                           <td>{e.roleData?.[0]?.roleName || '-'}</td>
@@ -366,6 +368,29 @@ const UserMaster = () => {
                             className="ds_role_text ds_coin_master_text"
                             style={{ fontWeight: "300" }}
                           >
+                            Name
+                          </h5>
+                          <h5 className="ds_role_text ds_coin_master_text">
+                            :
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-5 col-md-5 col-sm-5 col-5 text-lowercase">
+                        <h5
+                          className="text-light mb-3 ds_coin_master_text"
+                          style={{ fontWeight: "400" }}
+                        >
+                          {ele.firstName || '-'}
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5
+                            className="ds_role_text ds_coin_master_text"
+                            style={{ fontWeight: "300" }}
+                          >
                             Phone
                           </h5>
                           <h5 className="ds_role_text ds_coin_master_text">
@@ -382,7 +407,7 @@ const UserMaster = () => {
                         </h5>
                       </div>
                     </div>
-                    <div className="row">
+                    {/* <div className="row">
                       <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
                         <div className="d-flex justify-content-between mb-2">
                           <h5
@@ -404,7 +429,7 @@ const UserMaster = () => {
                           Coin Name
                         </h5>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="row">
                       <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
                         <div className="d-flex justify-content-between mb-2">
@@ -507,7 +532,7 @@ const UserMaster = () => {
                               wordBreak: "break-word",
                             }}
                           >
-                            Student_verification_status
+                            Student verification status
                           </h5>
                           <h5 className="ds_role_text ds_coin_master_text">
                             :
@@ -533,7 +558,7 @@ const UserMaster = () => {
                               wordBreak: "break-word",
                             }}
                           >
-                            Student_ID_image
+                            Student ID image
                           </h5>
                           <h5 className="ds_role_text ds_coin_master_text">
                             :
@@ -549,7 +574,7 @@ const UserMaster = () => {
                         </h5>
                       </div>
                     </div>
-                    <div className="row">
+                    {/* <div className="row">
                       <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
                         <div className="d-flex justify-content-between mb-2">
                           <h5
@@ -571,7 +596,7 @@ const UserMaster = () => {
                           {ele.coins || '-'}
                         </h5>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="row">
                       <div className="col-xl-6 col-lg-7 col-md-7 col-sm-7 col-7">
                         <div className="d-flex justify-content-between mb-2">
