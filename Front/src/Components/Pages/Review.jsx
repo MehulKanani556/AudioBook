@@ -318,13 +318,13 @@ const Review = () => {
                     <Modal.Body>
                         <div className="row py-md-3  px-md-5 text-capitalize">
                             <div className="col-6  pt-2 pt-sm-0">
-                                <p className='V_label2 mb-0'>Audio Book ID</p>
+                                <p className='V_label2 mb-0'>Audio Book </p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>{selectData?.audioBookData?.[0]?.name || '-'}</span></p>
                             </div>
                             <div className="col-6  pt-2 pt-sm-0">
-                                <p className='V_label2 mb-0'>User ID</p>
+                                <p className='V_label2 mb-0'>User </p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>{selectData?.userData?.[0]?.firstName || '-'}</span></p>

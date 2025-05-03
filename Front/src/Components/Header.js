@@ -152,7 +152,7 @@ const Header = ({ setOffToggle }) => {
   };
   return (
     <div>
-      <div className="ds_header_img">
+      <div className="ds_header_img position-relative">
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-md-none d-block">
             <h3 className="text-light text-center pt-3 ms-sm-4 ms-2 ds_head_logo">
@@ -160,53 +160,56 @@ const Header = ({ setOffToggle }) => {
             </h3>
           </div>
           <div>
-            <div className="position-relative ms-sm-3 ms-1">
-              <input
-                type="text"
-                className="ds_header_input"
-                placeholder="Search.."
-                onChange={(e) => {
-                  handleSearch(e.target.value);
-                }}
-              />
-              <div className="ds_search">
-                <img src={search} alt="" />
+            <div className="sp_search_input">
+              <div className="position-relative  ms-sm-3 ms-1">
+                <input
+                  type="text"
+                  className="ds_header_input"
+                  placeholder="Search.."
+                  onChange={(e) => {
+                    handleSearch(e.target.value);
+                  }}
+                />
+                <div className="ds_search">
+                  <img src={search} alt="" />
+                </div>
               </div>
               {searchModal && (
-                <div className="sp_search_box">
-                  {Object.values(searchData).every((val) => val.length === 0) ? (
-                    <p className="text-center text-muted py-5 ">Data not found</p>
-                  ) : (
-                    Object.entries(searchData).map(([key, value]) =>
-                      value.length > 0 && (
-                        <div key={key} className="mb-3">
-                          <h5 className="p-3">{key}</h5>
-                          <ul className="list-unstyled">
-                            {value.map((item, idx) => (
-                              <li
-                                key={idx}
-                                className=""
-                                onClick={() => {
-                                  handleSearchNav(item, key)
-                                }}
-                              >
-                                {key === "roles"
-                                  ? item?.roleName
-                                  : key === "reviews"
-                                    ? item?.review
-                                    : key === "home_Labels"
-                                      ? item?.labelName
-                                      : item?.name}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                  <div className="sp_search_box">
+                    {Object.values(searchData).every((val) => val.length === 0) ? (
+                      <p className="text-center text-muted py-5 ">Data not found</p>
+                    ) : (
+                      Object.entries(searchData).map(([key, value]) =>
+                        value.length > 0 && (
+                          <div key={key} className="mb-3">
+                            <h5 className="p-3">{key}</h5>
+                            <ul className="list-unstyled">
+                              {value.map((item, idx) => (
+                                <li
+                                  key={idx}
+                                  className=""
+                                  onClick={() => {
+                                    handleSearchNav(item, key)
+                                  }}
+                                >
+                                  {key === "roles"
+                                    ? item?.roleName
+                                    : key === "reviews"
+                                      ? item?.review
+                                      : key === "home_Labels"
+                                        ? item?.labelName
+                                        : item?.name}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )
                       )
-                    )
-                  )}
-                </div>
-              )}
+                    )}
+                  </div>
+                )}
             </div>
+
           </div>
           <div className="d-flex align-items-center mt-2 position-relative">
             <div className="ds_noti_bell">
@@ -498,53 +501,54 @@ const Header = ({ setOffToggle }) => {
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <div className="d-flex  px-md-5 text-capitalize">
-              {selectData && (
-                Object.entries(selectData).map(([key, value]) => (
-                  (key === 'image') && (
-                    <div className="">
-                      <img src={`http://localhost:4000/${String(value)}`} alt={value} className='ms-2' style={{ width: '100px' }} />
-                    </div>
-                  ))
-                )
-              )}
-              <div className="ps-4 w-100">
+              <div className="d-lg-flex  px-md-3 text-capitalize">
                 {selectData && (
                   Object.entries(selectData).map(([key, value]) => (
-                    (key !== '_id' && key !== 'createdAt' && key !== 'updatedAt' && key !== 'key' && key !== 'image') && (
-                      <div className="row " key={key}>
-                        <div className="col-6 pt-2 pt-sm-0">
-                          <p className='V_label2 mb-0'>{key?.replace(/_/g, ' ')}</p>
-                        </div>
-                        <div className="col-6 pt-2 pt-sm-0">
-                          <p>:
-                            {(key === 'user') ? (
-                              <span className='ms-2 V_label1 text-break'>
-                                {console.log(value)}
-                                {value?.[0]?.firstName || '-'}
-                              </span>
-                            ) : Array.isArray(value) ? (
-                              value.map((item, idx) => (
-                                <span key={idx} className='ms-2 V_label1 text-break'>
-                                  {key === 'role' ? item?.roleName : item?.name || String(item)}
-                                  {idx < value.length - 1 && ', '}
-                                </span>
-                              ))
-                            ) : (typeof value === 'object' && value !== null) ? (
-                              <span className='ms-2 V_label1 text-break'>
-                                {key === 'roleData' ? value?.roleName : value?.name || JSON.stringify(value)}
-                              </span>
-                            ) : (
-                              <span className='ms-2 V_label1 text-break'>
-                                {(key === 'price' || key === 'amount' || key === 'scratchPrice') ? `₹${String(value)}` : key === 'dicount' ? String(value) + '%' : String(value)}
-                              </span>
-                            )}
-                          </p>
-                        </div>
+                    (key === 'image' || key === 'generImage') && (
+                      <div className="p-4 p-lg-0 d-lg-block d-flex justify-content-center">
+                        <img src={`http://localhost:4000/${String(value)}`} alt={value} className='ms-2 mx-auto' style={{ width: '100px' }} />
                       </div>
-                    )
-                  ))
+                    ))
+                   
+                  )
                 )}
+                <div className="ps-4 w-100">
+                  {selectData && (
+                    Object.entries(selectData).map(([key, value]) => (
+                      (key !== '_id' && key !== 'createdAt' && key !== 'updatedAt' && key !== 'key' && key !== 'image' && key!=='generImage') && (
+                        <div className="row " key={key}>
+                          <div className="col-6 pt-2 pt-sm-0">
+                            <p className='V_label2 mb-0'>{key?.replace(/_/g, ' ')}</p>
+                          </div>
+                          <div className="col-6 pt-2 pt-sm-0">
+                            <p>:
+                              {(key === 'user') ? (
+                                <span className='ms-2 V_label1 text-break'>
+                                  {console.log(value)}
+                                  {value?.[0]?.firstName || '-'}
+                                </span>
+                              ) : Array.isArray(value) ? (
+                                value.map((item, idx) => (
+                                  <span key={idx} className='ms-2 V_label1 text-break'>
+                                    {key === 'role' ? item?.roleName : item?.name || String(item)}
+                                    {idx < value.length - 1 && ', '}
+                                  </span>
+                                ))
+                              ) : (typeof value === 'object' && value !== null) ? (
+                                <span className='ms-2 V_label1 text-break'>
+                                  {key === 'roleData' ? value?.roleName : value?.name || JSON.stringify(value)}
+                                </span>
+                              ) : (
+                                <span className='ms-2 V_label1 text-break'>
+                                  {(key === 'price' || key === 'amount' || key === 'scratchPrice') ? `₹${String(value)}` : key === 'dicount' ? String(value) + '%' : String(value)}
+                                </span>
+                              )}
+                            </p>
+                          </div>
+                        </div>
+                      )
+                    ))
+                  )}
                 </div>
               </div>
             </Modal.Body>

@@ -437,7 +437,7 @@ const UserMaster = () => {
                             className="ds_role_text ds_coin_master_text"
                             style={{ fontWeight: "300" }}
                           >
-                            Role ID{" "}
+                            Role{" "}
                           </h5>
                           <h5 className="ds_role_text ds_coin_master_text">
                             :
