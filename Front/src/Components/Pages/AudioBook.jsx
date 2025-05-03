@@ -173,14 +173,16 @@ const AudioBook = () => {
                         <td>{ele.name || "-"}</td>
                         <td>
                           <img
-                            src={"http://localhost:4000/" + ele?.sampleFile || '-'}
+                            src={
+                              "http://localhost:4000/" + ele?.sampleFile || "-"
+                            }
                             className="ds_user_master_img"
                             alt=""
                           />
                         </td>
-                        <td>{ele.description.slice(0, 10) || '-'}</td>
-                        <td>{ele.tags || '-'}</td>
-                        <td>{ele.language || '-'}</td>
+                        <td>{ele.description.slice(0, 10) || "-"}</td>
+                        <td>{ele.tags || "-"}</td>
+                        <td>{ele.language || "-"}</td>
                         <td className="">
                           <span
                             className="ds_sub_eye ds_cursor me-2"
@@ -279,58 +281,85 @@ const AudioBook = () => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="row py-md-3  px-md-5 text-capitalize">
-            <div className="col-6  pt-2 pt-sm-0">
+            <div className="row">
+              <div className="col-lg-3 col-12">
+                <img
+                  src={"http://localhost:4000/" + viewBook?.sampleFile || "-"}
+                  alt=""
+                  className='w-100'
+                />
+              </div>
+              <div className="col-lg-9 col-12 row py-md-3 py-3  px-md-5 text-capitalize">
+                {/* <div className="col-6  pt-2 pt-sm-0">
                 <p className="V_label2 mb-0">Thumbnail File</p>
               </div>
               <div className="col-6 pt-2 pt-sm-0">
                 <p>
                   :{" "}
-                  <img style={{width:"100px"}} src={"http://localhost:4000/" + viewBook?.sampleFile || '-'} alt="" />
-                  {/* <span className="ms-2 V_label1">{viewBook?.sampleFile.replace(/\\/g, "/")?.split("/")?.pop() || '-'}</span> */}
+                  <img
+                    style={{ width: "100px" }}
+                    src={"http://localhost:4000/" + viewBook?.sampleFile || "-"}
+                    alt=""
+                  />
+                  <span className="ms-2 V_label1">{viewBook?.sampleFile.replace(/\\/g, "/")?.split("/")?.pop() || '-'}</span>
                 </p>
-              </div>
-              <div className="col-6  pt-2 pt-sm-0">
-                <p className="V_label2 mb-0">Genre ID</p>
-              </div>
-              <div className="col-6 pt-2 pt-sm-0">
-                <p>
-                  : <span className="ms-2 V_label1">{viewBook?.genre?.[0]?.name || '-'}</span>
-                </p>
-              </div>
-              <div className="col-6  pt-2 pt-sm-0">
-                <p className="V_label2 mb-0">Name</p>
-              </div>
-              <div className="col-6 pt-2 pt-sm-0">
-                <p>
-                  : <span className="ms-2 V_label1">{viewBook?.name || '-'}</span>
-                </p>
-              </div>
-              
-              <div className="col-6  pt-2 pt-sm-0">
-                <p className="V_label2 mb-0">Description</p>
-              </div>
-              <div className="col-6 pt-2 pt-sm-0">
-                <p>
-                  :{" "}
-                  <span className="ms-2 V_label1">{viewBook?.description || '-'}</span>
-                </p>
-              </div>
-              <div className="col-6  pt-2 pt-sm-0">
-                <p className="V_label2 mb-0">Tags</p>
-              </div>
-              <div className="col-6 pt-2 pt-sm-0">
-                <p>
-                  : <span className="ms-2 V_label1">{viewBook?.tags || '-'}</span>
-                </p>
-              </div>
-              <div className="col-6  pt-2 pt-sm-0">
-                <p className="V_label2 mb-0">Language</p>
-              </div>
-              <div className="col-6 pt-2 pt-sm-0">
-                <p>
-                  : <span className="ms-2 V_label1">{viewBook?.language || '-'}</span>
-                </p>
+              </div> */}
+                <div className="col-6  pt-2 pt-sm-0">
+                  <p className="V_label2 mb-0">Genre ID</p>
+                </div>
+                <div className="col-6 pt-2 pt-sm-0">
+                  <p>
+                    :{" "}
+                    <span className="ms-2 V_label1">
+                      {viewBook?.genre?.[0]?.name || "-"}
+                    </span>
+                  </p>
+                </div>
+                <div className="col-6  pt-2 pt-sm-0">
+                  <p className="V_label2 mb-0">Name</p>
+                </div>
+                <div className="col-6 pt-2 pt-sm-0">
+                  <p>
+                    :{" "}
+                    <span className="ms-2 V_label1">
+                      {viewBook?.name || "-"}
+                    </span>
+                  </p>
+                </div>
+
+                <div className="col-6  pt-2 pt-sm-0">
+                  <p className="V_label2 mb-0">Description</p>
+                </div>
+                <div className="col-6 pt-2 pt-sm-0">
+                  <p>
+                    :{" "}
+                    <span className="ms-2 V_label1">
+                      {viewBook?.description || "-"}
+                    </span>
+                  </p>
+                </div>
+                <div className="col-6  pt-2 pt-sm-0">
+                  <p className="V_label2 mb-0">Tags</p>
+                </div>
+                <div className="col-6 pt-2 pt-sm-0">
+                  <p>
+                    :{" "}
+                    <span className="ms-2 V_label1">
+                      {viewBook?.tags || "-"}
+                    </span>
+                  </p>
+                </div>
+                <div className="col-6  pt-2 pt-sm-0">
+                  <p className="V_label2 mb-0">Language</p>
+                </div>
+                <div className="col-6 pt-2 pt-sm-0">
+                  <p>
+                    :{" "}
+                    <span className="ms-2 V_label1">
+                      {viewBook?.language || "-"}
+                    </span>
+                  </p>
+                </div>
               </div>
             </div>
           </Modal.Body>
