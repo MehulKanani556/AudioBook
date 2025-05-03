@@ -182,7 +182,7 @@ const EditVoucher = () => {
                             <div className='mt-5 mb-3 pb-5 '>
                                 <div className='text-center'>
                                     <button type='submit' className='ds_role_save'>Save</button>
-                                    <button className='ds_sub_cancel' onClick={() => setSubAdd(false)}>Clear</button>
+                                    <button className='ds_sub_cancel' onClick={() => {setSubAdd(false);  navigate("/admin/voucher")}}>Clear</button>
                                 </div>
                             </div>
                         </form>

@@ -259,6 +259,7 @@ const AddAudioBook = () => {
                       onClick={() => {
                         setSubAdd(false);
                         setFileName("No File Choosen");
+                        navigate("/admin/audiobooks")
                       }}
                     >
                       Clear
