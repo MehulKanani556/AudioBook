@@ -219,8 +219,8 @@
 .sp_search_box{
     position: absolute;
     top: 100%;
-    left: 0%;
-    width: 100%;
+    left: 1rem;
+    width: calc(100% - 1rem);
     overflow-y: auto;
     color: white;
     max-height: 300px;
@@ -235,3 +235,16 @@
 .sp_search_box li:hover{
     background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(236, 230, 230, 0.4) 0%, rgba(240, 234, 234, 0.045) 77.08%, rgba(245, 242, 242, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
 }
+
+@media (min-width:768px){
+    .sp_search_input{
+        position: relative;
+    }
+} 
+@media (max-width:767px){
+    .sp_search_box{
+        width: 80%;
+        left: 50%;
+        transform: translate(-50%);
+    }
+} 

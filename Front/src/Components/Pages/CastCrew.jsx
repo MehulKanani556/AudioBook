@@ -518,7 +518,7 @@ const CastCrew = () => {
                             <div className='col-12 col-sm-9   pt-3 '>
                                 <div className="row py-md-3  px-md-3 ">
                                     <div className="col-5 col-md-6  pt-2 pt-sm-0">
-                                        <p className='V_label2 mb-0'>Audio Book ID</p>
+                                        <p className='V_label2 mb-0'>Audio Book</p>
                                     </div>
                                     <div className="col-7 col-md-6 pt-2 pt-sm-0">
                                         <p>: <span className='ms-2 V_label1'>{selectData?.audiBookData?.[0]?.name || '-'}</span></p>

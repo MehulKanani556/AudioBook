@@ -159,7 +159,7 @@ const Voucher = () => {
                                                 <td>{ele?.name || '-'}</td>
                                                 <td>{ele?.description?.slice(0, 10) || '-'}...</td>
                                                 <td>{ele?.code || '-'}</td>
-                                                <td>{ele?.discount || '-'}</td>
+                                                <td>{ele?.discount || '-'}%</td>
                                                 {/* <td>{ele?.coinMaster?.[0]?.name || ele.coinMasterId}</td> */}
                                                 <td>{ele?.subScriptionSell?.[0]?.name || '-'}</td>
                                                 <td>{ele?.validTill || '-'}</td>
@@ -243,7 +243,7 @@ const Voucher = () => {
                                 <p className='V_label2 mb-0'>Discount</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
-                                <p>: <span className='ms-2 V_label1'>₹{selectData?.discount || '-'}</span></p>
+                                <p>: <span className='ms-2 V_label1'>{selectData?.discount || '-'}%</span></p>
                             </div>
                             {/* <div className="col-6  pt-2 pt-sm-0">
                                 <p className='V_label2 mb-0'>Coin Master ID</p>
@@ -252,7 +252,7 @@ const Voucher = () => {
                                 <p>: <span className='ms-2 V_label1'>5845</span></p>
                             </div> */}
                             <div className="col-6  pt-2 pt-sm-0">
-                                <p className='V_label2 mb-0'>Subscription ID</p>
+                                <p className='V_label2 mb-0'>Subscription</p>
                             </div>
                             <div className="col-6 pt-2 pt-sm-0">
                                 <p>: <span className='ms-2 V_label1'>{selectData?.subScriptionSell?.[0]?.name || '-'}</span></p>

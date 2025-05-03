@@ -244,7 +244,7 @@ exports.globalSearch = async (req, res) => {
         {
           $replaceRoot: {
             newRoot: {
-              name: "$name", description: "$description", code: "$code", discount: "$discount", subscriptions: '$subscriptions', validTill: "$validTill", forStudent: "$forStudent", status: '$status'
+              name: "$name", description: "$description", code: "$code", discount: "$discount", subscriptions: '$subscriptions', valid_Till: "$validTill", for_Student: "$forStudent", status: '$status'
             }
           }
         }
