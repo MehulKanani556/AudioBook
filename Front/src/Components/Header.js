@@ -110,22 +110,22 @@ const Header = ({ setOffToggle }) => {
     }
     else if (key === 'vouchers') {
       navigate('/admin/voucher')
-    } 
+    }
     else if (key === 'genres') {
       navigate('/admin/genre')
-    } 
+    }
     else if (key === 'cast') {
       navigate('/admin/castcrew')
-    } 
+    }
     else if (key === 'reviews') {
       navigate('/admin/review')
-    } 
+    }
     else if (key === 'episodes') {
       navigate('/admin/episodes')
     }
     else if (key === 'playlists') {
       navigate('/admin/playlistmaster')
-    } 
+    }
     else if (key === 'home_Labels') {
       navigate('/admin/homelabels')
     }
@@ -192,13 +192,11 @@ const Header = ({ setOffToggle }) => {
                               >
                                 {key === "roles"
                                   ? item?.roleName
-                                  : key === "users"
-                                    ? item?.firstName
-                                    : key === "reviews"
-                                      ? item?.review
-                                      : key === "home_Labels"
-                                        ? item?.labelName
-                                        : item?.name}
+                                  : key === "reviews"
+                                    ? item?.review
+                                    : key === "home_Labels"
+                                      ? item?.labelName
+                                      : item?.name}
                               </li>
                             ))}
                           </ul>
@@ -500,26 +498,35 @@ const Header = ({ setOffToggle }) => {
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <div className="  px-md-5 text-capitalize">
+              <div className="d-flex  px-md-5 text-capitalize">
+              {selectData && (
+                Object.entries(selectData).map(([key, value]) => (
+                  (key === 'image') && (
+                    <div className="">
+                      <img src={`http://localhost:4000/${String(value)}`} alt={value} className='ms-2' style={{ width: '100px' }} />
+                    </div>
+                  ))
+                )
+              )}
+              <div className="ps-4 w-100">
                 {selectData && (
                   Object.entries(selectData).map(([key, value]) => (
-                    (key !== '_id' && key !== 'password' && key !== 'createdAt' && key !== 'updatedAt' && key !== 'key' && key !== 'coinMaster' && key !== 'subScriptionSellId') && (
-                      <div className="row" key={key}>
+                    (key !== '_id' && key !== 'createdAt' && key !== 'updatedAt' && key !== 'key' && key !== 'image') && (
+                      <div className="row " key={key}>
                         <div className="col-6 pt-2 pt-sm-0">
-                          <p className='V_label2 mb-0'>{key}</p>
+                          <p className='V_label2 mb-0'>{key?.replace(/_/g, ' ')}</p>
                         </div>
                         <div className="col-6 pt-2 pt-sm-0">
                           <p>:
-                            {(key === 'sampleFile' || key === 'image' || key === 'generImage' || key === 'crewImage') ? (
-                              <img src={`http://localhost:4000/${String(value)}`} alt={value} className='ms-2 V_home_corousel_image' />
-                            ) : (key === 'user') ? (
+                            {(key === 'user') ? (
                               <span className='ms-2 V_label1 text-break'>
-                                {value?.firstName || 'N/A'}
+                                {console.log(value)}
+                                {value?.[0]?.firstName || '-'}
                               </span>
                             ) : Array.isArray(value) ? (
                               value.map((item, idx) => (
                                 <span key={idx} className='ms-2 V_label1 text-break'>
-                                  {key === 'roleData' ? item?.roleName : item?.name || String(item)}
+                                  {key === 'role' ? item?.roleName : item?.name || String(item)}
                                   {idx < value.length - 1 && ', '}
                                 </span>
                               ))
@@ -529,7 +536,7 @@ const Header = ({ setOffToggle }) => {
                               </span>
                             ) : (
                               <span className='ms-2 V_label1 text-break'>
-                                {(key === 'price' || key === 'amount') ? `₹ ${String(value)}` : String(value)}
+                                {(key === 'price' || key === 'amount' || key === 'scratchPrice') ? `₹${String(value)}` : key === 'dicount' ? String(value) + '%' : String(value)}
                               </span>
                             )}
                           </p>
@@ -538,6 +545,7 @@ const Header = ({ setOffToggle }) => {
                     )
                   ))
                 )}
+                </div>
               </div>
             </Modal.Body>
           </Modal>
